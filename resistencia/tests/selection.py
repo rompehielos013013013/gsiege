@@ -64,8 +64,6 @@ def get_installed_teams():
     print set_rules
     print set_formations
 
-    asdkasdk
-
     set_final = set_rules.intersection(set_formations)
     list_final = list(set_final)
 
