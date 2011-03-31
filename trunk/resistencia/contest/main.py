@@ -42,8 +42,6 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
     print "### INIT_CONTEST"
     print teams
 
-    sys.exit(0)
-
     if contest_format == 'league':
         _init_league(_clean_dictionary(teams), fast, num_turns, back_round)
     elif contest_format == 'cup':
