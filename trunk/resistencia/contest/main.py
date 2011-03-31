@@ -21,6 +21,7 @@
 import os
 import types
 
+import sys
 import gtk
 
 from resistencia import configure, filenames, xdg
@@ -33,9 +34,16 @@ import league
 import contest
 import tournament
 import round
+import pprint
 
 def init_contest(contest_format, teams, fast=False, back_round=False,
                  num_turns=120):
+
+    print "### INIT_CONTEST"
+    print teams
+
+    sys.exit(0)
+
     if contest_format == 'league':
         _init_league(_clean_dictionary(teams), fast, num_turns, back_round)
     elif contest_format == 'cup':
@@ -47,11 +55,13 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
 def _init_league(teams, fast, num_turns, back_round):
     l = league.League(teams, num_turns, back_round)
 
+    print "Init league..."
     band = False
     
     while not l.league_completed and not band:
         i = l.get_round_number()
         progress_bar = None
+
         if fast:
             progress_bar = pbs.ProgressBarDialog(None,
                                                  _('Running the contest'))
@@ -60,15 +70,23 @@ def _init_league(teams, fast, num_turns, back_round):
             progress_bar_dialog.show()
             while gtk.events_pending():
                 gtk.main_iteration(False)
+
         l.play_round(progress_bar, fast)
         r = l.get_round(i)
         
         classifications = l.get_actual_puntuations()
         results = r.get_round_results()
-        
+
+        print "Classifications: "
+        pprint.pprint(classifications)
+        print "Results: "
+        pprint.pprint(results)
+
         R = round_results.roundResults(classifications, results,
                                        l.get_prev_round_number() + 1,
                                        l.get_number_of_rounds())
+
+
         if fast:
             progress_bar_dialog.hide()
         button_pressed = R.result_dialog.run()
