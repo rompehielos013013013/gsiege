@@ -62,6 +62,7 @@ class Resistencia:
 
     def on_btn_competitions_clicked(self, widget):
         treeview = contest_dialog.contestDialog(self.window)
+        print "Nueva competición..."
         treeview.contest_dialog.run()
 
     def on_btn_human_es_game_clicked(self, widget):

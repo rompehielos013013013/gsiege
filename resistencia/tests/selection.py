@@ -26,6 +26,15 @@ import os
 
 from resistencia import configure
 
+def strip_svn(list_to_strip):
+
+    l = list_to_strip[:]
+    for m in l:
+        if m.count('svn'):
+            list_to_strip.remove(m)
+
+    return list_to_strip
+
 def get_installed_teams():
     """
     Return a list of the installed teams. We consider a installed team some
@@ -42,13 +51,20 @@ def get_installed_teams():
     for i in range(len(list_rules)):
         list_rules[i] = list_rules[i].replace('reglas','')
         list_rules[i] = list_rules[i].replace('.clp','')
-
+        
     for i in range(len(list_formations)):
         list_formations[i] = list_formations[i].replace('equipo', '')
         list_formations[i] = list_formations[i].replace('.clp', '')
 
-    set_rules = set(list_rules)
-    set_formations = set(list_formations)
+    
+
+    set_rules = set(strip_svn(list_rules))
+    set_formations = set(strip_svn(list_formations))
+
+    print set_rules
+    print set_formations
+
+    asdkasdk
 
     set_final = set_rules.intersection(set_formations)
     list_final = list(set_final)
