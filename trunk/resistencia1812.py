@@ -33,19 +33,28 @@ import sys
 import os
 import os.path
 
-if sys.platform == 'linux2':
-    # Set process name.  Only works on Linux >= 2.1.57.
+
+# Si estamos en un sistema con kernel GNU/Linux
+if 'linux' in sys.platform:
+
+    # Biblioteca para trabajar con tipos de datos de C
     import ctypes
+
+    # Carga la biblioteca de C
     __libc__ = ctypes.CDLL('libc.so.6')
     __libc__.prctl(15, 'resistencia1812', 0, 0, 0)
 
-# Find out the location of resistencia's working directory,
-# and insert it to sys.path
+
 __basedir__ = os.path.dirname(os.path.realpath(__file__))
-if not os.path.exists(os.path.join(__basedir__, "resistencia1812.py")):
+print "Base dir: " + __basedir__
+print "File name: " + __file__
+
+# WTF?
+if not os.path.exists(os.path.join(__basedir__, __file__)):
     __cwd__ = os.getcwd()
-    if os.path.exists(os.path.join(__cwd__, "resistencia1812.py")):
+    if os.path.exists(os.path.join(__cwd__, __file__)):
         __basedir__ = __cwd__
+
 sys.path.insert(0, __basedir__)
 
 

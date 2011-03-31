@@ -56,6 +56,8 @@ class Resistencia:
         gtk.main_quit()
 
     def on_btn_about_clicked(self, widget):
+        print "About button clicked"
+
         self.about.connect('response', lambda d, r: d.hide())
         self.about.set_transient_for(self.window)
         self.about.show()
@@ -96,19 +98,32 @@ class Resistencia:
         
     def __init__(self):
         "Constructor of the object"
+
+        # gtk.Builder es un objeto que lee una interfaz de glade e instancia los
+        # widgets descritos en el fichero
         builder = gtk.Builder()
+
+        # Carga el fichero con la interfaz principal
         builder.add_from_file(xdg.get_data_path('glade/main.glade')) 
         
+        # Guarda referencias a cada uno de los diálogos
         self.window = builder.get_object("mainWindow")
         self.about = builder.get_object("aboutdialog1")
         self.previous_games_chooser = builder.get_object("filechooserdialog1")
         self.games_chooser_warning = builder.get_object("messagedialog1")
 
-        
+        # Conecta el evento response a una lambda-función que oculta el cuadro
+        # de diálogo
         self.games_chooser_warning.connect('response', lambda d, r: d.hide())
+
+        # Indica que ese diálogo es un subdiálogo (sort of) de
+        # previous_game_chooser
         self.games_chooser_warning.set_transient_for(self.previous_games_chooser)
 
+        # Lo mismo, pero de la ventana principal
         self.previous_games_chooser.set_transient_for(self.window)
+
+        # Lo mismo, pero de la ventana principal también
         self.about.set_transient_for(self.window)
         
         def_path = configure.load_configuration()['games_path']

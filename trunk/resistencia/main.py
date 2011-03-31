@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ###############################################################################
 # This file is part of Resistencia Cadiz 1812.                                #
 #                                                                             #
@@ -26,6 +29,7 @@ import locale
 import gettext
 import gtk
 import gtk.glade
+
 APP = 'resistencia1812'
 DIR = '/usr/share/locale'
 
@@ -50,9 +54,16 @@ configure.load_configuration()
   
 def main():
     "Main function"
+
+    # Crea una nueva instancia de la clase Resistencia, que guarda todos los
+    # cuadros de diálogo
     editor = main_window.Resistencia()
+
+    # Muestra el cuadro de diálogo principal
     editor.window.show()
     print _("Loading main window")
+
+    # Lanza el bucle de GTK (?)
     gtk.main()
     
 if __name__ == "__main__":

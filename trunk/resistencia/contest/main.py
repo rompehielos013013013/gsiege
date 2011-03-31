@@ -60,6 +60,10 @@ def _init_league(teams, fast, num_turns, back_round):
         i = l.get_round_number()
         progress_bar = None
 
+        print "Playing round number " + str(i)
+
+        raw_input()
+
         if fast:
             progress_bar = pbs.ProgressBarDialog(None,
                                                  _('Running the contest'))
@@ -75,10 +79,12 @@ def _init_league(teams, fast, num_turns, back_round):
         classifications = l.get_actual_puntuations()
         results = r.get_round_results()
 
-        print "Classifications: "
+        print "\n"
+        print "** Classifications: "
         pprint.pprint(classifications)
-        print "Results: "
+        print "\n** Results: "
         pprint.pprint(results)
+        print "\n"
 
         R = round_results.roundResults(classifications, results,
                                        l.get_prev_round_number() + 1,
