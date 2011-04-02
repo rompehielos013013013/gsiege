@@ -3,104 +3,168 @@
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
   <object class="GtkWindow" id="mainWindow">
-    <property name="title" translatable="yes">Cadiz deffense: 1812</property>
+    <property name="title" translatable="yes">Gades Siege</property>
+    <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="default_width">299</property>
-    <property name="default_height">450</property>
     <property name="icon">../images/favicon.png</property>
     <signal name="destroy" handler="on_mainWindow_destroy"/>
     <child>
-      <object class="GtkVBox" id="vbox1">
+      <object class="GtkHBox" id="hbox1">
         <property name="visible">True</property>
         <child>
-          <object class="GtkVBox" id="vbox2">
+          <object class="GtkImage" id="image1">
+            <property name="visible">True</property>
+            <property name="xpad">25</property>
+            <property name="ypad">25</property>
+            <property name="pixbuf">../images/LogoBig.png</property>
+          </object>
+          <packing>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkVBox" id="vbox1">
             <property name="visible">True</property>
             <child>
-              <object class="GtkVButtonBox" id="vbuttonbox1">
+              <object class="GtkVBox" id="vbox2">
                 <property name="visible">True</property>
-                <property name="layout_style">spread</property>
                 <child>
-                  <object class="GtkButton" id="btn_quick_game">
-                    <property name="label" translatable="yes">Quick game</property>
+                  <object class="GtkVButtonBox" id="vbuttonbox1">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_btn_quick_game_clicked"/>
+                    <property name="layout_style">center</property>
+                    <child>
+                      <object class="GtkButton" id="btn_quick_game">
+                        <property name="label" translatable="yes">Quick game</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="on_btn_quick_game_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_competitions">
+                        <property name="label" translatable="yes">Competitions</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="on_btn_competitions_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_human_es_game">
+                        <property name="label" translatable="yes">Play against an E.S.</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="on_btn_human_es_game_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_laboratory">
+                        <property name="label" translatable="yes">Laboratory</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="on_btn_laboratory_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_previous_games">
+                        <property name="label" translatable="yes">Previous games</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="on_btn_previous_games_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_settings">
+                        <property name="label" translatable="yes">Settings</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <signal name="clicked" handler="on_btn_settings_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">5</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
                     <property name="position">0</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_competitions">
-                    <property name="label" translatable="yes">Competitions</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_btn_competitions_clicked"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_human_es_game">
-                    <property name="label" translatable="yes">Play against an E.S.</property>
+                  <object class="GtkHButtonBox" id="hbuttonbox1">
                     <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_btn_human_es_game_clicked"/>
+                    <property name="spacing">25</property>
+                    <property name="layout_style">center</property>
+                    <child>
+                      <object class="GtkButton" id="btn_about">
+                        <property name="label">gtk-about</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="use_stock">True</property>
+                        <property name="yalign">0.52999997138977051</property>
+                        <signal name="clicked" handler="on_btn_about_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="btn_quit">
+                        <property name="label">gtk-quit</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="clicked" handler="on_btn_quit_clicked"/>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">False</property>
                     <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="btn_laboratory">
-                    <property name="label" translatable="yes">Laboratory</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_btn_laboratory_clicked"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">3</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="btn_previous_games">
-                    <property name="label" translatable="yes">Previous games</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_btn_previous_games_clicked"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">4</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="btn_settings">
-                    <property name="label" translatable="yes">Settings</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <signal name="clicked" handler="on_btn_settings_clicked"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">5</property>
                   </packing>
                 </child>
               </object>
@@ -109,63 +173,17 @@
               </packing>
             </child>
             <child>
-              <placeholder/>
-            </child>
-            <child>
-              <object class="GtkHButtonBox" id="hbuttonbox1">
+              <object class="GtkStatusbar" id="statusbar1">
                 <property name="visible">True</property>
-                <property name="spacing">25</property>
-                <property name="layout_style">center</property>
-                <child>
-                  <object class="GtkButton" id="btn_about">
-                    <property name="label">gtk-about</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_stock">True</property>
-                    <property name="yalign">0.52999997138977051</property>
-                    <signal name="clicked" handler="on_btn_about_clicked"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="btn_quit">
-                    <property name="label">gtk-quit</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_btn_quit_clicked"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
+                <property name="spacing">2</property>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">2</property>
+                <property name="position">1</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkStatusbar" id="statusbar1">
-            <property name="visible">True</property>
-            <property name="spacing">2</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -176,10 +194,13 @@
     <property name="border_width">5</property>
     <property name="icon">../images/favicon.png</property>
     <property name="type_hint">normal</property>
-    <property name="program_name">Resistencia en Cádiz 1812</property>
-    <property name="copyright" translatable="yes">Copyright © 2009 Pablo Recio Quijano</property>
-    <property name="comments" translatable="yes">Sistema Experto para enseñar Sistemas Expertos</property>
-    <property name="website">http://sumergiendose.wordpress.com/</property>
+    <property name="program_name">Gades Siege</property>
+    <property name="copyright" translatable="yes">Copyright © 2011 Manuel Palomo Duarte, José Tomás Tocino García
+Copyright © 2009 Pablo Recio Quijano</property>
+    <property name="comments" translatable="yes">Ampliación del proyecto Resistencia en Cádiz: 1812,
+una aplicación para el desarrollo y la enseñanza
+de Sistemas Expertos</property>
+    <property name="website">http://gsiege.googlecode.com</property>
     <property name="license" translatable="yes">This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
@@ -192,9 +213,11 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</property>
-    <property name="authors">Desarrollador y director: Pablo Recio Quijano
+    <property name="authors">Desarrollador actual: José Tomás Tocino García
+Desarrollador de Resistencia 1812: Pablo Recio Quijano
 Nucleo original: Manuel Palomo Duarte</property>
-    <property name="artists">Gráficos por Noelia Sales Montes</property>
+    <property name="artists">José Tomás Tocino García
+Noelia Sales Montes</property>
     <property name="logo">../images/logo.png</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
