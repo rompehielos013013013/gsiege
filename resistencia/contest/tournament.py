@@ -90,6 +90,9 @@ class Tournament(contest.Contest):
     def get_round(self, round_number):
         return self.rounds[round_number]
 
+    def get_tournament_ended(self):
+        return (self.round_number == self.number_of_rounds)
+
     def play_round(self, progress_bar, fast=False):
         if not self.tournament_completed:
             r = self.rounds[self.round_number]
