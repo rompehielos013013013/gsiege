@@ -27,9 +27,8 @@ import pygame
 
 from resistencia import configure, xdg
 
-from guadaboard import board
-from guadaboard import layout
-
+import guadaboard.board as board
+import guadaboard.layout as layout
 
 def _find_element_matrix(board_rep, element):
     """
@@ -40,7 +39,6 @@ def _find_element_matrix(board_rep, element):
         _sum += line.count(element)
 
     return not _sum == 0
-
 
 class DynGame:
     """
@@ -58,26 +56,26 @@ class DynGame:
         self.piece_size = piece_size
         self.board_size = board_size
 
-        self.srfc_board_size = (self.board_size * self.piece_size, ) * 2
+        self.srfc_board_size = (self.board_size*self.piece_size,)*2
         self.player = player
-
+        
         self.music = False
         if configure.load_configuration()['music_active'] == '1':
             self.music = True
-
+        
         pygame.init()
         self.xml_layout = layout.Layout(xml_file, True)
-        self.screen = pygame.display.set_mode(
-            self.xml_layout.get_window_size())
+        #self.screen = pygame.display.set_mode(self.srfc_board_size)
+        self.screen = pygame.display.set_mode(self.xml_layout.get_window_size())
         pygame.display.set_caption(self.xml_layout.get_window_title())
         self.srfc_board = pygame.Surface(self.srfc_board_size)
-
+        
         self.xml_layout.init((team_a[1], team_a[0]), (team_b[1], team_b[0]),
                              self.srfc_board)
         self.rects = self.xml_layout.get_buttons_rects()
         self.offset = self.xml_layout.get_board_position()
         pygame.display.set_icon(self.xml_layout.get_favicon())
-
+        
         self.screen.blit(self.xml_layout.get_surface(), (0, 0))
         pygame.display.flip()
 
@@ -85,7 +83,7 @@ class DynGame:
             music_path = xdg.get_data_path('music/walking_on_old_stones.ogg')
             pygame.mixer.music.load(music_path)
             pygame.mixer.music.play()
-
+        
         img_piece_slct_path = xdg.get_data_path('images/piece-selection.png')
         img_possible_move_path = xdg.get_data_path('images/posible-move.png')
         print img_piece_slct_path
@@ -97,7 +95,7 @@ class DynGame:
         Returns the number of turns played
         """
         return self.turn
-
+    
     def _update_layout(self):
         """
         Update the layout with a board surface
@@ -141,7 +139,7 @@ class DynGame:
                 new_pos = (adjacents[i][1] * self.piece_size,
                            adjacents[i][0] * self.piece_size)
                 self.srfc_board.blit(self.possible_move, new_pos)
-
+            
         self._update_layout()
 
     def finish(self):
@@ -188,7 +186,7 @@ class DynGame:
 
         clock = pygame.time.Clock()
         while not band and game_continue:
-            clock.tick(50)
+            time_passed = clock.tick(50)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     if self.music:
@@ -200,7 +198,7 @@ class DynGame:
                         if band_pos == False:
                             surface = self.xml_layout.get_surface((res, 2))
                             self.screen.blit(surface, (0, 0))
-                            pygame.display.flip()
+                            pygame.display.flip()                        
                             band_pos = True
                     else:
                         if band_pos == True:
@@ -214,25 +212,30 @@ class DynGame:
                                           self.rects) == 'button_exit':
                             if self.music:
                                 pygame.mixer.music.stop()
-                            pygame.display.quit()
+                            pygame.display.quit() 
                         collision = _board.check_collision(event.pos)
                         if not piece_selected:
                             if collision[2] == self.player:
                                 self.srfc_board.blit(srfc.convert(), (0, 0))
                                 self._update_layout()
+                                #pygame.display.flip()
                                 self.draw_layers(state, collision)
                                 piece = collision
                                 piece_selected = True
-                        else:  # piece_selected
+                        else: #piece_selected
                             if collision[2] == piece[2]:
                                 piece = collision
                                 self.srfc_board.blit(srfc.convert(), (0, 0))
                                 self._update_layout()
+                                #pygame.display.flip()
                                 self.draw_layers(state, collision)
                             elif check_valid_movement(collision, piece):
                                 mov = get_movement(piece[1], collision[1],
                                                    self.player)
                                 return (piece[0], mov)
+                            #else:
+                            #    piece = None
+                            #    piece_selected = False
 
 
 def check_valid_movement(source, dest):
@@ -241,7 +244,7 @@ def check_valid_movement(source, dest):
     """
     print source
     print dest
-    if source[2] == dest[2]:  # same team. maybe handle for a better way
+    if source[2] == dest[2]: #same team. maybe handle for a better way
         return False
     else:
         offset_x = abs(source[1][0] - dest[1][0])
@@ -252,35 +255,34 @@ def check_valid_movement(source, dest):
 
         return element_1 or element_2
 
-
 def get_movement(source, dest, team):
     """
     Get the movement realized for the user
     """
     mov = 0
-    if source[1] == dest[1]:  # vertical movement
+    if source[1] == dest[1]: #vertical movement
         res = source[0] - dest[0]
-        if res == -1:  # down
-            if team == 1:  # team A
+        if res == -1: #down
+            if team == 1: #team A
                 mov = 4
-            else:  # team B
+            else: #team B
                 mov = 3
-        else:  # up
-            if team == 1:  # team A
+        else: #up
+            if team == 1: #team A
                 mov = 3
-            else:  # team B
+            else: #team B
                 mov = 4
-    else:  # horizontal movement
+    else: #horizontal movement
         res = source[1] - dest[1]
-        if res == 1:  # left
-            if team == 1:  # team A
+        if res == 1: #left
+            if team == 1: #team A
                 mov = 2
-            else:  # team B
+            else: #team B
                 mov = 1
-        else:  # right
-            if team == 1:  # team A
+        else: #right
+            if team == 1: #team A
                 mov = 1
-            else:  # team B
+            else: #team B
                 mov = 2
 
     return mov
@@ -299,14 +301,13 @@ def _get_collision(point, rects):
 
     return res
 
-
 def _reverse_board(_board):
     """
     Reverse the board from the guadalete kernel
     """
     tmp_board = []
     _num = len(_board)
-
+    
     for i in range(_num):
         aux = []
         for j in range(_num):
@@ -315,6 +316,6 @@ def _reverse_board(_board):
 
     for i in range(_num):
         for j in range(_num):
-            tmp_board[_num - (i + 1)][j] = _board[i][j]
+            tmp_board[_num-(i+1)][j] = _board[i][j]
 
     return tmp_board

@@ -183,6 +183,7 @@ def _init_playoff(teams, fast, num_turns, back_round):
 
     band = False
     
+    log_file_name = generate_log_file_name('playoff')
     while not l.league_completed and not band:
         i = l.get_round_number()
         progress_bar = None
@@ -199,7 +200,8 @@ def _init_playoff(teams, fast, num_turns, back_round):
         
         classifications = l.get_actual_puntuations()
         results = r.get_round_results()
-        
+        update_log_round(log_file_name, results, i)
+
         R = round_results.roundResults(classifications, results,
                                        l.get_prev_round_number() + 1,
                                        l.get_number_of_rounds(),
@@ -217,6 +219,10 @@ def _init_playoff(teams, fast, num_turns, back_round):
         band = False
         teams = _get_teams_next_round(teams, _extract_classifications(classifications))
         _init_tournament(teams, num_turns, fast)
+
+    update_log_end(log_file_name, classifications)
+    print "##### END TOURNAMENT"
+
         
 
 
