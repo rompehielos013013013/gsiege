@@ -125,7 +125,6 @@ class roundResults:
         builder.connect_signals(self)
 
     def on_dlg_results_show(self, data=None):
-        print 'on_dlg_results_show'
         if self.round == self.rounds:
             self.finalround_dialog.run()
 

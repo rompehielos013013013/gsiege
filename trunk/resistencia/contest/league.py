@@ -44,13 +44,9 @@ class League(contest.Contest):
         self.matchs = pairing.make_pairings(self.keys, back_round)
 
         self.rounds = []
-        base_path = configure.load_configuration()['games_path'] + '/'
-        self.tournament_file_name = base_path + filenames.generate_filename('league')
-        print self.tournament_file_name
-        
+
         for jorn in self.matchs:
             self.rounds.append(round.Round(jorn, self.translator,
-                                           self.tournament_file_name,
                                            self.num_turns))
 
         self.puntuations_by_round = []
@@ -89,14 +85,6 @@ class League(contest.Contest):
             p = r.get_puntuation()
             self.puntuations_by_round.append(p)
             contest.merge_puntuations(self.puntuations, p)
-
-            f_log = open(self.tournament_file_name, 'a')
-            f_log.write('Ronda ' + str(self.actual_round+1) + ":\n")
-            f_log.close()
-            r.log_tournament(True)
-            f_log = open(self.tournament_file_name, 'a')
-            f_log.write('-------------------------------' + "\n")
-            f_log.close()
 
             self.actual_round = self.actual_round + 1
             self.league_completed = (self.actual_round == self.number_of_rounds)
