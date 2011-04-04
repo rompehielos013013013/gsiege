@@ -88,6 +88,18 @@ def generate_log_file_name(prefix='pachanga'):
     base_path = configure.load_configuration()['games_path'] + '/'
     return base_path + filenames.generate_filename(prefix)
 
+def show_round_matches(game):
+    thisRoundMatches = game.matchs[game.get_round_number()];
+    
+    messageToShow = "\n\n".join([" vs ".join(m) for m in thisRoundMatches])
+
+    myDialog = gtk.MessageDialog(None,
+                                 gtk.DIALOG_MODAL, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE,
+                                 "Emparejamientos")
+    myDialog.format_secondary_text(messageToShow)
+    myDialog.run()
+    myDialog.destroy()
+
 def _init_league(teams, fast, num_turns, back_round):
     l = league.League(teams, num_turns, back_round)
 
@@ -97,34 +109,50 @@ def _init_league(teams, fast, num_turns, back_round):
     tournament_file_name = generate_log_file_name('league')
 
     while not l.league_completed and not band:
+        # Guardamos en i el número de ronda
         i = l.get_round_number()
+        show_round_matches(l)
+
+        # En principio no mostramos barra de progreso
         progress_bar = None
 
         print "Playing round number " + str(i)
 
+        # Si no mostramos el progreso del juego, que salga la barra
         if fast:
-            progress_bar = pbs.ProgressBarDialog(None,
-                                                 _('Running the contest'))
+            progress_bar = pbs.ProgressBarDialog(None, _('Running the contest'))
             progress_bar_dialog = progress_bar.progress_bar_dialog
             progress_bar.set_num_elements(l.get_round(i).number_games)
             progress_bar_dialog.show()
+
             while gtk.events_pending():
                 gtk.main_iteration(False)
 
+        # Jugamos esta ronda
         l.play_round(progress_bar, fast)
+        
+        # Guardamos en r la ronda actual, con sus resultados y tal
         r = l.get_round(i)
         
+        # "Puntuations" es una palabra que no existe
         classifications = l.get_actual_puntuations()
+
+        # Resultados de la ronda
         results = r.get_round_results()
 
+        # Actualizamos el fichero del log
         update_log_round(tournament_file_name, results, i)
 
+        # Cargamos el diálogo de resultados
         R = round_results.roundResults(classifications, results,
                                        l.get_prev_round_number() + 1,
                                        l.get_number_of_rounds())
 
+        # Ocultamos la barra de progreso (que ya habrá acabado)
         if fast:
             progress_bar_dialog.hide()
+
+        # Mostramos el diálogo de resultados
         button_pressed = R.result_dialog.run()
         
         while gtk.events_pending():
@@ -132,6 +160,8 @@ def _init_league(teams, fast, num_turns, back_round):
             
         if button_pressed == -4 or button_pressed == 0:
             band = True
+
+        print "EEEEEEEEEEEEEEEEEEEEEEEND OF THE ROUNDDDDDDDDDDDDDDDDDDDDDDDD"
 
     update_log_end(tournament_file_name, classifications)
     print "##### END LEAGUE..."
@@ -147,7 +177,10 @@ def _init_tournament(teams, num_turns, fast):
 
     while not t.get_tournament_ended() and not band:
         i = t.get_round_number()
+        show_round_matches(t)
         progress_bar = None
+
+
         if fast:
             progress_bar = pbs.ProgressBarDialog(None,
                                                  _('Running the contest'))

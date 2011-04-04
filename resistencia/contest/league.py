@@ -29,6 +29,7 @@ from resistencia import configure, filenames
 import pairing
 import contest
 import round
+import pprint
 
 class League(contest.Contest):
     
