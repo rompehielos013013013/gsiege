@@ -41,9 +41,9 @@ class TestRound(contest_round.Round):
                   log_file=None, player = 0):
         #player must be 0 or 1
         contest_round.Round.__init__(self, teams[0], teams[1],
-                                     log_file, num_turns)
+                                     num_turns)
         self.player_team = player
-
+        self.log_file = log_file
         self.round_stats = {}
         self.round_stats['wins'] = 0
         self.round_stats['looses'] = 0

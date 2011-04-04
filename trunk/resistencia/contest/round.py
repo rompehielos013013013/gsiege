@@ -146,7 +146,10 @@ class Round(object):
             else: #teamB_key == 'aux_ghost_team':
                 result = 1
 
-        print "The result of the game '" + teamA_key + "' - '"+ teamB_key + "' was:"
+        print "--------------------------------"
+        print "MATCH FINISHED:"
+        print "  The result of the game '" + teamA_key + "' vs '"+ teamB_key + "' was:"
+
         if result == 0:
             print 'Draw'
         elif result == 1:
