@@ -143,7 +143,9 @@ def _init_tournament(teams, num_turns, fast):
     
     log_file_name = generate_log_file_name('tournament')
 
-    while not t.tournament_completed and not band:
+    classifications = {}
+
+    while not t.get_tournament_ended() and not band:
         i = t.get_round_number()
         progress_bar = None
         if fast:
@@ -157,9 +159,17 @@ def _init_tournament(teams, num_turns, fast):
         t.play_round(progress_bar, fast)
         r = t.get_round(i)
 
-        classifications = []
         results = r.get_round_results()
         update_log_round(log_file_name, results, i)
+
+        winners_of_this_round = set()
+        for m in results:
+            if m[1] == 1:
+                winners_of_this_round.add(m[0][0])
+            elif m[1] == -1:
+                winners_of_this_round.add(m[0][1])
+
+        classifications[i] = winners_of_this_round
 
         R = round_results.roundResults(classifications, results,
                                        t.get_prev_round_number() + 1,
@@ -174,6 +184,19 @@ def _init_tournament(teams, num_turns, fast):
             
         if button_pressed == -4 or button_pressed == 0:
             band = True
+
+    log_file = open(log_file_name, 'a')
+    log_file.write("** CLASIFICACIÓN FINAL\n")
+    processed_players = set()
+
+    for i in reversed(classifications.keys()):
+        currentSet = classifications[i].difference(processed_players)
+        for elm in currentSet:
+            log_file.write(str(t.get_number_of_rounds() - i) + ' - ' + elm + "\n")
+
+        processed_players.update(currentSet)
+
+    log_file.close()
 
     print "##### END TOURNAMENT"
 
@@ -221,7 +244,7 @@ def _init_playoff(teams, fast, num_turns, back_round):
         _init_tournament(teams, num_turns, fast)
 
     update_log_end(log_file_name, classifications)
-    print "##### END TOURNAMENT"
+    print "##### END PLAYOFF"
 
         
 
