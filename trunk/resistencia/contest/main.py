@@ -242,6 +242,7 @@ def _init_playoff(teams, fast, num_turns, back_round):
     log_file_name = generate_log_file_name('playoff')
     while not l.league_completed and not band:
         i = l.get_round_number()
+        show_round_matches(l)
         progress_bar = None
         if fast:
             progress_bar = pbs.ProgressBarDialog(None,
