@@ -39,13 +39,12 @@ class RoundError(Error):
 
 class Round(object):
 
-    def __init__(self, matchs, translator, log_file, num_turns = 150):
+    def __init__(self, matchs, translator, num_turns = 150):
         self.round = [] #Formed by tuples ((teamA, teamB), played, result)
         for match in matchs:
             self.round.append((match, False, 0))
 
         self.completed = False
-        self.log_file = log_file
         self.next_game = 0
         self.number_games = len(self.round)
         self.translator = translator
@@ -106,21 +105,22 @@ class Round(object):
 
     def log_tournament(self, full=False):
         if self.completed:
-            f_log = open(self.log_file, 'a')
+            f_log = open('/tmp/k', 'a')
             for match in self.round:
                 teamA = match[0][0]
                 teamB = match[0][1]
-                s = teamA + ' - ' + teamB
+                s = '  ' + teamA + ' vs ' + teamB
                 n = 50 - len(s)
                 res = ''
                 if match[2] == 0:
-                    res = 'X'
+                    res = '    Empate'
                 elif match[2] == 1:
-                    res = '1'
+                    res = '    Gana ' + teamA
                 else: #match[2] == -1:
-                    res = '2'
+                    res = '    Gana ' + teamB
 
-                f_log.write(s + ' ' + '-'*n + '-' + res + "\n")
+                #f_log.write(s + ' ' + '-'*n + '-' + res + "\n")
+                f_log.write("\n")
             f_log.close()
         else:
             raise RoundError('Not all games played')

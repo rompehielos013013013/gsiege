@@ -71,12 +71,8 @@ class Tournament(contest.Contest):
         self.round_number = 0
         self.rounds = []
         
-        base_path = configure.load_configuration()['games_path'] + '/'
-        self.tournament_file_name = base_path + filenames.generate_filename('tournament')
-        
         self.rounds.append(round.Round(self.matchs[self.round_number],
                                        self.translator,
-                                       self.tournament_file_name,
                                        self.num_turns))
 
         self.number_of_rounds = int(math.ceil(math.log(len(self.teams),2)))
@@ -109,22 +105,13 @@ class Tournament(contest.Contest):
             winners = r.get_winners()
             self.round_winners.append(winners)
             
-            f_log = open(self.tournament_file_name, 'a')
-            f_log.write('Ronda ' + str(self.round_number+1) + ":\n")
-            f_log.close()
-            r.log_tournament(True)
-            f_log = open(self.tournament_file_name, 'a')
-            f_log.write('-------------------------------' + "\n")
-            f_log.close()
-            
             self.round_number = self.round_number + 1
             self.league_completed = (self.round_number == self.number_of_rounds)
 
             if not self.league_completed:
                 self.matchs.append(_auto_pairings(winners))
                 self.rounds.append(round.Round(self.matchs[self.round_number],
-                                               self.translator,
-                                               self.tournament_file_name))
+                                               self.translator))
 
     def get_results_by_now(self):
         return self.round_winners
