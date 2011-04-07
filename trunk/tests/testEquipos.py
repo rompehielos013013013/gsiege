@@ -31,12 +31,14 @@ teams = [(u'/home/jose/proyectos/gsiege/trunk/data/teams/rules/reglasA.clp',
  (u'/home/jose/proyectos/gsiege/trunk/data/teams/rules/reglasJavierS.clp',
  u'/home/jose/proyectos/gsiege/trunk/data/teams/formations/equipoJavierS.clp')]
 
-k = tournament.Tournament(teams, 200)
+# k = tournament.Tournament(teams, 200)
 
-print "INICIO"
+# print "INICIO"
 
-while not k.completed():
-    k.play_round(None, True)
-    print "RONDA"
+# while not k.completed():
+#     k.play_round(None, True)
+#     print "RONDA"
 
-print "FIN"
+# print "FIN"
+
+print tournament.closest_power2(5)
