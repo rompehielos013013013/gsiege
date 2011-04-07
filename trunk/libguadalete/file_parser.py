@@ -31,13 +31,8 @@ def __fill_matrix(x=8, y=8, value=0):
     y -- y size of the matrix
     value - value that we want to fill with
     """
-    m = []
-    for i in range(x):
-        f = []
-        for j in range(y):
-            f.append(value)
-        m.append(f)
-        
+    
+    m = [[value for nx in xrange(x)] for ny in xrange(y)]
     return m
 
 def __find_element_matrix(board, e):
@@ -144,7 +139,8 @@ def parse_file(src_file):
     while line != "":
         line = f.readline()
         if (line == "tiempo\n" or line == "fin\n"): #If we are in a new turn
-            try: board
+            try:
+                board
             except NameError:
                 board = __fill_matrix()
             else:
