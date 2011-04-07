@@ -33,7 +33,6 @@ import sys
 import os
 import os.path
 
-
 # Si estamos en un sistema con kernel GNU/Linux
 if 'linux' in sys.platform:
 

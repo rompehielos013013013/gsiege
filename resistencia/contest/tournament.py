@@ -25,30 +25,31 @@ import gtk
 
 from resistencia import configure, filenames
 
+import pprint
 import contest
 import round
 
-def is_power2(num):
-	'states if a number is a power of two'
 
-	return num != 0 and ((num & (num - 1)) == 0)
+def is_power2(num):
+        return num != 0 and ((num & (num - 1)) == 0)
 
 def closest_power2(num):
-    return math.pow(2, math.ceil(math.log(num, 2)))
-    
+        return math.pow(2, math.ceil(math.log(num, 2)))
+
 
 def _auto_pairings(elements):
+        
+        # Barajamos los equipos
+        random.shuffle(elements)
+        
+        pairing = []
 
-    # Barajamos los equipos
-    random.shuffle(elements)
-
-    pairing = []
-
-    # Guardamos el número de equipos
+        # Guardamos el número de equipos
     numEquiposTotales = len(elements)
     
     # Si el número de equipos es una potencia de dos, la agrupación es trivial
-    if is_power2(numEquiposTotales):
+    if is_power2(numEquiposTotales):            
+            
         for i in range(numEquiposTotales / 2):
             pairing.append((elements[i], elements[i + 1]))        
     else:
@@ -57,24 +58,26 @@ def _auto_pairings(elements):
         # equipos fantasma en etapas posteriores
 
         # El número de partidos será la potencia de dos más cercana (por arriba)
-        # a la mitad del número de equipos
+        # a la mitad del número de equipos            
+        numPartidos = int(closest_power2(numEquiposTotales / 2))
 
-        numPartidos = closest_power2(n/2)
+        # Calculamos el número de equipos necesarios, que son dos por partido
         numEquiposNecesarios = numPartidos * 2
-        numEquiposFantasma = numEquiposNecesarios - numEquiposTotales
+
+        # El número de equipos fantasma a añadir será la diferencia con el
+        # número de equipos reales
+        numEquiposFantasma = numEquiposNecesarios - numEquiposTotales        
         equiposFantasma = ['aux_ghost_team'] * numEquiposFantasma
+
+        # Contenedor total de equipos. Los fantasma se agrupan juntos al final
+        equiposTotales = elements + equiposFantasma
+
+        # Dividimos los equipos en dos, y mezclamos. Así, es imposible que haya
+        # un partido entre dos equipos fantasma
+        primeraMitad = equiposTotales[:len(equiposTotales)/2]
+        segundaMitad = equiposTotales[-len(equiposTotales)/2:]
+        pairing = zip(primeraMitad, segundaMitad)
         
-
-        
-    
-    if len(elements) % 2 == 1:
-        elements.append('aux_ghost_team')
-    random.shuffle(elements)
-    
-    n = len(elements)
-
-
-
     return pairing
 
 def _extract_teams_from_pairing(elements):

@@ -106,7 +106,7 @@ class Board(object):
 
     def get_surface(self):
         """
-        Generate a pygame drawdable surface with the entire board.
+        Generate a pygame drawable surface with the entire board.
         """
         print 'get_surface'
         size = (self.board_size * self.piece_size, ) * 2

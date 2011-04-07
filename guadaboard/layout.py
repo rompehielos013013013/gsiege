@@ -222,6 +222,8 @@ class Layout(object):
         Generates the surfaces containing the names and pieces of
         the the players
         """
+
+        print "Draw labels"
         players_names = self.elements['players_names']
         labels_size = players_names['names_size']
         label_a_pos = players_names['inside_labels']['label_A_position']
