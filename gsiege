@@ -9,4 +9,4 @@ if [ -z "$PROGRAM_DIR" ]; then
     PROGRAM_DIR=`dirname "$0"`
 fi
 
-exec python -O ${PROGRAM_DIR}/resistencia1812.py --startgui "$@"
+exec python -O ${PROGRAM_DIR}/gsiege.py --startgui "$@"

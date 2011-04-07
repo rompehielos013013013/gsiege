@@ -56,3 +56,6 @@ class Contest(object):
 
     def play_round(self, fast=False):
         raise NotImplementedError('Base class. Method not implemented')
+
+    def completed(self):
+        return (self.get_round_number() == self.get_number_of_rounds())
