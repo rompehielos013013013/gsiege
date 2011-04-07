@@ -28,16 +28,52 @@ from resistencia import configure, filenames
 import contest
 import round
 
+def is_power2(num):
+	'states if a number is a power of two'
+
+	return num != 0 and ((num & (num - 1)) == 0)
+
+def closest_power2(num):
+    return math.pow(2, math.ceil(math.log(num, 2)))
+    
+
 def _auto_pairings(elements):
+
+    # Barajamos los equipos
+    random.shuffle(elements)
+
+    pairing = []
+
+    # Guardamos el número de equipos
+    numEquiposTotales = len(elements)
+    
+    # Si el número de equipos es una potencia de dos, la agrupación es trivial
+    if is_power2(numEquiposTotales):
+        for i in range(numEquiposTotales / 2):
+            pairing.append((elements[i], elements[i + 1]))        
+    else:
+        # Si no es una potencia de dos, hay que conseguir un número potencia de
+        # dos de partidos en la primera eliminatoria para evitar que aparezcan
+        # equipos fantasma en etapas posteriores
+
+        # El número de partidos será la potencia de dos más cercana (por arriba)
+        # a la mitad del número de equipos
+
+        numPartidos = closest_power2(n/2)
+        numEquiposNecesarios = numPartidos * 2
+        numEquiposFantasma = numEquiposNecesarios - numEquiposTotales
+        equiposFantasma = ['aux_ghost_team'] * numEquiposFantasma
+        
+
+        
+    
     if len(elements) % 2 == 1:
         elements.append('aux_ghost_team')
     random.shuffle(elements)
     
     n = len(elements)
 
-    pairing = []
-    for i in range(n/2):
-        pairing.append((elements[i],elements[n-i-1]))
+
 
     return pairing
 
@@ -46,7 +82,9 @@ def _extract_teams_from_pairing(elements):
     for i in elements:
         teams.append(i[0])
         teams.append(i[1])
-    
+
+import pprint
+
 class Tournament(contest.Contest):
     def __init__(self, teams, num_turns, pairings_done=False):
         self.matchs = []
@@ -63,12 +101,15 @@ class Tournament(contest.Contest):
 
         self.translator = contest.generate_key_names(self.teams)
         self.keys = []
-        
+
         for t in self.translator:
             self.keys.append(t)
 
         if not pairings_done:
             self.matchs.append(_auto_pairings(self.keys))
+
+        pprint.pprint(self.matchs)
+        raw_input()
 
         self.round_number = 0
         self.rounds = []
