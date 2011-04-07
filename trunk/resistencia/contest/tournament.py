@@ -53,6 +53,8 @@ class Tournament(contest.Contest):
         self.teams = []
         self.round_winners = []
         self.num_turns = num_turns
+
+        
         if pairings_done:
             self.matchs.append(teams)
             self.teams = _extract_teams_from_pairing(self.matchs)
@@ -99,7 +101,7 @@ class Tournament(contest.Contest):
             n = r.get_number_of_games()
             
             for i in range(n):
-                if fast:
+                if fast and progress_bar != None:
                     progress_bar.pulse()
                     while gtk.events_pending():
                         gtk.main_iteration(False)

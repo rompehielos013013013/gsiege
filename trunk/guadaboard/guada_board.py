@@ -48,13 +48,19 @@ class GuadaFileError(Error):
     def __init__(self, msg):
         self.msg = msg
 
+import pprint
 
 def _handle_draw(output_file):
     """
-    Handle the draw if the game cant draw
+    Handle the tie if the game cant draw
     """
     entire_game, winner = file_parser.parse_file(output_file)
+    print "Handle_draw!!" + output_file
 
+    print "Dimensión 1: " + str(len(entire_game))
+    print "Dimensión 2: " + str(len(entire_game[0]))
+    print "Dimensión 3: " + str(len(entire_game[0][0]))
+    
     if not winner == 0:
         return winner
     else:  # if it's a draw
@@ -63,6 +69,9 @@ def _handle_draw(output_file):
         _sum = 0
         final_board = entire_game[:-1]
         _num = len(final_board)
+
+        pprint.pprint(final_board)
+        
         for i in range(_num):
             for j in range(_num):
                 _value = final_board[i][j]

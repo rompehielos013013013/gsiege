@@ -42,7 +42,7 @@ if 'linux' in sys.platform:
 
     # Carga la biblioteca de C
     __libc__ = ctypes.CDLL('libc.so.6')
-    __libc__.prctl(15, 'resistencia1812', 0, 0, 0)
+    __libc__.prctl(15, 'gsiege', 0, 0, 0)
 
 
 __basedir__ = os.path.dirname(os.path.realpath(__file__))
@@ -60,7 +60,7 @@ sys.path.insert(0, __basedir__)
 
 def main_execution():
     """
-    This function intializes the resistencia1812 evironment
+    This function intializes the gsiege evironment
     """
     from resistencia import main
     main.main()
