@@ -35,6 +35,7 @@ import contest
 import tournament
 import round
 import pprint
+import dibujo_clasificacion
 
 def init_contest(contest_format, teams, fast=False, back_round=False,
                  num_turns=120):
@@ -86,10 +87,13 @@ def generate_log_file_name(prefix='pachanga'):
     return base_path + filenames.generate_filename(prefix)
 
 def show_round_matches(game):
+    # Cogemos los partidos de la ronda actual
     thisRoundMatches = game.matchs[game.get_round_number()];
-    
+
+    # Formateamos el mensaje a mostrar
     messageToShow = "\n\n".join([" vs ".join(m) for m in thisRoundMatches])
 
+    # Mostramos el mensaje
     myDialog = gtk.MessageDialog(None,
                                  gtk.DIALOG_MODAL, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE,
                                  "Emparejamientos")
@@ -98,7 +102,9 @@ def show_round_matches(game):
     myDialog.destroy()
 
 #def _init_league(teams, fast, num_turns, back_round):
-def _init_game(game_type, teams, fast, num_turns, back_round):
+def _init_game(game_type, teams, fast, num_turns, back_round = False):
+
+    # Lanzamos el tipo de juego apropiado
     if game_type == 'cup':
         game = tournament.Tournament(teams, num_turns)
     else:
@@ -106,11 +112,15 @@ def _init_game(game_type, teams, fast, num_turns, back_round):
 
     band = False
 
+    # Generamos el nombre del fichero de log según el tipo de juego
     log_file_name = generate_log_file_name(game_type)
 
+    # Contenedor para clasificaciones
     classifications = {}
 
+    # Mientras no se haya completado el juego
     while not game.completed() and not band:
+        
         # Guardamos el número de la ronda
         roundNumber = game.get_round_number()
 
@@ -148,6 +158,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round):
                 if m[1] == 1:
                     winners_of_this_round.add(m[0][0])
                 elif m[1] == -1:
+
                     winners_of_this_round.add(m[0][1])
 
             classifications[roundNumber] = winners_of_this_round
@@ -184,11 +195,14 @@ def _init_game(game_type, teams, fast, num_turns, back_round):
         for i in reversed(classifications.keys()):
             currentSet = classifications[i].difference(processed_players)
             for elm in currentSet:
-                log_file.write(str(t.get_number_of_rounds() - i) + ' - ' + elm + "\n")
+                log_file.write(str(game.get_number_of_rounds() - i) + ' - ' + elm + "\n")
 
         processed_players.update(currentSet)
 
         log_file.close()
+
+        dibujoClasificacion = dibujo_clasificacion.DibujoClasificacion(game)
+
     else:        
         update_log_end(log_file_name, classifications)
         
@@ -235,7 +249,7 @@ def _init_playoff(teams, fast, num_turns, back_round):
     if not band:
         band = False
         teams = _get_teams_next_round(teams, _extract_classifications(classifications))
-        _init_tournament(teams, num_turns, fast)
+        _init_game('cup', teams, fast, num_turns)
 
     update_log_end(log_file_name, classifications)
     print "##### END PLAYOFF"
