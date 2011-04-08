@@ -126,6 +126,8 @@ class Round(object):
             raise RoundError('Not all games played')
 
     def play_match(self, fast=False, cant_draw=False):
+        print "*************************************"
+        print "** PLAYING MATCH"
         teamA_key = self.round[self.next_game][0][0]
         teamB_key = self.round[self.next_game][0][1]
         teamA = None
@@ -133,6 +135,7 @@ class Round(object):
         
         result = 0
         if (not teamA_key == 'aux_ghost_team') and (not teamB_key == 'aux_ghost_team'):
+            print " - It's a normal match"
             teamA = (self.translator[teamA_key], _pieceA)
             teamB = (self.translator[teamB_key], _pieceB)
             result = guada_board.run(teamA, teamB, fast=fast,
@@ -141,21 +144,23 @@ class Round(object):
                                      cant_draw=cant_draw)
             
         else:
+            print " - It's a match against a ghost team"
             if teamA_key == 'aux_ghost_team':
                 result = -1
             else: #teamB_key == 'aux_ghost_team':
                 result = 1
 
-        print "--------------------------------"
-        print "MATCH FINISHED:"
-        print "  The result of the game '" + teamA_key + "' vs '"+ teamB_key + "' was:"
+        print "\n * MATCH FINISHED:"
+        print   " - The result of the game '" + teamA_key + "' vs '"+ teamB_key + "' was:"
 
         if result == 0:
-            print 'Draw'
+            print '    Draw'
         elif result == 1:
-            print teamA_key + ' won'
+            print '    ' + teamA_key + ' won'
         elif result == -1:
-            print teamB_key + ' won'
+            print '    ' + teamB_key + ' won'
+
+        print ""
 
         self.round[self.next_game] = (self.round[self.next_game][0], True, result)
         

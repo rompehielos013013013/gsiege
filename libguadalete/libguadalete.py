@@ -51,7 +51,7 @@ class LibGuadalete(object):
     simulation of 'La batalla del Guadalete', generating a file
     that can be parsered easily.
     """
-    def __init__(self, teamA, teamB, number_turns=100, teams_path = '../teams'):
+    def __init__(self, teamA, teamB, number_turns=100, suppress_output = False, teams_path = '../teams'):
         """Class initializator.
 
         Keywords arguments:
@@ -63,8 +63,9 @@ class LibGuadalete(object):
         self.teamB = teamB
         self.teams_path = teams_path
         self.max_value = 6
+        self.suppress_output = suppress_output
         self.number_turns = number_turns
-
+        
         if not os.path.exists(configure.__file_path__):
             configure.generate_configuration_file()
 
@@ -89,16 +90,18 @@ class LibGuadalete(object):
         traducirF.LoadFunctions(clips)
         traducirM.LoadFunctions(clips)
 
-        #print self.teams_path + "/equipo" + self.teamA + ".clp"
         temp_team = mirroring.mirroring_team(self.teamB[1])
-        print _('Loading ') + self.teamA[1]
+
+        print _('   - Loading ') + self.teamA[1]
         #create a temporally file that mirror the formation of B team,
         #because it's written thinking in A team
         try:
             clips.Load(self.teamA[1])
         except clips.ClipsError:
             raise FileError(_('Error parsing the file ') +  self.teamA[1])
-        print _('Loading ') + self.teamB[1]
+
+        print _('   - Loading ') + self.teamB[1]
+
         try:
             clips.Load(temp_team)
         except clips.ClipsError:
@@ -108,7 +111,7 @@ class LibGuadalete(object):
         os.remove(temp_team)
 
         fA.LoadFunctions(clips)
-        print _('Loading ') + self.teamA[0]
+        print _('   - Loading ') + self.teamA[0]
         try:
             clips.Load(self.teamA[0])
         except clips.ClipsError:
@@ -116,7 +119,7 @@ class LibGuadalete(object):
         temp_rules = mirroring.mirroring_rules(self.teamB[0])
         #same thing that for the formation, but this time using the rules
         fB.LoadFunctions(clips)
-        print _('Loading ') + self.teamB[0]
+        print _('   - Loading ') + self.teamB[0]
         try:
             clips.Load(temp_rules)
         except clips.ClipsError:
@@ -128,6 +131,7 @@ class LibGuadalete(object):
         clips.Reset() #restart the environment
 
         clips.Run() #start the simulation
+
         t = clips.StdoutStream.Read() #print the output
         f = clips.FactList()
 
@@ -136,32 +140,28 @@ class LibGuadalete(object):
 
         winner = self.__define_winner(last_fact, prev_last_fact)
 
-        print t
-
         return winner
 
     def __generateFileName(self):
-        """This function generate a proper filename for the game log
+        """This function generates a proper filename for the game log
 
-        Return a string like 'game_YYYY-MM-DD_hh:mm:ss_teamA-vs-teamB.txt'
+        Returns a string like 'game_YYYY-MM-DD_hh:mm:ss_teamA-vs-teamB.txt'
         """
         des = filenames.generate_filename('game',
                                           (self.teamA, self.teamB))
 
         base_path = configure.load_configuration()['games_path']
 
-        return base_path + '/' + des
+        return os.path.join(base_path, des)
 
     def __renameOutputFile(self,des):
         """
-        Simple function that rename the output file named 'resultado.txt'
+        Simple function that renames the output file named 'resultado.txt'
         to the proper filename with the date, names and so on.
         """
         src = "resultado.txt"
         f = open(src,"a")
         f.write("fin\n")
-        print "src: " + src
-        print "des: " + des
         os.rename(src, des)
 
     def __define_winner(self, last_fact, prev_last_fact):
@@ -183,17 +183,26 @@ class LibGuadalete(object):
             
 
     def run_game(self):
-        """Method that make the expert systems play the game, and generate the
-        output file.
+        """This method starts the game, generating an output file with the
+        results
 
-        Return a pair containing the output filename where the game had been
-        logged, and an integer that indicates who won the game.
+        Returns a pair containing the name of the output file where the game has
+        been logged, and an integer indicating who won the game.
         """
+
+        print "\n  ** PROCESSING MATCH..."
+
         try:
             winner = self.__startGame()
         except FileError as e:
             raise FileError(e.msg)
+
+        print "\n  ** PROCESSING ENDED"
+
         des = self.__generateFileName()
         self.__renameOutputFile(des)
 
+        print "   - Results of the game have been written to: \n    " + des
+        print ""
+        
         return des, winner
