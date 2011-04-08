@@ -35,9 +35,6 @@ class DibujoClasificacion(gtk.Window):
         self.set_resizable(False)
         self.set_position(gtk.WIN_POS_CENTER)
 
-
-        self.connect("destroy", gtk.main_quit)
-
         barritas = gtk.ScrolledWindow()
         barritas.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
 
@@ -138,13 +135,21 @@ class DibujoClasificacion(gtk.Window):
             destino.move_to(inicialX + self.anchoBloque,
                             posY)
 
-            destino.line_to(inicialX + self.anchoBloque + self.separacionHorizontal,
+            destino.line_to(inicialX + self.anchoBloque + self.separacionHorizontal / 2.,
+                            posY)
+
+            destino.line_to(inicialX + self.anchoBloque + self.separacionHorizontal / 2.,
+                            posY + separacion)
+            
+            destino.line_to(inicialX + self.anchoBloque,
+                            posY + separacion)          
+
+            destino.move_to(inicialX + self.anchoBloque + self.separacionHorizontal / 2.,
                             posY + separacion / 2)
 
-            destino.line_to(inicialX + self.anchoBloque,
-                            posY + separacion)
+            destino.line_to(inicialX + self.anchoBloque + self.separacionHorizontal,
+                            posY + separacion/2)
 
-        
         destino.stroke()
                             
 
