@@ -54,8 +54,6 @@ class DibujoClasificacion(gtk.Window):
         for q in range(self.numeroRondas):
             self.resultados.append(game.get_round(q).get_round_results())
 
-        pprint.pprint(self.resultados)
-
         self.anchoBloque = 140
         self.altoBloque = 24
         self.separacionHorizontal = 20
@@ -118,13 +116,6 @@ class DibujoClasificacion(gtk.Window):
 
 
         destino.set_source_rgb(0.1, 0.1, 0.1)
-
-        # destino.move_to(x,y)
-        # destino.line_to(x + self.anchoBloque, y)
-        # destino.line_to(x + self.anchoBloque, y + self.altoBloque)
-        # destino.line_to(x, y + self.altoBloque)
-        # destino.line_to(x, y)
-        # destino.stroke()
 
         if ultimaRonda:
             return

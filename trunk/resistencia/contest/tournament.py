@@ -73,8 +73,6 @@ def _auto_pairings(equiposIniciales):
 
         equiposTotales = equiposTotales + equiposIniciales[i+1:]        
 
-    pprint.pprint(equiposTotales)
-
     for q in range(0, len(equiposTotales), 2):
             pairing.append((equiposTotales[q], equiposTotales[q+1]))
 

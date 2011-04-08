@@ -167,6 +167,7 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
                         pygame.display.flip()
                         band_pos = False
             elif event.type == pygame.MOUSEBUTTONUP:
+                print "KK"
                 res = get_collision(event.pos, rects)
                 if event.button == 1 and res != '':
                     if res == 'button_exit':

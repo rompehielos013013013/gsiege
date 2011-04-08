@@ -37,7 +37,7 @@ teams = [(u'/home/jose/gsiege/repo/trunk/data/teams/rules/reglasA.clp',
 k = tournament.Tournament(teams, 150)
 
 while not k.completed():
-    k.play_round(None, True)
+    k.play_round(None, False)
 
 from resistencia.contest.dibujo_clasificacion import *
 

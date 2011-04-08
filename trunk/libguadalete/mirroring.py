@@ -52,7 +52,6 @@ def mirroring_team(src_file):
     f_temp = open(team_path_tmp_file, "w")
 
     for l in f_team:
-        print l
         l = l.replace('fichas-A', 'fichas-B')
         l = l.replace('(equipo "A")', '(equipo "B")')
         y = l.find('(pos-y') + 7
