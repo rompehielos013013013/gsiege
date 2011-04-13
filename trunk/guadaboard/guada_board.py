@@ -93,6 +93,7 @@ def _handle_draw(output_file):
 def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
                          hidden=False, cant_draw=False):
                          
+
     entire_game, winner = file_parser.parse_file(src_file)
     
     if cant_draw:
