@@ -138,6 +138,7 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
 
     band_pos = False
     clock = pygame.time.Clock()
+
     while True:
         clock.tick(50)
         for event in pygame.event.get():
