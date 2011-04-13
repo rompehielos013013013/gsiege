@@ -92,7 +92,9 @@ def _handle_draw(output_file):
 
 def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
                          hidden=False, cant_draw=False):
+                         
     entire_game, winner = file_parser.parse_file(src_file)
+    
     if cant_draw:
         winner = _handle_draw(src_file)
 
@@ -119,8 +121,9 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
         mixer.music.load(_music_path)
         mixer.music.play()
 
-    res_game = game.Game(entire_game, team_a[1],
-                         team_b[1], path_piece_def, hidden=hidden)
+    res_game = game.Game(entire_game, 
+                        team_a[1],
+                        team_b[1], path_piece_def, hidden=hidden)
 
     img_board = res_game.draw_board().convert()
 
@@ -266,23 +269,33 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
     generating the game and parsing the file.
     """
     lib = libguadalete.LibGuadalete(team_a[0], team_b[0], number_turns)
+    
     try:
         out_file, winner = lib.run_game()
     except LibFileError as exc:
         raise GuadaFileError(exc.msg)
+        
     if not fast:
         name_team_a = filenames.extract_name_expert_system(team_a[0])
         name_team_b = filenames.extract_name_expert_system(team_b[0])
-        _load_game_from_file(out_file, (name_team_a, team_a[1]),
-                             (name_team_b, team_b[1]), path_piece_def,
-                             xml_file, hidden, cant_draw=cant_draw)
+        
+        # Aquí es donde se llama a la función que gestiona el dibujado del juego
+        _load_game_from_file(out_file, 
+                            (name_team_a, team_a[1]),
+                            (name_team_b, team_b[1]), path_piece_def,
+                            xml_file, hidden, cant_draw=cant_draw)
+                             
     if cant_draw:
         winner = _handle_draw(out_file)
+        
     res = winner
+    
     if get_stats:
         res = (winner, stats.get_game_file_stats(out_file))
+        
     if dont_log or get_stats:
         os.remove(out_file)
+        
     return res
 
 

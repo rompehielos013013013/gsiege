@@ -33,6 +33,7 @@ from resistencia.nls import gettext as _
 import league
 import contest
 import tournament
+import controlPartida
 import round
 import pprint
 import dibujo_clasificacion
@@ -41,6 +42,8 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
                  num_turns=120):
 
     print "### INIT_CONTEST"
+    
+    controlPartida.cancelarCampeonato = False
 
     if contest_format == 'playoff':
         _init_playoff(_clean_dictionary(teams), fast, num_turns, back_round)
@@ -101,7 +104,6 @@ def show_round_matches(game):
     myDialog.run()
     myDialog.destroy()
 
-#def _init_league(teams, fast, num_turns, back_round):
 def _init_game(game_type, teams, fast, num_turns, back_round = False):
 
     # Lanzamos el tipo de juego apropiado
@@ -119,7 +121,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
     classifications = {}
 
     # Mientras no se haya completado el juego
-    while not game.completed() and not band:
+    while not game.completed() and not band and not controlPartida.cancelarCampeonato:
         
         # Guardamos el número de la ronda
         roundNumber = game.get_round_number()

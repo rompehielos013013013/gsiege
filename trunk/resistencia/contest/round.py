@@ -136,8 +136,10 @@ class Round(object):
         result = 0
         if (not teamA_key == 'aux_ghost_team') and (not teamB_key == 'aux_ghost_team'):
             print " - It's a normal match"
+            
             teamA = (self.translator[teamA_key], _pieceA)
             teamB = (self.translator[teamB_key], _pieceB)
+            
             result = guada_board.run(teamA, teamB, fast=fast,
                                      hidden=True,
                                      number_turns=self.num_turns,

@@ -127,6 +127,8 @@ def init_human_game(player_formation, computer_team, player_as,
     traducirF.LoadFunctions(clips)
     traducirM.LoadFunctions(clips)
 
+    print "ASD1"
+    
     if player_num == 1:
         int_team = mirroring.interactive_formation(team_a)
         temp_team = mirroring.mirroring_team(team_b[1])
@@ -177,13 +179,15 @@ def init_human_game(player_formation, computer_team, player_as,
             raise FileError(_('Error parsing the file ') + team_a[0])
 
     interaccion.LoadFunctions(clips, player_as)
-
+    
+    print "******** !!"
     interaccion.interaction_object = r_intact.HumanInteraction(
         aux_team_a, aux_team_b, default_piece, player_num, number_turns)
 
+    print "******** !!!!"
     clips.Reset()  # restart the environment
-
     clips.Run()  # start the simulation
+    print "******** !!!!!!"
     interaccion.interaction_object.finish()
     _stream = clips.StdoutStream.Read()  # print the output
 
