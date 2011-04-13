@@ -14,11 +14,7 @@ sys.path.insert(0, "..")
 from libguadalete import libguadalete, file_parser
 
 class Ficha(pygame.sprite.Sprite):
-    def __init__ (self, x, y, valor, identificador, equipo):
-        pass
-
-class Ficha(pygame.sprite.Sprite):
-    def __init__(self, equipo, identificador, valor, x, y, visible = True):
+    def __init__(self, equipo, identificador, valor, x, y, descubierta, visible = True):
 
         pygame.sprite.Sprite.__init__(self)
 
@@ -26,22 +22,27 @@ class Ficha(pygame.sprite.Sprite):
         self.y = y
         self.valor = valor
         self.identificador = identificador
+        self.descubierta = descubierta
         self.equipo = equipo
         self.visible = visible
 
-        imagenFicha = None
+        self.actualizarSuperficie()        
 
-        if equipo == 'A':
+    def actualizarSuperficie(self):
+        imagenFicha = None
+        if self.equipo == 'A':
             imagenFicha = pygame.image.load("../data/images/piece-orange.png")
         else:
             imagenFicha = pygame.image.load("../data/images/piece-violete.png")
 
-#        fuente = font.Font("../data/LiberationMono-Bold.ttf", 
+        fuente = pygame.font.Font("../data/fonts/LiberationMono-Bold.ttf", 32)
+        imagenTexto = fuente.render("%d" % self.valor, 1, (255, 255, 255))
+        imagenFicha.blit(imagenTexto, (0,0))
+        self.image = imagenFicha.convert()
 
-        self.image = self.image.convert()
         self.rect = self.image.get_rect()
-        self.rect.x = 10 + (x - 1) * 60
-        self.rect.y = 10 + (y - 1) * 60
+        self.rect.x = 10 + (self.x - 1) * 60
+        self.rect.y = 10 + (self.y - 1) * 60
         
 
 class PintarPartida(object):
