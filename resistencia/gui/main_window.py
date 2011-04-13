@@ -52,9 +52,11 @@ class Resistencia:
     def on_mainWindow_destroy(self, widget, data=None):
         gtk.main_quit()
 
+    # Botón salir
     def on_btn_quit_clicked(self, widget, data=None):
         gtk.main_quit()
 
+    # Botón Acerca de
     def on_btn_about_clicked(self, widget):
         print "About button clicked"
 
@@ -62,29 +64,35 @@ class Resistencia:
         self.about.set_transient_for(self.window)
         self.about.show()
 
+    # Botón Competiciones
     def on_btn_competitions_clicked(self, widget):
         treeview = contest_dialog.contestDialog(self.window)
         print "Nueva competición..."
         treeview.contest_dialog.run()
 
+    # Botón jugar contra Sistema Experto
     def on_btn_human_es_game_clicked(self, widget):
         human_es_game = human_game_dialog.humanGameDialog(self.window)
         human_es_game.human_ia_dialog.run()
 
+    # Botón juegos anteriores
     def on_btn_previous_games_clicked(self, widget):
         self.previous_games_chooser.connect('response', lambda d, r: d.hide())
                                             #self.previous_games_file_chooser_handler)
         self.previous_games_chooser.set_transient_for(self.window)
         self.previous_games_chooser.show()
 
+    # Botón laboratorio
     def on_btn_laboratory_clicked(self, widget):
         testing_dialog = tests_dialog.testDialog(self.window)
         testing_dialog.tests_dialog.run()
 
+    # Botón Settings
     def on_btn_settings_clicked(self, widget):
         settings_dial = settings_dialog.settingsDialog(self.window)
         settings_dial.settings.run()
 
+    # Botón Juego Rápido
     def on_btn_quick_game_clicked(self, widget):
         quick_game = quick_game_dialog.quickGameDialog(self.window)
         quick_game.quick_game.run()

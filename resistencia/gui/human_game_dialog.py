@@ -74,7 +74,7 @@ class humanGameDialog:
         self.spin_turns.set_range(50,300)
         self.spin_turns.set_increments(1,10)
         self.spin_turns.set_value(self.num_turns)
-        #---------------
+
         self.dont_save_game = False
         self.human_team = 'A'
         self.random_computer = False
@@ -144,9 +144,12 @@ class humanGameDialog:
                 computer_team = (self.rules_computer, self.formation_computer)
 
             self.human_ia_dialog.destroy()
+            
             while gtk.events_pending():
                 gtk.main_iteration(False)
+                
             try:
+                # AQUÍ se lanza el juego de humano contra máquina
                 human_game_handler.init_human_game(self.formation_player,
                                                    computer_team, self.human_team,
                                                    self.num_turns, self.dont_save_game)

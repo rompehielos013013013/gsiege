@@ -151,4 +151,22 @@
 	<value id="pressed">./images/salir_pulsada.png</value>
       </propierty>    
   </label>
+  
+  <label name="abort_button" type="button">
+    <propierty name="abort_button_size" type="size">
+        <value id="weight">150</value>
+        <value id="height">40</value>
+    </propierty>
+    
+    <propierty name="abort_button_position" type="position">
+        <value id="x">650</value>
+        <value id="y">400</value>
+    </propierty>
+    
+    <propierty name="abourt_button_images" type="button_images">
+        <value id="default">./images/btnAbortar.png</value>
+        <value id="above">./images/btnAbortar.png</value>
+        <value id="pressed">./images/btnAbortar.png</value>
+    </propierty>
+  </label>
 </window-board>

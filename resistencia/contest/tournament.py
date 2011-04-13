@@ -29,7 +29,7 @@ from resistencia import configure, filenames
 import round
 import pprint
 import contest
-
+import controlPartida
 
 def isPowerTwo(num):
 	return num != 0 and ((num & (num - 1)) == 0)
@@ -91,6 +91,7 @@ class Tournament(contest.Contest):
         self.round_winners = []
         self.num_turns = num_turns
 
+        print "Cancelar campeonato: " + str(controlPartida.cancelarCampeonato)
 
         if pairings_done:
             self.matchs.append(teams)
