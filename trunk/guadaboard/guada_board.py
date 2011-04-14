@@ -28,9 +28,11 @@ from pygame import mixer
 
 import gtk
 
-from guadaboard import  game, layout
+from guadaboard import  game, layout, pintarPartida
+
 from libguadalete import libguadalete, file_parser, stats
 from libguadalete.libguadalete import FileError as LibFileError
+
 from resistencia import filenames, configure
 from resistencia.xdg import get_data_path as xdg_data_path
 from resistencia.gui import notify_result
@@ -50,12 +52,10 @@ class GuadaFileError(Error):
 
 import pprint
 
-def _handle_draw(output_file):
+def _handle_draw(entire_game, winner):
     """
     Handle the tie if the game cant draw
     """
-    entire_game, winner = file_parser.parse_file(output_file)
-
     if not winner == 0:
         return winner
     else:  # if it's a draw
@@ -95,9 +95,8 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
                          
 
     entire_game, winner = file_parser.parse_file(src_file)
-    
     if cant_draw:
-        winner = _handle_draw(src_file)
+        winner = _handle_draw(entire_game, winner)
 
     if winner == 0:
         print u'Empate'
@@ -110,99 +109,10 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
     if configure.load_configuration()['music_active'] == '1':
         music = True
 
-    pygame.init()
+    P = pintarPartida.PintarPartida(src_file, team_a, team_b, music, hidden, cant_draw)
+    P.run()
 
-    xml_layout = layout.Layout(xml_file)
-
-    screen = pygame.display.set_mode(xml_layout.get_window_size())
-    pygame.display.set_caption(xml_layout.get_window_title())
-
-    if music:
-        _music_path = xdg_data_path('music/walking_on_old_stones.ogg')
-        mixer.music.load(_music_path)
-        mixer.music.play()
-
-    res_game = game.Game(entire_game, 
-                        team_a[1],
-                        team_b[1], path_piece_def, hidden=hidden)
-
-    img_board = res_game.draw_board().convert()
-
-    xml_layout.init((team_a[1], team_a[0]), (team_b[1], team_b[0]), img_board)
-    rects = xml_layout.get_buttons_rects()
-
-    pygame.display.set_icon(xml_layout.get_favicon())
-
-    screen.blit(xml_layout.get_surface(), (0, 0))
-    pygame.display.flip()
-
-    band_pos = False
-    clock = pygame.time.Clock()
-
-    while True:
-        clock.tick(50)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                if music:
-                    mixer.music.stop()
-                pygame.display.quit()
-                show_dialog_result((team_a[0], team_b[0]), winner)
-                return winner
-            elif event.type == pygame.KEYDOWN:
-                if event.key == 275:
-                    surface = next_turn(res_game, xml_layout)
-                    screen.blit(surface, (0, 0))
-                    pygame.display.flip()
-                if event.key == 276:
-                    surface = previous_turn(res_game, xml_layout)
-                    screen.blit(surface, (0, 0))
-                    pygame.display.flip()
-            elif event.type == pygame.MOUSEMOTION:
-                res = get_collision(event.pos, rects)
-                if res != '':
-                    if band_pos == False:
-                        surface = xml_layout.get_surface((res, 2))
-                        screen.blit(surface, (0, 0))
-                        pygame.display.flip()
-                        band_pos = True
-                else:
-                    if band_pos == True:
-                        surface = xml_layout.get_surface()
-                        screen.blit(surface, (0, 0))
-                        pygame.display.flip()
-                        band_pos = False
-            elif event.type == pygame.MOUSEBUTTONUP:
-                print "KK"
-                res = get_collision(event.pos, rects)
-                if event.button == 1 and res != '':
-                    if res == 'button_exit':
-                        if music:
-                            mixer.music.stop()
-                        pygame.display.quit()
-                        show_dialog_result((team_a[0], team_b[0]), winner)
-                        return winner
-                    else:
-                        if res == 'button_left_2':
-                            surface = first_turn(
-                                res_game, xml_layout, (res, 1))
-                            screen.blit(surface, (0, 0))
-                            pygame.display.flip()
-                        elif res == 'button_left_1':
-                            surface = previous_turn(
-                                res_game, xml_layout, (res, 1))
-                            screen.blit(surface, (0, 0))
-                            pygame.display.flip()
-                        elif res == 'button_right_1':
-                            surface = next_turn(
-                                res_game, xml_layout, (res, 1))
-                            screen.blit(surface, (0, 0))
-                            pygame.display.flip()
-                        elif res == 'button_right_2':
-                            surface = last_turn(
-                                res_game, xml_layout, (res, 1))
-                            screen.blit(surface, (0, 0))
-                            pygame.display.flip()
-
+    show_dialog_result((team_a[0], team_b[0]), winner)
 
 def get_collision(point, rects):
     """
@@ -216,49 +126,6 @@ def get_collision(point, rects):
             break
 
     return res
-
-
-def _get_turn(actual_game, xml_layout, mouse=None):
-    """
-    Changes the turn
-    """
-    surface = actual_game.draw_board()
-    surface.convert()
-    xml_layout.change_board(surface)
-
-    return xml_layout.get_surface(mouse)
-
-
-def next_turn(actual_game, xml_layout, mouse=None):
-    """
-    Iterates to the next turn
-    """
-    actual_game.next_turn()
-    return _get_turn(actual_game, xml_layout, mouse)
-
-
-def previous_turn(actual_game, xml_layout, mouse=None):
-    """
-    Iterates to the previous turn
-    """
-    actual_game.previous_turn()
-    return _get_turn(actual_game, xml_layout, mouse)
-
-
-def first_turn(actual_game, xml_layout, mouse=None):
-    """
-    Iterates to the first turn
-    """
-    actual_game.first_turn()
-    return _get_turn(actual_game, xml_layout, mouse)
-
-
-def last_turn(actual_game, xml_layout, mouse=None):
-    """
-    Iterates to the last turn
-    """
-    actual_game.last_turn()
-    return _get_turn(actual_game, xml_layout, mouse)
 
 
 def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
@@ -283,13 +150,18 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
         
         # Aquí es donde se llama a la función que gestiona el dibujado del juego
         _load_game_from_file(out_file, 
-                            (name_team_a, team_a[1]),
-                            (name_team_b, team_b[1]), path_piece_def,
-                            xml_file, hidden, cant_draw=cant_draw)
-                             
-    if cant_draw:
-        winner = _handle_draw(out_file)
+                             (name_team_a, team_a[1]),
+                             (name_team_b, team_b[1]), 
+                             path_piece_def,
+                             xml_file, hidden, cant_draw=cant_draw)
         
+    # Si no puede haber empate
+    if cant_draw:
+        # Solucionar el empate
+        entire_game, winner = file_parser.parse_file(output_file)
+        winner = _handle_draw(entire_game, winner)
+        
+    # Preparamos la variable de retorno
     res = winner
     
     if get_stats:
@@ -302,22 +174,20 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
 
 
 def run_from_file(src_file,
-                  team_a=('equipoA',
-                         xdg_data_path('images/piece-orange.png')),
-                  team_b=('equipoB',
-                         xdg_data_path('images/piece-violete.png')),
+                  team_a=('equipoA', xdg_data_path('images/piece-orange.png')),
+                  team_b=('equipoB', xdg_data_path('images/piece-violete.png')),
                   path_piece_def=xdg_data_path('images/piece-default.png'),
                   xml_file=xdg_data_path('layouts/alternative-layout.xml')):
     """
-    Run a game directly from a file, not simulating a game.
+    Run a game directly from a file, skipping actual simulation
     """
     name_a, name_b = filenames.extract_names_from_file(src_file)
     team_a = (name_a, team_a[1])
     team_b = (name_b, team_b[1])
-    winner = _load_game_from_file(src_file, team_a, team_b,
+    _load_game_from_file(src_file, 
+                                  team_a, team_b,
                                   path_piece_def, xml_file)
 
-    return winner
 
 
 def show_dialog_result((name_team_a, name_team_b), winner):
