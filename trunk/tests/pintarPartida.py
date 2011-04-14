@@ -39,11 +39,17 @@ class Ficha(pygame.sprite.Sprite):
         fuente = pygame.font.Font("../data/fonts/LiberationMono-Bold.ttf", 32)
 
         # Pintamos el rótulo en una superficie nueva
-        imagenTexto = fuente.render("%d" % self.valor, 1, (255, 255, 255))
+        if self.descubierta:
+            imagenTexto = fuente.render("%d" % self.valor, 1, (255, 255, 255))
+        else:
+            imagenTexto = fuente.render("[%d]" % self.valor, 1, (255, 255, 255))
 
-        # Bliteamos la superficie del texto en la superficie de la ficha original
-        imagenFicha.blit(imagenTexto, (0,0))
-
+            # Bliteamos la superficie del texto en la superficie de la ficha original
+        if self.descubierta:            
+            imagenFicha.blit(imagenTexto, (19,11))
+        else:
+            imagenFicha.blit(imagenTexto, (0,11))
+            
         # Asignamos a la imagen de la ficha la superficie compuesta convertida
         self.image = imagenFicha.convert()
 
@@ -56,13 +62,12 @@ class Ficha(pygame.sprite.Sprite):
         self.posicionActual = self.posicionDestino
 
         self.rect.x, self.rect.y = self.posicionActual
+        self.opacidad = 255
         
 
     def pintar (self, destino):
         if self.visible:
             if round(self.posicionActual[0]) != round(self.posicionDestino[0]):
-                print "X: ", self.posicionActual[0], " => ", self.posicionDestino[0]
-                
                 variacion = (self.posicionDestino[0] - self.posicionActual[0]) / 15.0
                 self.posicionActual[0] += variacion
 
@@ -70,16 +75,17 @@ class Ficha(pygame.sprite.Sprite):
                 self.posicionActual[0] = self.posicionDestino[0]
 
             if round(self.posicionActual[1]) != round(self.posicionDestino[1]):
-                print "Y: ", self.posicionActual[1], " => ", self.posicionDestino[1]
-                
                 variacion = (self.posicionDestino[1] - self.posicionActual[1]) / 15.0
                 self.posicionActual[1] += variacion
             else:
                 self.posicionActual[1] = self.posicionDestino[1]
 
-
-            self.rect.x, self.rect.y = self.posicionActual
-            destino.blit(self.image, self.rect)
+        elif self.opacidad > 1:
+            self.opacidad -= 10
+            self.image.set_alpha(self.opacidad)
+            
+        self.rect.x, self.rect.y = self.posicionActual
+        destino.blit(self.image, self.rect)
 
     def muerete(self):
         self.visible = False
@@ -89,6 +95,10 @@ class Ficha(pygame.sprite.Sprite):
         self.x = datos[3]
         self.y = datos[4]
         
+        if self.descubierta != datos[5]:
+            self.descubierta = datos[5]
+            self.actualizarSuperficie()
+            
         self.posicionDestino = self.toGlobal()
     
 
