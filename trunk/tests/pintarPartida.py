@@ -29,25 +29,33 @@ class Ficha(pygame.sprite.Sprite):
         self.actualizarSuperficie()        
 
     def actualizarSuperficie(self):
-        imagenFicha = None
+        # Dependiendo del equipo elegiremos la pieza de un color u otro
         if self.equipo == 'A':
             imagenFicha = pygame.image.load("../data/images/piece-orange.png")
         else:
             imagenFicha = pygame.image.load("../data/images/piece-violete.png")
 
+        # Cargamos la fuente para el rótulo con el valor de la ficha
         fuente = pygame.font.Font("../data/fonts/LiberationMono-Bold.ttf", 32)
+
+        # Pintamos el rótulo en una superficie nueva
         imagenTexto = fuente.render("%d" % self.valor, 1, (255, 255, 255))
+
+        # Bliteamos la superficie del texto en la superficie de la ficha original
         imagenFicha.blit(imagenTexto, (0,0))
+
+        # Asignamos a la imagen de la ficha la superficie compuesta convertida
         self.image = imagenFicha.convert()
 
+        # El rectángulo inicialmente será el de la imagen...
         self.rect = self.image.get_rect()
+
+        # ... pero con las coordenadas acordes a la posición de la ficha en el tablero
         self.rect.x = 10 + (self.x - 1) * 60
         self.rect.y = 10 + (self.y - 1) * 60
         
 
 class PintarPartida(object):
-    """
-    """
     
     def __init__(self, ficheroOrigen, team_a, team_b, path_piece_def, xml_file,
                  hidden=False, cant_draw=False):
@@ -108,6 +116,8 @@ class PintarPartida(object):
             for eventos in pygame.event.get():
                 if eventos.type == QUIT:
                     sys.exit(0)
+                elif eventos.type == KEYDOWN and eventos.key == 275:
+                    nuevasFichas = self.parseador.avanzarTurno()
  
             # Pintamos el fondo
             self.pantalla.blit(self.imagenFondo, (0, 0))

@@ -91,13 +91,14 @@ class ParseadorPartida(object):
         line = self.lineasFichero[self.lineaActual]
 
         # En teoría, obligatoriamente deberíamos estar en esta línea
-        if (line == "tiempo\n"):
+        if ("tiempo" in line):
             # Saltamos la línea con el número del turno
             self.lineaActual += 2
             line = self.l()
 
-            while (line.count("tiempo") == 0 and line.count("fin") == 0
-                   and self.lineaActual < len(self.lineasFichero)):
+            while ("tiempo" not in line and 
+                   "fin" not in line and
+                   self.lineaActual < len(self.lineasFichero)):
 
                 pos_e = line.find("e")
                 pos_id = line.find("n")
@@ -119,14 +120,5 @@ class ParseadorPartida(object):
                 self.lineaActual = self.lineaActual + 1
                 line = self.l()
                     
-                # values[id] = val
-                    
-                # if e == 'A':
-                #     board[int(y) - 1][int(x) - 1] = int(val) + (int(d)*max_value)
-                # else:
-                #     board[int(y) - 1][int(x) - 1] = int(val) - 2*int(val) - (int(d)*max_value)
-
-
-                
         return infoFichas
                 
