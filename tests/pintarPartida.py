@@ -51,9 +51,54 @@ class Ficha(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # ... pero con las coordenadas acordes a la posición de la ficha en el tablero
-        self.rect.x = 10 + (self.x - 1) * 60
-        self.rect.y = 10 + (self.y - 1) * 60
+        self.posicionDestino = self.toGlobal()
+
+        self.posicionActual = self.posicionDestino
+
+        self.rect.x, self.rect.y = self.posicionActual
         
+
+    def pintar (self, destino):
+        if self.visible:
+            if round(self.posicionActual[0]) != round(self.posicionDestino[0]):
+                print "X: ", self.posicionActual[0], " => ", self.posicionDestino[0]
+                
+                variacion = (self.posicionDestino[0] - self.posicionActual[0]) / 15.0
+                self.posicionActual[0] += variacion
+
+            else:
+                self.posicionActual[0] = self.posicionDestino[0]
+
+            if round(self.posicionActual[1]) != round(self.posicionDestino[1]):
+                print "Y: ", self.posicionActual[1], " => ", self.posicionDestino[1]
+                
+                variacion = (self.posicionDestino[1] - self.posicionActual[1]) / 15.0
+                self.posicionActual[1] += variacion
+            else:
+                self.posicionActual[1] = self.posicionDestino[1]
+
+
+            self.rect.x, self.rect.y = self.posicionActual
+            destino.blit(self.image, self.rect)
+
+    def muerete(self):
+        self.visible = False
+
+    def actualizate(self, datos):
+        self.posicionPrevia = self.posicionDestino
+        self.x = datos[3]
+        self.y = datos[4]
+        
+        self.posicionDestino = self.toGlobal()
+    
+
+    def toGlobal(self):
+        return [float(10 + (self.x - 1) * 60),
+                float(10 + (self.y - 1) * 60)]
+
+def calcularPasoAnimacion (t, b, c, d):
+    t /= d
+    return -c *(t)*(t-2) + b
 
 class PintarPartida(object):
     
@@ -92,38 +137,68 @@ class PintarPartida(object):
         print "Inicializando pygame..."
         pygame.init()
 
+        tamanoVentana = (760,500)
+        
+        print pygame.display.mode_ok(tamanoVentana)
+        
         print "Estableciendo el modo de pantalla..."
-        self.pantalla = pygame.display.set_mode((760, 560))
+        self.pantalla = pygame.display.set_mode(tamanoVentana)
 
         print "Estableciendo el título de la ventana..."
         pygame.display.set_caption("Reproducir partida")
 
         print "Cargando imagen de fondo..."
-        self.imagenFondo = pygame.image.load("../data/images/fondo.png")
+        self.imagenFondoTemp = pygame.image.load("../data/images/fondo.png")
 
         print "Convirtiendo la imagen de fondo al formato adecuado..."
-        self.imagenFondo = self.imagenFondo.convert_alpha()
+        self.imagenFondo = self.imagenFondoTemp.convert()
 
         print "Parseando el estado inicial..."
         organizacionInicial = self.parseador.avanzarTurno()
 
+        print "Cargando las fichas iniciales..."
         for keyFicha in organizacionInicial.keys():
             ficha = organizacionInicial[keyFicha];
-            self.fichas[ficha] = Ficha(ficha[0], ficha[1], ficha[2], 
+            self.fichas[keyFicha] = Ficha(ficha[0], ficha[1], ficha[2], 
                                        ficha[3], ficha[4], ficha[5])
 
-        while True:
+        salir = False
+        
+        print "Comienza el game loop"
+        while not salir:
+
+            # Gestión de eventos
             for eventos in pygame.event.get():
+                
                 if eventos.type == QUIT:
-                    sys.exit(0)
+                    print "** HALT"
+                    salir = True
                 elif eventos.type == KEYDOWN and eventos.key == 275:
+                    
+                    # Cogemos las fichas del nuevo turno
                     nuevasFichas = self.parseador.avanzarTurno()
- 
+                    
+                    # Recorremos las fichas que teníamos antes
+                    for f in self.fichas.keys():
+
+                        # Si alguna ficha ya no está
+                        if f not in nuevasFichas:
+                            # Muere!
+                            self.fichas[f].muerete()
+
+                        # Si sigue estando
+                        else:
+                            # Actualízate con las cosas que veas nuevas
+                            self.fichas[f].actualizate(nuevasFichas[f])
+
+            self.pantalla.fill((1,1,1))
+
             # Pintamos el fondo
             self.pantalla.blit(self.imagenFondo, (0, 0))
 
+            # Pintamos las fichas
             for keyFicha in self.fichas:
-                self.pantalla.blit(self.fichas[keyFicha].image, self.fichas[keyFicha].rect)
+                self.fichas[keyFicha].pintar(self.pantalla)
 
             # Volcamos la pantalla a la gráfica
             pygame.display.flip()
@@ -131,15 +206,20 @@ class PintarPartida(object):
             ##############################
             # GESTIÓN DE LOS FPS
 
-            # Cogemos los ticks actuales
-            ticksActual = pygame.time.get_ticks()
+            # # Cogemos los ticks actuales
+            # ticksActual = pygame.time.get_ticks()
 
-            # Esperamos el tiempo necesario para mantener los FPS
-            pygame.time.delay(int(self.intervalo - (ticksActual - self.ticksAnterior)))
+            # espera = self.intervalo - (ticksActual - self.ticksAnterior)
 
-            # Actualizamos los ticks anteriores
-            self.ticksAnterior = ticksActual
+            # if espera > 0:
+            #     # Esperamos el tiempo necesario para mantener los FPS
+            #     pygame.time.delay(int(espera))
 
+            # # Actualizamos los ticks anteriores
+            # self.ticksAnterior = ticksActual
+
+        print "Fin del game loop"
+        pygame.quit()
         return 0
 
 
@@ -147,7 +227,7 @@ def main():
     """
     """
 
-    P = PintarPartida('../data/games/game_2011-04-08_17:23:03_AA-vs-PalomoPalomo.txt',1,2,3,4)
+    P = PintarPartida('../data/games/game_2011-04-07_17:18:47_JavierSJavierS-vs-RosunixRosunix.txt',1,2,3,4)
     P.run()
     
 
