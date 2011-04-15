@@ -4,74 +4,6 @@
 import os
 import pprint
 
-def compararTableros(tableroA, tableroB):
-    cambios = []
-    for i in range(8):
-        for j in range(8):
-            if tableroA[i][j] != tableroB[i][j]:
-                cambios.append((i,j))
-
-    diferencias = []
-
-    # Si solo hay una diferencia entre los dos tableros, se trata de una ficha
-    # que ha movido y ha desaparecido
-    if len(cambios) == 1:
-        i,j = cambios[0]
-        diferencias.append(("muerte", tableroA[i][j], (i,j), ()))
-
-    # Si hay dos cambios, es que una ficha se ha movido a otra posición, con
-    # varias posibles consecuencias
-    elif len(cambios) == 2:
-        x1, y1 = cambios[0]
-        x2, y2 = cambios[1]
-
-        # Si la posición a la que se movió estaba vacía, se trata de un
-        # movimiento simple (caso 1, de un lado al otro)
-
-        # [X| ] => [ |X]
-        if (tableroA[x1][y1] != 0 and tableroA[x2][y2] == 0 and
-            tableroB[x1][y1] == 0 and tableroB[x2][y2] != 0):
-            diferencias.append(("movimiento", tableroA[x1][y1], (x1,y1), (x2, y2)))
-
-        # Lo mismo para el movimiento inverso
-        # [ |X] => [X| ]
-        elif (tableroA[x1][y1] == 0 and tableroA[x2][y2] != 0 and
-              tableroB[x1][y1] != 0 and tableroB[x2][y2] == 0):
-            diferencias.append(("movimiento", tableroB[x1][y1], (x2, y2), (x1,y1)))
-
-        # Una ficha se mueve y se come a otra
-        # [X|Y] => [ |X]
-        elif (tableroA[x1][y1] != 0 and tableroA[x2][y2] != 0 and
-              tableroB[x1][y1] == 0 and tableroB[x2][y2] != 0):
-            diferencias.append(("movimiento", tableroA[x1][y1], (x1,y1), (x2, y2)))
-            diferencias.append(("muerte", tableroA[x2][y2], (x2, y2), ()))
-
-        # Una ficha se mueve y se come a otra (movimiento inverso)
-        #[Y|X] => [X| ]
-        elif (tableroA[x1][y1] != 0 and tableroA[x2][y2] != 0 and
-              tableroB[x1][y1] != 0 and tableroB[x2][y2] == 0):
-            diferencias.append(("movimiento", tableroA[x2][y2], (x2,y2), (x1, y1)))
-            diferencias.append(("muerte", tableroA[x1][y1], (x1, y1), ()))       
-
-        # Una ficha se mueve contra otra de su mismo valor y ambas mueren
-        #[X|Y] => [ | ]
-        elif (tableroA[x1][y1] != 0 and tableroA[x2][y2] != 0 and
-              tableroB[x1][y1] == 0 and tableroB[x2][y2] == 0):
-            diferencias.append(("muerte", tableroA[x1][y1], (x1, y1), ()))       
-            diferencias.append(("muerte", tableroA[x2][y2], (x2, y2), ()))       
-
-    return diferencias
-
-
-def compararJuegoCompleto(juego):
-    movimientosTotales = []
-    for i in range(len(juego) - 1):
-        movimientos = compararTableros(juego[i], juego[i+1])
-        movimientosTotales.append(movimientos)
-
-    return movimientosTotales
-
-
 class ParseadorPartida(object):
     def __init__(self, ficheroOrigen):
         f = open(ficheroOrigen)
@@ -79,11 +11,23 @@ class ParseadorPartida(object):
         f.close()
         
         self.lineaActual = 0
+        self.turno = 0
         
     def l(self):
         return self.lineasFichero[self.lineaActual].rstrip()
 
+    def retrocederTurno(self):
+        print "Retroceder turno (II) ", self.turno
+        if self.turno == 1:
+            return None
+
+        while "tiempo" not in self.l() and self.lineaActual > 0:
+            self.lineaActual -= 1
+
+        return self.avanzarTurno()
+
     def avanzarTurno(self):
+        print "ParseadorPartida::avanzarTurno"
         infoFichas = {}
         line = self.lineasFichero[self.lineaActual]
 
@@ -117,5 +61,6 @@ class ParseadorPartida(object):
                 self.lineaActual = self.lineaActual + 1
                 line = self.l()
                     
+        self.turno += 1
         return infoFichas
                 
