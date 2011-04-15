@@ -29,21 +29,35 @@ class ParseadorPartida(object):
 
         # Procesamos el fichero
         for i in range(len(lineasFichero)):
+
+            # Cogemos la línea actual. No se ha usado un for-in para poder
+            # llevar el índice
             line = lineasFichero[i]
 
+            # Si se trata de alguna línea divisoria
             if ("tiempo" in line or "fin" in line) and i > 0:
+
+                # Metemos la información de las fichas en el contenedor general
                 self.infoTurnos.append(fichasTurnoActual)
+
+                # Reiniciamos el contenedor temporal
                 fichasTurnoActual = {}
+
+                # Aumentamos el número de puntos
                 self.turnosTotales += 1
 
+            # Para las líneas de ficha
             elif "e:" in line:
+
+                # Posiciones de los campos
                 pos_e = line.find("e")
                 pos_id = line.find("n")
                 pos_val = line.find("p")
                 pos_x = line.find("x")
                 pos_y = line.find("y")
                 pos_d = line.find("d")
-                    
+
+                # Valores de los campos
                 t_e = line[pos_e + 2 : pos_id - 1]
                 t_id = line[pos_id + 2 : pos_val - 1]
                 t_val = line[pos_val + 2 : pos_x - 1]
@@ -51,6 +65,7 @@ class ParseadorPartida(object):
                 t_y = line[pos_y + 2 : pos_d - 1]
                 t_d = line[pos_d + 2 : ]
 
+                # Escribimos en el contenedor temporal de fichas
                 fichasTurnoActual[t_e + t_id] = (t_e, t_id, int(t_val),
                                                  int(t_x), int(t_y), int(t_d))
 

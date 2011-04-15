@@ -73,9 +73,6 @@ def compararJuegoCompleto(juego):
 
 
 class ParseadorPartida(object):
-    """
-    """
-    
     def __init__(self, ficheroOrigen):
         f = open(ficheroOrigen)
         self.lineasFichero = f.readlines()

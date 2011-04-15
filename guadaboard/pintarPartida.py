@@ -4,14 +4,9 @@
 import pygame
 from pygame.locals import *
 
-import sys
 import pprint
 import algoritmoDiferencias
 
-# _Incluímos en el path de módulos el directorio raíz
-sys.path.insert(0, "..")
-
-from libguadalete import libguadalete, file_parser
 from resistencia.xdg import get_data_path as xdg_data_path
 
 class Boton(pygame.sprite.Sprite):
@@ -20,36 +15,52 @@ class Boton(pygame.sprite.Sprite):
     """
 
     def __init__(self, x, y, imagen, callback):
+        pygame.sprite.Sprite.__init__(self)
+
+        # Asignamos la acción a realizar al hacer click
         self.callback = callback
         
+        # Cargamos las imágenes
         self.imagenNormal = pygame.image.load(xdg_data_path(imagen + ".png")).convert_alpha()
         self.imagenHover = pygame.image.load(xdg_data_path(imagen + "_sobre.png")).convert_alpha()
         self.imagenActive = pygame.image.load(xdg_data_path(imagen + "_pulsada.png")).convert_alpha()
 
+        # Definimos el rectángulo de acción 
         self.rect = self.imagenNormal.get_rect()
         self.rect.x = x
         self.rect.y = y
 
+        # El estado por defecto es el normal
         self.estado = "normal"
 
     def pintar (self, destino):
+
+        # Según el estado, se pinta una imagen u otra
         if self.estado == "normal":
             destino.blit(self.imagenNormal, self.rect)
         elif self.estado == "hover":
             destino.blit(self.imagenHover, self.rect)
 
     def informarClick(self, pos):
+        # Si el click se ha producido sobre el botón
         if self.rect.collidepoint(pos):
+
+            # Llamamos a la función e callback
             self.callback()
 
     def informarHover(self, pos):
+        # Si el ratón está encima del botón, pasamos al estado hover
         if self.rect.collidepoint(pos):
             self.estado = "hover"
         else:
             self.estado = "normal"
 
+
 class Ficha(pygame.sprite.Sprite):
-    def __init__(self, equipo, identificador, valor, x, y, descubierta, visible = True):
+    """
+    Representa una ficha
+    """
+    def __init__(self, equipo, identificador, valor, x, y, descubierta, ocultarInicialmente):
 
         pygame.sprite.Sprite.__init__(self)
 
@@ -59,7 +70,8 @@ class Ficha(pygame.sprite.Sprite):
         self.identificador = identificador
         self.descubierta = descubierta
         self.equipo = equipo
-        self.visible = visible
+        self.ocultarInicialmente = ocultarInicialmente
+        self.visible = True
 
         self.actualizarSuperficie()        
 
@@ -79,10 +91,10 @@ class Ficha(pygame.sprite.Sprite):
         else:
             imagenTexto = fuente.render("[%d]" % self.valor, 1, (255, 255, 255))
 
-            # Bliteamos la superficie del texto en la superficie de la ficha original
+        # Bliteamos la superficie del texto en la superficie de la ficha original
         if self.descubierta:            
             imagenFicha.blit(imagenTexto, (19,11))
-        else:
+        elif not self.ocultarInicialmente:
             imagenFicha.blit(imagenTexto, (0,11))
             
         # Asignamos a la imagen de la ficha la superficie compuesta convertida
@@ -106,26 +118,36 @@ class Ficha(pygame.sprite.Sprite):
             if self.opacidad < 254:
                 self.opacidad += 10
 
-
+            # Si la posición HORIZONTAL actual no es la posición final
             if round(self.posicionActual[0]) != round(self.posicionDestino[0]):
+
+                # Calculamos la variación de la posición
                 variacion = (self.posicionDestino[0] - self.posicionActual[0]) / 15.0
                 self.posicionActual[0] += variacion
 
             else:
+                # Asignación para quitarnos los decimales
                 self.posicionActual[0] = self.posicionDestino[0]
 
+            # Lo mismo que antes pero para VERTICAL
             if round(self.posicionActual[1]) != round(self.posicionDestino[1]):
                 variacion = (self.posicionDestino[1] - self.posicionActual[1]) / 15.0
                 self.posicionActual[1] += variacion
             else:
                 self.posicionActual[1] = self.posicionDestino[1]
 
+        # Si no está visible y la opacidad es mayor, desvanecerlo
         elif self.opacidad > 1:
             self.opacidad -= 10
 
             
+        # Actualizamos el rectángulo con la posición actual
         self.rect.x, self.rect.y = self.posicionActual
+
+        # Le asignamos el alfa a la iamgen
         self.image.set_alpha(self.opacidad)
+
+        # Bliteamos la imagen
         destino.blit(self.image, self.rect)
 
     def muerete(self):
@@ -135,18 +157,24 @@ class Ficha(pygame.sprite.Sprite):
         self.visible = True
 
     def actualizate(self, datos):
+        # Se llamará a esta función cuando se actualice la ficha con nuevos
+        # atributos (posición y si está descubierta o no)
+
         self.posicionPrevia = self.posicionDestino
         self.x = datos[3]
         self.y = datos[4]
-        
+
+        # Si ha pasado de estar descubierta a no estarlo (o al revés)
         if self.descubierta != datos[5]:
             self.descubierta = datos[5]
+
+            # Actualizamos la imagen
             self.actualizarSuperficie()
             
         self.posicionDestino = self.toGlobal()
     
-
     def toGlobal(self):
+        # Pasa de coordenadas locales a globales
         return [float(10 + (self.x - 1) * 60),
                 float(10 + (self.y - 1) * 60)]
 
@@ -156,23 +184,25 @@ class PintarPartida(object):
         
         self.team_a = team_a
         self.team_b = team_b
-        self.musica = False #musica
+        self.musica = musica
         self.hidden = hidden
         self.cant_draw = cant_draw
 
+        # FPS 
         self.fps = 100.0
+
+        # Intervalo
         self.intervalo = 1.0 / self.fps * 1000.0
         self.ticksAnterior = pygame.time.get_ticks()
 
         self.fichas = {}
 
+        # Cargamos el parseador de partidas
         self.parseador = algoritmoDiferencias.ParseadorPartida(ficheroOrigen)
 
         print "Init terminado!!"
 
     def run(self):
-        # Run..."
-
         # Inicializando pygame..."
         pygame.init()
 
@@ -204,7 +234,8 @@ class PintarPartida(object):
         imagenMarco = pygame.image.load(xdg_data_path("images/marco.png"))
         imagenMarco = imagenMarco.convert()
 
-        posMarcosEquipos = 50 # 198
+        # Posición inicial de los marcos con los nombres de los equipos
+        posMarcosEquipos = 50 
 
         # Bliteamos el marco en el fondo
         self.imagenFondo.blit(imagenMarco, (510, posMarcosEquipos))
@@ -231,6 +262,7 @@ class PintarPartida(object):
         self.imagenFondo.blit(sombraTextoEquipoB, (552, posMarcosEquipos + 73))
         self.imagenFondo.blit(textoEquipoB, (550, posMarcosEquipos + 71))
 
+        # Pintamos las fichas blancas del fondo
         fichaBlanca = pygame.image.load(xdg_data_path("images/piece-default.png"))
         fichaBlanca = fichaBlanca.convert()
 
@@ -242,7 +274,7 @@ class PintarPartida(object):
         for keyFicha in organizacionInicial.keys():
             ficha = organizacionInicial[keyFicha];
             self.fichas[keyFicha] = Ficha(ficha[0], ficha[1], ficha[2], 
-                                       ficha[3], ficha[4], ficha[5])
+                                       ficha[3], ficha[4], ficha[5], self.hidden)
 
         # Pintamos los botones
         botonesInterfaz = []
@@ -254,25 +286,38 @@ class PintarPartida(object):
 
         self.salir = False
         
-        # Comienza el game loop"
+        # Comienza el game loop
         while not self.salir:
 
             # Gestión de eventos
             for eventos in pygame.event.get():
                 
+                # Si se ha pulsado ALT+F4 o el botón de cerrar ventana
                 if eventos.type == QUIT:
-                    print "** HALT"
+                    # Activamos el flag de salir
                     self.salir = True
+
+                # Cuando se pulsa el botón el ratón
                 elif eventos.type == MOUSEBUTTONDOWN:
+
+                    # Informamos a cada botón de la interfaz
                     for btn in botonesInterfaz:
                         btn.informarClick(eventos.pos)
 
+                # Cuando se mueve el ratón
                 elif eventos.type == MOUSEMOTION:
+
+                    # Informamos a cada botón de la interfaz
                     for btn in botonesInterfaz:
                         btn.informarHover(eventos.pos)
 
+                # Podemos avanzar turno con la flecha derecha del teclado
                 elif eventos.type == KEYDOWN and eventos.key == 275:
                     self.callAvanzarTurno()
+
+                # También podemos retroceder turno con las flechas del teclado
+                elif eventos.type == KEYDOWN and eventos.key == 276:
+                    self.callRetrocederTurno()
 
 
             # Pintamos el fondo
@@ -282,6 +327,7 @@ class PintarPartida(object):
             for keyFicha in self.fichas:
                 self.fichas[keyFicha].pintar(self.pantalla)
 
+            # Pintamos los botones
             for btn in botonesInterfaz:
                 btn.pintar(self.pantalla)
 
@@ -304,7 +350,11 @@ class PintarPartida(object):
             self.ticksAnterior = ticksActual
 
         # Fin del game loop"
+
+        # Cortamos la música
         pygame.mixer.music.stop()
+
+        # Cerramos el subsistema gráfica (no es necesario)
         pygame.display.quit()
         return 0
 
@@ -331,8 +381,8 @@ class PintarPartida(object):
         self.actualizarFichas(nuevasFichas)
     
     def actualizarFichas(self, nuevasFichas):
+        # Esto no puede pasar nunca realmente
         if len(nuevasFichas) == 0:
-            #self.salir = True
             pass
         else:
             # Recorremos las fichas que teníamos antes
@@ -351,21 +401,3 @@ class PintarPartida(object):
                 else:
                     # Actualízate con las cosas que veas nuevas
                     self.fichas[f].actualizate(nuevasFichas[f])
-
-
-    
-
-
-def main():
-    """
-    """
-
-    P = PintarPartida(xdg_data_path('games/game_2011-04-14_20:36:19_Gent0ozaNoelia-vs-NoeliaPabloRecio.txt'),
-                      ('Gent0ozaGent0oza', '/home/jose/gsiege/repo/trunk/data/images/piece-orange.png'),
-                      ('Gent0ozaGent0oza', '/home/jose/gsiege/repo/trunk/data/images/piece-orange.png'),
-                      3,4)
-    P.run()
-    
-
-if __name__ == '__main__':
-    main()

@@ -188,25 +188,29 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
             band = True
 
         print "EEEEEEEEEEEEEEEEEEEEEEEND OF THE ROUNDDDDDDDDDDDDDDDDDDDDDDDD"
+        print ""
+        print "BAND? ", band
+        print ""
 
-    if game_type == 'cup':
-        log_file = open(log_file_name, 'a')
-        log_file.write("** CLASIFICACIÓN FINAL\n")
-        processed_players = set()
+    if not band:
+        if game_type == 'cup':
+            log_file = open(log_file_name, 'a')
+            log_file.write("** CLASIFICACIÓN FINAL\n")
+            processed_players = set()
 
-        for i in reversed(classifications.keys()):
-            currentSet = classifications[i].difference(processed_players)
-            for elm in currentSet:
-                log_file.write(str(game.get_number_of_rounds() - i) + ' - ' + elm + "\n")
+            for i in reversed(classifications.keys()):
+                currentSet = classifications[i].difference(processed_players)
+                for elm in currentSet:
+                    log_file.write(str(game.get_number_of_rounds() - i) + ' - ' + elm + "\n")
 
-        processed_players.update(currentSet)
+            processed_players.update(currentSet)
 
-        log_file.close()
+            log_file.close()
 
-        dibujoClasificacion = dibujo_clasificacion.DibujoClasificacion(game)
+            dibujoClasificacion = dibujo_clasificacion.DibujoClasificacion(game)
 
-    else:        
-        update_log_end(log_file_name, classifications)
+        else:        
+            update_log_end(log_file_name, classifications)
         
     print "##### END"
 
