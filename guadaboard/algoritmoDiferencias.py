@@ -6,41 +6,37 @@ import pprint
 
 class ParseadorPartida(object):
     def __init__(self, ficheroOrigen):
+        # Abrimos el fichero a procesar
         f = open(ficheroOrigen)
-        self.lineasFichero = f.readlines()
+
+        # Leemos todas las líneas
+        lineasFichero = f.readlines()
+
+        # Cerramos el fichero
         f.close()
-        
-        self.lineaActual = 0
-        self.turno = 0
-        
-    def l(self):
-        return self.lineasFichero[self.lineaActual].rstrip()
 
-    def retrocederTurno(self):
-        print "Retroceder turno (II) ", self.turno
-        if self.turno == 1:
-            return None
+        # Contador de turnos totales
+        self.turnosTotales = 0
 
-        while "tiempo" not in self.l() and self.lineaActual > 0:
-            self.lineaActual -= 1
+        # Indicador del turno actual
+        self.turnoActual = 0
 
-        return self.avanzarTurno()
+        # Esta lista guardará las fichas de cada turno
+        self.infoTurnos = []
 
-    def avanzarTurno(self):
-        print "ParseadorPartida::avanzarTurno"
-        infoFichas = {}
-        line = self.lineasFichero[self.lineaActual]
+        # Contenedor temporal para las fichas de este turno
+        fichasTurnoActual = {}
 
-        # En teoría, obligatoriamente deberíamos estar en esta línea
-        if ("tiempo" in line):
-            # Saltamos la línea con el número del turno
-            self.lineaActual += 2
-            line = self.l()
+        # Procesamos el fichero
+        for i in range(len(lineasFichero)):
+            line = lineasFichero[i]
 
-            while ("tiempo" not in line and 
-                   "fin" not in line and
-                   self.lineaActual < len(self.lineasFichero)):
+            if ("tiempo" in line or "fin" in line) and i > 0:
+                self.infoTurnos.append(fichasTurnoActual)
+                fichasTurnoActual = {}
+                self.turnosTotales += 1
 
+            elif "e:" in line:
                 pos_e = line.find("e")
                 pos_id = line.find("n")
                 pos_val = line.find("p")
@@ -55,12 +51,28 @@ class ParseadorPartida(object):
                 t_y = line[pos_y + 2 : pos_d - 1]
                 t_d = line[pos_d + 2 : ]
 
-                infoFichas[t_e + t_id] = (t_e, t_id, int(t_val),
-                                          int(t_x), int(t_y), int(t_d))
-                
-                self.lineaActual = self.lineaActual + 1
-                line = self.l()
-                    
-        self.turno += 1
-        return infoFichas
-                
+                fichasTurnoActual[t_e + t_id] = (t_e, t_id, int(t_val),
+                                                 int(t_x), int(t_y), int(t_d))
+
+    def esteTurno(self):
+        return self.infoTurnos[self.turnoActual]
+
+    def retrocederTurno(self):
+        if self.turnoActual > 0:
+            self.turnoActual -= 1
+
+        return self.infoTurnos[self.turnoActual]
+
+    def avanzarTurno(self):
+        if self.turnoActual < self.turnosTotales - 1:
+            self.turnoActual += 1
+
+        return self.infoTurnos[self.turnoActual]
+
+    def avanzarFinal(self):
+        self.turnoActual = self.turnosTotales - 1
+        return self.infoTurnos[self.turnoActual]
+
+    def retrocederInicio(self):
+        self.turnoActual = 0
+        return self.infoTurnos[self.turnoActual]

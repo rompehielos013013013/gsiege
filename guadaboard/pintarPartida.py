@@ -102,6 +102,11 @@ class Ficha(pygame.sprite.Sprite):
 
     def pintar (self, destino):
         if self.visible:
+            # Para cuando está reviviendo
+            if self.opacidad < 254:
+                self.opacidad += 10
+
+
             if round(self.posicionActual[0]) != round(self.posicionDestino[0]):
                 variacion = (self.posicionDestino[0] - self.posicionActual[0]) / 15.0
                 self.posicionActual[0] += variacion
@@ -117,13 +122,17 @@ class Ficha(pygame.sprite.Sprite):
 
         elif self.opacidad > 1:
             self.opacidad -= 10
-            self.image.set_alpha(self.opacidad)
+
             
         self.rect.x, self.rect.y = self.posicionActual
+        self.image.set_alpha(self.opacidad)
         destino.blit(self.image, self.rect)
 
     def muerete(self):
         self.visible = False
+
+    def revivete(self):
+        self.visible = True
 
     def actualizate(self, datos):
         self.posicionPrevia = self.posicionDestino
@@ -189,7 +198,7 @@ class PintarPartida(object):
         self.imagenFondo = self.imagenFondoTemp.convert()
 
         # Parseando el estado inicial..."
-        organizacionInicial = self.parseador.avanzarTurno()
+        organizacionInicial = self.parseador.esteTurno()
 
         # Cargamos la imagen de los marcos con los nombres..."
         imagenMarco = pygame.image.load(xdg_data_path("images/marco.png"))
@@ -238,10 +247,10 @@ class PintarPartida(object):
         # Pintamos los botones
         botonesInterfaz = []
         botonesInterfaz.append(Boton(700, 500, "images/salir", self.callSalir))
-        botonesInterfaz.append(Boton(120, 500, "images/flecha_izquierda2", None))
+        botonesInterfaz.append(Boton(120, 500, "images/flecha_izquierda2", self.callRetrocederInicio))
         botonesInterfaz.append(Boton(190, 500, "images/flecha_izquierda1", self.callRetrocederTurno))
         botonesInterfaz.append(Boton(260, 500, "images/flecha_derecha1", self.callAvanzarTurno))
-        botonesInterfaz.append(Boton(330, 500, "images/flecha_derecha2", None))
+        botonesInterfaz.append(Boton(330, 500, "images/flecha_derecha2", self.callAvanzarFinal))
 
         self.salir = False
         
@@ -299,20 +308,27 @@ class PintarPartida(object):
         pygame.display.quit()
         return 0
 
+
+    ## CALLBACKS para los botones
+
     def callSalir(self, ):
         self.salir = True
         
     def callAvanzarTurno(self, ):
-        # Cogemos las fichas del nuevo turno
         nuevasFichas = self.parseador.avanzarTurno()
         self.actualizarFichas(nuevasFichas)
 
     def callRetrocederTurno(self, ):
-        print "Retroceder turno"
         nuevasFichas = self.parseador.retrocederTurno()
+        self.actualizarFichas(nuevasFichas)
 
-        if nuevasFichas != None:
-            self.actualizarFichas(nuevasFichas)
+    def callAvanzarFinal(self, ):
+        nuevasFichas = self.parseador.avanzarFinal()
+        self.actualizarFichas(nuevasFichas)
+
+    def callRetrocederInicio(self, ):
+        nuevasFichas = self.parseador.retrocederInicio()
+        self.actualizarFichas(nuevasFichas)
     
     def actualizarFichas(self, nuevasFichas):
         if len(nuevasFichas) == 0:
@@ -327,10 +343,15 @@ class PintarPartida(object):
                     # Muere!
                     self.fichas[f].muerete()
 
+                # Estaba muerta y revive (al rebobinar)
+                elif f in nuevasFichas and self.fichas[f].visible == False:
+                    self.fichas[f].revivete()
+
                 # Si sigue estando
                 else:
                     # Actualízate con las cosas que veas nuevas
                     self.fichas[f].actualizate(nuevasFichas[f])
+
 
     
 
