@@ -14,16 +14,21 @@ class Boton(pygame.sprite.Sprite):
     Representa un botón de la interfaz
     """
 
-    def __init__(self, x, y, imagen, callback):
+    def __init__(self, x, y, imagen, callback, activarImagenHover = True):
         pygame.sprite.Sprite.__init__(self)
+
+        self.activarImagenHover = activarImagenHover
 
         # Asignamos la acción a realizar al hacer click
         self.callback = callback
         
         # Cargamos las imágenes
         self.imagenNormal = pygame.image.load(xdg_data_path(imagen + ".png")).convert_alpha()
-        self.imagenHover = pygame.image.load(xdg_data_path(imagen + "_sobre.png")).convert_alpha()
-        self.imagenActive = pygame.image.load(xdg_data_path(imagen + "_pulsada.png")).convert_alpha()
+        
+        if self.activarImagenHover:
+            self.imagenHover = pygame.image.load(xdg_data_path(imagen + "_sobre.png")).convert_alpha()
+
+        #self.imagenActive = pygame.image.load(xdg_data_path(imagen + "_pulsada.png")).convert_alpha()
 
         # Definimos el rectángulo de acción 
         self.rect = self.imagenNormal.get_rect()
@@ -36,7 +41,7 @@ class Boton(pygame.sprite.Sprite):
     def pintar (self, destino):
 
         # Según el estado, se pinta una imagen u otra
-        if self.estado == "normal":
+        if not self.activarImagenHover or self.estado == "normal":
             destino.blit(self.imagenNormal, self.rect)
         elif self.estado == "hover":
             destino.blit(self.imagenHover, self.rect)
@@ -50,11 +55,42 @@ class Boton(pygame.sprite.Sprite):
 
     def informarHover(self, pos):
         # Si el ratón está encima del botón, pasamos al estado hover
-        if self.rect.collidepoint(pos):
+        if self.rect.collidepoint(pos) and self.activarImagenHover:
             self.estado = "hover"
         else:
             self.estado = "normal"
 
+class Interruptor(pygame.sprite.Sprite):
+    def __init__ (self, x, y, imagen, callback):
+        self.callback = callback
+
+        # Cargamos las imágenes
+        self.imagenNormal = pygame.image.load(xdg_data_path(imagen + ".png")).convert_alpha()
+        self.imagenToggled = pygame.image.load(xdg_data_path(imagen + "_toggled.png")).convert_alpha()
+        
+        self.rect = self.imagenNormal.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+        self.estado = "normal"
+
+    def pintar (self, destino):
+        if self.estado == "normal":
+            destino.blit(self.imagenNormal, self.rect)
+        else:
+            destino.blit(self.imagenToggled, self.rect)
+
+    def informarHover(self, pos):
+        pass
+
+    def informarClick(self, pos):
+        if self.rect.collidepoint(pos):
+            if self.estado == "normal":
+                self.estado = "toggled"
+            else:
+                self.estado = "normal"
+
+            self.callback()                  
 
 class Ficha(pygame.sprite.Sprite):
     """
@@ -283,11 +319,27 @@ class PintarPartida(object):
         botonesInterfaz.append(Boton(190, 500, "images/flecha_izquierda1", self.callRetrocederTurno))
         botonesInterfaz.append(Boton(260, 500, "images/flecha_derecha1", self.callAvanzarTurno))
         botonesInterfaz.append(Boton(330, 500, "images/flecha_derecha2", self.callAvanzarFinal))
+        
+        botonesInterfaz.append(Boton(630, 500, "images/btnAbortar", self.callAbortar, False))
+        botonesInterfaz.append(Interruptor(700, 430, "images/btnAvanceAutomatico", self.callToggleAvanceAutomatico))
 
         self.salir = False
-        
+        self.avanceAutomatico = False
+        self.intervaloAvanceAutomatico = 500
+
         # Comienza el game loop
         while not self.salir:
+
+            # Comprobación del avance automático
+            if self.avanceAutomatico:
+                # Si el tiempo que ha pasado desde el último avance supera el intervalo
+                if pygame.time.get_ticks() - self.ultimoAvance > self.intervaloAvanceAutomatico:
+
+                    # Avanzamos el turno
+                    self.callAvanzarTurno()
+
+                    # Actualizamos la variable con el tiempo del último avance
+                    self.ultimoAvance = pygame.time.get_ticks()
 
             # Gestión de eventos
             for eventos in pygame.event.get():
@@ -380,6 +432,16 @@ class PintarPartida(object):
         nuevasFichas = self.parseador.retrocederInicio()
         self.actualizarFichas(nuevasFichas)
     
+    def callAbortar(self, ):
+        print "ABORTAR"
+
+    def callToggleAvanceAutomatico(self, ):
+        if self.avanceAutomatico:
+            self.avanceAutomatico = False
+        else:
+            self.ultimoAvance = pygame.time.get_ticks()
+            self.avanceAutomatico = True
+
     def actualizarFichas(self, nuevasFichas):
         # Esto no puede pasar nunca realmente
         if len(nuevasFichas) == 0:
