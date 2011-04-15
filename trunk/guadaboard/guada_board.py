@@ -17,9 +17,6 @@
 #                                                                             #
 # Copyright (C) 2010, Pablo Recio Quijano, <pablo.recioquijano@alum.uca.es>   #
 ###############################################################################
-"""
-Main module that handle the representation of a entire game
-"""
 
 import os
 
@@ -112,19 +109,6 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
 
     show_dialog_result((team_a[0], team_b[0]), winner)
 
-def get_collision(point, rects):
-    """
-    Function that checks if it is a collision with the buttons
-    """
-    res = ''
-    for index in rects:
-        rect = rects[index]
-        if rect.collidepoint(point):
-            res = index
-            break
-
-    return res
-
 
 def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
         number_turns=100,
@@ -188,6 +172,7 @@ def run_from_file(src_file,
     name_a, name_b = filenames.extract_names_from_file(src_file)
     team_a = (name_a, team_a[1])
     team_b = (name_b, team_b[1])
+
     _load_game_from_file(src_file, 
                          team_a, team_b,
                          path_piece_def, xml_file)
