@@ -49,6 +49,7 @@ class quickGameDialog:
 
         self.quick_game = builder.get_object("quick_game_dialog")
         self.quick_game.set_transient_for(parent)
+
         #---- Initialation for the dialogs
         self.error_es_a = builder.get_object("error_no_es_a")
         self.error_es_a.connect('response', lambda d, r: d.hide())
@@ -171,12 +172,9 @@ class quickGameDialog:
     def load_board(self):
         try:
             winner = guada_board.run(
-                (
-                    (self.es_team_a,
-                     self.team_team_a),
-                    xdg.get_data_path('images/piece-orange.png')),
-                (
-                    (self.es_team_b,self.team_team_b),
+                ((self.es_team_a, self.team_team_a),
+                 xdg.get_data_path('images/piece-orange.png')),
+                ((self.es_team_b,self.team_team_b),
                     xdg.get_data_path('images/piece-violete.png')),
 
                 self.fast_game, 

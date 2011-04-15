@@ -158,7 +158,7 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
     # Si no puede haber empate
     if cant_draw:
         # Solucionar el empate
-        entire_game, winner = file_parser.parse_file(output_file)
+        entire_game, winner = file_parser.parse_file(out_file)
         winner = _handle_draw(entire_game, winner)
         
     # Preparamos la variable de retorno

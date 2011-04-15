@@ -61,13 +61,10 @@ class Round(object):
 
     def get_round_results(self):
         results = []
-        if self.completed:
-            for match in self.round:
-                results.append((match[0], match[2]))
+        for match in self.round:
+            results.append((match[0], match[2]))
 
-            return results
-        else:
-            raise RoundError('Not all games played')
+        return results
 
     def get_winners(self):
         winners = []
