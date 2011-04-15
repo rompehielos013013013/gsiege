@@ -14,6 +14,40 @@ sys.path.insert(0, "..")
 from libguadalete import libguadalete, file_parser
 from resistencia.xdg import get_data_path as xdg_data_path
 
+class Boton(pygame.sprite.Sprite):
+    """
+    Representa un botón de la interfaz
+    """
+
+    def __init__(self, x, y, imagen, callback):
+        self.callback = callback
+        
+        self.imagenNormal = pygame.image.load(xdg_data_path(imagen + ".png")).convert_alpha()
+        self.imagenHover = pygame.image.load(xdg_data_path(imagen + "_sobre.png")).convert_alpha()
+        self.imagenActive = pygame.image.load(xdg_data_path(imagen + "_pulsada.png")).convert_alpha()
+
+        self.rect = self.imagenNormal.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+        self.estado = "normal"
+
+    def pintar (self, destino):
+        if self.estado == "normal":
+            destino.blit(self.imagenNormal, self.rect)
+        elif self.estado == "hover":
+            destino.blit(self.imagenHover, self.rect)
+
+    def informarClick(self, pos):
+        if self.rect.collidepoint(pos):
+            self.callback()
+
+    def informarHover(self, pos):
+        if self.rect.collidepoint(pos):
+            self.estado = "hover"
+        else:
+            self.estado = "normal"
+
 class Ficha(pygame.sprite.Sprite):
     def __init__(self, equipo, identificador, valor, x, y, descubierta, visible = True):
 
@@ -107,22 +141,18 @@ class Ficha(pygame.sprite.Sprite):
         return [float(10 + (self.x - 1) * 60),
                 float(10 + (self.y - 1) * 60)]
 
-def calcularPasoAnimacion (t, b, c, d):
-    t /= d
-    return -c *(t)*(t-2) + b
-
 class PintarPartida(object):
     
     def __init__(self, ficheroOrigen, team_a, team_b, musica, hidden=False, cant_draw=False):
         
         self.team_a = team_a
         self.team_b = team_b
-        self.musica = musica
+        self.musica = False #musica
         self.hidden = hidden
         self.cant_draw = cant_draw
 
-        self.fps = 60.0
-        self.intervalo = 1.0 / 60.0 * 1000.0
+        self.fps = 100.0
+        self.intervalo = 1.0 / self.fps * 1000.0
         self.ticksAnterior = pygame.time.get_ticks()
 
         self.fichas = {}
@@ -132,9 +162,9 @@ class PintarPartida(object):
         print "Init terminado!!"
 
     def run(self):
-        print "Run..."
+        # Run..."
 
-        print "Inicializando pygame..."
+        # Inicializando pygame..."
         pygame.init()
 
         if self.musica:
@@ -142,26 +172,26 @@ class PintarPartida(object):
             pygame.mixer.music.load(_music_path)
             pygame.mixer.music.play()
 
-        tamanoVentana = (760,500)
+        tamanoVentana = (760,560)
         
         print pygame.display.mode_ok(tamanoVentana)
         
-        print "Estableciendo el modo de pantalla..."
+        # Estableciendo el modo de pantalla..."
         self.pantalla = pygame.display.set_mode(tamanoVentana)
 
-        print "Estableciendo el título de la ventana..."
+        # Estableciendo el título de la ventana..."
         pygame.display.set_caption("Reproduciendo partida")
 
-        print "Cargando imagen de fondo..."
+        # Cargando imagen de fondo..."
         self.imagenFondoTemp = pygame.image.load(xdg_data_path("images/fondo.png"))
 
-        print "Convirtiendo la imagen de fondo al formato adecuado..."
+        # Convirtiendo la imagen de fondo al formato adecuado..."
         self.imagenFondo = self.imagenFondoTemp.convert()
 
-        print "Parseando el estado inicial..."
+        # Parseando el estado inicial..."
         organizacionInicial = self.parseador.avanzarTurno()
 
-        print "Cargamos la imagen de los marcos con los nombres..."
+        # Cargamos la imagen de los marcos con los nombres..."
         imagenMarco = pygame.image.load(xdg_data_path("images/marco.png"))
         imagenMarco = imagenMarco.convert()
 
@@ -180,7 +210,7 @@ class PintarPartida(object):
         imagenEquipoA = pygame.transform.scale(pygame.image.load(self.team_a[1]), (30,30))
 
         textoEquipoB = fuenteEquipos.render(self.team_b[0][:16], 1, (255,255,255))
-        sombraTextoEquipoB = fuenteEquipos.render(self.team_a[0][:16], 1, (0,0,0))
+        sombraTextoEquipoB = fuenteEquipos.render(self.team_b[0][:16], 1, (0,0,0))
         imagenEquipoB = pygame.transform.scale(pygame.image.load(self.team_b[1]), (30,30))
 
         # Bliteamos las superficies de los marcadores
@@ -199,43 +229,41 @@ class PintarPartida(object):
             for j in range (8):
                 self.imagenFondo.blit(fichaBlanca, (10 + 60 * i, 10 + 60 * j))
 
-        print "Cargando las fichas iniciales..."
+        # Cargando las fichas iniciales..."
         for keyFicha in organizacionInicial.keys():
             ficha = organizacionInicial[keyFicha];
             self.fichas[keyFicha] = Ficha(ficha[0], ficha[1], ficha[2], 
                                        ficha[3], ficha[4], ficha[5])
 
-        salir = False
+        # Pintamos los botones
+        botonesInterfaz = []
+        botonesInterfaz.append(Boton(700, 500, "images/salir", self.callSalir))
+        botonesInterfaz.append(Boton(120, 500, "images/flecha_izquierda2", None))
+        botonesInterfaz.append(Boton(190, 500, "images/flecha_izquierda1", self.callRetrocederTurno))
+        botonesInterfaz.append(Boton(260, 500, "images/flecha_derecha1", self.callAvanzarTurno))
+        botonesInterfaz.append(Boton(330, 500, "images/flecha_derecha2", None))
+
+        self.salir = False
         
-        print "Comienza el game loop"
-        while not salir:
+        # Comienza el game loop"
+        while not self.salir:
 
             # Gestión de eventos
             for eventos in pygame.event.get():
                 
                 if eventos.type == QUIT:
                     print "** HALT"
-                    salir = True
+                    self.salir = True
+                elif eventos.type == MOUSEBUTTONDOWN:
+                    for btn in botonesInterfaz:
+                        btn.informarClick(eventos.pos)
+
+                elif eventos.type == MOUSEMOTION:
+                    for btn in botonesInterfaz:
+                        btn.informarHover(eventos.pos)
+
                 elif eventos.type == KEYDOWN and eventos.key == 275:
-                    
-                    # Cogemos las fichas del nuevo turno
-                    nuevasFichas = self.parseador.avanzarTurno()
-
-                    if len(nuevasFichas) == 0:
-                        salir = True
-
-                    # Recorremos las fichas que teníamos antes
-                    for f in self.fichas.keys():
-
-                        # Si alguna ficha ya no está
-                        if f not in nuevasFichas:
-                            # Muere!
-                            self.fichas[f].muerete()
-
-                        # Si sigue estando
-                        else:
-                            # Actualízate con las cosas que veas nuevas
-                            self.fichas[f].actualizate(nuevasFichas[f])
+                    self.callAvanzarTurno()
 
 
             # Pintamos el fondo
@@ -245,28 +273,66 @@ class PintarPartida(object):
             for keyFicha in self.fichas:
                 self.fichas[keyFicha].pintar(self.pantalla)
 
+            for btn in botonesInterfaz:
+                btn.pintar(self.pantalla)
+
             # Volcamos la pantalla a la gráfica
             pygame.display.flip()
 
             ##############################
             # GESTIÓN DE LOS FPS
 
-            # # Cogemos los ticks actuales
-            # ticksActual = pygame.time.get_ticks()
+            # Cogemos los ticks actuales
+            ticksActual = pygame.time.get_ticks()
 
-            # espera = self.intervalo - (ticksActual - self.ticksAnterior)
+            espera = self.intervalo - (ticksActual - self.ticksAnterior)
 
-            # if espera > 0:
-            #     # Esperamos el tiempo necesario para mantener los FPS
-            #     pygame.time.delay(int(espera))
+            if espera > 0:
+                # Esperamos el tiempo necesario para mantener los FPS
+                pygame.time.delay(int(espera))
 
-            # # Actualizamos los ticks anteriores
-            # self.ticksAnterior = ticksActual
+            # Actualizamos los ticks anteriores
+            self.ticksAnterior = ticksActual
 
-        print "Fin del game loop"
+        # Fin del game loop"
         pygame.mixer.music.stop()
         pygame.display.quit()
         return 0
+
+    def callSalir(self, ):
+        self.salir = True
+        
+    def callAvanzarTurno(self, ):
+        # Cogemos las fichas del nuevo turno
+        nuevasFichas = self.parseador.avanzarTurno()
+        self.actualizarFichas(nuevasFichas)
+
+    def callRetrocederTurno(self, ):
+        print "Retroceder turno"
+        nuevasFichas = self.parseador.retrocederTurno()
+
+        if nuevasFichas != None:
+            self.actualizarFichas(nuevasFichas)
+    
+    def actualizarFichas(self, nuevasFichas):
+        if len(nuevasFichas) == 0:
+            #self.salir = True
+            pass
+        else:
+            # Recorremos las fichas que teníamos antes
+            for f in self.fichas.keys():
+            
+                # Si alguna ficha ya no está
+                if f not in nuevasFichas:
+                    # Muere!
+                    self.fichas[f].muerete()
+
+                # Si sigue estando
+                else:
+                    # Actualízate con las cosas que veas nuevas
+                    self.fichas[f].actualizate(nuevasFichas[f])
+
+    
 
 
 def main():
