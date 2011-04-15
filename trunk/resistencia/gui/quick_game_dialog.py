@@ -164,6 +164,7 @@ class quickGameDialog:
                 print ">>>> Iniciando juego"
                 self.load_board()
                 print ">>>> Fin del juego"
+
             except guada_board.GuadaFileError as e:
                 self.dlg_bad_file.format_secondary_text(e.msg)
                 self.dlg_bad_file.run()
