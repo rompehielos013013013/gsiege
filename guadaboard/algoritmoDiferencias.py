@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pprint
 
 class ParseadorPartida(object):
     def __init__(self, ficheroOrigen):

@@ -28,7 +28,7 @@ from pygame import mixer
 
 import gtk
 
-from guadaboard import  game, layout, pintarPartida
+from guadaboard import pintarPartida
 
 from libguadalete import libguadalete, file_parser, stats
 from libguadalete.libguadalete import FileError as LibFileError
@@ -49,8 +49,6 @@ class GuadaFileError(Error):
     """
     def __init__(self, msg):
         self.msg = msg
-
-import pprint
 
 def _handle_draw(entire_game, winner):
     """
@@ -137,13 +135,18 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
     Runs a game using the system expert teams given. It calls to libguadalete,
     generating the game and parsing the file.
     """
+    
+    # Preparamos el motor con los equipos y el número de turnos
     lib = libguadalete.LibGuadalete(team_a[0], team_b[0], number_turns)
     
     try:
+        # Procesamos el juego, obteniendo el fichero de log y el ganador
         out_file, winner = lib.run_game()
     except LibFileError as exc:
         raise GuadaFileError(exc.msg)
         
+    # fast indica si queremos ver solo el resultado (fast = True) o la partida
+    # completa
     if not fast:
         name_team_a = filenames.extract_name_expert_system(team_a[0])
         name_team_b = filenames.extract_name_expert_system(team_b[0])
@@ -179,14 +182,15 @@ def run_from_file(src_file,
                   path_piece_def=xdg_data_path('images/piece-default.png'),
                   xml_file=xdg_data_path('layouts/alternative-layout.xml')):
     """
-    Run a game directly from a file, skipping actual simulation
+    Muestra un juego en pantalla directamente desde un fichero de un juego
+    previamente simulado
     """
     name_a, name_b = filenames.extract_names_from_file(src_file)
     team_a = (name_a, team_a[1])
     team_b = (name_b, team_b[1])
     _load_game_from_file(src_file, 
-                                  team_a, team_b,
-                                  path_piece_def, xml_file)
+                         team_a, team_b,
+                         path_piece_def, xml_file)
 
 
 
