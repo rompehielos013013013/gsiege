@@ -8,6 +8,7 @@ import pprint
 import algoritmoDiferencias
 
 from resistencia.xdg import get_data_path as xdg_data_path
+from resistencia import configure
 
 class Boton(pygame.sprite.Sprite):
     """
@@ -325,7 +326,9 @@ class PintarPartida(object):
 
         self.salir = False
         self.avanceAutomatico = False
-        self.intervaloAvanceAutomatico = 500
+
+        config_vars = configure.load_configuration()
+        self.intervaloAvanceAutomatico = config_vars['auto_interval_time']
 
         # Comienza el game loop
         while not self.salir:
