@@ -140,7 +140,7 @@ class Round(object):
             teamB = (self.translator[teamB_key], _pieceB)
             
             result = guada_board.run(teamA, teamB, fast=fast,
-                                     hidden=True,
+                                     hidden=False,
                                      number_turns=self.num_turns,
                                      cant_draw=cant_draw)
             
