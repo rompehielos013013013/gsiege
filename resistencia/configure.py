@@ -72,10 +72,14 @@ def generate_configuration_file():
     active_music = config_xml.createElement('music_active')
     active_music.setAttribute('value', '1')
 
+    auto_interval_time = config_xml.createElement('auto_interval_time')
+    auto_interval_time.setAttribute('value', '500')
+
     top_element.appendChild(se_path)
     top_element.appendChild(games_path)
     top_element.appendChild(language)
     top_element.appendChild(active_music)
+    top_element.appendChild(auto_interval_time)
 
     file_xml = open(__file_path__,"w")
 
@@ -103,6 +107,9 @@ def load_configuration():
     
     music_active = config_xml.getElementsByTagName('music_active')
     params['music_active'] = music_active[0].getAttribute('value')
+
+    auto_interval_time = config_xml.getElementsByTagName('auto_interval_time')
+    params['auto_interval_time'] = int(auto_interval_time[0].getAttribute('value'))
 
     return params
 
@@ -165,3 +172,19 @@ def set_active_music(new_music_active):
 
     file_xml.write(config_xml.toprettyxml())
     file_xml.close()
+
+def set_interval_time(new_value):
+    """
+    Set or unset the music on the game
+    """
+    config_xml = minidom.parse(__file_path__)
+    interval_time = config_xml.getElementsByTagName('auto_interval_time')[0]
+    
+    interval_time.removeAttribute('value')
+    interval_time.setAttribute('value', str(int(new_value)))
+    
+    file_xml = open(__file_path__,"w")
+
+    file_xml.write(config_xml.toprettyxml())
+    file_xml.close()
+

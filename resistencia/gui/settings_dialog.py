@@ -51,6 +51,10 @@ class settingsDialog:
         if config_vars['music_active'] == '1':
             active = True
         self.check_active_music.set_active(active)
+
+        self.scale_intervalo = builder.get_object("scale_intervalo")
+        self.scale_intervalo.set_range(100, 2000)
+        self.scale_intervalo.set_value(config_vars['auto_interval_time'])
         
         builder.connect_signals(self)
         
@@ -72,6 +76,8 @@ class settingsDialog:
             current_active_music = "1"
         else:
             current_active_music = "0"
+
+        current_interval_time = self.scale_intervalo.get_value()
         
         if current_games_path != config_vars['games_path']:
             configure.set_games_path(current_games_path)
@@ -79,5 +85,7 @@ class settingsDialog:
             configure.set_se_path(current_teams_path)
         if current_active_music != config_vars['music_active']:
             configure.set_active_music(current_active_music)
-            
+        if current_interval_time != config_vars['auto_interval_time']:
+            configure.set_interval_time(current_interval_time)
+
         self.settings.hide()
