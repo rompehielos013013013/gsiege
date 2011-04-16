@@ -20,6 +20,8 @@
 
 from guadaboard import guada_board
 from resistencia import xdg
+from resistencia.contest import controlPartida
+
 _pieceA = xdg.get_data_path('images/piece-orange.png')
 _pieceB = xdg.get_data_path('images/piece-violete.png')
 

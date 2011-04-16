@@ -9,6 +9,7 @@ import algoritmoDiferencias
 
 from resistencia.xdg import get_data_path as xdg_data_path
 from resistencia import configure
+from resistencia.contest import controlPartida
 
 class Boton(pygame.sprite.Sprite):
     """
@@ -320,18 +321,18 @@ class PintarPartida(object):
         botonesInterfaz.append(Boton(190, 500, "images/flecha_izquierda1", self.callRetrocederTurno))
         botonesInterfaz.append(Boton(260, 500, "images/flecha_derecha1", self.callAvanzarTurno))
         botonesInterfaz.append(Boton(330, 500, "images/flecha_derecha2", self.callAvanzarFinal))
-        
         botonesInterfaz.append(Boton(630, 500, "images/btnAbortar", self.callAbortar, False))
         botonesInterfaz.append(Interruptor(700, 430, "images/btnAvanceAutomatico", self.callToggleAvanceAutomatico))
 
         self.salir = False
         self.avanceAutomatico = False
 
+        # Leemos del fichero de configuración la velocidad del avance automático
         config_vars = configure.load_configuration()
         self.intervaloAvanceAutomatico = config_vars['auto_interval_time']
 
         # Comienza el game loop
-        while not self.salir:
+        while not self.salir and not controlPartida.flagCancelarCampeonato:
 
             # Comprobación del avance automático
             if self.avanceAutomatico:
@@ -436,6 +437,7 @@ class PintarPartida(object):
         self.actualizarFichas(nuevasFichas)
     
     def callAbortar(self, ):
+        controlPartida.cancelarCampeonato()
         print "ABORTAR"
 
     def callToggleAvanceAutomatico(self, ):

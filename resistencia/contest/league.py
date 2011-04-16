@@ -30,6 +30,7 @@ import pairing
 import contest
 import round
 import pprint
+import controlPartida
 
 class League(contest.Contest):
     
@@ -72,11 +73,14 @@ class League(contest.Contest):
         return self.rounds[round_number]
 
     def play_round(self, progress_bar, fast=False):
-        if not self.league_completed:
+        if not self.league_completed and not controlPartida.flagCancelarCampeonato:
             r = self.rounds[self.actual_round]
             n = r.get_number_of_games()
 
             for i in range(n):
+                if controlPartida.flagCancelarCampeonato:
+                    return
+
                 if fast:
                     progress_bar.pulse()
                     while gtk.events_pending():
