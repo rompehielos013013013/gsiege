@@ -98,7 +98,7 @@ class Ficha(pygame.sprite.Sprite):
     """
     Representa una ficha
     """
-    def __init__(self, equipo, identificador, valor, x, y, descubierta, ocultarInicialmente):
+    def __init__(self, equipo, identificador, valor, x, y, descubierta, ocultarInicialmente = False):
 
         pygame.sprite.Sprite.__init__(self)
 
@@ -225,7 +225,6 @@ class PintarPartida(object):
         self.musica = musica
         self.hidden = hidden
         self.cant_draw = cant_draw
-
         # FPS 
         self.fps = 100.0
 
