@@ -91,8 +91,6 @@ class Tournament(contest.Contest):
         self.round_winners = []
         self.num_turns = num_turns
 
-        print "Cancelar campeonato: " + str(controlPartida.cancelarCampeonato)
-
         if pairings_done:
             self.matchs.append(teams)
             self.teams = _extract_teams_from_pairing(self.matchs)
@@ -138,7 +136,7 @@ class Tournament(contest.Contest):
         return self.rounds[round_number]
 
     def play_round(self, progress_bar, fast=False):
-        if not self.tournament_completed:
+        if not self.tournament_completed and not controlPartida.flagCancelarCampeonato:
             r = self.rounds[self.round_number]
             n = r.get_number_of_games()
 
@@ -147,6 +145,8 @@ class Tournament(contest.Contest):
                     progress_bar.pulse()
                     while gtk.events_pending():
                         gtk.main_iteration(False)
+                if controlPartida.flagCancelarCampeonato:
+                        return
                 r.play_match(fast, True)
 
             winners = r.get_winners()

@@ -41,14 +41,16 @@ import dibujo_clasificacion
 def init_contest(contest_format, teams, fast=False, back_round=False,
                  num_turns=120):
 
-    print "### INIT_CONTEST"
+    print "##### INIT_CONTEST"
     
-    controlPartida.cancelarCampeonato = False
+    controlPartida.restaurarCampeonato()
 
     if contest_format == 'playoff':
         _init_playoff(_clean_dictionary(teams), fast, num_turns, back_round)
     else:
         _init_game(contest_format, _clean_dictionary(teams), fast, num_turns, back_round)
+
+    print "##### END_INIT_CONTEST"
 
 def update_log_round(log_file, results, round_number):
     tournament_file = open(log_file, 'a')
@@ -106,11 +108,15 @@ def show_round_matches(game):
 
 def _init_game(game_type, teams, fast, num_turns, back_round = False):
 
+    print "##### INIT_GAME"
+
     # Lanzamos el tipo de juego apropiado
     if game_type == 'cup':
         game = tournament.Tournament(teams, num_turns)
+        print "Tipo de juego: torneo"
     else:
         game = league.League(teams, num_turns, back_round)
+        print "Tipo de juego: liga"
 
     band = False
 
@@ -121,7 +127,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
     classifications = {}
 
     # Mientras no se haya completado el juego
-    while not game.completed() and not band and not controlPartida.cancelarCampeonato:
+    while not game.completed() and not band and not controlPartida.flagCancelarCampeonato:
         
         # Guardamos el número de la ronda
         roundNumber = game.get_round_number()
@@ -144,6 +150,9 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
     
         # Jugamos esta ronda
         game.play_round(progress_bar, fast)
+
+        if controlPartida.flagCancelarCampeonato:
+            return
         
         # Guardamos en r la ronda actual, con sus resultados y tal
         r = game.get_round(roundNumber)
@@ -192,7 +201,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
         print "BAND? ", band
         print ""
 
-    if not band:
+    if not band and not controlPartida.flagCancelarCampeonato:
         if game_type == 'cup':
             log_file = open(log_file_name, 'a')
             log_file.write("** CLASIFICACIÓN FINAL\n")
@@ -212,7 +221,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
         else:        
             update_log_end(log_file_name, classifications)
         
-    print "##### END"
+    print "##### END_INIT_GAME"
 
 def _init_playoff(teams, fast, num_turns, back_round):
     l = league.League(teams, num_turns, back_round)
@@ -220,7 +229,7 @@ def _init_playoff(teams, fast, num_turns, back_round):
     band = False
     
     log_file_name = generate_log_file_name('playoff')
-    while not l.league_completed and not band:
+    while not l.league_completed and not band and not controlPartida.flagCancelarCampeonato:
         i = l.get_round_number()
         show_round_matches(l)
         progress_bar = None
@@ -233,6 +242,10 @@ def _init_playoff(teams, fast, num_turns, back_round):
             while gtk.events_pending():
                 gtk.main_iteration(False)
         l.play_round(progress_bar, fast)
+
+        if controlPartida.flagCancelarCampeonato:
+            return
+
         r = l.get_round(i)
         
         classifications = l.get_actual_puntuations()
@@ -252,7 +265,8 @@ def _init_playoff(teams, fast, num_turns, back_round):
             
         if button_pressed == -4 or button_pressed == 0:
             band = True
-    if not band:
+
+    if not band and not controlPartida.flagCancelarCampeonato:
         band = False
         teams = _get_teams_next_round(teams, _extract_classifications(classifications))
         _init_game('cup', teams, fast, num_turns)

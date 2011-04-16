@@ -25,6 +25,7 @@ import gtk.glade
 
 from guadaboard import guada_board
 from resistencia import configure, xdg
+from resistencia.contest import controlPartida
 
 import settings_dialog
 import quick_game_dialog
@@ -43,6 +44,7 @@ class Resistencia:
         selected_file = self.previous_games_chooser.get_filename()
         if not (selected_file == None):
             print 'Seleccionado ' + selected_file
+            controlPartida.restaurarCampeonato()
             guada_board.run_from_file(selected_file)
             return True
         else:
@@ -78,7 +80,6 @@ class Resistencia:
     # Botón juegos anteriores
     def on_btn_previous_games_clicked(self, widget):
         self.previous_games_chooser.connect('response', lambda d, r: d.hide())
-                                            #self.previous_games_file_chooser_handler)
         self.previous_games_chooser.set_transient_for(self.window)
         self.previous_games_chooser.show()
 

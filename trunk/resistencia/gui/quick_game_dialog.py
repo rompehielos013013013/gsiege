@@ -27,6 +27,8 @@ from guadaboard import guada_board
 from resistencia import configure, xdg, filenames
 from resistencia.nls import gettext as _
 
+from resistencia.contest import controlPartida
+
 import notify_result
 
 class quickGameDialog:    
@@ -171,6 +173,7 @@ class quickGameDialog:
                 self.quick_game.show()
 
     def load_board(self):
+        controlPartida.restaurarCampeonato()
         try:
             winner = guada_board.run(
                 ((self.es_team_a, self.team_team_a),

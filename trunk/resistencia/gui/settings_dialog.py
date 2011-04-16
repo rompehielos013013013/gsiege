@@ -81,10 +81,13 @@ class settingsDialog:
         
         if current_games_path != config_vars['games_path']:
             configure.set_games_path(current_games_path)
+
         if current_teams_path != config_vars['se_path']:
             configure.set_se_path(current_teams_path)
+
         if current_active_music != config_vars['music_active']:
             configure.set_active_music(current_active_music)
+
         if current_interval_time != config_vars['auto_interval_time']:
             configure.set_interval_time(current_interval_time)
 

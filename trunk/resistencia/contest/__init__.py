@@ -18,4 +18,4 @@
 # Copyright (C) 2010, Pablo Recio Quijano
 #----------------------------------------------------------------------
 
-__all__ = ["tournament", "league"]
+__all__ = ["tournament", "league", "controlPartida"]
