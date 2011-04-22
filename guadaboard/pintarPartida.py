@@ -113,7 +113,7 @@ class Ficha(pygame.sprite.Sprite):
 
         self.actualizarSuperficie()        
 
-    def actualizarSuperficie(self):
+    def actualizarSuperficie(self, modificarCoordenadas = True):
         # Dependiendo del equipo elegiremos la pieza de un color u otro
         if self.equipo == 'A':
             imagenFicha = pygame.image.load(xdg_data_path("images/piece-orange.png"))
@@ -134,19 +134,21 @@ class Ficha(pygame.sprite.Sprite):
             imagenFicha.blit(imagenTexto, (19,11))
         elif not self.ocultarInicialmente:
             imagenFicha.blit(imagenTexto, (0,11))
-            
+
         # Asignamos a la imagen de la ficha la superficie compuesta convertida
         self.image = imagenFicha.convert()
 
-        # El rectángulo inicialmente será el de la imagen...
-        self.rect = self.image.get_rect()
+        if modificarCoordenadas:            
+            # El rectángulo inicialmente será el de la imagen...
+            self.rect = self.image.get_rect()
 
-        # ... pero con las coordenadas acordes a la posición de la ficha en el tablero
-        self.posicionDestino = self.toGlobal()
+            # ... pero con las coordenadas acordes a la posición de la ficha en el tablero
+            self.posicionDestino = self.toGlobal()
 
-        self.posicionActual = self.posicionDestino
+            self.posicionActual = self.posicionDestino
 
-        self.rect.x, self.rect.y = self.posicionActual
+            self.rect.x, self.rect.y = self.posicionActual
+
         self.opacidad = 255
         
 
@@ -166,9 +168,9 @@ class Ficha(pygame.sprite.Sprite):
             else:
                 # Asignación para quitarnos los decimales
                 self.posicionActual[0] = self.posicionDestino[0]
-
+            
             # Lo mismo que antes pero para VERTICAL
-            if round(self.posicionActual[1]) != round(self.posicionDestino[1]):
+            if 1 or round(self.posicionActual[1]) != round(self.posicionDestino[1]):
                 variacion = (self.posicionDestino[1] - self.posicionActual[1]) / 15.0
                 self.posicionActual[1] += variacion
             else:
@@ -197,7 +199,6 @@ class Ficha(pygame.sprite.Sprite):
     def actualizate(self, datos):
         # Se llamará a esta función cuando se actualice la ficha con nuevos
         # atributos (posición y si está descubierta o no)
-
         self.posicionPrevia = self.posicionDestino
         self.x = datos[3]
         self.y = datos[4]
@@ -207,7 +208,7 @@ class Ficha(pygame.sprite.Sprite):
             self.descubierta = datos[5]
 
             # Actualizamos la imagen
-            self.actualizarSuperficie()
+            self.actualizarSuperficie(False)
             
         self.posicionDestino = self.toGlobal()
     
@@ -249,8 +250,6 @@ class PintarPartida(object):
             pygame.mixer.music.play()
 
         tamanoVentana = (760,560)
-        
-        print pygame.display.mode_ok(tamanoVentana)
         
         # Estableciendo el modo de pantalla..."
         self.pantalla = pygame.display.set_mode(tamanoVentana)
