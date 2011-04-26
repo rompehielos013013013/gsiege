@@ -31,6 +31,7 @@ import guadaboard.real_interaction as r_intact
 
 from libguadalete import funciones, f1, mover, texto
 from libguadalete import traducirF, traducirM, fA, fB, mirroring, interaccion
+from libguadalete.parsear_fichero_formacion import parsear_fichero_formacion
 
 from resistencia import configure, filenames, xdg
 from resistencia.nls import gettext as _
@@ -83,6 +84,8 @@ def init_human_game(player_formation, computer_team, player_as,
     """
     Intialize the clips environment
     """
+    print "### INIT HUMAN VS PC"
+    
     player_num = 0
     team_a = None
     team_b = None
@@ -92,6 +95,15 @@ def init_human_game(player_formation, computer_team, player_as,
     team_a_piece = xdg.get_data_path('images/piece-orange.png')
     team_b_piece = xdg.get_data_path('images/piece-violete.png')
     default_piece = xdg.get_data_path('images/piece-default.png')
+
+    formacion_temporal_player = None
+    formacion_temporal_pc = None
+
+    formacion_temporal_player = parsear_fichero_formacion(player_formation)
+    player_formation = formacion_temporal_player
+    formacion_temporal_pc = parsear_fichero_formacion(computer_team[1])
+
+    computer_team = (computer_team[0], formacion_temporal_pc)
 
     if player_as == 'A':
         player_num = 1
@@ -106,8 +118,8 @@ def init_human_game(player_formation, computer_team, player_as,
         name_team_b = filenames.extract_simple_name_es((None, team_b))
         name_team_a = filenames.extract_name_expert_system(team_a)
 
-    print team_a
-    print team_b
+    print "TEAM A:", team_a
+    print "TEAM B:", team_b
 
     aux_team_a = (name_team_a, team_a_piece)
     aux_team_b = (name_team_b, team_b_piece)
@@ -196,4 +208,8 @@ def init_human_game(player_formation, computer_team, player_as,
 
     if not dont_save:
         _rename_output_file(_generate_file_name(name_team_a, name_team_b))
+        
     os.remove('resultado.txt')
+    
+    os.remove(formacion_temporal_pc)
+    os.remove(formacion_temporal_player)

@@ -40,6 +40,9 @@ def closest_power2(num):
 
 def _auto_pairings(equiposIniciales):
 
+    print "AUTO PAIRINGS #####"
+    pprint.pprint(equiposIniciales)
+    
     # Guardamos el número de equipos
     numEquiposIniciales = len(equiposIniciales)
 

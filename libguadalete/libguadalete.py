@@ -21,11 +21,13 @@
 import os
 import random
 import sys
+import traceback
 #sys.path.append("./libguadalete")
 
 import clips
 
 import funciones, f1, mover, texto, traducirF, traducirM, fA, fB, mirroring
+import parsear_fichero_formacion
 
 from resistencia import configure, filenames
 from resistencia.nls import gettext as _
@@ -81,7 +83,7 @@ class LibGuadalete(object):
 
         random.seed()
         clips.Eval("(seed " + str(random.randint(0,9999)) + ")") 
-
+        
         funciones.LoadFunctions(clips)
         f1.init_world(clips, self.number_turns)
         f1.LoadFunctions(clips)
@@ -89,6 +91,12 @@ class LibGuadalete(object):
         texto.LoadFunctions(clips)
         traducirF.LoadFunctions(clips)
         traducirM.LoadFunctions(clips)
+
+        temp_form_A = parsear_fichero_formacion.parsear_fichero_formacion(self.teamA[1])
+        temp_form_B = parsear_fichero_formacion.parsear_fichero_formacion(self.teamB[1])
+
+        self.teamA = (self.teamA[0], temp_form_A)
+        self.teamB = (self.teamB[0], temp_form_B)
 
         temp_team = mirroring.mirroring_team(self.teamB[1])
 
@@ -109,6 +117,8 @@ class LibGuadalete(object):
             raise FileError(_('Error parsing the file ') +  self.teamB[1])
         
         os.remove(temp_team)
+        os.remove(temp_form_A)
+        os.remove(temp_form_B)
 
         fA.LoadFunctions(clips)
         print _('   - Loading ') + self.teamA[0]
@@ -117,6 +127,7 @@ class LibGuadalete(object):
         except clips.ClipsError:
             raise FileError(_('Error parsing the file ') +  self.teamA[0])
         temp_rules = mirroring.mirroring_rules(self.teamB[0])
+        
         #same thing that for the formation, but this time using the rules
         fB.LoadFunctions(clips)
         print _('   - Loading ') + self.teamB[0]

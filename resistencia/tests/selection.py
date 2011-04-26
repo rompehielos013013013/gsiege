@@ -38,7 +38,7 @@ def strip_svn(list_to_strip):
 def get_installed_teams():
     """
     Return a list of the installed teams. We consider a installed team some
-    of the way 'data/teams/formations/equipoXX.clp',
+    of the way 'data/teams/formations/equipoXX.form',
     'data/teams/rules/reglasYYYY.clp' where XX == YYYY
     """
     base_path = configure.load_configuration()['se_path']
@@ -54,15 +54,12 @@ def get_installed_teams():
         
     for i in range(len(list_formations)):
         list_formations[i] = list_formations[i].replace('equipo', '')
-        list_formations[i] = list_formations[i].replace('.clp', '')
+        list_formations[i] = list_formations[i].replace('.form', '')
 
     
 
     set_rules = set(strip_svn(list_rules))
     set_formations = set(strip_svn(list_formations))
-
-    print set_rules
-    print set_formations
 
     set_final = set_rules.intersection(set_formations)
     list_final = list(set_final)
@@ -71,7 +68,7 @@ def get_installed_teams():
 
     for i in range(len(list_final)):
         _rules = rules_path + '/reglas' + list_final[i] + '.clp'
-        _form = formations_path + '/equipo' + list_final[i] + '.clp'
+        _form = formations_path + '/equipo' + list_final[i] + '.form'
         res.append((_rules, _form))
 
     return res

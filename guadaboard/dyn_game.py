@@ -156,10 +156,10 @@ class DynGame:
         """
         Draw a board a capture the movement of the user
         """
-        print 'draw_boards'
-        print board_list[0]
         _board = None
-
+        if len(board_list) == 0:
+            return
+        
         for i in board_list:
             state = i[0]
             identifiers = i[1]

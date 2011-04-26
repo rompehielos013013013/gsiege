@@ -61,7 +61,6 @@ def main():
 
     # Muestra el cuadro de diálogo principal
     editor.window.show()
-    print _("Loading main window")
 
     # Lanza el bucle de GTK (?)
     gtk.main()
