@@ -38,7 +38,7 @@ class roundResults:
             if e[0] == 'aux_ghost_team':
                 top = top - 1
         color = '#0C0C9D'
-        print self.classifications
+
         for e in self.classifications:
             name = e[0]
             if not name == 'aux_ghost_team':

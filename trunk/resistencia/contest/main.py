@@ -196,10 +196,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
         if button_pressed == -4 or button_pressed == 0:
             band = True
 
-        print "EEEEEEEEEEEEEEEEEEEEEEEND OF THE ROUNDDDDDDDDDDDDDDDDDDDDDDDD"
-        print ""
-        print "BAND? ", band
-        print ""
+        print "END OF THE ROUND"
 
     if not band and not controlPartida.flagCancelarCampeonato:
         if game_type == 'cup':

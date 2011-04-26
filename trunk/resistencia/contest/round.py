@@ -151,7 +151,7 @@ class Round(object):
             else: #teamB_key == 'aux_ghost_team':
                 result = 1
 
-        print "\n * MATCH FINISHED:"
+        print "\n** MATCH FINISHED:"
         print   " - The result of the game '" + teamA_key + "' vs '"+ teamB_key + "' was:"
 
         if result == 0:
