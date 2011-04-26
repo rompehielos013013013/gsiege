@@ -93,6 +93,7 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
     if cant_draw:
         winner = _handle_draw(entire_game, winner)
 
+    print "Resultado:",
     if winner == 0:
         print u'Empate'
     elif winner == 1:
@@ -126,6 +127,7 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
     try:
         # Procesamos el juego, obteniendo el fichero de log y el ganador
         out_file, winner = lib.run_game()
+        
     except LibFileError as exc:
         raise GuadaFileError(exc.msg)
         
