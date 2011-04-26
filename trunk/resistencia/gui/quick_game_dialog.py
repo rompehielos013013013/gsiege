@@ -130,31 +130,27 @@ class quickGameDialog:
             correct = False
         else:
             self.es_team_a = self.es_team_a[7:]
-            print self.es_team_a
             
         if len(self.es_team_b) == 0:
             self.error_es_b.run()
             correct = False
         else:
             self.es_team_b = self.es_team_b[7:]
-            print self.es_team_b
             
         if len(self.team_team_a) == 0:
             self.error_team_a.run()
             correct = False
         else:
             self.team_team_a = self.team_team_a[7:]
-            print self.team_team_a
             
         if len(self.team_team_b) == 0:
             self.error_team_b.run()
             correct = False
         else:
             self.team_team_b = self.team_team_b[7:]
-            print self.team_team_b
 
         if correct == True:
-            print "##################### All options look OK, starting the game..."
+            print "\n#### INIT QUICK GAME"
 
             # Ocultamos la ventana
             self.quick_game.hide()
@@ -171,6 +167,8 @@ class quickGameDialog:
                 self.dlg_bad_file.format_secondary_text(e.msg)
                 self.dlg_bad_file.run()
                 self.quick_game.show()
+
+            print "#### END QUICK GAME"
 
     def load_board(self):
         controlPartida.restaurarCampeonato()

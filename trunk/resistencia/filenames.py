@@ -55,7 +55,7 @@ def extract_name_expert_system(team):
     i_1 = team[0].find("/reglas")
     j_1 = team[0].find(".clp")
     i_2 = team[1].find("/equipo")
-    j_2 = team[1].find(".clp")
+    j_2 = team[1].find(".form")
     
     return (team[0])[i_1+7:j_1] + (team[1])[i_2+7:j_2]
 
