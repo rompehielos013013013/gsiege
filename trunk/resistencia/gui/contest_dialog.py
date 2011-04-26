@@ -176,9 +176,9 @@ class contestDialog:
         self.contest_dialog.hide()
 
     def on_btn_start_clicked(self, widget, data=None):
-        print "Se inicia la competición"
         if self.all_teams:
             self.teams = selection.get_installed_teams()
+            
         self.contest_dialog.destroy()
         while gtk.events_pending():
             gtk.main_iteration(False)

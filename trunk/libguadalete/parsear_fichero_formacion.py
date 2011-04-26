@@ -3,9 +3,11 @@
 
 import re
 import pprint
+import os
+import random
 
 def parsear_fichero_formacion(rutaFichero):
-    """Parsea el fichero de formación en formato texto y genera el clp 
+    """Parsea el fichero de formación en formato texto y genera el clp temporal
     """
 
     # Intentamos abrir el fichero
@@ -21,7 +23,7 @@ def parsear_fichero_formacion(rutaFichero):
         3:2,
         4:2,
         5:2,
-        6:1    
+        6:1   
     }
 
     # Creamos el contenedor para las fichas
@@ -61,26 +63,27 @@ def parsear_fichero_formacion(rutaFichero):
 
                 # Marcamos la posición como ocupada
                 posicionesOcupadas[x-1][y-1] = 1
-
+                
+    fichero.close()
 
     # Una vez leído el fichero, vamos a comprobar si faltan fichas por añadir
     # Vamos iterando por cada tipo de ficha, mirando si el usuario ha definido
     # el número correcto de ellas.
     for ficha in fichas.keys():
-        print "Comprobando fichas del tipo", ficha
+        # print "Comprobando fichas del tipo", ficha
         
         # Si faltan fichas del tipo concreto
         if len(fichas[ficha]) < fichasPermitidas[ficha]:
             
             # Miramos cuántas fichas faltan
             cantidad_faltante = fichasPermitidas[ficha] - len(fichas[ficha])
-            print " Faltan", cantidad_faltante, "fichas de este tipo"
+            # print " Faltan", cantidad_faltante, "fichas de este tipo"
             
             for f in range(cantidad_faltante):
                 posicion_libre = buscar_posicion_libre(posicionesOcupadas)
                 posicionesOcupadas[posicion_libre[0] - 1][posicion_libre[1] - 1] = 1
                 fichas[ficha].append(posicion_libre)
-                print "  Añadiendo una ficha en la posición", posicion_libre
+                # print "  Añadiendo una ficha en la posición", posicion_libre
             
         # En teoría esto es imposible que pase
         #
@@ -90,9 +93,10 @@ def parsear_fichero_formacion(rutaFichero):
         #     pprint.pprint(fichas)
         
         else:
-            print " El número de fichas del tipo", ficha, "es correcto"
+            # print " El número de fichas del tipo", ficha, "es correcto"
+            pass
 
-        print 
+        # print 
     
 
     # El último paso es convertir el hash de fichas en una matriz
@@ -105,7 +109,22 @@ def parsear_fichero_formacion(rutaFichero):
 
             matrizFinal[cx][cy] = f
 
-    return matrizFinal
+
+    nombreFicheroTemporal = "form" + str(random.randint(1e5, 1e6))
+    # print "Nombre de fichero temporal:", nombreFicheroTemporal
+
+    ficheroTemp = open(nombreFicheroTemporal, "w")
+    ficheroTemp.write("(deffacts fichas-A\n")
+    
+    for x, cx in enumerate(matrizFinal):
+        for y, cy in enumerate(cx):
+            ficheroTemp.write('\t(ficha-r (equipo "A") (num %s) (puntos %i) (pos-x %i) (pos-y %i) (descubierta 0))\n'
+                              % ("1" + str(x) + str(y), cy, x + 1, y + 1))
+
+    ficheroTemp.write(")\n")
+    ficheroTemp.close()
+    
+    return nombreFicheroTemporal
 
 def buscar_posicion_libre(posicionesOcupadas):
     for i, col in enumerate(posicionesOcupadas):
