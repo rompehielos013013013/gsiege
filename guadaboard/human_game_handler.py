@@ -124,6 +124,7 @@ def init_human_game(player_formation, computer_team, player_as,
     aux_team_a = (name_team_a, team_a_piece)
     aux_team_b = (name_team_b, team_b_piece)
 
+    clips.Eval('(reset)')
     clips.Eval('(clear)')
 
     clips.EngineConfig.Strategy = clips.RANDOM_STRATEGY
@@ -133,7 +134,13 @@ def init_human_game(player_formation, computer_team, player_as,
 
     funciones.LoadFunctions(clips)
     f1.init_world(clips, number_turns)
-    f1.LoadFunctions(clips)
+
+    try:
+        f1.LoadFunctions(clips)
+    except Exception:
+        print clips.ErrorStream.Read()
+        exit(-1)
+    
     mover.LoadFunctions(clips)
     texto.LoadFunctions(clips)
     traducirF.LoadFunctions(clips)
@@ -191,7 +198,7 @@ def init_human_game(player_formation, computer_team, player_as,
             raise FileError(_('Error parsing the file ') + team_a[0])
 
     interaccion.LoadFunctions(clips, player_as)
-    
+
     print "******** !!"
     interaccion.interaction_object = r_intact.HumanInteraction(
         aux_team_a, aux_team_b, default_piece, player_num, number_turns)
@@ -216,6 +223,10 @@ def init_human_game(player_formation, computer_team, player_as,
         
     if os.path.isfile("resultado.txt"):
         os.remove('resultado.txt')
+
     
     os.remove(formacion_temporal_pc)
     os.remove(formacion_temporal_player)
+    
+    clips.Eval('(reset)')
+    clips.Eval('(clear)')
