@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<config>
-	<se_path value="/home/jose/proyectos/gsiege/trunk/data/teams"/>
-	<games_path value="/home/jose/proyectos/gsiege/trunk/data/games"/>
-	<language value="es_ES"/>
-	<music_active value="1"/>
-	<auto_interval_time value="500"/>
-</config>

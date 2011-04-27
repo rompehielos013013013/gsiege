@@ -109,7 +109,7 @@ class HumanInteraction:
         Close the environment
         """
         self.update_games()
-        time.sleep(3)
+        #time.sleep(3)
         self.game_interaction.finish()
         show_dialog_result((self.team_a, self.team_b), self.define_winner())
 
