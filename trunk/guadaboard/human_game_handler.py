@@ -196,20 +196,26 @@ def init_human_game(player_formation, computer_team, player_as,
     interaccion.interaction_object = r_intact.HumanInteraction(
         aux_team_a, aux_team_b, default_piece, player_num, number_turns)
 
-    print "******** !!!!"
+    print "## CLIPS RESET"
     clips.Reset()  # restart the environment
+
+    print "## CLIPS RUN"
     clips.Run()  # start the simulation
-    print "******** !!!!!!"
+
+    print "## INTERACTION FINISH"
     interaccion.interaction_object.finish()
+
+    print "## READ STDOUT"
     _stream = clips.StdoutStream.Read()  # print the output
 
-    print _stream
-    print interaccion.interaction_object.define_winner()
+    # print _stream
+    # print interaccion.interaction_object.define_winner()
 
     if not dont_save:
         _rename_output_file(_generate_file_name(name_team_a, name_team_b))
         
-    os.remove('resultado.txt')
+    if os.path.isfile("resultado.txt"):
+        os.remove('resultado.txt')
     
     os.remove(formacion_temporal_pc)
     os.remove(formacion_temporal_player)
