@@ -36,6 +36,7 @@ class settingsDialog:
         self.file_chooser_games = builder.get_object("file_chs_prev_games")
         self.file_chooser_teams = builder.get_object("file_chs_se")
         self.check_active_music = builder.get_object("check_active_music")
+        self.label_subfolders = builder.get_object("label_subfolders")
 
         config_vars = configure.load_configuration()
 
@@ -46,7 +47,7 @@ class settingsDialog:
         self.file_chooser_games.set_filename(config_vars['games_path'])
         self.file_chooser_teams.set_current_folder(teams_current_folder)
         self.file_chooser_teams.set_filename(config_vars['se_path'])
-        print config_vars
+
         active = False
         if config_vars['music_active'] == '1':
             active = True
@@ -63,6 +64,22 @@ class settingsDialog:
 
     def on_btn_cancel_clicked(self, widget, data=None):
         self.settings.hide()
+
+    def comprobarDirectorios(self):
+        widget = self.file_chooser_teams
+
+        return (os.path.isdir(os.path.join(widget.get_filename(), "rules")) and
+                os.path.isdir(os.path.join(widget.get_filename(), "formations")))
+
+    def on_file_chs_se_file_set(self, widget, data=None):
+        if (self.comprobarDirectorios()):
+            mensaje = "<b>Directorio correcto</b>"
+            mensaje += "\n    <b>Reglas</b>: %s" % os.path.join(widget.get_filename(), "rules")
+            mensaje += "\n    <b>Equipos</b>: %s" % os.path.join(widget.get_filename(), "formations")
+            self.label_subfolders.set_markup(mensaje)
+        else:
+            self.label_subfolders.set_markup("<span foreground=\"red\" weight=\"bold\">Directorio inválido</span>")
+
 
     def on_btn_apply_clicked(self, widget, data=None):
         config_vars = configure.load_configuration()
@@ -82,7 +99,7 @@ class settingsDialog:
         if current_games_path != config_vars['games_path']:
             configure.set_games_path(current_games_path)
 
-        if current_teams_path != config_vars['se_path']:
+        if self.comprobarDirectorios() and current_teams_path != config_vars['se_path']:
             configure.set_se_path(current_teams_path)
 
         if current_active_music != config_vars['music_active']:
