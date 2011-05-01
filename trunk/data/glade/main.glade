@@ -194,12 +194,18 @@
     <property name="border_width">5</property>
     <property name="icon">../images/favicon.png</property>
     <property name="type_hint">normal</property>
+    <property name="has_separator">True</property>
     <property name="program_name">Gades Siege</property>
-    <property name="copyright" translatable="yes">Copyright © 2011 Manuel Palomo Duarte, José Tomás Tocino García
-Copyright © 2009 Pablo Recio Quijano</property>
+    <property name="copyright" translatable="yes">Copyright © 2011 José Tomás Tocino García
+Copyright © 2009 Pablo Recio Quijano
+Copyright © 2007 Manuel Palomo Duarte ("La Batalla de Guadalete" - núcleo original)</property>
     <property name="comments" translatable="yes">Ampliación del proyecto Resistencia en Cádiz: 1812,
 una aplicación para el desarrollo y la enseñanza
-de Sistemas Expertos</property>
+de Sistemas Expertos
+
+El desarrollo de este sistema está financiado por el proyecto 
+"La competitividad y el análisis crítico en la evaluación",
+ cod.: CIE44 de la "Convocatoria 2010 de Proyectos de Innovación Educativa Universitaria para el PDI de la Universidad de Cádiz</property>
     <property name="website">http://gsiege.googlecode.com</property>
     <property name="license" translatable="yes">This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
