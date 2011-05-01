@@ -29,9 +29,10 @@ import locale
 import gettext
 import gtk
 import gtk.glade
+import os
 
 APP = 'resistencia1812'
-DIR = '/usr/share/locale'
+DIR = os.path.join(os.getcwd(),"po")  #'/usr/share/locale'
 
 gettext.textdomain(APP)
 gettext.bindtextdomain(APP, DIR)

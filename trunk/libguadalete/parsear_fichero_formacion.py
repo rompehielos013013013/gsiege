@@ -134,7 +134,7 @@ def buscar_posicion_libre(posicionesOcupadas):
             return (i+1, 2)
         
 def main():
-    datos = parsear_fichero_formacion("formacionEquipo")
+    datos = parsear_fichero_formacion("eqForm.php")
     
 if __name__ == '__main__':
     main()
