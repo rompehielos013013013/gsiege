@@ -168,7 +168,7 @@ class quickGameDialog:
                 self.dlg_bad_file.run()
                 self.quick_game.show()
 
-            print "#### END QUICK GAME"
+            print "#### END QUICK GAME \n"
 
     def load_board(self):
         controlPartida.restaurarCampeonato()
@@ -187,11 +187,14 @@ class quickGameDialog:
         except guada_board.GuadaFileError as e:
             raise guada_board.GuadaFileError(e.msg)
             
+        # Se ha seleccionado mostrar sólo los resultados
         if self.fast_game:
             teamA = (self.es_team_a, self.team_team_a)
             teamB = (self.es_team_b, self.team_team_b)
-            name_teamA = filenames.extract_name_expert_system(teamA)
-            name_teamB = filenames.extract_name_expert_system(teamB)
-            n = notify_result.notifyResult((name_teamA, name_teamB), winner)
+
+            # name_teamA = filenames.extract_name_expert_system(teamA)
+            # name_teamB = filenames.extract_name_expert_system(teamB)
+
+            n = notify_result.notifyResult((teamA, teamB), winner)
             
             n.dlg_result.run()

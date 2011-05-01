@@ -43,6 +43,7 @@ class Round(object):
 
     def __init__(self, matchs, translator, num_turns = 150):
         self.round = [] #Formed by tuples ((teamA, teamB), played, result)
+
         for match in matchs:
             self.round.append((match, False, 0))
 

@@ -41,7 +41,7 @@ import dibujo_clasificacion
 def init_contest(contest_format, teams, fast=False, back_round=False,
                  num_turns=120):
 
-    print "##### INIT_CONTEST"
+    print "#### INIT CONTEST"
     
     controlPartida.restaurarCampeonato()
 
@@ -50,7 +50,7 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
     else:
         _init_game(contest_format, _clean_dictionary(teams), fast, num_turns, back_round)
 
-    print "##### END_INIT_CONTEST"
+    print "#### END CONTEST"
 
 def update_log_round(log_file, results, round_number):
     tournament_file = open(log_file, 'a')
@@ -108,15 +108,13 @@ def show_round_matches(game):
 
 def _init_game(game_type, teams, fast, num_turns, back_round = False):
 
-    print "##### INIT_GAME"
+    print ">>>> INIT GAME"
 
     # Lanzamos el tipo de juego apropiado
     if game_type == 'cup':
         game = tournament.Tournament(teams, num_turns)
-        print "Tipo de juego: torneo"
     else:
         game = league.League(teams, num_turns, back_round)
-        print "Tipo de juego: liga"
 
     band = False
 
@@ -196,7 +194,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
         if button_pressed == -4 or button_pressed == 0:
             band = True
 
-        print "END OF THE ROUND"
+        print "---- END OF THE ROUND"
 
     if not band and not controlPartida.flagCancelarCampeonato:
         if game_type == 'cup':
@@ -218,7 +216,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
         else:        
             update_log_end(log_file_name, classifications)
         
-    print "##### END_INIT_GAME"
+    print ">>>> END INIT GAME"
 
 def _init_playoff(teams, fast, num_turns, back_round):
     l = league.League(teams, num_turns, back_round)

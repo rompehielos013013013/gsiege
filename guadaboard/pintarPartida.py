@@ -8,7 +8,7 @@ import pprint
 import algoritmoDiferencias
 
 from resistencia.xdg import get_data_path as xdg_data_path
-from resistencia import configure
+from resistencia import configure, filenames
 from resistencia.contest import controlPartida
 
 class Boton(pygame.sprite.Sprite):
@@ -221,8 +221,15 @@ class PintarPartida(object):
     
     def __init__(self, ficheroOrigen, team_a, team_b, musica, hidden=False, cant_draw=False):
         
+        # team_a y team_b son pares con el nombre procesado del equipo y la ruta
+        # a la imagen de la ficha correspondiente
+
         self.team_a = team_a
         self.team_b = team_b
+
+        self.name_team_a = team_a[0]
+        self.name_team_b = team_b[0]
+
         self.musica = musica
         self.hidden = hidden
         self.cant_draw = cant_draw
@@ -238,9 +245,8 @@ class PintarPartida(object):
         # Cargamos el parseador de partidas
         self.parseador = algoritmoDiferencias.ParseadorPartida(ficheroOrigen)
 
-        print "Init terminado!!"
-
     def run(self):
+        print "  ## INICIANDO Pintado de partida"
         # Inicializando pygame..."
         pygame.init()
 
@@ -281,12 +287,12 @@ class PintarPartida(object):
         fuenteEquipos = pygame.font.Font(xdg_data_path("fonts/zektonbi.ttf"), 18)
         
         # Renderizamos los textos en superficies
-        textoEquipoA = fuenteEquipos.render(self.team_a[0][:16], 1, (255,255,255))
-        sombraTextoEquipoA = fuenteEquipos.render(self.team_a[0][:16], 1, (0,0,0))
+        textoEquipoA = fuenteEquipos.render(self.name_team_a[:16], 1, (255,255,255))
+        sombraTextoEquipoA = fuenteEquipos.render(self.name_team_a[:16], 1, (0,0,0))
         imagenEquipoA = pygame.transform.scale(pygame.image.load(self.team_a[1]), (30,30))
 
-        textoEquipoB = fuenteEquipos.render(self.team_b[0][:16], 1, (255,255,255))
-        sombraTextoEquipoB = fuenteEquipos.render(self.team_b[0][:16], 1, (0,0,0))
+        textoEquipoB = fuenteEquipos.render(self.name_team_b[:16], 1, (255,255,255))
+        sombraTextoEquipoB = fuenteEquipos.render(self.name_team_b[:16], 1, (0,0,0))
         imagenEquipoB = pygame.transform.scale(pygame.image.load(self.team_b[1]), (30,30))
 
         # Bliteamos las superficies de los marcadores
@@ -410,8 +416,8 @@ class PintarPartida(object):
 
         # Cerramos el subsistema gráfica (no es necesario)
         pygame.display.quit()
+        print "  ## FINALIZADO Pintado de partida"
         return 0
-
 
     ## CALLBACKS para los botones
 

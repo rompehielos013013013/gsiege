@@ -182,6 +182,7 @@ class contestDialog:
         self.contest_dialog.destroy()
         while gtk.events_pending():
             gtk.main_iteration(False)
+
         contest.init_contest(self.format_contest, self.teams,
                              self.fast, self.back_round, self.num_turns)
 

@@ -26,6 +26,28 @@ from os import path
 import datetime
 import types
 
+def despejar_ruta (ruta):
+    """ Recibe la ruta total o parcial de un fichero y la limpia, dejando solo
+    el nombre del fichero sin la extensión"""
+
+    return path.splitext(path.split(ruta)[1])[0]
+
+def quitar_prefijo(nombre):
+    if "/" in nombre:
+        nombre = despejar_ruta(nombre)
+
+    if (nombre[0:6] == "equipo" or nombre[0:6] == "reglas"):
+        return nombre[6:]
+    else:
+        return nombre
+
+def quitar_prefijo_multiple(varios):
+    retorno = list(varios)
+    for i,e in enumerate(retorno):
+        retorno[i] = quitar_prefijo(retorno[i])
+
+    return tuple(retorno)
+
 def extract_simple_name_es (team):
     """Reciving a 2 elements tuple, extract the name of the player.
 
