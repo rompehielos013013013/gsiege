@@ -41,6 +41,9 @@ class Resistencia:
     main window
     """
     def previous_games_file_chooser_handler(self):
+        print "\n"
+        print "#### PARTIDA ANTIGUA"
+
         selected_file = self.previous_games_chooser.get_filename()
         if not (selected_file == None):
             print 'Seleccionado ' + selected_file
@@ -69,7 +72,6 @@ class Resistencia:
     # Botón Competiciones
     def on_btn_competitions_clicked(self, widget):
         treeview = contest_dialog.contestDialog(self.window)
-        print "Nueva competición..."
         treeview.contest_dialog.run()
 
     # Botón jugar contra Sistema Experto

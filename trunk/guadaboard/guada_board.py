@@ -93,19 +93,21 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
     if cant_draw:
         winner = _handle_draw(entire_game, winner)
 
-    print "Resultado:",
-    if winner == 0:
-        print u'Empate'
-    elif winner == 1:
-        print u'Ganó %s' % team_a[0]
-    else:
-        print u'Ganó %s' % team_b[0]
-
     music = False
     if configure.load_configuration()['music_active'] == '1':
         music = True
 
-    P = pintarPartida.PintarPartida(src_file, team_a, team_b, music, hidden, cant_draw)
+    if type(team_a[0]) == str:
+        name_team_a = team_a[0]
+        name_team_b = team_b[0]
+    else:
+        name_team_a = filenames.extract_name_expert_system(team_a[0])
+        name_team_b = filenames.extract_name_expert_system(team_b[0]) 
+
+    c_team_a = (name_team_a, team_a[1])
+    c_team_b = (name_team_b, team_b[1])
+
+    P = pintarPartida.PintarPartida(src_file, c_team_a, c_team_b, music, hidden, cant_draw)
     P.run()
 
     show_dialog_result((team_a[0], team_b[0]), winner)
@@ -120,7 +122,6 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
     Runs a game using the system expert teams given. It calls to libguadalete,
     generating the game and parsing the file.
     """
-    
     # Preparamos el motor con los equipos y el número de turnos
     lib = libguadalete.LibGuadalete(team_a[0], team_b[0], number_turns)
     
@@ -134,13 +135,9 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
     # fast indica si queremos ver solo el resultado (fast = True) o la partida
     # completa
     if not fast:
-        name_team_a = filenames.extract_name_expert_system(team_a[0])
-        name_team_b = filenames.extract_name_expert_system(team_b[0])
-        
         # Aquí es donde se llama a la función que gestiona el dibujado del juego
         _load_game_from_file(out_file, 
-                             (name_team_a, team_a[1]),
-                             (name_team_b, team_b[1]), 
+                             team_a, team_b,
                              path_piece_def,
                              xml_file, hidden, cant_draw=cant_draw)
         
@@ -172,6 +169,7 @@ def run_from_file(src_file,
     previamente simulado
     """
     name_a, name_b = filenames.extract_names_from_file(src_file)
+
     team_a = (name_a, team_a[1])
     team_b = (name_b, team_b[1])
 
@@ -181,11 +179,11 @@ def run_from_file(src_file,
 
 
 
-def show_dialog_result((name_team_a, name_team_b), winner):
+def show_dialog_result((team_a, team_b), winner):
     """
     Simple function that show a dialog with the result of a game
     """
-    _not_dig = notify_result.notifyResult((name_team_a, name_team_b), winner)
+    _not_dig = notify_result.notifyResult((team_a, team_b), winner)
     _not_dig.dlg_result.run()
 
     while gtk.events_pending():

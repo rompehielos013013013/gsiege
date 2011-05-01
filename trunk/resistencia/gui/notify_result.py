@@ -22,27 +22,50 @@ import sys
 import os.path
 
 import gtk
+import pprint
 
 from resistencia import filenames, xdg
 from resistencia.nls import gettext as _
 
 class notifyResult:
     def __init__(self, teams, winner):
-        name_teamA = teams[0]
-        name_teamB = teams[1]
-        
+        """ Genera un nuevo diálogo de notificación de resultados.
+
+        teams será un par cuyos elementos pueden ser cadenas con el nombre del
+        equipo o un par con la ruta del fichero de formación y de reglas, de los
+        que sacarán los nombres.
+        """
+
         result = ''
+
+        if type(teams[0]) == str:
+            msg_team_a = teams[0]
+            msg_team_b = teams[1]
+        else:
+
+            team_a = filenames.quitar_prefijo_multiple(teams[0])
+            team_b = filenames.quitar_prefijo_multiple(teams[1])
+        
+            msg_team = "equipo <b>%s</b> con formación <b>%s</b>"
+            msg_team_a = msg_team % team_a
+            msg_team_b = msg_team % team_b
         
         if winner == 0:
             result = _('Draw')
         elif winner == 1:
-            result = _('Wins ') + name_teamA
+            result  = '<span foreground="red"><b>Ganador</b>: '
+            result += msg_team_a 
+            result += '</span>\n'
+            result +=  "Contrincante: "  + msg_team_b
         else:
-            result = _('Gana ') + name_teamB
+            result  = '<span foreground="red"><b>Ganador</b>: '
+            result += msg_team_b
+            result += '</span>\n'
+            result +=  "Contrincante: "  + msg_team_a
             
         builder = gtk.Builder()
         builder.add_from_file(xdg.get_data_path('glade/resultNotifier.glade'))
 
         self.dlg_result = builder.get_object('dlg_result')
         self.dlg_result.connect('response', lambda d, r: d.hide())
-        self.dlg_result.format_secondary_text(result)
+        self.dlg_result.format_secondary_markup(result)
