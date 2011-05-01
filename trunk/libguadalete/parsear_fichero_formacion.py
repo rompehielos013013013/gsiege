@@ -37,8 +37,9 @@ def parsear_fichero_formacion(rutaFichero):
     posicionesOcupadas = [[0 for y in range(1,3)] for x in range(1, 9)]
 
     # Diseñamos la expresión regular para leer el fichero
-    expReg = re.compile (r"^([1-6]):([1-8]),([1-2])$")
+    expReg = re.compile (r"^([1-6]:){7}[1-6]$")
 
+    fila = 2
     # Por cada línea del fichero
     for linea in fichero.readlines():
 
@@ -48,21 +49,28 @@ def parsear_fichero_formacion(rutaFichero):
         # Comprobamos que la línea se ajuste a la regexp
         m = expReg.match(linea)
         if m:
-            # Leemos los datos de la expresión regular
-            ficha = int(m.group(1))
-            x = int(m.group(2))
-            y = int(m.group(3))
+            fichasLeidas = linea.split(":")
+            fichasLeidas.reverse()
 
-            # Si en la posición indicada no había una ficha previamente definida
-            # y todavía es posible añadir fichas de ese tipo
-            if (posicionesOcupadas[x-1][y-1] == 0 and
-                len(fichas[ficha]) < fichasPermitidas[ficha]):
+            for i, ficha in enumerate(fichasLeidas):
+                ficha = int(ficha)
+                x = i + 1
+                y = fila
+
+                # Si en la posición indicada no había una ficha previamente definida
+                # y todavía es posible añadir fichas de ese tipo
+                if (posicionesOcupadas[x-1][y-1] == 0 and
+                    len(fichas[ficha]) < fichasPermitidas[ficha]):
                 
-                # Añadimos la ficha al conjunto
-                fichas[ficha].append((x,y))
+                    # Añadimos la ficha al conjunto
+                    fichas[ficha].append((x,y))
 
-                # Marcamos la posición como ocupada
-                posicionesOcupadas[x-1][y-1] = 1
+                    # Marcamos la posición como ocupada
+                    posicionesOcupadas[x-1][y-1] = 1
+
+        fila -= 1
+        if fila == 0:
+            break
                 
     fichero.close()
 
@@ -134,7 +142,7 @@ def buscar_posicion_libre(posicionesOcupadas):
             return (i+1, 2)
         
 def main():
-    datos = parsear_fichero_formacion("eqForm.php")
+    datos = parsear_fichero_formacion("eqform.form")
     
 if __name__ == '__main__':
     main()
