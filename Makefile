@@ -92,9 +92,6 @@ install-target: make-install-dirs
 	 > resistencia1812 && \
 	 chmod 755 resistencia1812
 
-locale:
-	cd po && find . -name "*.po" -exec ../tools/compilepo.sh {} \; && cd ..
-
 install-locale:
 	for f in `find po -name resistencia1812.mo` ; do \
 	  install -d -m 755 \
@@ -115,17 +112,6 @@ clean:
 
 clean-games:
 	$(RM) ./data/games/*.txt
-
-pot:
-	@echo "[encoding: UTF-8]" > po/POTFILES.in
-	find resistencia -name "*.py" >> po/POTFILES.in
-	find guadaboard -name "*.py" >> po/POTFILES.in
-	find libguadalete -name "*.py" >> po/POTFILES.in
-	find data/glade/ -name "*.glade" >> po/POTFILES.in
-	python tools/createpot.py
-
-translations:
-	python tools/createpot.py compile
 
 potball:
 	tar --bzip2 --format=posix -cf resistencia1812-po.tar.bz2 po/ \
