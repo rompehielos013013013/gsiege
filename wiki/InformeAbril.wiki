@@ -20,14 +20,16 @@ En cada ronda no se sabía a priori qué partidos se iban a disputar. Se ha impl
 
 === Tickets 4, 7 y 8 ===
 Estos tres tickets guardaban una relación entre sí que hizo que se llevaran a cabo de forma simultánea:
-* Ticket 4: implementar alguna forma de abortar una competición.
-* Ticket 7: modo de avance automático o _play_.
-* Ticket 8: animaciones de transición para las fichas.
+
+  * Ticket 4: implementar alguna forma de abortar una competición.
+  * Ticket 7: modo de avance automático o _play_.
+  * Ticket 8: animaciones de transición para las fichas.
 
 Estos tres tickets implicaban hacer modificaciones al módulo de dibujado de las partidas. Se estudió el código existente y se decidió reescribir por completo el módulo para facilitar la adición de nuevas funcionalidades y, sobre todo, mejorar la forma en que se pintaban los elementos gráficos. Así, fue posible:
-* Implementar el ticket 4, añadiendo un botón que abortaba la competición en la interfaz
-* Implementar el ticket 7, añadiendo un botón que active el avance automático. También se ha añadido, en el panel de configuración del juego, un control para la velocidad del avance automático.
-* Implementar el ticket 8, añadiendo animaciones suaves para los movimientos de las fichas, que ahora también se desvanecen cuando resultan eliminadas.
+
+  * Implementar el ticket 4, añadiendo un botón que abortaba la competición en la interfaz
+  * Implementar el ticket 7, añadiendo un botón que active el avance automático. También se ha añadido, en el panel de configuración del juego, un control para la velocidad del avance automático.
+  * Implementar el ticket 8, añadiendo animaciones suaves para los movimientos de las fichas, que ahora también se desvanecen cuando resultan eliminadas.
 
 === Ticket 14: Equipos fantasma ===
 En las competiciones tipo eliminatoria, en los casos en los que el número de equipos en la primera ronda no es una potencia de dos, tarde o temprano alguno de los equipos se quedará sin rival y será automáticamente ascendido a la siguiente ronda, lo cual suele ser problemático si ocurre en rondas cercanas a la final.
@@ -53,13 +55,13 @@ Previamente, al término de cada partido sólo se indicaba el ganador del mismo,
 Se modificó el sistema de forma que al finalizar cada partido aparezca un mensaje tipo:
 
    RESULTADOS DEL JUEGO:
-    Ganador: equipo *Fulanito* con formación *Menganito*
-    Contrincante: equipo *Noséquién* con formación *Nosécuánto*
+
+   Ganador: equipo *Fulanito* con formación *Menganito*
+
+   Contrincante: equipo *Noséquién* con formación *Nosécuánto*
 
 === Ticket 18: información sobre el proyecto ===
 Se ha ampliado la información existente en el cuadro de diálogo _Acerca de_, en la aplicación
 
 === Ticket 19: directorio de equipos ===
 Se ha añadido una funcionalidad en el panel de configuración en la que se detecta si el directorio elegido para almacenar los ficheros de los equipos es correcto o no. Esto se hace verificando que existen los subdirectorios correspondientes a los ficheros de formación y reglas. En caso de que la elección sea incorrecta, los cambios realizados se desechan para evitar inconsistencias durante el juego.
-
-
