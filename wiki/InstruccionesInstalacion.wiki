@@ -1,5 +1,5 @@
 #summary Instrucciones para instalar Gades Siege
-= Introduction =
+= Instrucciones de instalación =
 
 A continuación se indican las instrucciones para instalar Gades Siege en un sistema GNU/Linux basado en paquetería Debian. Para otros sistemas la instalación sería equivalente.
 
