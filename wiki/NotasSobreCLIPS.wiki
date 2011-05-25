@@ -23,3 +23,5 @@ Y a ese not se le pueden poner condiciones incrustadas con &: por ejemplo
   =>
   (assert (mueve (num ?n) (mov 3) (tiempo ?t))))
 }}}
+
+Más información en en [http://clipsrules.sourceforge.net/OnlineDocs.html Manual de CLIPS]
