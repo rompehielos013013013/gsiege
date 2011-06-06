@@ -11,211 +11,9 @@ from resistencia.xdg import get_data_path as xdg_data_path
 from resistencia import configure, filenames
 from resistencia.contest import controlPartida
 
-class Boton(pygame.sprite.Sprite):
-    """
-    Representa un botón de la interfaz
-    """
-
-    def __init__(self, x, y, imagen, callback, activarImagenHover = True):
-        pygame.sprite.Sprite.__init__(self)
-
-        self.activarImagenHover = activarImagenHover
-
-        # Asignamos la acción a realizar al hacer click
-        self.callback = callback
-        
-        # Cargamos las imágenes
-        self.imagenNormal = pygame.image.load(xdg_data_path(imagen + ".png")).convert_alpha()
-        
-        if self.activarImagenHover:
-            self.imagenHover = pygame.image.load(xdg_data_path(imagen + "_sobre.png")).convert_alpha()
-
-        #self.imagenActive = pygame.image.load(xdg_data_path(imagen + "_pulsada.png")).convert_alpha()
-
-        # Definimos el rectángulo de acción 
-        self.rect = self.imagenNormal.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-        # El estado por defecto es el normal
-        self.estado = "normal"
-
-    def pintar (self, destino):
-
-        # Según el estado, se pinta una imagen u otra
-        if not self.activarImagenHover or self.estado == "normal":
-            destino.blit(self.imagenNormal, self.rect)
-        elif self.estado == "hover":
-            destino.blit(self.imagenHover, self.rect)
-
-    def informarClick(self, pos):
-        # Si el click se ha producido sobre el botón
-        if self.rect.collidepoint(pos):
-
-            # Llamamos a la función e callback
-            self.callback()
-
-    def informarHover(self, pos):
-        # Si el ratón está encima del botón, pasamos al estado hover
-        if self.rect.collidepoint(pos) and self.activarImagenHover:
-            self.estado = "hover"
-        else:
-            self.estado = "normal"
-
-class Interruptor(pygame.sprite.Sprite):
-    def __init__ (self, x, y, imagen, callback):
-        self.callback = callback
-
-        # Cargamos las imágenes
-        self.imagenNormal = pygame.image.load(xdg_data_path(imagen + ".png")).convert_alpha()
-        self.imagenToggled = pygame.image.load(xdg_data_path(imagen + "_toggled.png")).convert_alpha()
-        
-        self.rect = self.imagenNormal.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-
-        self.estado = "normal"
-
-    def pintar (self, destino):
-        if self.estado == "normal":
-            destino.blit(self.imagenNormal, self.rect)
-        else:
-            destino.blit(self.imagenToggled, self.rect)
-
-    def informarHover(self, pos):
-        pass
-
-    def informarClick(self, pos):
-        if self.rect.collidepoint(pos):
-            if self.estado == "normal":
-                self.estado = "toggled"
-            else:
-                self.estado = "normal"
-
-            self.callback()                  
-
-class Ficha(pygame.sprite.Sprite):
-    """
-    Representa una ficha
-    """
-    def __init__(self, equipo, identificador, valor, x, y, descubierta, ocultarInicialmente = False):
-
-        pygame.sprite.Sprite.__init__(self)
-
-        self.x = x
-        self.y = y
-        self.valor = valor
-        self.identificador = identificador
-        self.descubierta = descubierta
-        self.equipo = equipo
-        self.ocultarInicialmente = ocultarInicialmente
-        self.visible = True
-
-        self.actualizarSuperficie()        
-
-    def actualizarSuperficie(self, modificarCoordenadas = True):
-        # Dependiendo del equipo elegiremos la pieza de un color u otro
-        if self.equipo == 'A':
-            imagenFicha = pygame.image.load(xdg_data_path("images/piece-orange.png"))
-        else:
-            imagenFicha = pygame.image.load(xdg_data_path("images/piece-violete.png"))
-
-        # Cargamos la fuente para el rótulo con el valor de la ficha
-        fuente = pygame.font.Font(xdg_data_path("fonts/LiberationMono-Bold.ttf"), 32)
-
-        # Pintamos el rótulo en una superficie nueva
-        if self.descubierta:
-            imagenTexto = fuente.render("%d" % self.valor, 1, (255, 255, 255))
-        else:
-            imagenTexto = fuente.render("[%d]" % self.valor, 1, (255, 255, 255))
-
-        # Bliteamos la superficie del texto en la superficie de la ficha original
-        if self.descubierta:            
-            imagenFicha.blit(imagenTexto, (19,11))
-        elif not self.ocultarInicialmente:
-            imagenFicha.blit(imagenTexto, (0,11))
-
-        # Asignamos a la imagen de la ficha la superficie compuesta convertida
-        self.image = imagenFicha.convert()
-
-        if modificarCoordenadas:            
-            # El rectángulo inicialmente será el de la imagen...
-            self.rect = self.image.get_rect()
-
-            # ... pero con las coordenadas acordes a la posición de la ficha en el tablero
-            self.posicionDestino = self.toGlobal()
-
-            self.posicionActual = self.posicionDestino
-
-            self.rect.x, self.rect.y = self.posicionActual
-
-        self.opacidad = 255
-        
-
-    def pintar (self, destino):
-        if self.visible:
-            # Para cuando está reviviendo
-            if self.opacidad < 254:
-                self.opacidad += 10
-
-            # Si la posición HORIZONTAL actual no es la posición final
-            if round(self.posicionActual[0]) != round(self.posicionDestino[0]):
-
-                # Calculamos la variación de la posición
-                variacion = (self.posicionDestino[0] - self.posicionActual[0]) / 15.0
-                self.posicionActual[0] += variacion
-
-            else:
-                # Asignación para quitarnos los decimales
-                self.posicionActual[0] = self.posicionDestino[0]
-            
-            # Lo mismo que antes pero para VERTICAL
-            if 1 or round(self.posicionActual[1]) != round(self.posicionDestino[1]):
-                variacion = (self.posicionDestino[1] - self.posicionActual[1]) / 15.0
-                self.posicionActual[1] += variacion
-            else:
-                self.posicionActual[1] = self.posicionDestino[1]
-
-        # Si no está visible y la opacidad es mayor, desvanecerlo
-        elif self.opacidad > 1:
-            self.opacidad -= 10
-
-            
-        # Actualizamos el rectángulo con la posición actual
-        self.rect.x, self.rect.y = self.posicionActual
-
-        # Le asignamos el alfa a la iamgen
-        self.image.set_alpha(self.opacidad)
-
-        # Bliteamos la imagen
-        destino.blit(self.image, self.rect)
-
-    def muerete(self):
-        self.visible = False
-
-    def revivete(self):
-        self.visible = True
-
-    def actualizate(self, datos):
-        # Se llamará a esta función cuando se actualice la ficha con nuevos
-        # atributos (posición y si está descubierta o no)
-        self.posicionPrevia = self.posicionDestino
-        self.x = datos[3]
-        self.y = datos[4]
-
-        # Si ha pasado de estar descubierta a no estarlo (o al revés)
-        if self.descubierta != datos[5]:
-            self.descubierta = datos[5]
-
-            # Actualizamos la imagen
-            self.actualizarSuperficie(False)
-            
-        self.posicionDestino = self.toGlobal()
-    
-    def toGlobal(self):
-        # Pasa de coordenadas locales a globales
-        return [float(10 + (self.x - 1) * 60),
-                float(10 + (self.y - 1) * 60)]
+from pintarFicha import Ficha
+from pintarBoton import Boton
+from pintarInterruptor import Interruptor
 
 class PintarPartida(object):
     
@@ -277,11 +75,12 @@ class PintarPartida(object):
         imagenMarco = imagenMarco.convert()
 
         # Posición inicial de los marcos con los nombres de los equipos
-        posMarcosEquipos = 50 
+        posMarcoSuperior = 10 
+        posMarcoInferior = 152
 
         # Bliteamos el marco en el fondo
-        self.imagenFondo.blit(imagenMarco, (510, posMarcosEquipos))
-        self.imagenFondo.blit(imagenMarco, (510, posMarcosEquipos + 62))
+        self.imagenFondo.blit(imagenMarco, (510, posMarcoSuperior))
+        self.imagenFondo.blit(imagenMarco, (510, posMarcoInferior))
 
         # Cargamos la fuente para el rótulo con el valor de la ficha
         fuenteEquipos = pygame.font.Font(xdg_data_path("fonts/zektonbi.ttf"), 18)
@@ -289,20 +88,23 @@ class PintarPartida(object):
         # Renderizamos los textos en superficies
         textoEquipoA = fuenteEquipos.render(self.name_team_a[:16], 1, (255,255,255))
         sombraTextoEquipoA = fuenteEquipos.render(self.name_team_a[:16], 1, (0,0,0))
-        imagenEquipoA = pygame.transform.scale(pygame.image.load(self.team_a[1]), (30,30))
+        self.imagenEquipoA = pygame.transform.scale(pygame.image.load(self.team_a[1]), (30,30))
 
         textoEquipoB = fuenteEquipos.render(self.name_team_b[:16], 1, (255,255,255))
         sombraTextoEquipoB = fuenteEquipos.render(self.name_team_b[:16], 1, (0,0,0))
-        imagenEquipoB = pygame.transform.scale(pygame.image.load(self.team_b[1]), (30,30))
+        self.imagenEquipoB = pygame.transform.scale(pygame.image.load(self.team_b[1]), (30,30))
 
         # Bliteamos las superficies de los marcadores
-        self.imagenFondo.blit(imagenEquipoA, (515, posMarcosEquipos + 9))
-        self.imagenFondo.blit(sombraTextoEquipoA, (552, posMarcosEquipos + 11))
-        self.imagenFondo.blit(textoEquipoA, (550, posMarcosEquipos + 9))
+        self.imagenFondo.blit(self.imagenEquipoA, (515, posMarcoSuperior + 9))
+        self.imagenFondo.blit(sombraTextoEquipoA, (552, posMarcoSuperior + 11))
+        self.imagenFondo.blit(textoEquipoA, (550, posMarcoSuperior + 9))
 
-        self.imagenFondo.blit(imagenEquipoB, (515, posMarcosEquipos + 71))
-        self.imagenFondo.blit(sombraTextoEquipoB, (552, posMarcosEquipos + 73))
-        self.imagenFondo.blit(textoEquipoB, (550, posMarcosEquipos + 71))
+        self.imagenFondo.blit(self.imagenEquipoB, (515, posMarcoInferior + 9))
+        self.imagenFondo.blit(sombraTextoEquipoB, (552, posMarcoInferior + 11))
+        self.imagenFondo.blit(textoEquipoB, (550, posMarcoInferior + 9))
+
+        # Cargamos la fuente para el texto de las fichas muertas
+        self.fuenteFichasMuertas = pygame.font.Font(xdg_data_path("fonts/LiberationMono-Bold.ttf"), 19)
 
         # Pintamos las fichas blancas del fondo
         fichaBlanca = pygame.image.load(xdg_data_path("images/piece-default.png"))
@@ -391,6 +193,9 @@ class PintarPartida(object):
             for btn in botonesInterfaz:
                 btn.pintar(self.pantalla)
 
+            # Pintamos las fichas muertas
+            self.pintarFichasMuertas()
+
             # Volcamos la pantalla a la gráfica
             pygame.display.flip()
 
@@ -426,6 +231,7 @@ class PintarPartida(object):
         
     def callAvanzarTurno(self, ):
         nuevasFichas = self.parseador.avanzarTurno()
+
         self.actualizarFichas(nuevasFichas)
 
     def callRetrocederTurno(self, ):
@@ -472,3 +278,47 @@ class PintarPartida(object):
                 else:
                     # Actualízate con las cosas que veas nuevas
                     self.fichas[f].actualizate(nuevasFichas[f])
+
+
+    def pintarFichasMuertas(self):
+        dA, dB = self.parseador.calcularFichasMuertas()
+        
+        fichasA = dict2list(dA)
+        fichasB = dict2list(dB)
+
+        x = 0
+        y = 0
+
+        coorX = lambda x : 510 + x * 40
+        coorY = lambda y : 65 + y * 40
+
+        for fA in fichasA:
+            self.pantalla.blit(self.imagenEquipoA, (coorX(x), coorY(y)))
+            imText = self.fuenteFichasMuertas.render("%d" % fA, 1, (255,255,255))
+            self.pantalla.blit(imText, (10 + coorX(x), 5 + coorY(y)))
+            x += 1
+            if x == 6:
+                x = 0
+                y += 1
+
+        x = 0
+        y = 0
+
+        for fB in fichasB:
+            self.pantalla.blit(self.imagenEquipoB, (coorX(x), 142 + coorY(y)))
+            imText = self.fuenteFichasMuertas.render("%d" % fB, 1, (255,255,255))
+            self.pantalla.blit(imText, (10 + coorX(x), 147 + coorY(y)))
+            x += 1
+            if x == 6:
+                x = 0
+                y += 1
+
+def dict2list(d):
+    l = []
+
+    for k in d.keys():
+        for i in range(d[k]):
+            l.append(k)
+
+    return l
+
