@@ -90,3 +90,31 @@ class ParseadorPartida(object):
     def retrocederInicio(self):
         self.turnoActual = 0
         return self.infoTurnos[self.turnoActual]
+
+    def calcularFichasMuertas(self):
+        fichasPermitidas = [{
+            1:1,
+            2:8,
+            3:2,
+            4:2,
+            5:2,
+            6:1   
+            },{
+            1:1,
+            2:8,
+            3:2,
+            4:2,
+            5:2,
+            6:1   
+            }]
+
+        for f in self.infoTurnos[self.turnoActual].keys():
+            ficha = self.infoTurnos[self.turnoActual][f]
+
+            if ficha[0] == "A":
+                fichasPermitidas[0][ficha[2]] = fichasPermitidas[0][ficha[2]] - 1
+            else:
+                fichasPermitidas[1][ficha[2]] = fichasPermitidas[1][ficha[2]] - 1
+
+        return fichasPermitidas
+        

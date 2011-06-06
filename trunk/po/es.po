@@ -20,7 +20,6 @@ msgstr ""
 
 #: ../libguadalete/libguadalete.py:103 ../libguadalete/libguadalete.py:111
 #: ../libguadalete/libguadalete.py:124 ../libguadalete/libguadalete.py:133
-#, fuzzy
 msgid "   - Loading "
 msgstr "Cargando"
 
@@ -136,7 +135,6 @@ msgid "Back round"
 msgstr "Ida y vuelta"
 
 #: ../data/glade/progressbarDialog.glade.h:3
-#, fuzzy
 msgid "Calculating"
 msgstr "Calculando..."
 
@@ -335,12 +333,10 @@ msgid "Rules file"
 msgstr "Archivo de reglas"
 
 #: ../resistencia/contest/main.py:141 ../resistencia/contest/main.py:233
-#, fuzzy
 msgid "Running the contest"
 msgstr "Ejecutando las pruebas..."
 
 #: ../resistencia/gui/tests_dialog.py:160
-#, fuzzy
 msgid "Running the test"
 msgstr "Ejecutando las pruebas..."
 
