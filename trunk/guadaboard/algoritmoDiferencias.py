@@ -71,6 +71,15 @@ class ParseadorPartida(object):
     def esteTurno(self):
         return self.infoTurnos[self.turnoActual]
 
+    def getNumTurnoActual(self):
+        return self.turnoActual + 1
+
+    def getNumTurnoTotal(self):
+        return self.turnosTotales
+
+    def getNumTurnosRestantes(self):
+        return self.turnosTotales - self.turnoActual - 1
+
     def retrocederTurno(self):
         if self.turnoActual > 0:
             self.turnoActual -= 1
