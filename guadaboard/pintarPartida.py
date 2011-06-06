@@ -75,12 +75,12 @@ class PintarPartida(object):
         imagenMarco = imagenMarco.convert()
 
         # Posición inicial de los marcos con los nombres de los equipos
-        posMarcoSuperior = 10 
-        posMarcoInferior = 152
+        self.posMarcoSuperior = 10 
+        self.posMarcoInferior = 190
 
         # Bliteamos el marco en el fondo
-        self.imagenFondo.blit(imagenMarco, (510, posMarcoSuperior))
-        self.imagenFondo.blit(imagenMarco, (510, posMarcoInferior))
+        self.imagenFondo.blit(imagenMarco, (510, self.posMarcoSuperior))
+        self.imagenFondo.blit(imagenMarco, (510, self.posMarcoInferior))
 
         # Cargamos la fuente para el rótulo con el valor de la ficha
         fuenteEquipos = pygame.font.Font(xdg_data_path("fonts/zektonbi.ttf"), 18)
@@ -95,13 +95,19 @@ class PintarPartida(object):
         self.imagenEquipoB = pygame.transform.scale(pygame.image.load(self.team_b[1]), (30,30))
 
         # Bliteamos las superficies de los marcadores
-        self.imagenFondo.blit(self.imagenEquipoA, (515, posMarcoSuperior + 9))
-        self.imagenFondo.blit(sombraTextoEquipoA, (552, posMarcoSuperior + 11))
-        self.imagenFondo.blit(textoEquipoA, (550, posMarcoSuperior + 9))
+        self.imagenFondo.blit(self.imagenEquipoA, (515, self.posMarcoSuperior + 9))
+        self.imagenFondo.blit(sombraTextoEquipoA, (552, self.posMarcoSuperior + 11))
+        self.imagenFondo.blit(textoEquipoA, (550, self.posMarcoSuperior + 9))
 
-        self.imagenFondo.blit(self.imagenEquipoB, (515, posMarcoInferior + 9))
-        self.imagenFondo.blit(sombraTextoEquipoB, (552, posMarcoInferior + 11))
-        self.imagenFondo.blit(textoEquipoB, (550, posMarcoInferior + 9))
+        self.imagenFondo.blit(self.imagenEquipoB, (515, self.posMarcoInferior + 9))
+        self.imagenFondo.blit(sombraTextoEquipoB, (552, self.posMarcoInferior + 11))
+        self.imagenFondo.blit(textoEquipoB, (550, self.posMarcoInferior + 9))
+
+        posBloqueTurnoActual = 367
+        self.imagenFondo.blit(imagenMarco, (510, posBloqueTurnoActual))
+
+        posBloqueTurnosRestantes = 420
+        self.imagenFondo.blit(imagenMarco, (510, posBloqueTurnosRestantes))
 
         # Cargamos la fuente para el texto de las fichas muertas
         self.fuenteFichasMuertas = pygame.font.Font(xdg_data_path("fonts/LiberationMono-Bold.ttf"), 19)
@@ -128,7 +134,7 @@ class PintarPartida(object):
         botonesInterfaz.append(Boton(260, 500, "images/flecha_derecha1", self.callAvanzarTurno))
         botonesInterfaz.append(Boton(330, 500, "images/flecha_derecha2", self.callAvanzarFinal))
         botonesInterfaz.append(Boton(630, 500, "images/btnAbortar", self.callAbortar, False))
-        botonesInterfaz.append(Interruptor(700, 430, "images/btnAvanceAutomatico", self.callToggleAvanceAutomatico))
+        botonesInterfaz.append(Interruptor(560, 500, "images/btnAvanceAutomatico", self.callToggleAvanceAutomatico))
 
         self.salir = False
         self.avanceAutomatico = False
@@ -195,6 +201,12 @@ class PintarPartida(object):
 
             # Pintamos las fichas muertas
             self.pintarFichasMuertas()
+
+            self.pantalla.blit(fuenteEquipos.render("Turno actual: %d" % self.parseador.getNumTurnoActual(), 1, (0,0,0)), (517, posBloqueTurnoActual + 11))
+            self.pantalla.blit(fuenteEquipos.render("Turno actual: %d" % self.parseador.getNumTurnoActual(), 1, (255,255,255)), (515, posBloqueTurnoActual + 9))
+
+            self.pantalla.blit(fuenteEquipos.render("Turnos restantes: %d" % self.parseador.getNumTurnosRestantes(), 1, (0,0,0)), (517, posBloqueTurnosRestantes + 11))
+            self.pantalla.blit(fuenteEquipos.render("Turnos restantes: %d" % self.parseador.getNumTurnosRestantes(), 1, (255,255,255)), (515, posBloqueTurnosRestantes + 9))
 
             # Volcamos la pantalla a la gráfica
             pygame.display.flip()
@@ -289,8 +301,10 @@ class PintarPartida(object):
         fichasB = dict2list(dB)
 
         # Funciones para pasar de coordenadas locales a globales
-        coorX = lambda x : 510 + x * 40
-        coorY = lambda y : 65 + y * 40
+        espaciado = 40
+        coorX = lambda x : 510 + x * espaciado
+        coorYA = lambda y : self.posMarcoSuperior + 55 + y * espaciado
+        coorYB = lambda y : self.posMarcoInferior + 55 + y * espaciado
 
         # Coordenadas iniciales de dibujado
         x = 0
@@ -298,9 +312,9 @@ class PintarPartida(object):
 
         # Recorremos las fichas muertas del equipo A
         for fA in fichasA:
-            self.pantalla.blit(self.imagenEquipoA, (coorX(x), coorY(y)))
+            self.pantalla.blit(self.imagenEquipoA, (coorX(x), coorYA(y)))
             imText = self.fuenteFichasMuertas.render("%d" % fA, 1, (255,255,255))
-            self.pantalla.blit(imText, (10 + coorX(x), 5 + coorY(y)))
+            self.pantalla.blit(imText, (10 + coorX(x), 5 + coorYA(y)))
 
             x += 1
 
@@ -313,9 +327,9 @@ class PintarPartida(object):
 
         # Recorremos las fichas muertas del equipo B
         for fB in fichasB:
-            self.pantalla.blit(self.imagenEquipoB, (coorX(x), 142 + coorY(y)))
+            self.pantalla.blit(self.imagenEquipoB, (coorX(x), coorYB(y)))
             imText = self.fuenteFichasMuertas.render("%d" % fB, 1, (255,255,255))
-            self.pantalla.blit(imText, (10 + coorX(x), 147 + coorY(y)))
+            self.pantalla.blit(imText, (10 + coorX(x), 5 + coorYB(y)))
 
             x += 1
 
@@ -324,6 +338,11 @@ class PintarPartida(object):
                 y += 1
 
 def dict2list(d):
+    """
+    Convierte un diccionario con la forma {1:3, 2:1, 3:4} en una lista
+    con la forma [1, 1, 1, 2, 3, 3, 3, 3]
+    """
+
     l = []
 
     for k in d.keys():

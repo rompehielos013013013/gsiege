@@ -100,7 +100,7 @@ class LibGuadalete(object):
 
         temp_team = mirroring.mirroring_team(self.teamB[1])
 
-        print _('   - Loading ') + self.teamA[1]
+        print '   - Loading ' + self.teamA[1]
         #create a temporally file that mirror the formation of B team,
         #because it's written thinking in A team
         try:
@@ -108,7 +108,7 @@ class LibGuadalete(object):
         except clips.ClipsError:
             raise FileError(_('Error parsing the file ') +  self.teamA[1])
 
-        print _('   - Loading ') + self.teamB[1]
+        print '   - Loading ' + self.teamB[1]
 
         try:
             clips.Load(temp_team)
