@@ -281,22 +281,29 @@ class PintarPartida(object):
 
 
     def pintarFichasMuertas(self):
+        # Parseamos las fichas muertas
         dA, dB = self.parseador.calcularFichasMuertas()
         
+        # Las convertimos a listas
         fichasA = dict2list(dA)
         fichasB = dict2list(dB)
 
-        x = 0
-        y = 0
-
+        # Funciones para pasar de coordenadas locales a globales
         coorX = lambda x : 510 + x * 40
         coorY = lambda y : 65 + y * 40
 
+        # Coordenadas iniciales de dibujado
+        x = 0
+        y = 0
+
+        # Recorremos las fichas muertas del equipo A
         for fA in fichasA:
             self.pantalla.blit(self.imagenEquipoA, (coorX(x), coorY(y)))
             imText = self.fuenteFichasMuertas.render("%d" % fA, 1, (255,255,255))
             self.pantalla.blit(imText, (10 + coorX(x), 5 + coorY(y)))
+
             x += 1
+
             if x == 6:
                 x = 0
                 y += 1
@@ -304,11 +311,14 @@ class PintarPartida(object):
         x = 0
         y = 0
 
+        # Recorremos las fichas muertas del equipo B
         for fB in fichasB:
             self.pantalla.blit(self.imagenEquipoB, (coorX(x), 142 + coorY(y)))
             imText = self.fuenteFichasMuertas.render("%d" % fB, 1, (255,255,255))
             self.pantalla.blit(imText, (10 + coorX(x), 147 + coorY(y)))
+
             x += 1
+
             if x == 6:
                 x = 0
                 y += 1
