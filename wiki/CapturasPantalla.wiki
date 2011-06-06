@@ -1,0 +1,26 @@
+#summary Capturas de pantalla de Gades Siege
+#labels Screenshots
+
+= Menú principal =
+
+[http://gsiege.googlecode.com/svn/gades4.jpg]
+
+= Pantalla de juego =
+
+[http://gsiege.googlecode.com/svn/reproduciendo1.jpg]
+
+= Configuración de las competiciones =
+
+[http://gsiege.googlecode.com/svn/config1.jpg]
+
+= Gráfica de resultados de competiciones =
+
+[http://gsiege.googlecode.com/svn/Resultados_006.jpg]
+
+= Resultados de pruebas de laboratorio =
+
+[http://gsiege.googlecode.com/svn/resultados1.jpg]
+
+= Pantalla acerca de =
+
+[http://gsiege.googlecode.com/svn/acerca_de.jpg]
