@@ -4,3 +4,20 @@ En este manual se presentará el modo de uso de Gades Siege, cómo está estruct
 
 = Instalación =
 La instalación de Gades Siege es muy sencilla y está íntegramente reflejada en el artículo [InstruccionesInstalacion creado a tal efecto].
+
+En este manual vamos a considerar que estamos trabajando con una instalación correcta de Gades Siege. Para ejecutar el juego, dentro de la carpeta del mismo lanzamos el siguiente comando:
+{{{
+./gsiege.py
+}}}
+
+= Opciones del menú principal =
+En el menú principal de Gades Siege encontraremos una serie de opciones, que detallaremos con más atención a continuación.
+
+== Partida rápida ==
+Este modo nos permite lanzar una partida simple entre dos sistemas expertos. Al abrir este modo, el cuadro de diálogo nos permitirá elegir los equipos que se van a enfrentar, así como diversas opciones adicionales:
+  * Podemos elegir el máximo número de turnos del juego con el indicador *Número de turnos*.
+  * Si activamos *No guardar la partida*, no se generará ningún fichero de log con el resultado de la misma.
+  * Si activamos *Solo los resultados*, nos aparecerá directamente el desenlace final de la partida, sin posibilidad de ver el progreso de la misma.
+  * Si activamos *Esconder el valor de las piezas*, el valor de cada pieza aparecerá oculto hasta que sea descubierta por otra pieza.
+
+Una vez pulsemos en el botón *Aplicar*, la partida comenzará con las opciones indicadas.
