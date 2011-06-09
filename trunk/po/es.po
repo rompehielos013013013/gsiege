@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-02 01:53+0200\n"
+"POT-Creation-Date: 2011-06-09 15:28+0200\n"
 "PO-Revision-Date: 2010-02-12 01:57+0100\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
@@ -18,8 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../libguadalete/libguadalete.py:103 ../libguadalete/libguadalete.py:111
-#: ../libguadalete/libguadalete.py:124 ../libguadalete/libguadalete.py:133
+#: ../libguadalete/libguadalete.py:136 ../libguadalete/libguadalete.py:151
 msgid "   - Loading "
 msgstr "Cargando"
 
@@ -102,6 +101,10 @@ msgstr "<b>Equipo B</b>"
 msgid "Active music on the board"
 msgstr "Activar la música en el tablero"
 
+#: ../data/glade/contest.glade.h:4
+msgid "All-play-all tournament"
+msgstr "Liga: \ntodos contra todos"
+
 #: ../data/glade/main.glade.h:1
 msgid ""
 "Ampliación del proyecto Resistencia en Cádiz: 1812,\n"
@@ -118,7 +121,7 @@ msgstr ""
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
-#: ../resistencia/tests/tests.py:81
+#: ../resistencia/tests/tests.py:82
 msgid "As team"
 msgstr "Como equipo"
 
@@ -130,7 +133,7 @@ msgstr "Como equipo A"
 msgid "As team B"
 msgstr "Como equipo B"
 
-#: ../data/glade/contest.glade.h:4
+#: ../data/glade/contest.glade.h:5
 msgid "Back round"
 msgstr "Ida y vuelta"
 
@@ -146,7 +149,7 @@ msgstr "Competiciones"
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#: ../data/glade/contest.glade.h:5
+#: ../data/glade/contest.glade.h:6
 msgid "Contest settings"
 msgstr "Configuraciones de la competición"
 
@@ -170,10 +173,6 @@ msgstr "Empate "
 msgid "Draws:"
 msgstr "Empata "
 
-#: ../data/glade/contest.glade.h:6
-msgid "Elimination cup"
-msgstr "Copa eliminatoria"
-
 #: ../data/glade/quickGame.glade.h:7 ../data/glade/humanEsDialog.glade.h:9
 msgid "Error finded"
 msgstr "Error encontrado"
@@ -187,9 +186,9 @@ msgstr "Error leyendo un fichero"
 #: ../guadaboard/human_game_handler.py:176
 #: ../guadaboard/human_game_handler.py:182
 #: ../guadaboard/human_game_handler.py:191
-#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:109
-#: ../libguadalete/libguadalete.py:117 ../libguadalete/libguadalete.py:128
-#: ../libguadalete/libguadalete.py:138
+#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:115
+#: ../libguadalete/libguadalete.py:129 ../libguadalete/libguadalete.py:145
+#: ../libguadalete/libguadalete.py:162
 msgid "Error parsing the file "
 msgstr "Error al analizar el fichero"
 
@@ -197,7 +196,7 @@ msgstr "Error al analizar el fichero"
 msgid "Final round"
 msgstr "Última ronda"
 
-#: ../resistencia/gui/tests_dialog.py:134
+#: ../resistencia/gui/tests_dialog.py:138
 #: ../resistencia/gui/contest_dialog.py:92
 msgid "Formation"
 msgstr "Formación"
@@ -226,15 +225,11 @@ msgstr ""
 msgid "Laboratory"
 msgstr "Laboratorio"
 
-#: ../data/glade/contest.glade.h:7
-msgid "League"
-msgstr "Liga"
-
 #: ../data/glade/testResults.glade.h:3
 msgid "Looses:"
 msgstr "Partidas perdidas:"
 
-#: ../data/glade/contest.glade.h:8
+#: ../data/glade/contest.glade.h:7
 msgid "Main configuration"
 msgstr "Configuración principal"
 
@@ -242,7 +237,7 @@ msgstr "Configuración principal"
 msgid "Max value piece dies at turn:"
 msgstr "La pieza de mas valor muere en el turno:"
 
-#: ../resistencia/gui/tests_dialog.py:132
+#: ../resistencia/gui/tests_dialog.py:136
 #: ../resistencia/gui/contest_dialog.py:90
 msgid "Name"
 msgstr "Nombre"
@@ -251,7 +246,7 @@ msgstr "Nombre"
 msgid "Number of games:"
 msgstr "Numero de juegos:"
 
-#: ../resistencia/tests/tests.py:83
+#: ../resistencia/tests/tests.py:84
 msgid "Number of pieces"
 msgstr "Número de piezas"
 
@@ -259,8 +254,8 @@ msgstr "Número de piezas"
 msgid "Number of repetitions"
 msgstr "Número de repeticiones"
 
-#: ../resistencia/tests/tests.py:82 ../data/glade/quickGame.glade.h:10
-#: ../data/glade/testDialog.glade.h:6 ../data/glade/contest.glade.h:9
+#: ../resistencia/tests/tests.py:83 ../data/glade/quickGame.glade.h:10
+#: ../data/glade/testDialog.glade.h:6 ../data/glade/contest.glade.h:8
 #: ../data/glade/humanEsDialog.glade.h:11
 msgid "Number of turns"
 msgstr "Número de turnos"
@@ -269,11 +264,11 @@ msgstr "Número de turnos"
 msgid "Only result"
 msgstr "Solo los resultados"
 
-#: ../data/glade/contest.glade.h:10
+#: ../data/glade/contest.glade.h:9
 msgid "Only results"
 msgstr "Solo los resultados"
 
-#: ../resistencia/tests/tests.py:81
+#: ../resistencia/tests/tests.py:82
 msgid "Opponent"
 msgstr "Oponente"
 
@@ -285,13 +280,17 @@ msgstr "Juega contra un S.E."
 msgid "Play against an expert system"
 msgstr "Juega contra un sistema experto"
 
-#: ../data/glade/contest.glade.h:11
+#: ../data/glade/contest.glade.h:10
 msgid "Players"
 msgstr "Jugadores"
 
-#: ../data/glade/contest.glade.h:12
-msgid "Playoff"
+#: ../data/glade/contest.glade.h:11
+msgid ""
+"Playoff: \n"
+"all-play-all, then single-eliminaton"
 msgstr ""
+"Torneo mixto: \n"
+"Primero una liga, luego una copa"
 
 #: ../data/glade/main.glade.h:15
 msgid "Previous games"
@@ -306,7 +305,7 @@ msgstr "Partida rápida"
 msgid "Rests"
 msgstr "Descansa"
 
-#: ../resistencia/tests/tests.py:82
+#: ../resistencia/tests/tests.py:83
 msgid "Result"
 msgstr "Resultad"
 
@@ -323,7 +322,7 @@ msgstr "Resultados"
 msgid "Results of the round"
 msgstr "Resultados de la ronda"
 
-#: ../resistencia/gui/tests_dialog.py:133
+#: ../resistencia/gui/tests_dialog.py:137
 #: ../resistencia/gui/contest_dialog.py:91
 msgid "Rules"
 msgstr "Reglas"
@@ -336,7 +335,7 @@ msgstr "Archivo de reglas"
 msgid "Running the contest"
 msgstr "Ejecutando las pruebas..."
 
-#: ../resistencia/gui/tests_dialog.py:160
+#: ../resistencia/gui/tests_dialog.py:164
 msgid "Running the test"
 msgstr "Ejecutando las pruebas..."
 
@@ -381,6 +380,10 @@ msgstr "Configuración"
 #: ../data/glade/settingsDialog.glade.h:5
 msgid "Settings - Cadiz deffense: 1812"
 msgstr "Configuración - Resistencia en Cádiz: 1812"
+
+#: ../data/glade/contest.glade.h:15
+msgid "Single-elimination tournament"
+msgstr "Copa:\neliminatoria directa por partido"
 
 #: ../data/glade/humanEsDialog.glade.h:17
 msgid "System Expert for computer team"
@@ -438,7 +441,7 @@ msgid ""
 "along with this program.  If not, see <http://www.gnu.org/licenses/>."
 msgstr ""
 
-#: ../resistencia/tests/tests.py:84
+#: ../resistencia/tests/tests.py:85
 msgid "Turn when max value piece died"
 msgstr "Turno cuando muere la pieza de máximo valor"
 
@@ -450,11 +453,11 @@ msgstr "Turnos en los que pierdes"
 msgid "Turns used to win:"
 msgstr "Turnos en los que ganas"
 
-#: ../data/glade/testDialog.glade.h:11 ../data/glade/contest.glade.h:15
+#: ../data/glade/testDialog.glade.h:11 ../data/glade/contest.glade.h:16
 msgid "Use all teams installed"
 msgstr "Usar todos los equipos instalados"
 
-#: ../resistencia/tests/tests.py:83
+#: ../resistencia/tests/tests.py:84
 msgid "Value of the pieces"
 msgstr "Valor de las piezas"
 
@@ -508,6 +511,9 @@ msgstr "Debe seleccionar un fichero"
 #~ msgid "Copyright &#xA9; 2009 Pablo Recio Quijano"
 #~ msgstr "Copyright &#xA9; 2009 Pablo Recio Quijano"
 
+#~ msgid "Elimination cup"
+#~ msgstr "Copa eliminatoria"
+
 #~ msgid "Expert system's Manager"
 #~ msgstr "Gestor de sistemas expertos"
 
@@ -522,6 +528,9 @@ msgstr "Debe seleccionar un fichero"
 
 #~ msgid "Language"
 #~ msgstr "Idioma"
+
+#~ msgid "League"
+#~ msgstr "Liga"
 
 #~ msgid "Loading main window"
 #~ msgstr "Cargando ventana principal"

@@ -206,9 +206,6 @@ class quickGameDialog:
             teamA = (self.es_team_a, self.team_team_a)
             teamB = (self.es_team_b, self.team_team_b)
 
-            # name_teamA = filenames.extract_name_expert_system(teamA)
-            # name_teamB = filenames.extract_name_expert_system(teamB)
-
             n = notify_result.notifyResult((teamA, teamB), winner)
             
             n.dlg_result.run()
