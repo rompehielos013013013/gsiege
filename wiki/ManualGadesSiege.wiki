@@ -68,3 +68,43 @@ Las opciones de configuración que podemos modificar en esta sección son las si
   * Ruta al directorio de sistemas expertos. Para que sea un directorio correcto, debe contener dos subdirectorios: *rules* y *formations*. Posteriormente se explicará el sentido de estas carpetas.
   * Opción de activar o desactivar la música en el tablero.
   * Ritmo de avance de las fichas en el modo de avance automático.
+
+== Acerca de ==
+En este panel encontrará los créditos del juego, así como información adicional.
+
+= Estructura de ficheros de Gades Siege =
+Gades Siege se estructura en la siguiente jerarquía de directorios:
+  * *data* : incluye todos los ficheros de recursos,
+    * *fonts* : tipografías.
+    * *games* : logs de juegos y competiciones anteriores.
+    * *glade* : ficheros que definen las interfaces de usuario.
+    * *images* : imágenes y gráficos.
+    * *music* : música del juego.
+    * *teams* : <font color="#ff0000">*importante*</font>, aquí es donde se guardan los ficheros de los equipos. Posteriormente explicaremos con más detalle cómo incluir tus equipos en Gades Siege. Consta de dos subdirectorios:
+      * *formations* : aquí se encuentran las formaciones de los equipos, esto es, cómo van colocadas las fichas inicialmente.
+      * *rules* : aquí se encuentran las reglas del sistema experto que controla tu equipo.
+  * *doc* : Documentación varia, irrelevante.
+  * *guadaborad* : ficheros Python con el módulo guadaboard, que se encarga de representar en pantalla las partidas.
+  * *libguadalete* : ficheros Python con el módulo del motor principal. Es el que se encargar de procesar los ficheros Clips y generar los resultados de las partidas.
+  * *po* : ficheros de traducción.
+  * *resistencia* : ficheros Python con el módulo principal del programa, que controla el funcionamiento en general, las interfaces gráficas de usuario, opciones de configuración, etcétera.
+
+== Ficheros de los equipos ==
+Como se ha comentado previamente, en el directorio *teams* dentro de *data* encontraremos las carpetas donde guardar los ficheros de nuestro sistema experto. Éste se compone de dos partes.
+
+=== Fichero de formación ===
+Los ficheros de formación indican la posición inicial de nuestro sistema experto en el tablero. En anteriores versiones se utilizaba un fichero Clips para expresar estas posiciones, pero posteriormente decidimos utilizar una representación más sencilla.
+
+El fichero de formación debe contenerse en la carpeta *formations* del directorio *teams*, y su nombre debe seguir la estructura *equipoNombre.form*, donde _Nombre_ será el identificador de tu equipo. El contenido de un fichero de formación es muy sencillo de entender:
+
+{{{
+6:5:5:4:4:3:3:2
+2:2:2:2:2:2:2:1
+}}}
+
+Como se ve a simple vista, el fichero consta de dos líneas de números separados entre sí por dos puntos. Estas dos líneas representan las dos filas en las que las fichas podrán colocarse inicialmente en el tablero. En la formación de ejemplo, el rey (número 1) está en la esquina inferior derecha, de forma que tiene bastante protección, es una formación habitual.
+
+=== Fichero de reglas ===
+Los ficheros de reglas definen las reglas que el sistema experto evaluará en cada momento para decidir qué acción tomar. Estos ficheros se encuentran en la carpeta *rules* del directorio *teams*, y la nomenclatura a seguir será *reglasNombre.clp*, siendo _Nombre_, de nuevo, el mismo identificador que en el fichero de formación.
+
+Los ficheros de reglas son ficheros de Clips propiamente, por eso tienen la extensión .clp, y siguen la sintaxis de Clips.
