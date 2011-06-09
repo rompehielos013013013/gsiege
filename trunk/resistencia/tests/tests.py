@@ -65,6 +65,7 @@ class TestSuite:
         self.filename = base_path + filenames.generate_filename('stats',
                                                                 main_team)
 
+        print "Filename", self.filename
         for _team in self.translator_teams:
             self.keys_teams.append(_team)
 
@@ -82,6 +83,7 @@ class TestSuite:
                                _('Result'), _("Number of turns"),
                                _('Number of pieces'), _("Value of the pieces"),
                                _('Turn when max value piece died')])
+
         for i in range(self.rounds_number):
             round_games = pairing.test_pairing(self.key_main_team[0],
                                                self.keys_teams, i%2)

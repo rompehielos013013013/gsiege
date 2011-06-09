@@ -48,6 +48,9 @@ class quickGameDialog:
         builder.get_object('file_chooser_team_a').set_current_folder(def_formations_path)
         builder.get_object('file_chooser_es_b').set_current_folder(def_rules_path)
         builder.get_object('file_chooser_team_b').set_current_folder(def_formations_path)
+        
+        self.file_chooser_team_a = builder.get_object('file_chooser_team_a')
+        self.file_chooser_team_b = builder.get_object('file_chooser_team_b')
 
         self.quick_game = builder.get_object("quick_game_dialog")
         self.quick_game.set_transient_for(parent)
@@ -95,12 +98,24 @@ class quickGameDialog:
 
     def on_file_chooser_es_a_file_set(self, widget, data=None):
         self.es_team_a = widget.get_uri()
+        
+        formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
+        
+        if formacionAsociada != None:			
+			self.file_chooser_team_a.set_uri(formacionAsociada)
+			self.team_team_a = formacionAsociada
 
     def on_file_chooser_team_a_file_set(self, widget, data=None):
         self.team_team_a = widget.get_uri()
         
     def on_file_chooser_es_b_file_set(self, widget, data=None):
         self.es_team_b = widget.get_uri()
+        
+        formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
+        
+        if formacionAsociada != None:			
+			self.file_chooser_team_b.set_uri(formacionAsociada)
+			self.team_team_b = formacionAsociada
 
     def on_file_chooser_team_b_file_set(self, widget, data=None):
         self.team_team_b = widget.get_uri()
@@ -166,7 +181,6 @@ class quickGameDialog:
             except guada_board.GuadaFileError as e:
                 self.dlg_bad_file.format_secondary_text(e.msg)
                 self.dlg_bad_file.run()
-                self.quick_game.show()
 
             print "#### END QUICK GAME \n"
 
