@@ -34,3 +34,37 @@ Las opciones en esta ventana son las siguientes:
   * *Número de turnos*: igual que en _partida rápida_, permite elegir el número máximo de turnos.
 
 En la pestaña de *Jugadores* podremos elegir los equipos que van a participar en la competición, teniendo la opción de agregar, directamente, todos los equipos instalados en el sistema.
+
+== Jugar contra un sistema experto ==
+Este modo es el más interactivo de Gades Siege. Nos permitirá tomar el mando de uno de los equipos del juego y enfrentarnos a un Sistema Experto controlado por la máquina. 
+
+En el apartado *Equipo humano* elegiremos nuestra formación y la posición del equipo. En la sección *Equipo de la máquina* elegiremos nuestro oponente, con la opción de elegirlo al azar. Las opciones de configuración son iguales que en los modos anteriores.
+
+Una vez que lancemos el juego, en nuestros turnos podremos hacer click en la ficha que deseemos mover. Al hacerlo, se nos indicarán con cuadros de color cyan las posibles posiciones a las que mover nuestra ficha. Tal y como le pasara a un sistema experto que nosotros programáramos, no veremos el valor de las fichas enemigas hasta que sean descubiertas por otra ficha. El objetivo del juego es, lógicamente, encontrar y capturar al rey. Una vez que se produzca este evento, la partida terminará.
+
+== Modo laboratorio ==
+
+En este modo podremos poner a pelear a nuestro sistema experto de forma automatizada un gran número de veces. Una vez que elijamos el sistema experto a testear en el apartado *Sistema experto principal*, podremos elegir una serie de opciones:
+  * Indicamos el *número de repeticiones* que se realizarán para cada partido.
+  * Indicamos también el *número de turnos* máximo para cada encuentro.
+
+Una vez hecho esto, podemos elegir manualmente con qué equipos enfrentar a nuestro sistema, o indicar que se *usen todos los equipos instalados*. Tras esto, simplemente tendremos que aceptar y esperar a que termine el procesamiento.
+
+Al terminar, se nos mostrarán unas estadísticas junto a unas gráficas, con los siguientes datos:
+  * Número de encuentros realizados.
+  * Partidas ganadas.
+  * Partidas perdidas.
+  * Partidas empatadas.
+  * Número de turnos en los que el sistema gana.
+  * Número de turnos en los que el sistema pierde.
+  * Turno en el que la pieza de más valor suele perder.
+
+== Partidas antiguas ==
+En este modo, es posible revisar partidas previamente jugadas. Al indicar esta opción, tendremos que elegir un fichero de log correcto. Tras ello, aparecerá el reproductor de partidas (el mismo que se utiliza en los otros modos), que nos permitirá reproducir el encuentro.
+
+== Configuración ==
+Las opciones de configuración que podemos modificar en esta sección son las siguientes:
+  * Ruta al directorio de logs de partidas previas.
+  * Ruta al directorio de sistemas expertos. Para que sea un directorio correcto, debe contener dos subdirectorios: *rules* y *formations*. Posteriormente se explicará el sentido de estas carpetas.
+  * Opción de activar o desactivar la música en el tablero.
+  * Ritmo de avance de las fichas en el modo de avance automático.
