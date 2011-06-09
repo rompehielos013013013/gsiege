@@ -140,10 +140,14 @@ class Round(object):
             teamA = (self.translator[teamA_key], _pieceA)
             teamB = (self.translator[teamB_key], _pieceB)
             
-            result = guada_board.run(teamA, teamB, fast=fast,
-                                     hidden=False,
-                                     number_turns=self.num_turns,
-                                     cant_draw=cant_draw)
+            try:
+                result = guada_board.run(teamA, teamB, fast=fast,
+                                         hidden=False,
+                                         number_turns=self.num_turns,
+                                         cant_draw=cant_draw)
+            except:
+                print "ERROR!"
+                
             
         else:
             print " - It's a match against a ghost team"

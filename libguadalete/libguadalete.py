@@ -105,14 +105,26 @@ class LibGuadalete(object):
         #because it's written thinking in A team
         try:
             clips.Load(self.teamA[1])
-        except clips.ClipsError:
-            raise FileError(_('Error parsing the file ') +  self.teamA[1])
+        except clips.ClipsError as e:
+            print "####################"
+            print "ERROR de clips:", e
+            print "Mensaje: "
+            print clips.ErrorStream.Read()
+            print "####################"
+
+            raise FileError(_('Error parsing the file ') +  self.teamA[1] + "\n" + e)
 
         print '   - Loading ' + self.teamB[1]
 
         try:
             clips.Load(temp_team)
-        except clips.ClipsError:
+        except clips.ClipsError as e:
+            print "####################"
+            print "ERROR de clips:", e
+            print "Mensaje: "
+            print clips.ErrorStream.Read()
+            print "####################"
+
             os.remove(temp_team)
             raise FileError(_('Error parsing the file ') +  self.teamB[1])
         
@@ -124,8 +136,14 @@ class LibGuadalete(object):
         print _('   - Loading ') + self.teamA[0]
         try:
             clips.Load(self.teamA[0])
-        except clips.ClipsError:
+        except clips.ClipsError as e:
+            print "####################"
+            print "ERROR de clips:", e
+            print "Mensaje: "
+            print clips.ErrorStream.Read()
+            print "####################"
             raise FileError(_('Error parsing the file ') +  self.teamA[0])
+
         temp_rules = mirroring.mirroring_rules(self.teamB[0])
         
         #same thing that for the formation, but this time using the rules
@@ -133,9 +151,15 @@ class LibGuadalete(object):
         print _('   - Loading ') + self.teamB[0]
         try:
             clips.Load(temp_rules)
-        except clips.ClipsError:
+        except clips.ClipsError as e:
             os.remove(temp_rules)
-            raise FileError(_('Error parsing the file ') +  self.teamB[0])
+            print "####################"
+            print "ERROR de clips:", e
+            print "Mensaje: "
+            print clips.ErrorStream.Read()
+            print "####################"
+
+            raise FileError(_('Error parsing the file ') +  self.teamB[0] + "\n")
         
         os.remove(temp_rules)
 

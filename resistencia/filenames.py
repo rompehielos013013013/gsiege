@@ -23,6 +23,7 @@ This file provides some functions commonly used in all the application.
 """
 
 from os import path
+from resistencia.xdg import get_data_path as xdg_data_path
 import datetime
 import types
 
@@ -47,6 +48,17 @@ def quitar_prefijo_multiple(varios):
         retorno[i] = quitar_prefijo(retorno[i])
 
     return tuple(retorno)
+    
+def devolverFormacionAsociada(rutaReglas, noPrefijo = False):
+	nombreDespejado = quitar_prefijo(despejar_ruta(rutaReglas))
+	nombreFormacion = "equipo" + nombreDespejado + ".form"
+	rutaFormacion = xdg_data_path('teams/formations/' + nombreFormacion)
+	
+	prefijo = "file://"
+	if noPrefijo:
+		prefijo = ""
+		
+	return prefijo + rutaFormacion
 
 def extract_simple_name_es (team):
     """Reciving a 2 elements tuple, extract the name of the player.
