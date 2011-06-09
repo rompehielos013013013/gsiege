@@ -27,3 +27,10 @@ El modo de competiciones es el modo más usado de Gades Siege. Permite lanzar co
   * *Liga*: en una liga, todos los equipos juegan contra todos, generándose una clasificación por puntos que determinará los ganadores de la competición.
   * *Copa eliminatoria*: en este caso, los equipos apuntados a la competición son emparejados y enfrentados, de forma aleatoria. Los equipos vencidos son automáticamente eliminados de la competición, y los ganadores pasan a la siguiente ronda. Así, la progresión de partidos se hace en forma de árbol, y en cada ronda siempre hay un número de partidos potencia de dos. Gades Siege está programado de forma que se resuelvan todos las [http://es.wikipedia.org/wiki/Exenci%C3%B3n_%28competiciones_deportivas%29 exenciones] en la primera ronda.
  * *Playoff*: este modo es una mezcla entre los dos anteriores. Primero, se realiza una liga entre todos los participantes. A partir de la clasificación de ésta, la mitad de los jugadores en mejores posiciones jugarán una eliminatoria.
+
+Las opciones en esta ventana son las siguientes:
+  * *Ida y vuelta*: esta opción, que solo tiene validez al jugarse una liga, fuerza a que se realicen los partidos entre cada par de equipos dos veces, permutando las posiciones de los equipos.
+  * *Solo los resultados*: al igual que en el modo de _partida rápida_, solo muestra los resultados de cada partido, no el transcurso del mismo.
+  * *Número de turnos*: igual que en _partida rápida_, permite elegir el número máximo de turnos.
+
+En la pestaña de *Jugadores* podremos elegir los equipos que van a participar en la competición, teniendo la opción de agregar, directamente, todos los equipos instalados en el sistema.
