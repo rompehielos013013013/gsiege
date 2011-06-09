@@ -1,0 +1,7 @@
+#summary Manual introductorio a Gades Siege
+
+= Introducción =
+En este manual se presentará el modo de uso de Gades Siege, cómo está estructurada la instalación, etcétera.
+
+= Instalación =
+La instalación de Gades Siege es muy sencilla y está íntegramente reflejada en el artículo [creado a tal efecto InstruccionesInstalacion].
