@@ -51,7 +51,8 @@ class notifyResult:
             msg_team_b = msg_team % team_b
         
         if winner == 0:
-            result = _('Draw')
+            result = '<span foreground="red"><b>' + _('Draw') + '</b></span>\n'
+            result += msg_team_a + '\n' + msg_team_b
         elif winner == 1:
             result  = '<span foreground="red"><b>Ganador</b>: '
             result += msg_team_a 
