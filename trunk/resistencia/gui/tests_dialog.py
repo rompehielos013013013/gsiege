@@ -102,6 +102,10 @@ class testDialog:
         default_path = configure.load_configuration()['se_path']
         default_rules_path = default_path + '/rules'
         default_formations_path = default_path + '/formations'
+        
+        self.btn_rules = builder.get_object('btn_filechooser_rules')
+        self.btn_formation = builder.get_object('btn_filechooser_formation')
+        
         builder.get_object('btn_filechooser_rules').set_current_folder(default_rules_path)
         builder.get_object('btn_filechooser_formation').set_current_folder(default_formations_path)
         # ----
@@ -170,6 +174,12 @@ class testDialog:
 
     def on_btn_filechooser_rules_file_set(self, widget, data=None):
         self.rules_main_team = widget.get_uri().replace('file://','')
+        
+        formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
+        
+        if formacionAsociada != None:			
+			self.btn_formation.set_uri(formacionAsociada)
+			self.formation_main_team = self.btn_formation.get_uri().replace('file://','')
     
     def on_btn_filechooser_formation_file_set(self, widget, data=None):
         self.formation_main_team = widget.get_uri().replace('file://','')

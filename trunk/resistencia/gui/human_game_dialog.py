@@ -49,6 +49,8 @@ class humanGameDialog:
         builder.get_object('file_chooser_es_ia').set_current_folder(def_rules_path)
         builder.get_object('file_chooser_team_ia').set_current_folder(def_formations_path)
         builder.get_object('file_chooser_team').set_current_folder(def_formations_path)
+        
+        self.file_chooser_team_ia = builder.get_object('file_chooser_team_ia')
 
         self.file_chooser_es_ia = builder.get_object('file_chooser_es_ia')
         self.file_chooser_team_ia = builder.get_object('file_chooser_team_ia')
@@ -86,6 +88,12 @@ class humanGameDialog:
 
     def on_file_chooser_es_ia_file_set(self, widget, data=None):
         self.rules_computer = widget.get_uri().replace('file://', '')
+        
+        formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
+        
+        if formacionAsociada != None:			
+			self.file_chooser_team_ia.set_uri(formacionAsociada)
+			self.formation_computer = self.file_chooser_team_ia.get_uri().replace('file://','')
 
     def on_file_chooser_team_ia_file_set(self, widget, data=None):
         self.formation_computer = widget.get_uri().replace('file://', '')
