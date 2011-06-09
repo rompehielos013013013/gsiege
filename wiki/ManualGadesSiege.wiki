@@ -21,3 +21,9 @@ Este modo nos permite lanzar una partida simple entre dos sistemas expertos. Al 
   * Si activamos *Esconder el valor de las piezas*, el valor de cada pieza aparecerá oculto hasta que sea descubierta por otra pieza.
 
 Una vez pulsemos en el botón *Aplicar*, la partida comenzará con las opciones indicadas.
+
+== Competiciones ==
+El modo de competiciones es el modo más usado de Gades Siege. Permite lanzar competiciones variadas entre un gran número de equipos, siguiendo tres posibles formatos:
+  * *Liga*: en una liga, todos los equipos juegan contra todos, generándose una clasificación por puntos que determinará los ganadores de la competición.
+  * *Copa eliminatoria*: en este caso, los equipos apuntados a la competición son emparejados y enfrentados, de forma aleatoria. Los equipos vencidos son automáticamente eliminados de la competición, y los ganadores pasan a la siguiente ronda. Así, la progresión de partidos se hace en forma de árbol, y en cada ronda siempre hay un número de partidos potencia de dos. Gades Siege está programado de forma que se resuelvan todos las [http://es.wikipedia.org/wiki/Exenci%C3%B3n_%28competiciones_deportivas%29 exenciones] en la primera ronda.
+ * *Playoff*: este modo es una mezcla entre los dos anteriores. Primero, se realiza una liga entre todos los participantes. A partir de la clasificación de ésta, la mitad de los jugadores en mejores posiciones jugarán una eliminatoria.
