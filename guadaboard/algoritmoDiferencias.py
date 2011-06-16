@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
 
 class ParseadorPartida(object):
     def __init__(self, ficheroOrigen):
@@ -26,6 +27,8 @@ class ParseadorPartida(object):
         # Contenedor temporal para las fichas de este turno
         fichasTurnoActual = {}
 
+        self.turnoMax = -1
+
         # Procesamos el fichero
         for i in range(len(lineasFichero)):
 
@@ -44,6 +47,9 @@ class ParseadorPartida(object):
 
                 # Aumentamos el número de puntos
                 self.turnosTotales += 1
+
+            elif re.match("^[0-9]+$", line) and self.turnoMax == -1:
+                self.turnoMax = int(line) + 1
 
             # Para las líneas de ficha
             elif "e:" in line:
@@ -79,6 +85,9 @@ class ParseadorPartida(object):
 
     def getNumTurnosRestantes(self):
         return self.turnosTotales - self.turnoActual - 1
+
+    def getNumTurnoMax(self):
+        return self.turnoMax
 
     def retrocederTurno(self):
         if self.turnoActual > 0:
