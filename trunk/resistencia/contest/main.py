@@ -96,8 +96,17 @@ def show_round_matches(game):
     thisRoundMatches = game.matchs[game.get_round_number()];
 
     # Formateamos el mensaje a mostrar
-    messageToShow = "\n\n".join([" vs ".join(m) for m in thisRoundMatches])
+    messageToShow = ""
+    for m in thisRoundMatches:
+        if m[0] == "aux_ghost_team":
+            messageToShow += m[1] + " descansa"
+        elif m[1] == "aux_ghost_team":
+            messageToShow += m[0] + " descansa"
+        else:
+            messageToShow += m[0] + " vs " + m[1]
 
+        messageToShow += "\n\n"
+        
     # Mostramos el mensaje
     myDialog = gtk.MessageDialog(None,
                                  gtk.DIALOG_MODAL, gtk.MESSAGE_INFO, gtk.BUTTONS_CLOSE,
