@@ -205,8 +205,8 @@ class PintarPartida(object):
             self.pantalla.blit(fuenteEquipos.render("Turno actual: %d" % self.parseador.getNumTurnoActual(), 1, (0,0,0)), (517, posBloqueTurnoActual + 11))
             self.pantalla.blit(fuenteEquipos.render("Turno actual: %d" % self.parseador.getNumTurnoActual(), 1, (255,255,255)), (515, posBloqueTurnoActual + 9))
 
-            self.pantalla.blit(fuenteEquipos.render("Turnos restantes: %d" % self.parseador.getNumTurnosRestantes(), 1, (0,0,0)), (517, posBloqueTurnosRestantes + 11))
-            self.pantalla.blit(fuenteEquipos.render("Turnos restantes: %d" % self.parseador.getNumTurnosRestantes(), 1, (255,255,255)), (515, posBloqueTurnosRestantes + 9))
+            self.pantalla.blit(fuenteEquipos.render("Turnos restantes: %d" % (self.parseador.getNumTurnoMax() - self.parseador.getNumTurnoActual()), 1, (0,0,0)), (517, posBloqueTurnosRestantes + 11))
+            self.pantalla.blit(fuenteEquipos.render("Turnos restantes: %d" % (self.parseador.getNumTurnoMax() - self.parseador.getNumTurnoActual()), 1, (255,255,255)), (515, posBloqueTurnosRestantes + 9))
 
             # Volcamos la pantalla a la gráfica
             pygame.display.flip()
