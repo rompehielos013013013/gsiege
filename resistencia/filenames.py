@@ -167,9 +167,13 @@ def generate_filename (filetype, teams=None):
         name_team_a = extract_name_expert_system(teams[0])
         name_team_b = extract_name_expert_system(teams[1])
         tail = '_' + name_team_a + '-vs-' + name_team_b
-    if filetype == 'stats':
+    elif filetype == 'stats':
         tail = '_' + extract_name_expert_system(teams)
         extension = '.csv'
+    elif filetype == 'labdir':
+        filetype = "LaboratorySession"
+        tail = '_' + extract_name_expert_system(teams)
+        extension = ''
 
     filename = filetype + '_' + iso_date + tail + extension
 
