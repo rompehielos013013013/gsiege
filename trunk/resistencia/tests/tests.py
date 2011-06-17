@@ -22,7 +22,7 @@ Contains the main function to the execution of tests suites
 """
 
 import csv
-
+import os
 import gtk
 
 from resistencia import configure, filenames
@@ -62,6 +62,12 @@ class TestSuite:
         self.rounds_number = rounds_number
 
         base_path = configure.load_configuration()['games_path'] + '/'
+        base_path += filenames.generate_filename('labdir', main_team) +'/'
+
+        os.mkdir(base_path)
+
+        print "Base Path", base_path
+
         self.filename = base_path + filenames.generate_filename('stats',
                                                                 main_team)
 
@@ -91,7 +97,7 @@ class TestSuite:
                                                     self.translator),
                                                     num_turns = self.num_turns,
                                                     log_file=self.filename,
-                                                    player=i%2))
+                                                    player=i%2, logFolder = base_path))
 
         self.total_stats = {}
         self.total_stats['wins'] = 0

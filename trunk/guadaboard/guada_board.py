@@ -117,7 +117,7 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
         number_turns=100,
         path_piece_def=xdg_data_path('images/piece-default.png'),
         xml_file=xdg_data_path('layouts/main-layout.xml'),
-        get_stats=False, cant_draw=False):
+        get_stats=False, cant_draw=False, logNameReference = None):
     """
     Runs a game using the system expert teams given. It calls to libguadalete,
     generating the game and parsing the file.
@@ -154,7 +154,11 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
     if get_stats:
         res = (winner, stats.get_game_file_stats(out_file))
         
-    if dont_log or get_stats:
+
+    if logNameReference != None:
+        logNameReference[0] = out_file
+
+    if dont_log:
         os.remove(out_file)
         
     return res

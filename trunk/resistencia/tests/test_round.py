@@ -23,6 +23,8 @@ be used on the tests.
 """
 
 import csv
+import os.path
+import os
 
 from guadaboard import guada_board
 #from resistencia import xdg
@@ -38,12 +40,13 @@ class TestRound(contest_round.Round):
     the real team
     """
     def __init__ (self, teams, num_turns = 150,
-                  log_file=None, player = 0):
+                  log_file=None, player = 0, logFolder = None):
         #player must be 0 or 1
         contest_round.Round.__init__(self, teams[0], teams[1],
                                      num_turns)
         self.player_team = player
         self.log_file = log_file
+        self.logFolder = logFolder
         self.round_stats = {}
         self.round_stats['wins'] = 0
         self.round_stats['looses'] = 0
@@ -53,6 +56,8 @@ class TestRound(contest_round.Round):
         self.round_stats['num_pieces'] = 0
         self.round_stats['val_pieces'] = 0
         self.round_stats['max_death'] = 0
+
+        print "Creating test round"
 
     def get_round_stats(self):
         """
@@ -81,10 +86,18 @@ class TestRound(contest_round.Round):
         team_a = (self.translator[teams_keys['a']],)
         team_b = (self.translator[teams_keys['b']],)
 
+        logFileName = [""]
+
         result, stats = guada_board.run(team_a, team_b, fast=True,
                                         get_stats=True,
                                         number_turns=self.num_turns,
-                                        dont_log=True)
+                                        logNameReference = logFileName)
+
+        # print "LogName from outside:", logFileName[0]
+        # print "Basename", os.path.basename(logFileName[0])
+        # print "LogFolder", self.logFolder
+
+        os.rename(logFileName[0], os.path.join(self.logFolder, os.path.basename(logFileName[0])))
 
         stats_writer = csv.writer(open(self.log_file, 'a'), delimiter=',')#,
                                   #quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -120,7 +133,8 @@ class TestRound(contest_round.Round):
                          player_stats['num_pieces'],
                          player_stats['val_pieces'],
                          player_stats['max_death']]
-        print write_results
+
+        #print write_results
 
         stats_writer.writerow(write_results)
                              
