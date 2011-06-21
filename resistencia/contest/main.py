@@ -267,57 +267,59 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
         else:        
             update_log_end(log_file_name, classifications)
         
+    return (band, classifications)
     print ">>>> END INIT GAME"
 
 def _init_playoff(teams, fast, num_turns, back_round):
-    l = league.League(teams, num_turns, back_round)
-
-    band = False
-    
-    log_file_name = generate_log_file_name('playoff')
-    while not l.league_completed and not band and not controlPartida.flagCancelarCampeonato:
-        i = l.get_round_number()
-        show_round_matches(l)
-        progress_bar = None
-        if fast:
-            progress_bar = pbs.ProgressBarDialog(None,
-                                                 _('Running the contest'))
-            progress_bar_dialog = progress_bar.progress_bar_dialog
-            progress_bar.set_num_elements(l.get_round(i).number_games)
-            progress_bar_dialog.show()
-            while gtk.events_pending():
-                gtk.main_iteration(False)
-        l.play_round(progress_bar, fast)
-
-        if controlPartida.flagCancelarCampeonato:
-            return
-
-        r = l.get_round(i)
-        
-        classifications = l.get_actual_puntuations()
-        results = r.get_round_results()
-        update_log_round(log_file_name, results, i)
-
-        R = round_results.roundResults(classifications, results,
-                                       l.get_prev_round_number() + 1,
-                                       l.get_number_of_rounds(),
-                                       show_top_teams=True)
-        if fast:
-            progress_bar_dialog.hide()
-        button_pressed = R.result_dialog.run()
-        
-        while gtk.events_pending():
-            gtk.main_iteration(False)
-            
-        if button_pressed == -4 or button_pressed == 0:
-            band = True
+    print "##### INIT PLAYOFF"
+    band, classifications = _init_game('league', teams, fast, num_turns, back_round)
 
     if not band and not controlPartida.flagCancelarCampeonato:
         band = False
         teams = _get_teams_next_round(teams, _extract_classifications(classifications))
         _init_game('cup', teams, fast, num_turns)
 
-    update_log_end(log_file_name, classifications)
+    # log_file_name = generate_log_file_name('playoff')
+    # while not l.league_completed and not band and not controlPartida.flagCancelarCampeonato:
+    #     i = l.get_round_number()
+    #     show_round_matches(l)
+    #     progress_bar = None
+    #     if fast:
+    #         progress_bar = pbs.ProgressBarDialog(None,
+    #                                              _('Running the contest'))
+    #         progress_bar_dialog = progress_bar.progress_bar_dialog
+    #         progress_bar.set_num_elements(l.get_round(i).number_games)
+    #         progress_bar_dialog.show()
+    #         while gtk.events_pending():
+    #             gtk.main_iteration(False)
+    #     l.play_round(progress_bar, fast)
+
+    #     if controlPartida.flagCancelarCampeonato:
+    #         return
+
+    #     r = l.get_round(i)
+        
+    #     classifications = l.get_actual_puntuations()
+    #     results = r.get_round_results()
+    #     update_log_round(log_file_name, results, i)
+
+    #     R = round_results.roundResults(classifications, results,
+    #                                    l.get_prev_round_number() + 1,
+    #                                    l.get_number_of_rounds(),
+    #                                    show_top_teams=True)
+    #     if fast:
+    #         progress_bar_dialog.hide()
+    #     button_pressed = R.result_dialog.run()
+        
+    #     while gtk.events_pending():
+    #         gtk.main_iteration(False)
+            
+    #     if button_pressed == -4 or button_pressed == 0:
+    #         band = True
+
+
+
+    # update_log_end(log_file_name, classifications)
     print "##### END PLAYOFF"
 
         
