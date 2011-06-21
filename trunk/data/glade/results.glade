@@ -1,17 +1,7 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
-  <object class="GtkListStore" id="list_classification">
-    <columns>
-      <!-- column-name pos -->
-      <column type="gint"/>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-      <!-- column-name punt -->
-      <column type="gint"/>
-    </columns>
-  </object>
   <object class="GtkListStore" id="list_results">
     <columns>
       <!-- column-name teamA -->
@@ -20,18 +10,32 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkListStore" id="list_classification">
+    <columns>
+      <!-- column-name pos -->
+      <column type="gint"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name punt -->
+      <column type="gint"/>
+      <!-- column-name ganadas -->
+      <column type="gint"/>
+      <!-- column-name empatadas -->
+      <column type="gint"/>
+      <!-- column-name perdidas -->
+      <column type="gint"/>
+    </columns>
+  </object>
   <object class="GtkDialog" id="dlg_results">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Results of the round</property>
     <property name="icon">favicon.png</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <signal name="close" handler="on_dlg_results_close"/>
     <signal name="show" handler="on_dlg_results_show"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkHBox" id="hbox1">
@@ -155,7 +159,6 @@
     <property name="icon">favicon.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="has_separator">False</property>
     <property name="message_type">warning</property>
     <property name="text" translatable="yes">Are you sure?</property>
     <property name="secondary_text" translatable="yes">If you close this contest, you won't be able to restart
@@ -163,7 +166,6 @@ it again, and you will have to start a new one.</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox2">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area2">
@@ -221,14 +223,12 @@ it again, and you will have to start a new one.</property>
     <property name="icon">favicon.png</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
-    <property name="has_separator">False</property>
     <property name="buttons">ok</property>
     <property name="text" translatable="yes">The end!</property>
     <property name="secondary_text" translatable="yes">This are the results of the final round</property>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox4">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area4">

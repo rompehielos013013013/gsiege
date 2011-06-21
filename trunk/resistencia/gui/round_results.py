@@ -44,7 +44,10 @@ class roundResults:
             if not name == 'aux_ghost_team':
                 if self.show_top_teams and (i - 1) < top:
                     name = _draw_string(name, color)
-                self.list_store_classifications.append((i, name, e[1]))
+                self.list_store_classifications.append((i, name, e[1], 
+                                                        self.stats[name]["ganadas"],
+                                                        self.stats[name]["empatadas"],
+                                                        self.stats[name]["perdidas"]))
                 i = i + 1
 
     def fill_results(self):
@@ -63,7 +66,7 @@ class roundResults:
             self.list_store_results.append((teamA, teamB))
     
     def __init__(self, classification, results, round, rounds,
-                 show_classifications=True, show_top_teams=False): #add parent
+                 show_classifications=True, show_top_teams=False, stats = None): #add parent
         builder = gtk.Builder()
         builder.add_from_file(xdg.get_data_path('glade/results.glade'))
 
@@ -72,6 +75,7 @@ class roundResults:
         self.round = round
         self.rounds = rounds
         self.show_top_teams = show_top_teams
+        self.stats = stats
 
         self.result_dialog = builder.get_object('dlg_results')
         title = self.result_dialog.get_title()  + ' ' + str(round) + '/' + str(rounds)
@@ -102,7 +106,21 @@ class roundResults:
             self.add_column(self.list_view_classifications,
                             self.sPuntuations, self.cPuntuations)
 
+            if self.stats != None:
+                self.cNumGanados = 3
+                self.cNumEmpatados = 4
+                self.cNumPerdidos = 5
+
+                self.sNumGanados = '✓'
+                self.sNumEmpatados = '='
+                self.sNumPerdidos = '✗'
+
+                self.add_column(self.list_view_classifications, self.sNumGanados, self.cNumGanados)
+                self.add_column(self.list_view_classifications, self.sNumEmpatados, self.cNumEmpatados)
+                self.add_column(self.list_view_classifications, self.sNumPerdidos, self.cNumPerdidos)
+
         self.list_store_classifications = builder.get_object('list_classification')
+
         if show_classifications:
             self.fill_classification()
         else:
