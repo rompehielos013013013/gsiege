@@ -44,10 +44,15 @@ class roundResults:
             if not name == 'aux_ghost_team':
                 if self.show_top_teams and (i - 1) < top:
                     name = _draw_string(name, color)
-                self.list_store_classifications.append((i, name, e[1], 
-                                                        self.stats[name]["ganadas"],
-                                                        self.stats[name]["empatadas"],
-                                                        self.stats[name]["perdidas"]))
+
+                if self.stats != None:
+                    self.list_store_classifications.append((i, name, e[1], 
+                                                            self.stats[name]["ganadas"],
+                                                            self.stats[name]["empatadas"],
+                                                            self.stats[name]["perdidas"]))
+                else:
+                    self.list_store_classifications.append((i, name, e[1], 0,0,0))
+
                 i = i + 1
 
     def fill_results(self):
