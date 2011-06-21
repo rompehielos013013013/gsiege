@@ -235,7 +235,8 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
     R = round_results.roundResults(classifications, results,
                                    game.get_prev_round_number() + 1,
                                    game.get_number_of_rounds(),
-                                   show_classifications = (game_type != 'cup'))
+                                   show_classifications = (game_type != 'cup'),
+                                   stats = estadisticasLiga)
 
     # Mostramos el diálogo de resultados
     button_pressed = R.result_dialog.run()
