@@ -18,6 +18,8 @@
 # Copyright (C) 2010, Pablo Recio Quijano
 #----------------------------------------------------------------------
 
+import os
+
 from guadaboard import guada_board
 from resistencia import xdg
 from resistencia.contest import controlPartida
@@ -126,7 +128,7 @@ class Round(object):
         else:
             raise RoundError('Not all games played')
 
-    def play_match(self, fast=False, cant_draw=False):
+    def play_match(self, fast=False, cant_draw=False, log_folder = None):
         print "*************************************"
         print "** PLAYING MATCH"
         teamA_key = self.round[self.next_game][0][0]
@@ -142,10 +144,15 @@ class Round(object):
             teamB = (self.translator[teamB_key], _pieceB)
             
             try:
+                log_container = [""]
                 result = guada_board.run(teamA, teamB, fast=fast,
                                          hidden=False,
                                          number_turns=self.num_turns,
-                                         cant_draw=cant_draw)
+                                         cant_draw=cant_draw, logNameReference = log_container)
+                
+                if log_folder != None:
+                    os.rename(log_container[0],
+                              log_folder + "/" + os.path.basename(log_container[0]))
             except:
                 print "ERROR!"
                 

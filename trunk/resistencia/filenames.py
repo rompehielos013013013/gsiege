@@ -179,6 +179,6 @@ def generate_filename (filetype, teams=None, noExtension = False):
         tail = '_' + extract_name_expert_system(teams)
         extension = ''
 
-    filename = filetype + '_' + iso_date + tail + (extension if not noExtension else "/")
+    filename = filetype + '_' + iso_date + tail + (extension if not noExtension else "")
 
     return filename
