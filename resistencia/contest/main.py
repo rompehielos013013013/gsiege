@@ -123,17 +123,18 @@ def show_round_matches(game):
     myDialog.run()
     myDialog.destroy()
 
-def _init_game(game_type, teams, fast, num_turns, back_round = False, logFolder = None):
+def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_folder = None):
 
     print ">>>> INIT GAME"
 
-    if logFolder == None:
-        logFolder = configure.load_configuration()['games_path'] + '/'
+    if log_base_folder == None:
+        log_base_folder = configure.load_configuration()['games_path'] + '/'
 
 
     # Generamos el nombre del fichero de log según el tipo de juego
-    log_folder_name = generate_log_folder_name(game_type)
-    log_file_name = generate_log_file_name(game_type, log_folder_name)   
+    log_base_name = filenames.generate_filename(game_type, noExtension = True)
+    log_folder_name = log_base_folder + log_base_name
+    log_file_name = log_folder_name + "/" + game_type + ".txt"
 
     print "Fichero de log:", log_file_name
     print "Carpeta de log:", log_folder_name
@@ -142,10 +143,9 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, logFolder 
     
     # Lanzamos el tipo de juego apropiado
     if game_type == 'cup':
-        
-        game = tournament.Tournament(teams, num_turns)
+        game = tournament.Tournament(teams, num_turns, log_folder = log_folder_name)
     else:
-        game = league.League(teams, num_turns, back_round)
+        game = league.League(teams, num_turns, back_round, log_folder = log_folder_name)
 
     band = False
 
@@ -294,12 +294,18 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, logFolder 
 
 def _init_playoff(teams, fast, num_turns, back_round):
     print "##### INIT PLAYOFF"
-    band, classifications = _init_game('league', teams, fast, num_turns, back_round)
+
+    log_base_folder = configure.load_configuration()['games_path'] + '/'
+    log_base_folder += "Mixto-" + filenames.generate_isodate() + "/"
+
+    os.mkdir(log_base_folder)
+
+    band, classifications = _init_game('league', teams, fast, num_turns, back_round, log_base_folder = log_base_folder)
 
     if not band and not controlPartida.flagCancelarCampeonato:
         band = False
         teams = _get_teams_next_round(teams, _extract_classifications(classifications))
-        _init_game('cup', teams, fast, num_turns)
+        _init_game('cup', teams, fast, num_turns, log_base_folder = log_base_folder)
 
     print "##### END PLAYOFF"
      

@@ -88,11 +88,13 @@ def _extract_teams_from_pairing(elements):
         teams.append(i[1])
 
 class Tournament(contest.Contest):
-    def __init__(self, teams, num_turns, pairings_done=False):
+    def __init__(self, teams, num_turns, pairings_done=False, log_folder = None):
         self.matchs = []
         self.teams = []
         self.round_winners = []
         self.num_turns = num_turns
+
+        self.log_folder = log_folder
 
         if pairings_done:
             self.matchs.append(teams)
@@ -150,7 +152,7 @@ class Tournament(contest.Contest):
                         gtk.main_iteration(False)
                 if controlPartida.flagCancelarCampeonato:
                         return
-                r.play_match(fast, True)
+                r.play_match(fast, True, log_folder = self.log_folder)
 
             winners = r.get_winners()
             self.round_winners.append(winners)

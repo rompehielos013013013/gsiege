@@ -34,11 +34,12 @@ import controlPartida
 
 class League(contest.Contest):
     
-    def __init__(self, teams, num_turns, back_round=False):
+    def __init__(self, teams, num_turns, back_round=False, log_folder = None):
         self.teams = teams
         self.translator = contest.generate_key_names(teams)
         self.keys = []
         self.num_turns = num_turns
+        self.log_folder = log_folder
 
         for t in self.translator:
             self.keys.append(t)
@@ -85,7 +86,8 @@ class League(contest.Contest):
                     progress_bar.pulse()
                     while gtk.events_pending():
                         gtk.main_iteration(False)
-                r.play_match(fast)
+
+                r.play_match(fast, log_folder = self.log_folder)
 
             p = r.get_puntuation()
             self.puntuations_by_round.append(p)
