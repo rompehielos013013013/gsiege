@@ -43,15 +43,17 @@ class roundResults:
             name = e[0]
             if not name == 'aux_ghost_team':
                 if self.show_top_teams and (i - 1) < top:
-                    name = _draw_string(name, color)
+                    showName = _draw_string(name, color)
+                else:
+                    showName = name
 
                 if self.stats != None:
-                    self.list_store_classifications.append((i, name, e[1], 
+                    self.list_store_classifications.append((i, showName, e[1], 
                                                             self.stats[name]["ganadas"],
                                                             self.stats[name]["empatadas"],
                                                             self.stats[name]["perdidas"]))
                 else:
-                    self.list_store_classifications.append((i, name, e[1], 0,0,0))
+                    self.list_store_classifications.append((i, showName, e[1], 0,0,0))
 
                 i = i + 1
 
@@ -85,9 +87,11 @@ class roundResults:
         self.result_dialog = builder.get_object('dlg_results')
         title = self.result_dialog.get_title()  + ' ' + str(round) + '/' + str(rounds)
         self.result_dialog.set_title(title)
+
         self.confirmation_dialog = builder.get_object('dlg_confirmation_close')
         self.confirmation_dialog.connect('response', lambda d, r: d.hide())
         self.confirmation_dialog.set_transient_for(self.result_dialog)
+
         self.finalround_dialog = builder.get_object('dlg_finalround')
         self.finalround_dialog.connect('response', lambda d, r: d.hide())
         self.finalround_dialog.set_transient_for(self.result_dialog)
@@ -145,6 +149,7 @@ class roundResults:
 
         self.end_contest = False
         
+        builder.get_object('dlg_results').set_focus(builder.get_object('btn_results_next'))
         builder.connect_signals(self)
 
     def on_dlg_results_show(self, data=None):

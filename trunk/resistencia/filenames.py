@@ -138,8 +138,16 @@ def generate_filename_keys (filetype, teams=None):
 
     return filename
 
+def generate_isodate():
+    _time = datetime.datetime.now()
 
-def generate_filename (filetype, teams=None):
+    iso_date = _time.isoformat()
+    iso_date = iso_date.replace('T', '_')
+    iso_date = iso_date[:iso_date.find('.')]
+
+    return iso_date
+
+def generate_filename (filetype, teams=None, noExtension = False):
     """This function allow to generates files with proper name.
 
     Keyword arguments:
@@ -154,11 +162,7 @@ def generate_filename (filetype, teams=None):
             str_error += 'an extra argument is needed'
             raise ValueError(str_error)
 
-    _time = datetime.datetime.now()
-
-    iso_date = _time.isoformat()
-    iso_date = iso_date.replace('T', '_')
-    iso_date = iso_date[:iso_date.find('.')]
+    iso_date = generate_isodate()
 
     tail = ''
     extension = '.txt'
@@ -175,6 +179,6 @@ def generate_filename (filetype, teams=None):
         tail = '_' + extract_name_expert_system(teams)
         extension = ''
 
-    filename = filetype + '_' + iso_date + tail + extension
+    filename = filetype + '_' + iso_date + tail + (extension if not noExtension else "/")
 
     return filename
