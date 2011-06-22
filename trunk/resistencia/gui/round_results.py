@@ -73,7 +73,7 @@ class roundResults:
             self.list_store_results.append((teamA, teamB))
     
     def __init__(self, classification, results, round, rounds,
-                 show_classifications=True, show_top_teams=False, stats = None): #add parent
+                 show_classifications=True, show_top_teams=False, stats = None, next_matches = None): #add parent
         builder = gtk.Builder()
         builder.add_from_file(xdg.get_data_path('glade/results.glade'))
 
@@ -98,6 +98,7 @@ class roundResults:
 
         self.list_view_classifications = builder.get_object('treeview_classification')
         self.list_view_results = builder.get_object('treeview_results')
+        self.list_view_matches = builder.get_object('treeview_matches')
 
         if show_classifications:
             self.cPosition = 0
@@ -129,11 +130,20 @@ class roundResults:
                 self.add_column(self.list_view_classifications, self.sNumPerdidos, self.cNumPerdidos)
 
         self.list_store_classifications = builder.get_object('list_classification')
-
+        
         if show_classifications:
             self.fill_classification()
         else:
             builder.get_object('hbox1').remove(builder.get_object('frame_classifications'))
+
+        if next_matches:
+            self.list_store_matches = builder.get_object('list_matches')
+            self.add_column(self.list_view_matches, _("Team A"), 0)
+            self.add_column(self.list_view_matches, _("Team B"), 1)
+            for m in next_matches:
+                self.list_store_matches.append(m)
+        else:
+            builder.get_object('hbox1').remove(builder.get_object('frame_matches'))
 
         self.cTeamA = 0
         self.cTeamB = 1

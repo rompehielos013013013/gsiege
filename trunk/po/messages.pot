@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-09 15:28+0200\n"
+"POT-Creation-Date: 2011-06-22 14:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,54 +40,56 @@ msgstr ""
 msgid "Draw"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:52
-#: ../resistencia/gui/round_results.py:53
+#: ../resistencia/gui/round_results.py:62
+#: ../resistencia/gui/round_results.py:63
 msgid "Rests"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:95
+#: ../resistencia/gui/round_results.py:109
 msgid "Team name"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:114
+#: ../resistencia/gui/round_results.py:141
+#: ../resistencia/gui/round_results.py:151
 msgid "Team A"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:115
+#: ../resistencia/gui/round_results.py:142
+#: ../resistencia/gui/round_results.py:152
 msgid "Team B"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:82
+#: ../resistencia/tests/tests.py:88
 msgid "Opponent"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:82
+#: ../resistencia/tests/tests.py:88
 msgid "As team"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:83
+#: ../resistencia/tests/tests.py:89
 msgid "Result"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:83 ../data/glade/quickGame.glade.h:10
+#: ../resistencia/tests/tests.py:89 ../data/glade/quickGame.glade.h:10
 #: ../data/glade/testDialog.glade.h:6 ../data/glade/contest.glade.h:8
 #: ../data/glade/humanEsDialog.glade.h:11
 msgid "Number of turns"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:84
+#: ../resistencia/tests/tests.py:90
 msgid "Number of pieces"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:84
+#: ../resistencia/tests/tests.py:90
 msgid "Value of the pieces"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:85
+#: ../resistencia/tests/tests.py:91
 msgid "Turn when max value piece died"
 msgstr ""
 
-#: ../resistencia/contest/main.py:141 ../resistencia/contest/main.py:233
+#: ../resistencia/contest/main.py:214
 msgid "Running the contest"
 msgstr ""
 
@@ -350,36 +352,40 @@ msgid "<b>Classification</b>"
 msgstr ""
 
 #: ../data/glade/results.glade.h:2
-msgid "<b>Results</b>"
+msgid "<b>Next matches</b>"
 msgstr ""
 
 #: ../data/glade/results.glade.h:3
-msgid "Are you sure?"
+msgid "<b>Results</b>"
 msgstr ""
 
 #: ../data/glade/results.glade.h:4
-msgid "Confirmation"
+msgid "Are you sure?"
 msgstr ""
 
 #: ../data/glade/results.glade.h:5
-msgid "Final round"
+msgid "Confirmation"
 msgstr ""
 
 #: ../data/glade/results.glade.h:6
+msgid "Final round"
+msgstr ""
+
+#: ../data/glade/results.glade.h:7
 msgid ""
 "If you close this contest, you won't be able to restart\n"
 "it again, and you will have to start a new one."
 msgstr ""
 
-#: ../data/glade/results.glade.h:8
+#: ../data/glade/results.glade.h:9
 msgid "Results of the round"
 msgstr ""
 
-#: ../data/glade/results.glade.h:9
+#: ../data/glade/results.glade.h:10
 msgid "The end!"
 msgstr ""
 
-#: ../data/glade/results.glade.h:10
+#: ../data/glade/results.glade.h:11
 msgid "This are the results of the final round"
 msgstr ""
 
