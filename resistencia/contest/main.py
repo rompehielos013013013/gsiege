@@ -87,9 +87,17 @@ def update_log_end(log_file_name, results):
 
     log_file.close()
 
-def generate_log_file_name(prefix='pachanga'):
-    base_path = configure.load_configuration()['games_path'] + '/'
+def generate_log_file_name(prefix='pachanga', base_path = None):
+    if base_path == None:
+        base_path = configure.load_configuration()['games_path'] + '/'
+
     return base_path + filenames.generate_filename(prefix)
+
+def generate_log_folder_name(prefix='pachanga', base_path = None):
+    if base_path == None:
+        base_path = configure.load_configuration()['games_path'] + '/'
+
+    return base_path + filenames.generate_filename(prefix, noExtension = True)
 
 def show_round_matches(game):
     # Cogemos los partidos de la ronda actual
@@ -115,20 +123,33 @@ def show_round_matches(game):
     myDialog.run()
     myDialog.destroy()
 
-def _init_game(game_type, teams, fast, num_turns, back_round = False):
+def _init_game(game_type, teams, fast, num_turns, back_round = False, logFolder = None):
 
     print ">>>> INIT GAME"
 
+    if logFolder == None:
+        logFolder = configure.load_configuration()['games_path'] + '/'
+
+
+    # Generamos el nombre del fichero de log según el tipo de juego
+    log_folder_name = generate_log_folder_name(game_type)
+    log_file_name = generate_log_file_name(game_type, log_folder_name)   
+
+    print "Fichero de log:", log_file_name
+    print "Carpeta de log:", log_folder_name
+
+    os.mkdir(log_folder_name)
+    
     # Lanzamos el tipo de juego apropiado
     if game_type == 'cup':
+        
         game = tournament.Tournament(teams, num_turns)
     else:
         game = league.League(teams, num_turns, back_round)
 
     band = False
 
-    # Generamos el nombre del fichero de log según el tipo de juego
-    log_file_name = generate_log_file_name(game_type)
+
 
     # Contenedor para clasificaciones
     classifications = {}
@@ -237,6 +258,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False):
                                        game.get_prev_round_number() + 1,
                                        game.get_number_of_rounds(),
                                        show_classifications = (game_type != 'cup'),
+                                       show_top_teams = True,
                                        stats = estadisticasLiga)
 
         # Mostramos el diálogo de resultados
@@ -279,52 +301,8 @@ def _init_playoff(teams, fast, num_turns, back_round):
         teams = _get_teams_next_round(teams, _extract_classifications(classifications))
         _init_game('cup', teams, fast, num_turns)
 
-    # log_file_name = generate_log_file_name('playoff')
-    # while not l.league_completed and not band and not controlPartida.flagCancelarCampeonato:
-    #     i = l.get_round_number()
-    #     show_round_matches(l)
-    #     progress_bar = None
-    #     if fast:
-    #         progress_bar = pbs.ProgressBarDialog(None,
-    #                                              _('Running the contest'))
-    #         progress_bar_dialog = progress_bar.progress_bar_dialog
-    #         progress_bar.set_num_elements(l.get_round(i).number_games)
-    #         progress_bar_dialog.show()
-    #         while gtk.events_pending():
-    #             gtk.main_iteration(False)
-    #     l.play_round(progress_bar, fast)
-
-    #     if controlPartida.flagCancelarCampeonato:
-    #         return
-
-    #     r = l.get_round(i)
-        
-    #     classifications = l.get_actual_puntuations()
-    #     results = r.get_round_results()
-    #     update_log_round(log_file_name, results, i)
-
-    #     R = round_results.roundResults(classifications, results,
-    #                                    l.get_prev_round_number() + 1,
-    #                                    l.get_number_of_rounds(),
-    #                                    show_top_teams=True)
-    #     if fast:
-    #         progress_bar_dialog.hide()
-    #     button_pressed = R.result_dialog.run()
-        
-    #     while gtk.events_pending():
-    #         gtk.main_iteration(False)
-            
-    #     if button_pressed == -4 or button_pressed == 0:
-    #         band = True
-
-
-
-    # update_log_end(log_file_name, classifications)
     print "##### END PLAYOFF"
-
-        
-
-
+     
 def _clean_dictionary(d):
     if type(d) == types.ListType:
         return d

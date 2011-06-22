@@ -102,8 +102,8 @@ class quickGameDialog:
         formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
         
         if formacionAsociada != None:			
-			self.file_chooser_team_a.set_uri(formacionAsociada)
-			self.team_team_a = formacionAsociada
+            self.file_chooser_team_a.set_uri(formacionAsociada)
+            self.team_team_a = formacionAsociada
 
     def on_file_chooser_team_a_file_set(self, widget, data=None):
         self.team_team_a = widget.get_uri()
@@ -114,8 +114,8 @@ class quickGameDialog:
         formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
         
         if formacionAsociada != None:			
-			self.file_chooser_team_b.set_uri(formacionAsociada)
-			self.team_team_b = formacionAsociada
+            self.file_chooser_team_b.set_uri(formacionAsociada)
+            self.team_team_b = formacionAsociada
 
     def on_file_chooser_team_b_file_set(self, widget, data=None):
         self.team_team_b = widget.get_uri()
@@ -191,7 +191,7 @@ class quickGameDialog:
                 ((self.es_team_a, self.team_team_a),
                  xdg.get_data_path('images/piece-orange.png')),
                 ((self.es_team_b,self.team_team_b),
-                    xdg.get_data_path('images/piece-violete.png')),
+                 xdg.get_data_path('images/piece-violete.png')),
 
                 self.fast_game, 
                 self.dont_save_game,
@@ -200,7 +200,7 @@ class quickGameDialog:
                 )
         except guada_board.GuadaFileError as e:
             raise guada_board.GuadaFileError(e.msg)
-            
+        
         # Se ha seleccionado mostrar sólo los resultados
         if self.fast_game:
             teamA = (self.es_team_a, self.team_team_a)
