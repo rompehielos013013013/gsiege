@@ -186,7 +186,8 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
                                            game.get_prev_round_number() + 1,
                                            game.get_number_of_rounds(),
                                            show_classifications = (game_type != 'cup'),
-                                           stats = estadisticasLiga)
+                                           stats = estadisticasLiga,
+                                           next_matches = game.matchs[game.get_round_number()])
 
         # Mostramos el diálogo de resultados
             button_pressed = R.result_dialog.run()
@@ -202,8 +203,8 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
         # Guardamos el número de la ronda
         roundNumber = game.get_round_number()
 
-        # Mostramos los emparejamientos iniciales
-        show_round_matches(game)
+        if roundNumber == 0:
+            show_round_matches(game)
 
         # Por defecto que la barra de progreso no exista
         progress_bar = None
