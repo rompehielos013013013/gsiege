@@ -141,7 +141,15 @@ class roundResults:
             self.add_column(self.list_view_matches, _("Team A"), 0)
             self.add_column(self.list_view_matches, _("Team B"), 1)
             for m in next_matches:
-                self.list_store_matches.append(m)
+                n = list(m)
+
+                if n[0] == "aux_ghost_team":
+                    n[0] = _("Rests")
+
+                if n[1] == "aux_ghost_team":
+                    n[1] = _("Rests")
+
+                self.list_store_matches.append(n)
         else:
             builder.get_object('hbox1').remove(builder.get_object('frame_matches'))
 
