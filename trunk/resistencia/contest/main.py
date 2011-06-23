@@ -187,6 +187,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
                                            game.get_number_of_rounds(),
                                            show_classifications = (game_type != 'cup'),
                                            stats = estadisticasLiga,
+                                           show_top_teams = True,
                                            next_matches = game.matchs[game.get_round_number()])
 
         # Mostramos el diálogo de resultados

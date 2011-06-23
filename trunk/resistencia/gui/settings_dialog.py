@@ -24,6 +24,7 @@ import sys
 import gtk
 
 from resistencia import configure, xdg
+from resistencia.nls import gettext as _
 
 class settingsDialog:
     def __init__(self, parent):
@@ -36,7 +37,9 @@ class settingsDialog:
         self.file_chooser_games = builder.get_object("file_chs_prev_games")
         self.file_chooser_teams = builder.get_object("file_chs_se")
         self.check_active_music = builder.get_object("check_active_music")
+
         self.label_subfolders = builder.get_object("label_subfolders")
+        self.label_logfolder = builder.get_object("label_logfolder")
 
         config_vars = configure.load_configuration()
 
@@ -71,14 +74,17 @@ class settingsDialog:
         return (os.path.isdir(os.path.join(widget.get_filename(), "rules")) and
                 os.path.isdir(os.path.join(widget.get_filename(), "formations")))
 
+    def on_file_chs_prev_games_selection_changed(self, widget, data=None):
+        self.label_logfolder.set_markup(_("<b>Full path</b>: ") + widget.get_filename())
+
     def on_file_chs_se_file_set(self, widget, data=None):
         if (self.comprobarDirectorios()):
-            mensaje = "<b>Directorio correcto</b>"
-            mensaje += "\n    <b>Reglas</b>: %s" % os.path.join(widget.get_filename(), "rules")
-            mensaje += "\n    <b>Equipos</b>: %s" % os.path.join(widget.get_filename(), "formations")
+            mensaje = _("<b>Correct directory</b>")
+            mensaje += "\n    <b>" + _("Rules") + "</b>: %s" % os.path.join(widget.get_filename(), "rules")
+            mensaje += "\n    <b>" + _("Teams") + "</b>: %s" % os.path.join(widget.get_filename(), "formations")
             self.label_subfolders.set_markup(mensaje)
         else:
-            self.label_subfolders.set_markup("<span foreground=\"red\" weight=\"bold\">Directorio inválido</span>")
+            self.label_subfolders.set_markup("<span foreground=\"red\" weight=\"bold\">" + _("Invalid directory") + "</span>")
 
 
     def on_btn_apply_clicked(self, widget, data=None):

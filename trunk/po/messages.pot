@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-22 14:37+0200\n"
+"POT-Creation-Date: 2011-06-24 01:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,7 @@ msgstr ""
 
 #: ../resistencia/gui/tests_dialog.py:137
 #: ../resistencia/gui/contest_dialog.py:91
+#: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
 msgstr ""
 
@@ -42,6 +43,8 @@ msgstr ""
 
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
+#: ../resistencia/gui/round_results.py:147
+#: ../resistencia/gui/round_results.py:150
 msgid "Rests"
 msgstr ""
 
@@ -50,13 +53,29 @@ msgid "Team name"
 msgstr ""
 
 #: ../resistencia/gui/round_results.py:141
-#: ../resistencia/gui/round_results.py:151
+#: ../resistencia/gui/round_results.py:159
 msgid "Team A"
 msgstr ""
 
 #: ../resistencia/gui/round_results.py:142
-#: ../resistencia/gui/round_results.py:152
+#: ../resistencia/gui/round_results.py:160
 msgid "Team B"
+msgstr ""
+
+#: ../resistencia/gui/settings_dialog.py:78
+msgid "<b>Full path</b>: "
+msgstr ""
+
+#: ../resistencia/gui/settings_dialog.py:82
+msgid "<b>Correct directory</b>"
+msgstr ""
+
+#: ../resistencia/gui/settings_dialog.py:84
+msgid "Teams"
+msgstr ""
+
+#: ../resistencia/gui/settings_dialog.py:87
+msgid "Invalid directory"
 msgstr ""
 
 #: ../resistencia/tests/tests.py:88
@@ -89,7 +108,7 @@ msgstr ""
 msgid "Turn when max value piece died"
 msgstr ""
 
-#: ../resistencia/contest/main.py:214
+#: ../resistencia/contest/main.py:215
 msgid "Running the contest"
 msgstr ""
 
@@ -394,11 +413,11 @@ msgid "<b>Auto play mode: time between turns</b> (ms)"
 msgstr ""
 
 #: ../data/glade/settingsDialog.glade.h:2
-msgid "<b>Path to previous game log files</b>"
+msgid "<b>Path to expert systems</b>"
 msgstr ""
 
 #: ../data/glade/settingsDialog.glade.h:3
-msgid "<b>Path to systems experts</b>"
+msgid "<b>Path to previous game log files</b>"
 msgstr ""
 
 #: ../data/glade/settingsDialog.glade.h:4
