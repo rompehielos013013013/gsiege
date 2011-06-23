@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-22 14:37+0200\n"
+"POT-Creation-Date: 2011-06-24 01:55+0200\n"
 "PO-Revision-Date: 2010-02-12 01:57+0100\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
@@ -52,6 +52,14 @@ msgstr "<b>Equipo de la máquina</b>"
 msgid "<b>Contest format</b>"
 msgstr "<b>Formato de la competición</b>"
 
+#: ../resistencia/gui/settings_dialog.py:82
+msgid "<b>Correct directory</b>"
+msgstr "<b>Directorio correcto</b>"
+
+#: ../resistencia/gui/settings_dialog.py:78
+msgid "<b>Full path</b>: "
+msgstr "<b>Ruta completa</b>: "
+
 #: ../data/glade/contest.glade.h:2
 msgid "<b>Generals</b>"
 msgstr "<b>Generales</b>"
@@ -73,12 +81,12 @@ msgid "<b>Options</b>"
 msgstr "<b>Opciones</b>"
 
 #: ../data/glade/settingsDialog.glade.h:2
-msgid "<b>Path to previous game log files</b>"
-msgstr "<b>Ruta a los logs de partidas antiguas</b>"
+msgid "<b>Path to expert systems</b>"
+msgstr "<b>Ruta a los sistemas expertos</b>"
 
 #: ../data/glade/settingsDialog.glade.h:3
-msgid "<b>Path to systems experts</b>"
-msgstr "<b>Ruta a los sistemas expertos</b>"
+msgid "<b>Path to previous game log files</b>"
+msgstr "<b>Ruta a los logs de partidas antiguas</b>"
 
 #: ../data/glade/results.glade.h:3
 msgid "<b>Results</b>"
@@ -227,6 +235,10 @@ msgstr ""
 "Si cierras la competición no podrás volver a reiniciarla\n"
 "otra vez, y tendrás que empezar una nueva."
 
+#: ../resistencia/gui/settings_dialog.py:87
+msgid "Invalid directory"
+msgstr "Directorio inválido"
+
 #: ../data/glade/main.glade.h:13
 msgid "Laboratory"
 msgstr "Laboratorio"
@@ -308,12 +320,14 @@ msgstr "Partida rápida"
 
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
+#: ../resistencia/gui/round_results.py:147
+#: ../resistencia/gui/round_results.py:150
 msgid "Rests"
 msgstr "Descansa"
 
 #: ../resistencia/tests/tests.py:89
 msgid "Result"
-msgstr "Resultad"
+msgstr "Resultado"
 
 #: ../data/glade/resultNotifier.glade.h:1 ../data/glade/quickGame.glade.h:13
 #: ../data/glade/humanEsDialog.glade.h:13
@@ -330,6 +344,7 @@ msgstr "Resultados de la ronda"
 
 #: ../resistencia/gui/tests_dialog.py:137
 #: ../resistencia/gui/contest_dialog.py:91
+#: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
 msgstr "Reglas"
 
@@ -337,7 +352,7 @@ msgstr "Reglas"
 msgid "Rules file"
 msgstr "Archivo de reglas"
 
-#: ../resistencia/contest/main.py:214
+#: ../resistencia/contest/main.py:215
 msgid "Running the contest"
 msgstr "Ejecutando las pruebas..."
 
@@ -406,18 +421,22 @@ msgid "System Expert for team B"
 msgstr "Reglas para el equipo B"
 
 #: ../resistencia/gui/round_results.py:141
-#: ../resistencia/gui/round_results.py:151
+#: ../resistencia/gui/round_results.py:159
 msgid "Team A"
 msgstr "Equipo A"
 
 #: ../resistencia/gui/round_results.py:142
-#: ../resistencia/gui/round_results.py:152
+#: ../resistencia/gui/round_results.py:160
 msgid "Team B"
 msgstr "Equipo B"
 
 #: ../resistencia/gui/round_results.py:109
 msgid "Team name"
 msgstr "Nombre del equipo"
+
+#: ../resistencia/gui/settings_dialog.py:84
+msgid "Teams"
+msgstr "Equipos"
 
 #: ../data/glade/testDialog.glade.h:10
 msgid "Tests expert system"
@@ -514,6 +533,9 @@ msgstr "No ha seleccionado el fichero de formación para el equipo B"
 #: ../data/glade/main.glade.h:30
 msgid "You have to select a file"
 msgstr "Debe seleccionar un fichero"
+
+#~ msgid "<b>Path to systems experts</b>"
+#~ msgstr "<b>Ruta a los sistemas expertos</b>"
 
 #~ msgid "Cadiz deffense: 1812"
 #~ msgstr "Resistencia en Cádiz: 1812"
