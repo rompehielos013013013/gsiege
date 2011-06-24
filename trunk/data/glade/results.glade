@@ -37,7 +37,7 @@
   <object class="GtkDialog" id="dlg_results">
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Results of the round</property>
-    <property name="icon">favicon.png</property>
+    <property name="icon">../images/favicon.png</property>
     <property name="type_hint">normal</property>
     <signal name="close" handler="on_dlg_results_close"/>
     <signal name="show" handler="on_dlg_results_show"/>

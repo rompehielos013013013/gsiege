@@ -59,14 +59,21 @@ class testDialog:
         assert(not(self.formation_selected_file == None))
 
     def apply_file_chooser_rules(self):
+
         self.file_chooser_rules_handler()
         self.file_chooser_rules.hide()
-        self.file_chooser_formation.run()
+
+        if self.check_default_formations.get_active():
+            self.formation_selected_file = filenames.devolverFormacionAsociada(self.file_chooser_rules.get_filename())[7:]
+            self.tests_dialog.show()
+            self.insert_element_list()
+        else:
+            self.file_chooser_formation.run()
 
     def apply_file_chooser_formation(self):
         self.file_chooser_formation_handler()
         self.file_chooser_formation.hide()
-        #self.tests_dialog.show()
+        self.tests_dialog.show()
         self.insert_element_list()
 
     def insert_element_list(self):
@@ -99,9 +106,9 @@ class testDialog:
         self.tests_dialog.set_transient_for(parent)
 
         # ---- Init file chooser buttons
-        default_path = configure.load_configuration()['se_path']
-        default_rules_path = default_path + '/rules'
-        default_formations_path = default_path + '/formations'
+        self.def_path = configure.load_configuration()['se_path']
+        default_rules_path = self.def_path + '/rules'
+        default_formations_path = self.def_path + '/formations'
         
         self.btn_rules = builder.get_object('btn_filechooser_rules')
         self.btn_formation = builder.get_object('btn_filechooser_formation')
@@ -163,6 +170,8 @@ class testDialog:
         self.progress_bar = pbs.ProgressBarDialog(self.tests_dialog,
                                                   _('Running the test'))
         self.progress_bar_dialog = self.progress_bar.progress_bar_dialog
+
+        self.check_default_formations = builder.get_object('check_default_formations')
         
         builder.connect_signals(self)
     
@@ -222,6 +231,13 @@ class testDialog:
         self.list_store.remove(self.treeiter)
         if len(self.teams) == 1:
             self.start_button.set_sensitive(False)
+
+    def on_btn_formation_clicked(self, widget, data=None):
+        self.rules_selected_file = self.def_path + "/rules/" + self.list_store.get_value(self.treeiter, 1)
+        self.tests_dialog.hide()
+        self.on_btn_remove_clicked(None)
+        self.file_chooser_formation.show()
+
     
     def on_btn_file_chooser_rules_apply_clicked(self, widget):
         self.apply_file_chooser_rules()

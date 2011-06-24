@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
@@ -16,12 +16,10 @@
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Tests expert system</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <signal name="close" handler="on_tests_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkHBox" id="hbox1">
@@ -29,7 +27,6 @@
             <child>
               <object class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkFrame" id="frame1">
                     <property name="visible">True</property>
@@ -120,11 +117,9 @@
                         <child>
                           <object class="GtkVBox" id="vbox3">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkVBox" id="vbox4">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkTable" id="table2">
                                     <property name="visible">True</property>
@@ -134,7 +129,7 @@
                                       <object class="GtkSpinButton" id="spin_rounds">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
-                                        <property name="invisible_char">&#x25CF;</property>
+                                        <property name="invisible_char">●</property>
                                         <signal name="value_changed" handler="on_spin_rounds_value_changed"/>
                                         <signal name="change_value" handler="on_spin_rounds_change_value"/>
                                       </object>
@@ -160,7 +155,7 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="max_length">3</property>
-                                        <property name="invisible_char">&#x25CF;</property>
+                                        <property name="invisible_char">●</property>
                                         <property name="progress_pulse_step">1</property>
                                         <signal name="value_changed" handler="on_spin_num_turns_value_changed"/>
                                         <signal name="change_value" handler="on_spin_num_turns_change_value"/>
@@ -218,6 +213,22 @@
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
                                     <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkCheckButton" id="check_default_formations">
+                                    <property name="label" translatable="yes">Use default formations</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">False</property>
+                                    <property name="xalign">0</property>
+                                    <property name="active">True</property>
+                                    <property name="draw_indicator">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
                                   </packing>
                                 </child>
                               </object>
@@ -288,7 +299,6 @@
                             <child>
                               <object class="GtkVButtonBox" id="vbuttonbox3">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <property name="spacing">30</property>
                                 <property name="layout_style">center</property>
                                 <child>
@@ -307,18 +317,31 @@
                                   </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkButton" id="btn_remove">
-                                    <property name="label">gtk-remove</property>
+                                  <object class="GtkButton" id="btn_formation">
+                                    <property name="label">Formation</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
-                                    <property name="use_stock">True</property>
-                                    <signal name="clicked" handler="on_btn_remove_clicked"/>
+                                    <signal name="clicked" handler="on_btn_formation_clicked"/>
                                   </object>
                                   <packing>
                                     <property name="expand">False</property>
                                     <property name="fill">False</property>
                                     <property name="position">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="btn_remove1">
+                                    <property name="label">gtk-remove</property>
+                                    <property name="visible">True</property>
+                                    <property name="can_focus">True</property>
+                                    <property name="receives_default">True</property>
+                                    <property name="use_stock">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">False</property>
+                                    <property name="position">2</property>
                                   </packing>
                                 </child>
                               </object>
@@ -409,12 +432,10 @@
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Select the formation file</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <signal name="file_activated" handler="on_file_chooser_formation_file_activated"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox8">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <placeholder/>
@@ -471,13 +492,11 @@
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Select the rules file</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <property name="create_folders">False</property>
     <signal name="file_activated" handler="on_file_chooser_rules_file_activated"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox11">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <placeholder/>
@@ -541,7 +560,6 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox18">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area18">
@@ -574,7 +592,6 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox20">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area20">
