@@ -73,7 +73,11 @@ class roundResults:
             else:
                 reason = _("Can't handle draw, team A wins")
 
-            if e[1] == 1:
+            if e[0][0] == "aux_ghost_team":
+                teamA = _draw_string(teamA, win_color)
+            elif e[0][1] == "aux_ghost_team":
+                teamB = _draw_string(teamB, win_color)
+            elif e[1] == 1:
                 teamA = _draw_string(teamA, win_color)
             elif e[1] == -1:
                 teamB = _draw_string(teamB, win_color)
