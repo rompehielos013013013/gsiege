@@ -63,6 +63,16 @@ class roundResults:
             teamB = e[0][1].replace('aux_ghost_team', _('Rests'))
             win_color = '#0C0C9D'
             draw_color = '#5DEA5D'
+
+            if e[2] == "normal":
+                reason = _("King died")
+            elif e[2] == "puntos":
+                reason = _("Number of points")
+            elif e[2] == "piezas":
+                reason = _("Number of pieces")
+            else:
+                reason = _("Can't handle draw, team A wins")
+
             if e[1] == 1:
                 teamA = _draw_string(teamA, win_color)
             elif e[1] == -1:
@@ -70,7 +80,8 @@ class roundResults:
             else: #draw
                 teamA = _draw_string(teamA, draw_color)
                 teamB = _draw_string(teamB, draw_color)
-            self.list_store_results.append((teamA, teamB))
+
+            self.list_store_results.append((teamA, teamB, reason))
     
     def __init__(self, classification, results, round, rounds,
                  show_classifications=True, show_top_teams=False, stats = None, next_matches = None): #add parent
@@ -140,6 +151,7 @@ class roundResults:
             self.list_store_matches = builder.get_object('list_matches')
             self.add_column(self.list_view_matches, _("Team A"), 0)
             self.add_column(self.list_view_matches, _("Team B"), 1)
+
             for m in next_matches:
                 n = list(m)
 
@@ -161,6 +173,7 @@ class roundResults:
 
         self.add_column(self.list_view_results, self.sTeamA, self.cTeamA)
         self.add_column(self.list_view_results, self.sTeamB, self.cTeamB)
+        self.add_column(self.list_view_results, _("Reason"), 2)
 
         self.list_store_results = builder.get_object('list_results')
         self.fill_results()

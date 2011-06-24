@@ -180,6 +180,9 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
                     estadisticasLiga[partido[0][0]]["empatadas"] += 1
                     estadisticasLiga[partido[0][1]]["empatadas"] += 1
 
+            print "RESULTS:"
+            pprint.pprint(results)
+            print "<<"
 
             # Cargamos el diálogo de resultados
             R = round_results.roundResults(classifications, results,
@@ -275,8 +278,6 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
             log_file.write("** CLASIFICACIÓN FINAL\n")
             processed_players = set()
 
-            print classifications
-
             for i in reversed(classifications.keys()):
                 currentSet = classifications[i].difference(processed_players)
                 for elm in currentSet:
@@ -291,8 +292,9 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
         else:        
             update_log_end(log_file_name, classifications)
         
-    return (band, classifications)
     print ">>>> END INIT GAME"
+    return (band, classifications)
+
 
 def _init_playoff(teams, fast, num_turns, back_round):
     print "##### INIT PLAYOFF"

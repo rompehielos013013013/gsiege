@@ -92,6 +92,7 @@ class Tournament(contest.Contest):
         self.matchs = []
         self.teams = []
         self.round_winners = []
+        self.round_reasons = []
         self.num_turns = num_turns
 
         self.log_folder = log_folder
@@ -155,7 +156,9 @@ class Tournament(contest.Contest):
                 r.play_match(fast, True, log_folder = self.log_folder)
 
             winners = r.get_winners()
+            reasons = r.get_reasons()
             self.round_winners.append(winners)
+            self.round_reasons.append(reasons)
 
             self.round_number = self.round_number + 1
             self.league_completed = (self.round_number == self.number_of_rounds)

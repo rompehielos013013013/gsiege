@@ -52,7 +52,8 @@ class DibujoClasificacion(gtk.Window):
         self.resultados = []
 
         for q in range(self.numeroRondas):
-            self.resultados.append(game.get_round(q).get_round_results())
+            ss = game.get_round(q).get_round_results()
+            self.resultados.append(ss)
 
         self.anchoBloque = 140
         self.altoBloque = 24

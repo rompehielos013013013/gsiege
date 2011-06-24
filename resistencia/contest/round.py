@@ -68,7 +68,7 @@ class Round(object):
     def get_round_results(self):
         results = []
         for match in self.round:
-            results.append((match[0], match[2]))
+            results.append((match[0], match[2], match[3]))
 
         return results
 
@@ -85,6 +85,14 @@ class Round(object):
             return winners
         else:
             raise RoundError('Not all games played')
+
+    def get_reasons(self):
+        reasons = []
+        if self.completed:
+            for match in self.round:
+                reasons.append(match[3])
+
+            return reasons
 
     def get_puntuation(self):
         results = {}
@@ -137,6 +145,7 @@ class Round(object):
         teamB = None
         
         result = 0
+        reason = "normal"
         if (not teamA_key == 'aux_ghost_team') and (not teamB_key == 'aux_ghost_team'):
             print " - It's a normal match"
             
@@ -145,11 +154,10 @@ class Round(object):
             
             try:
                 log_container = [""]
-                result = guada_board.run(teamA, teamB, fast=fast,
+                result, reason = guada_board.run(teamA, teamB, fast=fast,
                                          hidden=False,
                                          number_turns=self.num_turns,
                                          cant_draw=cant_draw, logNameReference = log_container)
-                
                 if log_folder != None:
                     os.rename(log_container[0],
                               log_folder + "/" + os.path.basename(log_container[0]))
@@ -176,7 +184,7 @@ class Round(object):
 
         print ""
 
-        self.round[self.next_game] = (self.round[self.next_game][0], True, result)
+        self.round[self.next_game] = (self.round[self.next_game][0], True, result, reason)
         
         #self.round[self.next_game][1] = True
         #self.round[self.next_game][2] = result
@@ -184,7 +192,7 @@ class Round(object):
         self.next_game = self.next_game + 1
         self.completed = (self.next_game == self.number_games)
 
-        return (self.round[self.next_game-1][0], self.round[self.next_game-1][2])
+        return (self.round[self.next_game-1][0], self.round[self.next_game-1][2], self.round[self.next_game-1][3])
 
     def is_complete(self):
         return self.completed

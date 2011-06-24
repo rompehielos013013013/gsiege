@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 18:32+0200\n"
+"POT-Creation-Date: 2011-06-24 20:39+0200\n"
 "PO-Revision-Date: 2010-02-12 01:57+0100\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
@@ -155,6 +155,10 @@ msgstr "Ida y vuelta"
 msgid "Calculating"
 msgstr "Calculando..."
 
+#: ../resistencia/gui/round_results.py:74
+msgid "Can't handle draw, team A wins"
+msgstr "No se puede desempatar, gana A"
+
 #: ../data/glade/main.glade.h:8
 msgid "Competitions"
 msgstr "Competiciones"
@@ -210,7 +214,7 @@ msgstr "Error al analizar el fichero"
 msgid "Final round"
 msgstr "Última ronda"
 
-#: ../resistencia/gui/tests_dialog.py:138
+#: ../resistencia/gui/tests_dialog.py:145
 #: ../resistencia/gui/contest_dialog.py:104
 msgid "Formation"
 msgstr "Formación"
@@ -239,6 +243,10 @@ msgstr ""
 msgid "Invalid directory"
 msgstr "Directorio inválido"
 
+#: ../resistencia/gui/round_results.py:68
+msgid "King died"
+msgstr "Rey muerto"
+
 #: ../data/glade/main.glade.h:13
 msgid "Laboratory"
 msgstr "Laboratorio"
@@ -255,7 +263,7 @@ msgstr "Configuración principal"
 msgid "Max value piece dies at turn:"
 msgstr "La pieza de mas valor muere en el turno:"
 
-#: ../resistencia/gui/tests_dialog.py:136
+#: ../resistencia/gui/tests_dialog.py:143
 #: ../resistencia/gui/contest_dialog.py:102
 msgid "Name"
 msgstr "Nombre"
@@ -264,9 +272,13 @@ msgstr "Nombre"
 msgid "Number of games:"
 msgstr "Numero de juegos:"
 
-#: ../resistencia/tests/tests.py:90
+#: ../resistencia/gui/round_results.py:72 ../resistencia/tests/tests.py:90
 msgid "Number of pieces"
 msgstr "Número de piezas"
+
+#: ../resistencia/gui/round_results.py:70
+msgid "Number of points"
+msgstr "Número de puntos"
 
 #: ../data/glade/testDialog.glade.h:5
 msgid "Number of repetitions"
@@ -318,10 +330,14 @@ msgstr "Partidas antiguas"
 msgid "Quick game"
 msgstr "Partida rápida"
 
+#: ../resistencia/gui/round_results.py:176
+msgid "Reason"
+msgstr "Razón"
+
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
-#: ../resistencia/gui/round_results.py:147
-#: ../resistencia/gui/round_results.py:150
+#: ../resistencia/gui/round_results.py:159
+#: ../resistencia/gui/round_results.py:162
 msgid "Rests"
 msgstr "Descansa"
 
@@ -342,7 +358,7 @@ msgstr "Resultados"
 msgid "Results of the round"
 msgstr "Resultados de la ronda"
 
-#: ../resistencia/gui/tests_dialog.py:137
+#: ../resistencia/gui/tests_dialog.py:144
 #: ../resistencia/gui/contest_dialog.py:103
 #: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
@@ -352,11 +368,11 @@ msgstr "Reglas"
 msgid "Rules file"
 msgstr "Archivo de reglas"
 
-#: ../resistencia/contest/main.py:215
+#: ../resistencia/contest/main.py:218
 msgid "Running the contest"
-msgstr "Ejecutando las pruebas..."
+msgstr "Ejecutando la partida..."
 
-#: ../resistencia/gui/tests_dialog.py:164
+#: ../resistencia/gui/tests_dialog.py:171
 msgid "Running the test"
 msgstr "Ejecutando las pruebas..."
 
@@ -420,17 +436,17 @@ msgstr "Reglas para el equipo A"
 msgid "System Expert for team B"
 msgstr "Reglas para el equipo B"
 
-#: ../resistencia/gui/round_results.py:141
-#: ../resistencia/gui/round_results.py:159
+#: ../resistencia/gui/round_results.py:152
+#: ../resistencia/gui/round_results.py:171
 msgid "Team A"
 msgstr "Equipo A"
 
-#: ../resistencia/gui/round_results.py:142
-#: ../resistencia/gui/round_results.py:160
+#: ../resistencia/gui/round_results.py:153
+#: ../resistencia/gui/round_results.py:172
 msgid "Team B"
 msgstr "Equipo B"
 
-#: ../resistencia/gui/round_results.py:109
+#: ../resistencia/gui/round_results.py:120
 msgid "Team name"
 msgstr "Nombre del equipo"
 
@@ -491,7 +507,8 @@ msgstr "Turnos en los que ganas"
 msgid "Use all teams installed"
 msgstr "Usar todos los equipos instalados"
 
-#: ../data/glade/teamSelector.glade.h:6 ../data/glade/contest.glade.h:17
+#: ../data/glade/teamSelector.glade.h:6 ../data/glade/testDialog.glade.h:12
+#: ../data/glade/contest.glade.h:17
 msgid "Use default formations"
 msgstr "Usar formaciones por defecto"
 
@@ -507,7 +524,7 @@ msgstr "Partidas ganadas:"
 msgid "You have no selected any file for your team"
 msgstr "No ha seleccionado ningún fichero para tu equipo"
 
-#: ../data/glade/testDialog.glade.h:12
+#: ../data/glade/testDialog.glade.h:13
 msgid "You have no selected file for the Expert System"
 msgstr "No ha seleccionado el fichero de reglas"
 
@@ -519,7 +536,7 @@ msgstr "No ha seleccionado el fichero de reglas para el equipo A"
 msgid "You have no selected file for the Expert System B"
 msgstr "No ha seleccionado el fichero de reglas para el equipo B"
 
-#: ../data/glade/testDialog.glade.h:13
+#: ../data/glade/testDialog.glade.h:14
 msgid "You have no selected file for the Team"
 msgstr "No ha seleccionado el fichero de formación"
 
