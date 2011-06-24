@@ -46,9 +46,17 @@ class contestDialog:
         assert(not(self.formation_selected_file == None))
 
     def apply_file_chooser_rules(self):
+
         self.file_chooser_rules_handler()
         self.file_chooser_rules.hide()
-        self.file_chooser_formation.show()
+
+        if self.check_default_formations.get_active():
+            self.formation_selected_file = filenames.devolverFormacionAsociada(self.file_chooser_rules.get_filename())[7:]
+            self.contest_dialog.show()
+            self.insert_element_list()
+        else:
+            self.file_chooser_formation.show()
+
 
     def apply_file_chooser_formation(self):
         self.file_chooser_formation_handler()
@@ -64,6 +72,10 @@ class contestDialog:
 
         name = filenames.extract_name_expert_system((rules_file_name,
                                                      formation_file_name))
+
+
+        print "INSERTADO:"
+        print self.rules_selected_file, self.formation_selected_file
 
         if not self.teams.has_key(name):
             self.teams[name] = (self.rules_selected_file, self.formation_selected_file)
@@ -118,9 +130,9 @@ class contestDialog:
         self.fast = False
         self.all_teams = False
         
-        def_path = configure.load_configuration()['se_path']
-        self.file_chooser_rules.set_current_folder(def_path + '/rules')
-        self.file_chooser_formation.set_current_folder(def_path + '/formations')
+        self.def_path = configure.load_configuration()['se_path']
+        self.file_chooser_rules.set_current_folder(self.def_path + '/rules')
+        self.file_chooser_formation.set_current_folder(self.def_path + '/formations')
 
         self.start_button = builder.get_object('btn_start')
         self.frame_selection_teams = builder.get_object('box_selection')
@@ -130,6 +142,8 @@ class contestDialog:
         self.spin_turns.set_range(50,300)
         self.spin_turns.set_increments(2,10)
         self.spin_turns.set_value(self.num_turns)
+
+        self.check_default_formations = builder.get_object('check_default_formations')
         
         builder.connect_signals(self)
 
@@ -143,6 +157,15 @@ class contestDialog:
         self.list_store.remove(self.treeiter)
         if len(self.teams) == 1:
             self.start_button.set_sensitive(False)
+
+    def on_btn_formation_clicked(self, widget, data=None):
+        try:
+            self.rules_selected_file = self.def_path + "/rules/" + self.list_store.get_value(self.treeiter, 1)
+            self.contest_dialog.hide()
+            self.on_btn_remove_clicked(None)
+            self.file_chooser_formation.show()
+        except:
+            pass
 
     def on_list_es_view_cursor_changed(self, widget, data=None):
         self.treeiter = self.list_store.get_iter(widget.get_cursor()[0])
@@ -159,7 +182,9 @@ class contestDialog:
     def on_btn_file_chooser_rules_close_clicked(self, widget):
         self.file_chooser_rules.hide()
         self.contest_dialog.show()
-        del self.rules_selected_file
+        
+        self.rules_selected_file = None
+        self.formation_selected_file = None
 
     def on_btn_file_chooser_formation_apply_clicked(self, widget):
         self.apply_file_chooser_formation()
@@ -169,8 +194,10 @@ class contestDialog:
 
     def on_btn_file_chooser_formation_close_clicked(self, widget):
         self.file_chooser_formation.hide()
-        del self.rules_selected_file
-        del self.formation_selected_file
+        self.contest_dialog.show()
+
+        self.rules_selected_file = None
+        self.formation_selected_file = None
 
     def on_btn_cancel_clicked(self, widget, data=None):
         self.contest_dialog.hide()
@@ -227,9 +254,11 @@ class contestDialog:
         self.all_teams = widget.get_active()
         if self.all_teams:
             self.frame_selection_teams.set_sensitive(False)
+            self.check_default_formations.set_sensitive(False)
             self.start_button.set_sensitive(True)
         else:
             self.frame_selection_teams.set_sensitive(True)
+            self.check_default_formations.set_sensitive(True)
             if len(self.teams) >= 2:
                 self.start_button.set_sensitive(True)
             else:

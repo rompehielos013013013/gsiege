@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 01:55+0200\n"
+"POT-Creation-Date: 2011-06-24 18:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../resistencia/gui/tests_dialog.py:136
-#: ../resistencia/gui/contest_dialog.py:90
+#: ../resistencia/gui/contest_dialog.py:102
 msgid "Name"
 msgstr ""
 
 #: ../resistencia/gui/tests_dialog.py:137
-#: ../resistencia/gui/contest_dialog.py:91
+#: ../resistencia/gui/contest_dialog.py:103
 #: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
 msgstr ""
 
 #: ../resistencia/gui/tests_dialog.py:138
-#: ../resistencia/gui/contest_dialog.py:92
+#: ../resistencia/gui/contest_dialog.py:104
 msgid "Formation"
 msgstr ""
 
@@ -125,6 +125,34 @@ msgstr ""
 
 #: ../libguadalete/libguadalete.py:136 ../libguadalete/libguadalete.py:151
 msgid "   - Loading "
+msgstr ""
+
+#: ../data/glade/teamSelector.glade.h:1 ../data/glade/testDialog.glade.h:3
+#: ../data/glade/contest.glade.h:3 ../data/glade/tree.glade.h:1
+msgid "<b>Selected expert systems</b>"
+msgstr ""
+
+#: ../data/glade/teamSelector.glade.h:2 ../data/glade/testDialog.glade.h:8
+#: ../data/glade/contest.glade.h:13 ../data/glade/tree.glade.h:3
+msgid "Select the formation file"
+msgstr ""
+
+#: ../data/glade/teamSelector.glade.h:3 ../data/glade/testDialog.glade.h:9
+#: ../data/glade/contest.glade.h:14 ../data/glade/tree.glade.h:4
+msgid "Select the rules file"
+msgstr ""
+
+#: ../data/glade/teamSelector.glade.h:4
+msgid "Team selector"
+msgstr ""
+
+#: ../data/glade/teamSelector.glade.h:5 ../data/glade/testDialog.glade.h:11
+#: ../data/glade/contest.glade.h:16
+msgid "Use all teams installed"
+msgstr ""
+
+#: ../data/glade/teamSelector.glade.h:6 ../data/glade/contest.glade.h:17
+msgid "Use default formations"
 msgstr ""
 
 #: ../data/glade/main.glade.h:1
@@ -281,11 +309,6 @@ msgstr ""
 msgid "<b>Options</b>"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:3 ../data/glade/contest.glade.h:3
-#: ../data/glade/tree.glade.h:1
-msgid "<b>Selected expert systems</b>"
-msgstr ""
-
 #: ../data/glade/testDialog.glade.h:4
 msgid "Formation file"
 msgstr ""
@@ -298,22 +321,8 @@ msgstr ""
 msgid "Rules file"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:8 ../data/glade/contest.glade.h:13
-#: ../data/glade/tree.glade.h:3
-msgid "Select the formation file"
-msgstr ""
-
-#: ../data/glade/testDialog.glade.h:9 ../data/glade/contest.glade.h:14
-#: ../data/glade/tree.glade.h:4
-msgid "Select the rules file"
-msgstr ""
-
 #: ../data/glade/testDialog.glade.h:10
 msgid "Tests expert system"
-msgstr ""
-
-#: ../data/glade/testDialog.glade.h:11 ../data/glade/contest.glade.h:16
-msgid "Use all teams installed"
 msgstr ""
 
 #: ../data/glade/testDialog.glade.h:12
