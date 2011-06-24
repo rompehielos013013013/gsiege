@@ -52,7 +52,7 @@ def _handle_draw(entire_game, winner):
     Handle the tie if the game cant draw
     """
     if not winner == 0:
-        return winner
+        return (winner, "normal")
     else:  # if it's a draw
         num_a = 0
         num_b = 0
@@ -71,18 +71,18 @@ def _handle_draw(entire_game, winner):
                         num_b = num_b + 1
         if not _sum == 0:  # a team has more _sum of values than the other
             if _sum > 0:
-                return 1
+                return (1, "puntos")
             else:
-                return -1
+                return (-1, "puntos")
         else:  # both has the same _sum of values
             if not num_a == num_b:  # a team has more pieces than the other
                 if num_a > num_b:
-                    return 1
+                    return (1, "piezas")
                 else:
-                    return -1
+                    return (-1, "piezas")
             else:  # both have the same number of pieces.
 
-                return -1  # B team is in disvantage
+                return (-1, "badluck")  # B team is in disvantage
 
 
 def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
@@ -91,7 +91,7 @@ def _load_game_from_file(src_file, team_a, team_b, path_piece_def, xml_file,
 
     entire_game, winner = file_parser.parse_file(src_file)
     if cant_draw:
-        winner = _handle_draw(entire_game, winner)
+        winner,kk = _handle_draw(entire_game, winner)
 
     music = False
     if configure.load_configuration()['music_active'] == '1':
@@ -141,15 +141,17 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
                              team_a, team_b,
                              path_piece_def,
                              xml_file, hidden, cant_draw=cant_draw)
-        
+    
+    reason = "normal"
     # Si no puede haber empate
     if cant_draw:
         # Solucionar el empate
         entire_game, winner = file_parser.parse_file(out_file)
-        winner = _handle_draw(entire_game, winner)
-        
+        winner,reason = _handle_draw(entire_game, winner)
+
+    
     # Preparamos la variable de retorno
-    res = winner
+    res = (winner, reason)
     
     if get_stats:
         res = (winner, stats.get_game_file_stats(out_file))

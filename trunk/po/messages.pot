@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 18:32+0200\n"
+"POT-Creation-Date: 2011-06-24 20:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../resistencia/gui/tests_dialog.py:136
+#: ../resistencia/gui/tests_dialog.py:143
 #: ../resistencia/gui/contest_dialog.py:102
 msgid "Name"
 msgstr ""
 
-#: ../resistencia/gui/tests_dialog.py:137
+#: ../resistencia/gui/tests_dialog.py:144
 #: ../resistencia/gui/contest_dialog.py:103
 #: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
 msgstr ""
 
-#: ../resistencia/gui/tests_dialog.py:138
+#: ../resistencia/gui/tests_dialog.py:145
 #: ../resistencia/gui/contest_dialog.py:104
 msgid "Formation"
 msgstr ""
 
-#: ../resistencia/gui/tests_dialog.py:164
+#: ../resistencia/gui/tests_dialog.py:171
 msgid "Running the test"
 msgstr ""
 
@@ -43,23 +43,43 @@ msgstr ""
 
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
-#: ../resistencia/gui/round_results.py:147
-#: ../resistencia/gui/round_results.py:150
+#: ../resistencia/gui/round_results.py:159
+#: ../resistencia/gui/round_results.py:162
 msgid "Rests"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:109
+#: ../resistencia/gui/round_results.py:68
+msgid "King died"
+msgstr ""
+
+#: ../resistencia/gui/round_results.py:70
+msgid "Number of points"
+msgstr ""
+
+#: ../resistencia/gui/round_results.py:72 ../resistencia/tests/tests.py:90
+msgid "Number of pieces"
+msgstr ""
+
+#: ../resistencia/gui/round_results.py:74
+msgid "Can't handle draw, team A wins"
+msgstr ""
+
+#: ../resistencia/gui/round_results.py:120
 msgid "Team name"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:141
-#: ../resistencia/gui/round_results.py:159
+#: ../resistencia/gui/round_results.py:152
+#: ../resistencia/gui/round_results.py:171
 msgid "Team A"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:142
-#: ../resistencia/gui/round_results.py:160
+#: ../resistencia/gui/round_results.py:153
+#: ../resistencia/gui/round_results.py:172
 msgid "Team B"
+msgstr ""
+
+#: ../resistencia/gui/round_results.py:176
+msgid "Reason"
 msgstr ""
 
 #: ../resistencia/gui/settings_dialog.py:78
@@ -97,10 +117,6 @@ msgid "Number of turns"
 msgstr ""
 
 #: ../resistencia/tests/tests.py:90
-msgid "Number of pieces"
-msgstr ""
-
-#: ../resistencia/tests/tests.py:90
 msgid "Value of the pieces"
 msgstr ""
 
@@ -108,7 +124,7 @@ msgstr ""
 msgid "Turn when max value piece died"
 msgstr ""
 
-#: ../resistencia/contest/main.py:215
+#: ../resistencia/contest/main.py:218
 msgid "Running the contest"
 msgstr ""
 
@@ -151,7 +167,8 @@ msgstr ""
 msgid "Use all teams installed"
 msgstr ""
 
-#: ../data/glade/teamSelector.glade.h:6 ../data/glade/contest.glade.h:17
+#: ../data/glade/teamSelector.glade.h:6 ../data/glade/testDialog.glade.h:12
+#: ../data/glade/contest.glade.h:17
 msgid "Use default formations"
 msgstr ""
 
@@ -325,11 +342,11 @@ msgstr ""
 msgid "Tests expert system"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:12
+#: ../data/glade/testDialog.glade.h:13
 msgid "You have no selected file for the Expert System"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:13
+#: ../data/glade/testDialog.glade.h:14
 msgid "You have no selected file for the Team"
 msgstr ""
 

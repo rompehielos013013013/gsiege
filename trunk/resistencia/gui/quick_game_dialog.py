@@ -187,7 +187,7 @@ class quickGameDialog:
     def load_board(self):
         controlPartida.restaurarCampeonato()
         try:
-            winner = guada_board.run(
+            winner,kk = guada_board.run(
                 ((self.es_team_a, self.team_team_a),
                  xdg.get_data_path('images/piece-orange.png')),
                 ((self.es_team_b,self.team_team_b),
