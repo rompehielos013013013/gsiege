@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 01:55+0200\n"
+"POT-Creation-Date: 2011-06-24 18:32+0200\n"
 "PO-Revision-Date: 2010-02-12 01:57+0100\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
@@ -92,8 +92,8 @@ msgstr "<b>Ruta a los logs de partidas antiguas</b>"
 msgid "<b>Results</b>"
 msgstr "<b>Resultados</b>"
 
-#: ../data/glade/testDialog.glade.h:3 ../data/glade/contest.glade.h:3
-#: ../data/glade/tree.glade.h:1
+#: ../data/glade/teamSelector.glade.h:1 ../data/glade/testDialog.glade.h:3
+#: ../data/glade/contest.glade.h:3 ../data/glade/tree.glade.h:1
 msgid "<b>Selected expert systems</b>"
 msgstr "<b>Selecciona sistema experto</b>"
 
@@ -211,7 +211,7 @@ msgid "Final round"
 msgstr "Última ronda"
 
 #: ../resistencia/gui/tests_dialog.py:138
-#: ../resistencia/gui/contest_dialog.py:92
+#: ../resistencia/gui/contest_dialog.py:104
 msgid "Formation"
 msgstr "Formación"
 
@@ -256,7 +256,7 @@ msgid "Max value piece dies at turn:"
 msgstr "La pieza de mas valor muere en el turno:"
 
 #: ../resistencia/gui/tests_dialog.py:136
-#: ../resistencia/gui/contest_dialog.py:90
+#: ../resistencia/gui/contest_dialog.py:102
 msgid "Name"
 msgstr "Nombre"
 
@@ -343,7 +343,7 @@ msgid "Results of the round"
 msgstr "Resultados de la ronda"
 
 #: ../resistencia/gui/tests_dialog.py:137
-#: ../resistencia/gui/contest_dialog.py:91
+#: ../resistencia/gui/contest_dialog.py:103
 #: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
 msgstr "Reglas"
@@ -384,13 +384,13 @@ msgstr "Seleccionar formación para tu equipo"
 msgid "Select players for the contest"
 msgstr "Seleccionar los jugadores para una competición"
 
-#: ../data/glade/testDialog.glade.h:8 ../data/glade/contest.glade.h:13
-#: ../data/glade/tree.glade.h:3
+#: ../data/glade/teamSelector.glade.h:2 ../data/glade/testDialog.glade.h:8
+#: ../data/glade/contest.glade.h:13 ../data/glade/tree.glade.h:3
 msgid "Select the formation file"
 msgstr "Selecciona el archivo de formación"
 
-#: ../data/glade/testDialog.glade.h:9 ../data/glade/contest.glade.h:14
-#: ../data/glade/tree.glade.h:4
+#: ../data/glade/teamSelector.glade.h:3 ../data/glade/testDialog.glade.h:9
+#: ../data/glade/contest.glade.h:14 ../data/glade/tree.glade.h:4
 msgid "Select the rules file"
 msgstr "Selecciona el archivo de reglas"
 
@@ -433,6 +433,10 @@ msgstr "Equipo B"
 #: ../resistencia/gui/round_results.py:109
 msgid "Team name"
 msgstr "Nombre del equipo"
+
+#: ../data/glade/teamSelector.glade.h:4
+msgid "Team selector"
+msgstr ""
 
 #: ../resistencia/gui/settings_dialog.py:84
 msgid "Teams"
@@ -482,9 +486,14 @@ msgstr "Turnos en los que pierdes"
 msgid "Turns used to win:"
 msgstr "Turnos en los que ganas"
 
-#: ../data/glade/testDialog.glade.h:11 ../data/glade/contest.glade.h:16
+#: ../data/glade/teamSelector.glade.h:5 ../data/glade/testDialog.glade.h:11
+#: ../data/glade/contest.glade.h:16
 msgid "Use all teams installed"
 msgstr "Usar todos los equipos instalados"
+
+#: ../data/glade/teamSelector.glade.h:6 ../data/glade/contest.glade.h:17
+msgid "Use default formations"
+msgstr "Usar formaciones por defecto"
 
 #: ../resistencia/tests/tests.py:90
 msgid "Value of the pieces"

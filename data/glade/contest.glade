@@ -289,7 +289,7 @@ all-play-all, then single-eliminaton</property>
                     <child>
                       <object class="GtkVButtonBox" id="vbuttonbox3">
                         <property name="visible">True</property>
-                        <property name="spacing">30</property>
+                        <property name="spacing">5</property>
                         <property name="layout_style">center</property>
                         <child>
                           <object class="GtkButton" id="btn_add">
@@ -307,6 +307,20 @@ all-play-all, then single-eliminaton</property>
                           </packing>
                         </child>
                         <child>
+                          <object class="GtkButton" id="btn_formation">
+                            <property name="label">Formation</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <signal name="clicked" handler="on_btn_formation_clicked"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
                           <object class="GtkButton" id="btn_remove">
                             <property name="label">gtk-remove</property>
                             <property name="visible">True</property>
@@ -318,7 +332,7 @@ all-play-all, then single-eliminaton</property>
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">False</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
                       </object>
@@ -361,6 +375,22 @@ all-play-all, then single-eliminaton</property>
                         <property name="expand">False</property>
                         <property name="fill">False</property>
                         <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="check_default_formations">
+                        <property name="label" translatable="yes">Use default formations</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="xalign">0</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                   </object>
