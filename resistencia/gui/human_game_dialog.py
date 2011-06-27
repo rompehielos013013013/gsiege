@@ -26,7 +26,7 @@ import gtk
 from resistencia import configure, xdg, filenames
 from resistencia.nls import gettext as _
 from resistencia.tests import selection
-
+from libguadalete.parsear_fichero_reglas import leer_comentario
 from guadaboard import human_game_handler
 
 class humanGameDialog:
@@ -80,7 +80,8 @@ class humanGameDialog:
         self.dont_save_game = False
         self.human_team = 'A'
         self.random_computer = False
-        
+        self.label_description = builder.get_object('label_description')
+
         builder.connect_signals(self)
 
     def on_file_chooser_team_file_set(self, widget, data=None):
@@ -90,7 +91,8 @@ class humanGameDialog:
         self.rules_computer = widget.get_uri().replace('file://', '')
         
         formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
-        
+        self.label_description.set_label(leer_comentario(widget.get_filename()))
+
         if formacionAsociada != None:			
 			self.file_chooser_team_ia.set_uri(formacionAsociada)
 			self.formation_computer = self.file_chooser_team_ia.get_uri().replace('file://','')

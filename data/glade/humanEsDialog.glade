@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
@@ -8,12 +8,10 @@
     <property name="window_position">center</property>
     <property name="icon">../images/favicon.png</property>
     <property name="type_hint">normal</property>
-    <property name="has_separator">False</property>
     <signal name="close" handler="on_human_ia_dialog_close"/>
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox1">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child>
           <object class="GtkHBox" id="hbox1">
@@ -21,7 +19,6 @@
             <child>
               <object class="GtkVBox" id="vbox1">
                 <property name="visible">True</property>
-                <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkFrame" id="frame2">
                     <property name="visible">True</property>
@@ -65,7 +62,6 @@
                             <child>
                               <object class="GtkVBox" id="vbox3">
                                 <property name="visible">True</property>
-                                <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkRadioButton" id="radio_a_team">
                                     <property name="label" translatable="yes">As team A</property>
@@ -141,11 +137,10 @@
                         <child>
                           <object class="GtkVBox" id="vbox2">
                             <property name="visible">True</property>
-                            <property name="orientation">vertical</property>
                             <child>
                               <object class="GtkTable" id="table4">
                                 <property name="visible">True</property>
-                                <property name="n_rows">2</property>
+                                <property name="n_rows">3</property>
                                 <property name="n_columns">2</property>
                                 <child>
                                   <object class="GtkLabel" id="label12">
@@ -201,6 +196,29 @@
                                     <property name="y_options"></property>
                                     <property name="x_padding">5</property>
                                     <property name="y_padding">10</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label6">
+                                    <property name="visible">True</property>
+                                    <property name="label" translatable="yes">Description</property>
+                                  </object>
+                                  <packing>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
+                                    <property name="x_options"></property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="label_description">
+                                    <property name="visible">True</property>
+                                  </object>
+                                  <packing>
+                                    <property name="left_attach">1</property>
+                                    <property name="right_attach">2</property>
+                                    <property name="top_attach">2</property>
+                                    <property name="bottom_attach">3</property>
+                                    <property name="x_options"></property>
                                   </packing>
                                 </child>
                               </object>
@@ -268,7 +286,6 @@
                     <child>
                       <object class="GtkVButtonBox" id="vbuttonbox1">
                         <property name="visible">True</property>
-                        <property name="orientation">vertical</property>
                         <property name="layout_style">start</property>
                         <child>
                           <object class="GtkHBox" id="hbox3">
@@ -289,7 +306,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="max_length">3</property>
-                                <property name="invisible_char">&#x25CF;</property>
+                                <property name="invisible_char">●</property>
                                 <property name="progress_pulse_step">1</property>
                                 <signal name="value_changed" handler="on_spin_num_turns_value_changed"/>
                                 <signal name="change_value" handler="on_spin_num_turns_change_value"/>
@@ -408,7 +425,6 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox16">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area16">
@@ -440,7 +456,6 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox18">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area18">
@@ -473,7 +488,6 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox21">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area21">
@@ -506,7 +520,6 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox23">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area23">
@@ -539,7 +552,6 @@
     <child internal-child="vbox">
       <object class="GtkVBox" id="dialog-vbox25">
         <property name="visible">True</property>
-        <property name="orientation">vertical</property>
         <property name="spacing">2</property>
         <child internal-child="action_area">
           <object class="GtkHButtonBox" id="dialog-action_area25">

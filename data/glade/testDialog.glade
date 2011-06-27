@@ -10,6 +10,8 @@
       <column type="gchararray"/>
       <!-- column-name es_formation -->
       <column type="gchararray"/>
+      <!-- column-name es_description -->
+      <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkDialog" id="tests_dialog">
@@ -39,7 +41,7 @@
                         <child>
                           <object class="GtkTable" id="table1">
                             <property name="visible">True</property>
-                            <property name="n_rows">2</property>
+                            <property name="n_rows">3</property>
                             <property name="n_columns">2</property>
                             <child>
                               <object class="GtkFileChooserButton" id="btn_filechooser_rules">
@@ -86,6 +88,29 @@
                               <packing>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
+                                <property name="x_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label7">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes">Description</property>
+                              </object>
+                              <packing>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
+                                <property name="x_options"></property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="label_description">
+                                <property name="visible">True</property>
+                              </object>
+                              <packing>
+                                <property name="left_attach">1</property>
+                                <property name="right_attach">2</property>
+                                <property name="top_attach">2</property>
+                                <property name="bottom_attach">3</property>
                                 <property name="x_options"></property>
                               </packing>
                             </child>
