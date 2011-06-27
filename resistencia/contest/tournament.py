@@ -114,45 +114,33 @@ class Tournament(contest.Contest):
         if not pairings_done:
             self.matchs.append(_auto_pairings(self.keys))
 
-        self.round_number = 0
+        self.current_round = 0
         self.rounds = []
 
-        self.rounds.append(round.Round(self.matchs[self.round_number],
+        self.rounds.append(round.Round(self.matchs[self.current_round],
                                        self.translator,
                                        self.num_turns))
 
         self.number_of_rounds = int(math.log(len(self.matchs[0]), 2)) + 1
         
-        self.tournament_completed = False
-
         print "Torneo creado"
         print str(len(self.matchs[0])) + " partidos en la primera ronda"
         print str(self.number_of_rounds) + " rondas totales"
 
-    def get_round_number(self):
-        return self.round_number
-
-    def get_prev_round_number(self):
-        return self.round_number - 1
-
-    def get_number_of_rounds(self):
-        return self.number_of_rounds
-
-    def get_round(self, round_number):
-        return self.rounds[round_number]
-
     def play_round(self, progress_bar, fast=False):
-        if not self.tournament_completed and not controlPartida.flagCancelarCampeonato:
-            r = self.rounds[self.round_number]
+        if not controlPartida.flagCancelarCampeonato:
+            r = self.rounds[self.current_round]
             n = r.get_number_of_games()
 
             for i in range(n):
+                if controlPartida.flagCancelarCampeonato:
+                        return
+
                 if fast and progress_bar != None:
                     progress_bar.pulse()
                     while gtk.events_pending():
                         gtk.main_iteration(False)
-                if controlPartida.flagCancelarCampeonato:
-                        return
+
                 r.play_match(fast, True, log_folder = self.log_folder)
 
             winners = r.get_winners()
@@ -160,12 +148,12 @@ class Tournament(contest.Contest):
             self.round_winners.append(winners)
             self.round_reasons.append(reasons)
 
-            self.round_number = self.round_number + 1
-            self.league_completed = (self.round_number == self.number_of_rounds)
+            self.current_round = self.current_round + 1
+            self.league_completed = (self.current_round == self.number_of_rounds)
 
             if not self.league_completed:
                 self.matchs.append(_auto_pairings(winners))
-                self.rounds.append(round.Round(self.matchs[self.round_number],
+                self.rounds.append(round.Round(self.matchs[self.current_round],
                                                self.translator))
 
     def get_results_by_now(self):

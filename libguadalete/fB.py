@@ -24,6 +24,9 @@
 """
 
 def LoadFunctions(clips):
+
+
+
     # Module name
     mod_name = "EQUIPO-B"
     # Module body
