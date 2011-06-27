@@ -24,6 +24,7 @@ import os.path
 import gtk
 
 from guadaboard import guada_board
+from libguadalete.parsear_fichero_reglas import leer_comentario
 from resistencia import configure, xdg, filenames
 from resistencia.nls import gettext as _
 
@@ -91,6 +92,9 @@ class quickGameDialog:
         self.dont_save_game = False
         self.hidde_values = False
         
+        self.label_desc_A = builder.get_object("label_desc_A")
+        self.label_desc_B = builder.get_object("label_desc_B")
+
         builder.connect_signals(self)
         
     def on_quickGameDialog_close(self, widget, data=None):
@@ -100,7 +104,8 @@ class quickGameDialog:
         self.es_team_a = widget.get_uri()
         
         formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
-        
+        self.label_desc_A.set_label(leer_comentario(widget.get_filename()))
+
         if formacionAsociada != None:			
             self.file_chooser_team_a.set_uri(formacionAsociada)
             self.team_team_a = formacionAsociada
@@ -112,7 +117,8 @@ class quickGameDialog:
         self.es_team_b = widget.get_uri()
         
         formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
-        
+        self.label_desc_B.set_label(leer_comentario(widget.get_filename()))
+
         if formacionAsociada != None:			
             self.file_chooser_team_b.set_uri(formacionAsociada)
             self.team_team_b = formacionAsociada

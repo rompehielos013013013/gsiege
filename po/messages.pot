@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 20:39+0200\n"
+"POT-Creation-Date: 2011-06-27 17:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../resistencia/gui/tests_dialog.py:143
-#: ../resistencia/gui/contest_dialog.py:102
+#: ../resistencia/gui/contest_dialog.py:104
 msgid "Name"
 msgstr ""
 
 #: ../resistencia/gui/tests_dialog.py:144
-#: ../resistencia/gui/contest_dialog.py:103
+#: ../resistencia/gui/contest_dialog.py:105
 #: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
 msgstr ""
 
 #: ../resistencia/gui/tests_dialog.py:145
-#: ../resistencia/gui/contest_dialog.py:104
+#: ../resistencia/gui/contest_dialog.py:106
 msgid "Formation"
 msgstr ""
 
 #: ../resistencia/gui/tests_dialog.py:171
 msgid "Running the test"
+msgstr ""
+
+#: ../resistencia/gui/contest_dialog.py:114
+msgid "Description"
 msgstr ""
 
 #: ../resistencia/gui/notify_result.py:54
@@ -43,8 +47,8 @@ msgstr ""
 
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
-#: ../resistencia/gui/round_results.py:159
-#: ../resistencia/gui/round_results.py:162
+#: ../resistencia/gui/round_results.py:163
+#: ../resistencia/gui/round_results.py:166
 msgid "Rests"
 msgstr ""
 
@@ -64,21 +68,21 @@ msgstr ""
 msgid "Can't handle draw, team A wins"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:120
+#: ../resistencia/gui/round_results.py:124
 msgid "Team name"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:152
-#: ../resistencia/gui/round_results.py:171
+#: ../resistencia/gui/round_results.py:156
+#: ../resistencia/gui/round_results.py:175
 msgid "Team A"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:153
-#: ../resistencia/gui/round_results.py:172
+#: ../resistencia/gui/round_results.py:157
+#: ../resistencia/gui/round_results.py:176
 msgid "Team B"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:176
+#: ../resistencia/gui/round_results.py:180
 msgid "Reason"
 msgstr ""
 
@@ -110,7 +114,7 @@ msgstr ""
 msgid "Result"
 msgstr ""
 
-#: ../resistencia/tests/tests.py:89 ../data/glade/quickGame.glade.h:10
+#: ../resistencia/tests/tests.py:89 ../data/glade/quickGame.glade.h:12
 #: ../data/glade/testDialog.glade.h:6 ../data/glade/contest.glade.h:8
 #: ../data/glade/humanEsDialog.glade.h:11
 msgid "Number of turns"
@@ -137,6 +141,10 @@ msgstr ""
 #: ../libguadalete/libguadalete.py:129 ../libguadalete/libguadalete.py:145
 #: ../libguadalete/libguadalete.py:162
 msgid "Error parsing the file "
+msgstr ""
+
+#: ../libguadalete/parsear_fichero_reglas.py:34
+msgid "No comment"
 msgstr ""
 
 #: ../libguadalete/libguadalete.py:136 ../libguadalete/libguadalete.py:151
@@ -212,7 +220,7 @@ msgstr ""
 msgid "Previous games"
 msgstr ""
 
-#: ../data/glade/main.glade.h:16 ../data/glade/quickGame.glade.h:12
+#: ../data/glade/main.glade.h:16 ../data/glade/quickGame.glade.h:14
 msgid "Quick game"
 msgstr ""
 
@@ -240,7 +248,7 @@ msgstr ""
 msgid "You have to select a file"
 msgstr ""
 
-#: ../data/glade/resultNotifier.glade.h:1 ../data/glade/quickGame.glade.h:13
+#: ../data/glade/resultNotifier.glade.h:1 ../data/glade/quickGame.glade.h:15
 #: ../data/glade/humanEsDialog.glade.h:13
 msgid "Result of the game"
 msgstr ""
@@ -266,55 +274,63 @@ msgstr ""
 msgid "<b>Team B</b>"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:6 ../data/glade/humanEsDialog.glade.h:8
+#: ../data/glade/quickGame.glade.h:6
+msgid "Description of team A"
+msgstr ""
+
+#: ../data/glade/quickGame.glade.h:7
+msgid "Description of team B"
+msgstr ""
+
+#: ../data/glade/quickGame.glade.h:8 ../data/glade/humanEsDialog.glade.h:8
 msgid "Don't save the game"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:7 ../data/glade/humanEsDialog.glade.h:9
+#: ../data/glade/quickGame.glade.h:9 ../data/glade/humanEsDialog.glade.h:9
 msgid "Error finded"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:8 ../data/glade/humanEsDialog.glade.h:10
+#: ../data/glade/quickGame.glade.h:10 ../data/glade/humanEsDialog.glade.h:10
 msgid "Error parsing a file"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:9
+#: ../data/glade/quickGame.glade.h:11
 msgid "Hide pieces's values"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:11
+#: ../data/glade/quickGame.glade.h:13
 msgid "Only result"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:14
+#: ../data/glade/quickGame.glade.h:16
 msgid "Select formation for team A"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:15
+#: ../data/glade/quickGame.glade.h:17
 msgid "Select formation for team B"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:16
+#: ../data/glade/quickGame.glade.h:18
 msgid "System Expert for team A"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:17
+#: ../data/glade/quickGame.glade.h:19
 msgid "System Expert for team B"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:18
+#: ../data/glade/quickGame.glade.h:20
 msgid "You have no selected file for the Expert System A"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:19
+#: ../data/glade/quickGame.glade.h:21
 msgid "You have no selected file for the Expert System B"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:20
+#: ../data/glade/quickGame.glade.h:22
 msgid "You have no selected file for the Team A"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:21
+#: ../data/glade/quickGame.glade.h:23
 msgid "You have no selected file for the team B"
 msgstr ""
 

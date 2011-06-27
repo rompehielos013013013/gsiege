@@ -28,6 +28,8 @@ from resistencia import configure, filenames, xdg
 from resistencia.contest import main as contest
 from resistencia.tests import selection
 from resistencia.nls import gettext as _
+
+from libguadalete.parsear_fichero_reglas import leer_comentario
 import tests_result
 
 class contestDialog:
@@ -80,7 +82,7 @@ class contestDialog:
         if not self.teams.has_key(name):
             self.teams[name] = (self.rules_selected_file, self.formation_selected_file)
 
-            self.list_store.append((name, rules_file_name, formation_file_name))
+            self.list_store.append((name, rules_file_name, formation_file_name, leer_comentario(self.rules_selected_file, wrap = False)))
             if len(self.teams) == 2:
                 self.start_button.set_sensitive(True)
     # ---
@@ -109,6 +111,7 @@ class contestDialog:
         self.addColumn(self.sName, self.cName)
         self.addColumn(self.sRules, self.cRules)
         self.addColumn(self.sFormation, self.cFormation)
+        self.addColumn(_("Description"), 3)
 
         self.list_store = builder.get_object("list_expert_system")
         #-----------------------------

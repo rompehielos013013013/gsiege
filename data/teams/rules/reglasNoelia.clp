@@ -1,3 +1,4 @@
+; DOC : Esto es el comentario para las reglas del equipo de Noelia
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;                 Reglas de Inteligencia Artificial                       ;
 ;                     básicas para el equipo A                            ;
