@@ -42,17 +42,18 @@ def puntuations_compare(p1, p2):
         return -1
 
 class Contest(object):
-    def get_round_number(self):
-        raise NotImplementedError('Base class. Method not implemented')
 
-    def get_prev_round_number(self):
-        raise NotImplementedError('Base class. Method not implemented')
+    def get_round_number(self):
+        return self.current_round
     
+    def get_prev_round_number(self):
+        return self.current_round - 1
+
     def get_number_of_rounds(self):
-        raise NotImplementedError('Base class. Method not implemented')
+        return self.number_of_rounds
 
     def get_round(self, round_number):
-        raise NotImplementedError('Base class. Method not implemented')
+        return self.rounds[round_number]
 
     def play_round(self, fast=False):
         raise NotImplementedError('Base class. Method not implemented')

@@ -58,31 +58,19 @@ class League(contest.Contest):
             self.puntuations[key] = 0
 
         self.number_of_rounds = len(self.rounds)
-        self.actual_round = 0
+        self.current_round = 0
         self.league_completed = False
-
-    def get_round_number(self):
-        return self.actual_round
-    
-    def get_prev_round_number(self):
-        return self.actual_round - 1
-
-    def get_number_of_rounds(self):
-        return self.number_of_rounds
-
-    def get_round(self, round_number):
-        return self.rounds[round_number]
 
     def play_round(self, progress_bar, fast=False):
         if not self.league_completed and not controlPartida.flagCancelarCampeonato:
-            r = self.rounds[self.actual_round]
+            r = self.rounds[self.current_round]
             n = r.get_number_of_games()
 
             for i in range(n):
                 if controlPartida.flagCancelarCampeonato:
                     return
 
-                if fast:
+                if fast and progress_bar != None:
                     progress_bar.pulse()
                     while gtk.events_pending():
                         gtk.main_iteration(False)
@@ -93,8 +81,8 @@ class League(contest.Contest):
             self.puntuations_by_round.append(p)
             contest.merge_puntuations(self.puntuations, p)
 
-            self.actual_round = self.actual_round + 1
-            self.league_completed = (self.actual_round == self.number_of_rounds)
+            self.current_round = self.current_round + 1
+            self.league_completed = (self.current_round == self.number_of_rounds)
 
     def get_actual_puntuations(self):
         clasification = self.puntuations.items()

@@ -23,8 +23,9 @@ This file contains a function to get all the installed teams
 """
 
 import os
+import re
 
-from resistencia import configure
+from resistencia import configure, filenames
 
 def strip_svn(list_to_strip):
 
@@ -35,6 +36,21 @@ def strip_svn(list_to_strip):
 
     return list_to_strip
 
+def browse_dir_rules(rules_path):
+    retorno = []
+    
+    for f in os.listdir(rules_path):
+        file_path = os.path.join(rules_path, f)
+
+        if "svn" in f:
+            pass 
+        elif os.path.isdir(file_path):
+            retorno.extend(browse_dir_rules(file_path))
+        elif re.match(r"^reglas(.*?).clp$", f):
+            retorno.append(file_path)
+
+    return retorno                
+
 def get_installed_teams():
     """
     Return a list of the installed teams. We consider a installed team some
@@ -42,33 +58,13 @@ def get_installed_teams():
     'data/teams/rules/reglasYYYY.clp' where XX == YYYY
     """
     base_path = configure.load_configuration()['se_path']
-    rules_path = base_path + '/rules'
-    formations_path = base_path + '/formations'
+    rules_path = os.path.join(base_path, 'rules')
 
-    list_rules = os.listdir(rules_path)
-    list_formations = os.listdir(formations_path)
+    print "rules_path:", rules_path
 
-    for i in range(len(list_rules)):
-        list_rules[i] = list_rules[i].replace('reglas','')
-        list_rules[i] = list_rules[i].replace('.clp','')
-        
-    for i in range(len(list_formations)):
-        list_formations[i] = list_formations[i].replace('equipo', '')
-        list_formations[i] = list_formations[i].replace('.form', '')
+    ficheros_reglas = browse_dir_rules(rules_path)
+    conjuntoTotal = []
+    for f in ficheros_reglas:
+        conjuntoTotal.append((f, filenames.devolverFormacionAsociada(f, True)))
 
-    
-
-    set_rules = set(strip_svn(list_rules))
-    set_formations = set(strip_svn(list_formations))
-
-    set_final = set_rules.intersection(set_formations)
-    list_final = list(set_final)
-
-    res = []
-
-    for i in range(len(list_final)):
-        _rules = rules_path + '/reglas' + list_final[i] + '.clp'
-        _form = formations_path + '/equipo' + list_final[i] + '.form'
-        res.append((_rules, _form))
-
-    return res
+    return conjuntoTotal

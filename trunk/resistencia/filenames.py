@@ -26,6 +26,7 @@ from os import path
 from resistencia.xdg import get_data_path as xdg_data_path
 import datetime
 import types
+import sys
 
 def despejar_ruta (ruta):
     """ Recibe la ruta total o parcial de un fichero y la limpia, dejando solo
@@ -50,15 +51,39 @@ def quitar_prefijo_multiple(varios):
     return tuple(retorno)
     
 def devolverFormacionAsociada(rutaReglas, noPrefijo = False):
-	nombreDespejado = quitar_prefijo(despejar_ruta(rutaReglas))
-	nombreFormacion = "equipo" + nombreDespejado + ".form"
-	rutaFormacion = xdg_data_path('teams/formations/' + nombreFormacion)
-	
-	prefijo = "file://"
-	if noPrefijo:
-		prefijo = ""
-		
-	return prefijo + rutaFormacion
+    # Quitamos lo de 'file://' del principio
+    if "file://" in rutaReglas:
+        rutaReglas = rutaReglas[7:]
+
+    defPathRules = xdg_data_path('teams/rules/')
+
+    # Le quitamos a la ruta del fichero de reglas la parte común
+    if rutaReglas.find(defPathRules) == 0:
+        rutaReglas = rutaReglas[len(defPathRules):]
+    else:
+        print "ERROR: el fichero de reglas no está en la ruta adecuada"
+        sys.exit(-1)
+
+    # Leemos el subdirectorio (si hay alguno)
+    subdirectorio, fichero = path.split(rutaReglas)
+
+    # Despejamos el nombre, quitando la extensión y el prefijo "reglas"
+    nombreDespejado = quitar_prefijo(path.splitext(fichero)[0])
+
+    # Formamos el nuevo nombre
+    nombreFormacion = "equipo" + nombreDespejado + ".form"
+
+    # Formamos la ruta completa
+    rutaFormacion = path.join(xdg_data_path('teams/formations/'), subdirectorio, nombreFormacion)
+
+    if not path.isfile(rutaFormacion):
+        return ""
+
+    prefijo = "file://"
+    if noPrefijo:
+        prefijo = ""
+        
+    return prefijo + rutaFormacion
 
 def extract_simple_name_es (team):
     """Reciving a 2 elements tuple, extract the name of the player.

@@ -235,14 +235,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
                 estadisticas[partido[0][1]]["empatadas"] += 1
 
         if game_type == 'cup':
-            winners_of_this_round = set()
-            for m in results:
-                if m[1] == 1:
-                    winners_of_this_round.add(m[0][0])
-                elif m[1] == -1:
-                    winners_of_this_round.add(m[0][1])
-
-            classifications[roundNumber] = winners_of_this_round
+            pass
         else:
             # "Puntuations" es una palabra que no existe
             classifications = game.get_actual_puntuations()
