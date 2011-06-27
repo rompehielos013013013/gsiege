@@ -8,7 +8,7 @@ if __name__ == '__main__':
 else:
     from resistencia.nls import gettext as _
 
-def leer_comentario(rutaFichero):
+def leer_comentario(rutaFichero, wrap = True):
     try:
         fichero = open(rutaFichero, 'r')
     except IOError:
@@ -18,7 +18,18 @@ def leer_comentario(rutaFichero):
     # Un comentario válido será aquél cuya línea empiece con ; DOC: Lorem ipsum dillum...
     busqueda = re.match(r"^\s*;\s*DOC\s*:\s*(.*)$", primeraLinea)
     if busqueda:
-        return busqueda.group(1)
+        cadena = busqueda.group(1)
+
+        if wrap:
+            nuevaCadena = ""
+            # Vamos a añadir un salto de línea cada X caracteres
+            anchoMaximo = 40
+            for i in range(0, len(cadena), anchoMaximo):
+                nuevaCadena += cadena[i : i + anchoMaximo] + "\n"
+
+            return nuevaCadena[:-1]
+        else:
+            return cadena
 
     return _("No comment")
 

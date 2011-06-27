@@ -2,14 +2,14 @@
 # Traducciones al español para el paquete resistencia-en-cadiz.
 # Copyright (C) 2010 THE resistencia-en-cadiz'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the resistencia-en-cadiz package.
-# Riku the Ronin <pablo.recioquijano@alum.uca.es>, 2010.
+# Riku the Ronin <pablo.recioquijano@alum.uca.es>, 2010, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-24 20:39+0200\n"
-"PO-Revision-Date: 2010-02-12 01:57+0100\n"
+"POT-Creation-Date: 2011-06-27 17:16+0200\n"
+"PO-Revision-Date: 2011-06-27 17:20+0200\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
 "Language: es\n"
@@ -179,7 +179,19 @@ msgid ""
 "original)"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:6 ../data/glade/humanEsDialog.glade.h:8
+#: ../resistencia/gui/contest_dialog.py:114
+msgid "Description"
+msgstr "Descripción"
+
+#: ../data/glade/quickGame.glade.h:6
+msgid "Description of team A"
+msgstr "Descripción del equipo A"
+
+#: ../data/glade/quickGame.glade.h:7
+msgid "Description of team B"
+msgstr "Descripción del equipo B"
+
+#: ../data/glade/quickGame.glade.h:8 ../data/glade/humanEsDialog.glade.h:8
 msgid "Don't save the game"
 msgstr "No guardar la partida"
 
@@ -191,11 +203,11 @@ msgstr "Empate "
 msgid "Draws:"
 msgstr "Empata "
 
-#: ../data/glade/quickGame.glade.h:7 ../data/glade/humanEsDialog.glade.h:9
+#: ../data/glade/quickGame.glade.h:9 ../data/glade/humanEsDialog.glade.h:9
 msgid "Error finded"
 msgstr "Error encontrado"
 
-#: ../data/glade/quickGame.glade.h:8 ../data/glade/humanEsDialog.glade.h:10
+#: ../data/glade/quickGame.glade.h:10 ../data/glade/humanEsDialog.glade.h:10
 msgid "Error parsing a file"
 msgstr "Error leyendo un fichero"
 
@@ -215,7 +227,7 @@ msgid "Final round"
 msgstr "Última ronda"
 
 #: ../resistencia/gui/tests_dialog.py:145
-#: ../resistencia/gui/contest_dialog.py:104
+#: ../resistencia/gui/contest_dialog.py:106
 msgid "Formation"
 msgstr "Formación"
 
@@ -225,9 +237,9 @@ msgstr "Archivo de formación"
 
 #: ../data/glade/main.glade.h:12
 msgid "Gades Siege"
-msgstr ""
+msgstr "Gades Siege"
 
-#: ../data/glade/quickGame.glade.h:9
+#: ../data/glade/quickGame.glade.h:11
 msgid "Hide pieces's values"
 msgstr "Esconder el valor de las piezas"
 
@@ -264,9 +276,13 @@ msgid "Max value piece dies at turn:"
 msgstr "La pieza de mas valor muere en el turno:"
 
 #: ../resistencia/gui/tests_dialog.py:143
-#: ../resistencia/gui/contest_dialog.py:102
+#: ../resistencia/gui/contest_dialog.py:104
 msgid "Name"
 msgstr "Nombre"
+
+#: ../libguadalete/parsear_fichero_reglas.py:34
+msgid "No comment"
+msgstr "Sin comentarios"
 
 #: ../data/glade/testResults.glade.h:5
 msgid "Number of games:"
@@ -284,13 +300,13 @@ msgstr "Número de puntos"
 msgid "Number of repetitions"
 msgstr "Número de repeticiones"
 
-#: ../resistencia/tests/tests.py:89 ../data/glade/quickGame.glade.h:10
+#: ../resistencia/tests/tests.py:89 ../data/glade/quickGame.glade.h:12
 #: ../data/glade/testDialog.glade.h:6 ../data/glade/contest.glade.h:8
 #: ../data/glade/humanEsDialog.glade.h:11
 msgid "Number of turns"
 msgstr "Número de turnos"
 
-#: ../data/glade/quickGame.glade.h:11
+#: ../data/glade/quickGame.glade.h:13
 msgid "Only result"
 msgstr "Solo los resultados"
 
@@ -326,18 +342,18 @@ msgstr ""
 msgid "Previous games"
 msgstr "Partidas antiguas"
 
-#: ../data/glade/main.glade.h:16 ../data/glade/quickGame.glade.h:12
+#: ../data/glade/main.glade.h:16 ../data/glade/quickGame.glade.h:14
 msgid "Quick game"
 msgstr "Partida rápida"
 
-#: ../resistencia/gui/round_results.py:176
+#: ../resistencia/gui/round_results.py:180
 msgid "Reason"
 msgstr "Razón"
 
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
-#: ../resistencia/gui/round_results.py:159
-#: ../resistencia/gui/round_results.py:162
+#: ../resistencia/gui/round_results.py:163
+#: ../resistencia/gui/round_results.py:166
 msgid "Rests"
 msgstr "Descansa"
 
@@ -345,7 +361,7 @@ msgstr "Descansa"
 msgid "Result"
 msgstr "Resultado"
 
-#: ../data/glade/resultNotifier.glade.h:1 ../data/glade/quickGame.glade.h:13
+#: ../data/glade/resultNotifier.glade.h:1 ../data/glade/quickGame.glade.h:15
 #: ../data/glade/humanEsDialog.glade.h:13
 msgid "Result of the game"
 msgstr "Resultados del juego"
@@ -359,7 +375,7 @@ msgid "Results of the round"
 msgstr "Resultados de la ronda"
 
 #: ../resistencia/gui/tests_dialog.py:144
-#: ../resistencia/gui/contest_dialog.py:103
+#: ../resistencia/gui/contest_dialog.py:105
 #: ../resistencia/gui/settings_dialog.py:83
 msgid "Rules"
 msgstr "Reglas"
@@ -384,11 +400,11 @@ msgstr "Seleccionar un equipo al azar"
 msgid "Select formation for computer team"
 msgstr "Seleccionar formación para la máquina"
 
-#: ../data/glade/quickGame.glade.h:14
+#: ../data/glade/quickGame.glade.h:16
 msgid "Select formation for team A"
 msgstr "Seleccionar formación para el equipo A"
 
-#: ../data/glade/quickGame.glade.h:15
+#: ../data/glade/quickGame.glade.h:17
 msgid "Select formation for team B"
 msgstr "Seleccionar formación para el equipo B"
 
@@ -428,31 +444,31 @@ msgstr ""
 msgid "System Expert for computer team"
 msgstr "Reglas para la máquina"
 
-#: ../data/glade/quickGame.glade.h:16
+#: ../data/glade/quickGame.glade.h:18
 msgid "System Expert for team A"
 msgstr "Reglas para el equipo A"
 
-#: ../data/glade/quickGame.glade.h:17
+#: ../data/glade/quickGame.glade.h:19
 msgid "System Expert for team B"
 msgstr "Reglas para el equipo B"
 
-#: ../resistencia/gui/round_results.py:152
-#: ../resistencia/gui/round_results.py:171
+#: ../resistencia/gui/round_results.py:156
+#: ../resistencia/gui/round_results.py:175
 msgid "Team A"
 msgstr "Equipo A"
 
-#: ../resistencia/gui/round_results.py:153
-#: ../resistencia/gui/round_results.py:172
+#: ../resistencia/gui/round_results.py:157
+#: ../resistencia/gui/round_results.py:176
 msgid "Team B"
 msgstr "Equipo B"
 
-#: ../resistencia/gui/round_results.py:120
+#: ../resistencia/gui/round_results.py:124
 msgid "Team name"
 msgstr "Nombre del equipo"
 
 #: ../data/glade/teamSelector.glade.h:4
 msgid "Team selector"
-msgstr ""
+msgstr "Selector de equipos"
 
 #: ../resistencia/gui/settings_dialog.py:84
 msgid "Teams"
@@ -528,11 +544,11 @@ msgstr "No ha seleccionado ningún fichero para tu equipo"
 msgid "You have no selected file for the Expert System"
 msgstr "No ha seleccionado el fichero de reglas"
 
-#: ../data/glade/quickGame.glade.h:18
+#: ../data/glade/quickGame.glade.h:20
 msgid "You have no selected file for the Expert System A"
 msgstr "No ha seleccionado el fichero de reglas para el equipo A"
 
-#: ../data/glade/quickGame.glade.h:19
+#: ../data/glade/quickGame.glade.h:21
 msgid "You have no selected file for the Expert System B"
 msgstr "No ha seleccionado el fichero de reglas para el equipo B"
 
@@ -540,7 +556,7 @@ msgstr "No ha seleccionado el fichero de reglas para el equipo B"
 msgid "You have no selected file for the Team"
 msgstr "No ha seleccionado el fichero de formación"
 
-#: ../data/glade/quickGame.glade.h:20
+#: ../data/glade/quickGame.glade.h:22
 msgid "You have no selected file for the Team A"
 msgstr "No ha seleccionado el fichero de formación para el equipo A"
 
@@ -552,7 +568,7 @@ msgstr "No ha seleccionado el fichero de reglas para la máquina"
 msgid "You have no selected file for the computer's team"
 msgstr "No ha seleccionado el fichero de reglas para la máquina"
 
-#: ../data/glade/quickGame.glade.h:21
+#: ../data/glade/quickGame.glade.h:23
 msgid "You have no selected file for the team B"
 msgstr "No ha seleccionado el fichero de formación para el equipo B"
 
