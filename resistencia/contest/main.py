@@ -157,10 +157,10 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
     results = None
 
     # Cada elemento tendrá una tupla de 3: ganadas, empatadas y perdidas
-    estadisticasLiga = {"aux_ghost_team": {"ganadas":0, "empatadas":0, "perdidas":0}}
+    estadisticas = {"aux_ghost_team": {"ganadas":0, "empatadas":0, "perdidas":0}}
 
     for equipo in contest.generate_key_names(teams).keys():
-        estadisticasLiga[equipo] = {"ganadas":0, "empatadas":0, "perdidas":0};
+        estadisticas[equipo] = {"ganadas":0, "empatadas":0, "perdidas":0};
 
     # Mientras no se haya completado el juego
     while not game.completed() and not band and not controlPartida.flagCancelarCampeonato:
@@ -169,27 +169,12 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
 
         if results != None:
 
-            for partido in results:
-                if partido[1] == 1:
-                    estadisticasLiga[partido[0][0]]["ganadas"] += 1
-                    estadisticasLiga[partido[0][1]]["perdidas"] += 1
-                elif partido[1] == -1:
-                    estadisticasLiga[partido[0][1]]["ganadas"] += 1
-                    estadisticasLiga[partido[0][0]]["perdidas"] += 1                    
-                else:
-                    estadisticasLiga[partido[0][0]]["empatadas"] += 1
-                    estadisticasLiga[partido[0][1]]["empatadas"] += 1
-
-            print "RESULTS:"
-            pprint.pprint(results)
-            print "<<"
-
             # Cargamos el diálogo de resultados
             R = round_results.roundResults(classifications, results,
                                            game.get_prev_round_number() + 1,
                                            game.get_number_of_rounds(),
                                            show_classifications = (game_type != 'cup'),
-                                           stats = estadisticasLiga,
+                                           stats = estadisticas,
                                            show_top_teams = True,
                                            next_matches = game.matchs[game.get_round_number()])
 
@@ -238,6 +223,17 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
         # Actualizamos el fichero del log
         update_log_round(log_file_name, results, roundNumber)
 
+        for partido in results:
+            if partido[1] == 1:
+                estadisticas[partido[0][0]]["ganadas"] += 1
+                estadisticas[partido[0][1]]["perdidas"] += 1
+            elif partido[1] == -1:
+                estadisticas[partido[0][1]]["ganadas"] += 1
+                estadisticas[partido[0][0]]["perdidas"] += 1                    
+            else:
+                estadisticas[partido[0][0]]["empatadas"] += 1
+                estadisticas[partido[0][1]]["empatadas"] += 1
+
         if game_type == 'cup':
             winners_of_this_round = set()
             for m in results:
@@ -264,7 +260,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
                                        game.get_number_of_rounds(),
                                        show_classifications = (game_type != 'cup'),
                                        show_top_teams = True,
-                                       stats = estadisticasLiga)
+                                       stats = estadisticas)
 
         # Mostramos el diálogo de resultados
         button_pressed = R.result_dialog.run()
@@ -274,17 +270,24 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
             
     if not band and not controlPartida.flagCancelarCampeonato:
         if game_type == 'cup':
+            cadena_clasificacion = "** CLASIFICACIÓN FINAL\n"
+
+            # A partir de las estadísticas, genera una lista de tuplas (jugador, númeroVictorias) ordenadas
+            numVictorias = sorted([(x,estadisticas[x]["ganadas"]) for x in estadisticas if x != "aux_ghost_team"], key=lambda x:x[1], reverse = True)
+            posicionPodio = 0
+            lastNumVictorias = 0
+
+            for i, e in enumerate(numVictorias):
+                if e[1] != lastNumVictorias:
+                    posicionPodio += 1
+                    lastNumVictorias = e[1]
+
+                cadena_clasificacion += "%i - %s \n" % (posicionPodio, e[0])
+
+            print cadena_clasificacion
+
             log_file = open(log_file_name, 'a')
-            log_file.write("** CLASIFICACIÓN FINAL\n")
-            processed_players = set()
-
-            for i in reversed(classifications.keys()):
-                currentSet = classifications[i].difference(processed_players)
-                for elm in currentSet:
-                    log_file.write(str(game.get_number_of_rounds() - i) + ' - ' + elm + "\n")
-
-                processed_players.update(currentSet)
-
+            log_file.write(cadena_clasificacion)
             log_file.close()
 
             dibujoClasificacion = dibujo_clasificacion.DibujoClasificacion(game)
