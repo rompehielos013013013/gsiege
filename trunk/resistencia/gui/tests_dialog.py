@@ -30,7 +30,7 @@ from resistencia import configure, xdg, filenames
 from resistencia.tests import tests, selection
 from resistencia.nls import gettext as _
 from resistencia.gui import progress_bar_dialog as pbs
-
+from libguadalete.parsear_fichero_reglas import leer_comentario
 import tests_result
 
 def _clean_dictionary(d):
@@ -88,7 +88,7 @@ class testDialog:
         if not self.teams.has_key(name):
             self.teams[name] = (self.rules_selected_file, self.formation_selected_file)
 
-            self.list_store.append((name, rules_file_name, formation_file_name))
+            self.list_store.append((name, rules_file_name, formation_file_name, leer_comentario(self.rules_selected_file, wrap = False)))
             if len(self.teams) == 2:
                 self.start_button.set_sensitive(True)
     # ---
@@ -150,6 +150,7 @@ class testDialog:
         self.addColumn(self.sName, self.cName)
         self.addColumn(self.sRules, self.cRules)
         self.addColumn(self.sFormation, self.cFormation)
+        self.addColumn(_("Description"), 3)
 
         self.list_store = builder.get_object("list_expert_system")
         #-----------------------------
@@ -172,7 +173,8 @@ class testDialog:
         self.progress_bar_dialog = self.progress_bar.progress_bar_dialog
 
         self.check_default_formations = builder.get_object('check_default_formations')
-        
+        self.label_description = builder.get_object('label_description')
+
         builder.connect_signals(self)
     
     def on_tests_dialog_close(self, widget, data=None):
@@ -185,10 +187,11 @@ class testDialog:
         self.rules_main_team = widget.get_uri().replace('file://','')
         
         formacionAsociada = filenames.devolverFormacionAsociada(widget.get_uri())
-        
+        self.label_description.set_label(leer_comentario(widget.get_filename()))
+
         if formacionAsociada != None:			
-			self.btn_formation.set_uri(formacionAsociada)
-			self.formation_main_team = self.btn_formation.get_uri().replace('file://','')
+            self.btn_formation.set_uri(formacionAsociada)
+            self.formation_main_team = self.btn_formation.get_uri().replace('file://','')
     
     def on_btn_filechooser_formation_file_set(self, widget, data=None):
         self.formation_main_team = widget.get_uri().replace('file://','')
