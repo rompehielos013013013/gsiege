@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-28 11:55+0200\n"
+"POT-Creation-Date: 2011-06-28 13:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgid "Number of pieces"
 msgstr ""
 
 #: ../resistencia/gui/round_results.py:74
-msgid "Can't handle draw, team A wins"
+msgid "Can't handle draw, team B wins"
 msgstr ""
 
 #: ../resistencia/gui/round_results.py:124
@@ -130,11 +130,11 @@ msgstr ""
 msgid "Turn when max value piece died"
 msgstr ""
 
-#: ../resistencia/contest/main.py:47
+#: ../resistencia/contest/main.py:49
 msgid "Checking teams..."
 msgstr ""
 
-#: ../resistencia/contest/main.py:62
+#: ../resistencia/contest/main.py:64
 #, python-format
 msgid ""
 "The rules file \n"
@@ -144,7 +144,7 @@ msgid ""
 "Check program output for more information."
 msgstr ""
 
-#: ../resistencia/contest/main.py:234
+#: ../resistencia/contest/main.py:257
 msgid "Running the contest"
 msgstr ""
 

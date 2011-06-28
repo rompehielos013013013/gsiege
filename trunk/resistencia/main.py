@@ -30,6 +30,7 @@ import gettext
 import gtk
 import gtk.glade
 import os
+import logging
 
 APP = 'resistencia1812'
 DIR = os.path.join(os.getcwd(),"po")  #'/usr/share/locale'
@@ -56,6 +57,9 @@ configure.load_configuration()
 def main():
     "Main function"
 
+    logging.basicConfig(format='[%(filename)s (%(lineno)d) %(funcName)s] [%(levelname)s] %(message)s', filename='log_gsiege', level=logging.DEBUG)
+    logging.info("#" * 40)
+    logging.info("Init logging")
     # Crea una nueva instancia de la clase Resistencia, que guarda todos los
     # cuadros de diálogo
     editor = main_window.Resistencia()
@@ -65,6 +69,7 @@ def main():
 
     # Lanza el bucle de GTK (?)
     gtk.main()
+    logging.info("End logging")
     
 if __name__ == "__main__":
     main()

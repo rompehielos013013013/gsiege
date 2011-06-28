@@ -45,8 +45,6 @@ if 'linux' in sys.platform:
 
 
 __basedir__ = os.path.dirname(os.path.realpath(__file__))
-print "Base dir: " + __basedir__
-print "File name: " + __file__
 
 # WTF?
 if not os.path.exists(os.path.join(__basedir__, __file__)):

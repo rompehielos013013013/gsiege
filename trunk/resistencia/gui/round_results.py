@@ -71,7 +71,7 @@ class roundResults:
             elif e[2] == "piezas":
                 reason = _("Number of pieces")
             else:
-                reason = _("Can't handle draw, team A wins")
+                reason = _("Can't handle draw, team B wins")
 
             if e[0][0] == "aux_ghost_team":
                 teamA = _draw_string(teamA, win_color)
