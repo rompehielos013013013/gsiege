@@ -54,7 +54,7 @@
                                 <property name="layout_style">start</property>
                                 <child>
                                   <object class="GtkRadioButton" id="radio_league">
-                                    <property name="label" translatable="yes">All-play-all tournament</property>
+                                    <property name="label" translatable="yes">Round-robin league</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -70,7 +70,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkRadioButton" id="radio_cup">
-                                    <property name="label" translatable="yes">Single-elimination tournament</property>
+                                    <property name="label" translatable="yes">Knockout playoff</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -86,8 +86,8 @@
                                 </child>
                                 <child>
                                   <object class="GtkRadioButton" id="radio_playoff">
-                                    <property name="label" translatable="yes">Playoff: 
-all-play-all, then single-eliminaton</property>
+                                    <property name="label" translatable="yes">Two stages tournament:
+league + playoff</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -135,7 +135,7 @@ all-play-all, then single-eliminaton</property>
                                     <property name="layout_style">start</property>
                                     <child>
                                       <object class="GtkCheckButton" id="check_backround">
-                                        <property name="label" translatable="yes">Back round</property>
+                                        <property name="label" translatable="yes">Two legs</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>

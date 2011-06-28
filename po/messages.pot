@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-27 17:16+0200\n"
+"POT-Creation-Date: 2011-06-28 11:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,12 +33,14 @@ msgstr ""
 msgid "Formation"
 msgstr ""
 
-#: ../resistencia/gui/tests_dialog.py:171
-msgid "Running the test"
+#: ../resistencia/gui/tests_dialog.py:153
+#: ../resistencia/gui/contest_dialog.py:114 ../data/glade/testDialog.glade.h:4
+#: ../data/glade/humanEsDialog.glade.h:8
+msgid "Description"
 msgstr ""
 
-#: ../resistencia/gui/contest_dialog.py:114
-msgid "Description"
+#: ../resistencia/gui/tests_dialog.py:172
+msgid "Running the test"
 msgstr ""
 
 #: ../resistencia/gui/notify_result.py:54
@@ -115,8 +117,8 @@ msgid "Result"
 msgstr ""
 
 #: ../resistencia/tests/tests.py:89 ../data/glade/quickGame.glade.h:12
-#: ../data/glade/testDialog.glade.h:6 ../data/glade/contest.glade.h:8
-#: ../data/glade/humanEsDialog.glade.h:11
+#: ../data/glade/testDialog.glade.h:7 ../data/glade/contest.glade.h:7
+#: ../data/glade/humanEsDialog.glade.h:12
 msgid "Number of turns"
 msgstr ""
 
@@ -128,7 +130,21 @@ msgstr ""
 msgid "Turn when max value piece died"
 msgstr ""
 
-#: ../resistencia/contest/main.py:218
+#: ../resistencia/contest/main.py:47
+msgid "Checking teams..."
+msgstr ""
+
+#: ../resistencia/contest/main.py:62
+#, python-format
+msgid ""
+"The rules file \n"
+"<b>&lt;%s&gt;</b>\n"
+" has errors. This team will be out of the competition.\n"
+"\n"
+"Check program output for more information."
+msgstr ""
+
+#: ../resistencia/contest/main.py:234
 msgid "Running the contest"
 msgstr ""
 
@@ -143,41 +159,12 @@ msgstr ""
 msgid "Error parsing the file "
 msgstr ""
 
-#: ../libguadalete/parsear_fichero_reglas.py:34
+#: ../libguadalete/parsear_fichero_reglas.py:38
 msgid "No comment"
 msgstr ""
 
 #: ../libguadalete/libguadalete.py:136 ../libguadalete/libguadalete.py:151
 msgid "   - Loading "
-msgstr ""
-
-#: ../data/glade/teamSelector.glade.h:1 ../data/glade/testDialog.glade.h:3
-#: ../data/glade/contest.glade.h:3 ../data/glade/tree.glade.h:1
-msgid "<b>Selected expert systems</b>"
-msgstr ""
-
-#: ../data/glade/teamSelector.glade.h:2 ../data/glade/testDialog.glade.h:8
-#: ../data/glade/contest.glade.h:13 ../data/glade/tree.glade.h:3
-msgid "Select the formation file"
-msgstr ""
-
-#: ../data/glade/teamSelector.glade.h:3 ../data/glade/testDialog.glade.h:9
-#: ../data/glade/contest.glade.h:14 ../data/glade/tree.glade.h:4
-msgid "Select the rules file"
-msgstr ""
-
-#: ../data/glade/teamSelector.glade.h:4
-msgid "Team selector"
-msgstr ""
-
-#: ../data/glade/teamSelector.glade.h:5 ../data/glade/testDialog.glade.h:11
-#: ../data/glade/contest.glade.h:16
-msgid "Use all teams installed"
-msgstr ""
-
-#: ../data/glade/teamSelector.glade.h:6 ../data/glade/testDialog.glade.h:12
-#: ../data/glade/contest.glade.h:17
-msgid "Use default formations"
 msgstr ""
 
 #: ../data/glade/main.glade.h:1
@@ -249,7 +236,7 @@ msgid "You have to select a file"
 msgstr ""
 
 #: ../data/glade/resultNotifier.glade.h:1 ../data/glade/quickGame.glade.h:15
-#: ../data/glade/humanEsDialog.glade.h:13
+#: ../data/glade/humanEsDialog.glade.h:14
 msgid "Result of the game"
 msgstr ""
 
@@ -282,15 +269,15 @@ msgstr ""
 msgid "Description of team B"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:8 ../data/glade/humanEsDialog.glade.h:8
+#: ../data/glade/quickGame.glade.h:8 ../data/glade/humanEsDialog.glade.h:9
 msgid "Don't save the game"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:9 ../data/glade/humanEsDialog.glade.h:9
+#: ../data/glade/quickGame.glade.h:9 ../data/glade/humanEsDialog.glade.h:10
 msgid "Error finded"
 msgstr ""
 
-#: ../data/glade/quickGame.glade.h:10 ../data/glade/humanEsDialog.glade.h:10
+#: ../data/glade/quickGame.glade.h:10 ../data/glade/humanEsDialog.glade.h:11
 msgid "Error parsing a file"
 msgstr ""
 
@@ -342,27 +329,50 @@ msgstr ""
 msgid "<b>Options</b>"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:4
-msgid "Formation file"
+#: ../data/glade/testDialog.glade.h:3 ../data/glade/contest.glade.h:3
+#: ../data/glade/tree.glade.h:1
+msgid "<b>Selected expert systems</b>"
 msgstr ""
 
 #: ../data/glade/testDialog.glade.h:5
+msgid "Formation file"
+msgstr ""
+
+#: ../data/glade/testDialog.glade.h:6
 msgid "Number of repetitions"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:7
+#: ../data/glade/testDialog.glade.h:8
 msgid "Rules file"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:10
+#: ../data/glade/testDialog.glade.h:9 ../data/glade/contest.glade.h:11
+#: ../data/glade/tree.glade.h:3
+msgid "Select the formation file"
+msgstr ""
+
+#: ../data/glade/testDialog.glade.h:10 ../data/glade/contest.glade.h:12
+#: ../data/glade/tree.glade.h:4
+msgid "Select the rules file"
+msgstr ""
+
+#: ../data/glade/testDialog.glade.h:11
 msgid "Tests expert system"
 msgstr ""
 
-#: ../data/glade/testDialog.glade.h:13
-msgid "You have no selected file for the Expert System"
+#: ../data/glade/testDialog.glade.h:12 ../data/glade/contest.glade.h:16
+msgid "Use all teams installed"
+msgstr ""
+
+#: ../data/glade/testDialog.glade.h:13 ../data/glade/contest.glade.h:17
+msgid "Use default formations"
 msgstr ""
 
 #: ../data/glade/testDialog.glade.h:14
+msgid "You have no selected file for the Expert System"
+msgstr ""
+
+#: ../data/glade/testDialog.glade.h:15
 msgid "You have no selected file for the Team"
 msgstr ""
 
@@ -375,37 +385,37 @@ msgid "<b>Generals</b>"
 msgstr ""
 
 #: ../data/glade/contest.glade.h:4
-msgid "All-play-all tournament"
-msgstr ""
-
-#: ../data/glade/contest.glade.h:5
-msgid "Back round"
-msgstr ""
-
-#: ../data/glade/contest.glade.h:6
 msgid "Contest settings"
 msgstr ""
 
-#: ../data/glade/contest.glade.h:7
+#: ../data/glade/contest.glade.h:5
+msgid "Knockout playoff"
+msgstr ""
+
+#: ../data/glade/contest.glade.h:6
 msgid "Main configuration"
 msgstr ""
 
-#: ../data/glade/contest.glade.h:9
+#: ../data/glade/contest.glade.h:8
 msgid "Only results"
 msgstr ""
 
-#: ../data/glade/contest.glade.h:10
+#: ../data/glade/contest.glade.h:9
 msgid "Players"
 msgstr ""
 
-#: ../data/glade/contest.glade.h:11
-msgid ""
-"Playoff: \n"
-"all-play-all, then single-eliminaton"
+#: ../data/glade/contest.glade.h:10
+msgid "Round-robin league"
 msgstr ""
 
-#: ../data/glade/contest.glade.h:15
-msgid "Single-elimination tournament"
+#: ../data/glade/contest.glade.h:13
+msgid "Two legs"
+msgstr ""
+
+#: ../data/glade/contest.glade.h:14
+msgid ""
+"Two stages tournament:\n"
+"league + playoff"
 msgstr ""
 
 #: ../data/glade/results.glade.h:1
@@ -499,35 +509,35 @@ msgstr ""
 msgid "As team B"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:12
+#: ../data/glade/humanEsDialog.glade.h:13
 msgid "Play against an expert system"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:14
+#: ../data/glade/humanEsDialog.glade.h:15
 msgid "Select a random team"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:15
+#: ../data/glade/humanEsDialog.glade.h:16
 msgid "Select formation for computer team"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:16
+#: ../data/glade/humanEsDialog.glade.h:17
 msgid "Select formation for your team"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:17
+#: ../data/glade/humanEsDialog.glade.h:18
 msgid "System Expert for computer team"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:18
+#: ../data/glade/humanEsDialog.glade.h:19
 msgid "You have no selected any file for your team"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:19
+#: ../data/glade/humanEsDialog.glade.h:20
 msgid "You have no selected file for the computer's Expert System"
 msgstr ""
 
-#: ../data/glade/humanEsDialog.glade.h:20
+#: ../data/glade/humanEsDialog.glade.h:21
 msgid "You have no selected file for the computer's team"
 msgstr ""
 
