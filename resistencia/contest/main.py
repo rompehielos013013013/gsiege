@@ -25,7 +25,7 @@ import sys
 import gtk
 
 from resistencia import configure, filenames, xdg, colores
-from resistencia.gui import round_results
+from resistencia.gui import round_results, notify_result
 from resistencia.gui import progress_bar_dialog as pbs
 from resistencia.nls import gettext as _
 
@@ -43,12 +43,36 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
                  num_turns=120):
 
     print "#### INIT CONTEST"
-    
+
+    progress_bar = pbs.ProgressBarDialog(None, _('Checking teams...'))
+    progress_bar_dialog = progress_bar.progress_bar_dialog
+    progress_bar.set_num_elements(len(teams))
+    progress_bar_dialog.show()
+
+    while gtk.events_pending():
+        gtk.main_iteration(False)    
+
+    bannedTeams = []
     for equipo in teams:
         print colores.ROJO + "Probando equipo:\n\t%s\n\t%s" % equipo, colores.ENDC
-        probar_equipo(equipo)
+        try:
+            probar_equipo(equipo)
+        except:
+            progress_bar_dialog.hide()
+            notificacion = notify_result.SimpleNotify(_("The rules file \n%s\n has errors. This team will be out of the competition.\n\nCheck program output for more information.") % equipo[0])
+            notificacion.dlg_result.run()
+            progress_bar_dialog.show()
+            bannedTeams.append(equipo)
+            
+        progress_bar.pulse()
+        
+        while gtk.events_pending():
+            gtk.main_iteration(False)    
 
-    return
+    progress_bar_dialog.hide()
+
+    for t in bannedTeams:
+        teams.remove(t)
 
     controlPartida.restaurarCampeonato()
 
