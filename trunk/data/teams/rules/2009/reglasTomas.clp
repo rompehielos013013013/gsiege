@@ -268,7 +268,7 @@
 	(not (ficha (equipo "A") (num J61) (puntos ?px) (pos-x ?xx) (pos-y ?yx)))
 
 	(test (= ?y1 ?y2))
-	(test (= ?x1 (- ?x2 1))
+	(test (= ?x1 (- ?x2 1)))
 	(tiempo ?t)
 	=>
 	(assert (mueve (num ?n1) (mov 1) (tiempo ?t))))
