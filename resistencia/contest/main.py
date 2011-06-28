@@ -24,11 +24,12 @@ import types
 import sys
 import gtk
 
-from resistencia import configure, filenames, xdg
+from resistencia import configure, filenames, xdg, colores
 from resistencia.gui import round_results
 from resistencia.gui import progress_bar_dialog as pbs
-
 from resistencia.nls import gettext as _
+
+from libguadalete.parsear_fichero_reglas import probar_equipo
 
 import league
 import contest
@@ -43,6 +44,12 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
 
     print "#### INIT CONTEST"
     
+    for equipo in teams:
+        print colores.ROJO + "Probando equipo:\n\t%s\n\t%s" % equipo, colores.ENDC
+        probar_equipo(equipo)
+
+    return
+
     controlPartida.restaurarCampeonato()
 
     if contest_format == 'playoff':
