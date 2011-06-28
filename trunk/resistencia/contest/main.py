@@ -59,7 +59,7 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
             probar_equipo(equipo)
         except:
             progress_bar_dialog.hide()
-            notificacion = notify_result.SimpleNotify(_("The rules file \n%s\n has errors. This team will be out of the competition.\n\nCheck program output for more information.") % equipo[0])
+            notificacion = notify_result.SimpleNotify(_("The rules file \n<b>&lt;%s&gt;</b>\n has errors. This team will be out of the competition.\n\nCheck program output for more information.") % equipo[0])
             notificacion.dlg_result.run()
             progress_bar_dialog.show()
             bannedTeams.append(equipo)
