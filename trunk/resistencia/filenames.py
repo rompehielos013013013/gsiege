@@ -50,25 +50,27 @@ def quitar_prefijo_multiple(varios):
 
     return tuple(retorno)
     
-def devolverFormacionAsociada(rutaReglas, noPrefijo = False):
-    # Quitamos lo de 'file://' del principio
-    if "file://" in rutaReglas:
-        rutaReglas = rutaReglas[7:]
 
+def dividir_ruta(rutaReglas):
     defPathRules = xdg_data_path('teams/rules/')
 
     # Le quitamos a la ruta del fichero de reglas la parte común
-    if rutaReglas.find(defPathRules) == 0:
-        rutaReglas = rutaReglas[len(defPathRules):]
-    else:
-        print "ERROR: el fichero de reglas no está en la ruta adecuada"
-        sys.exit(-1)
-
+    rutaReglas = rutaReglas[len(defPathRules):]
+    
     # Leemos el subdirectorio (si hay alguno)
     subdirectorio, fichero = path.split(rutaReglas)
 
     # Despejamos el nombre, quitando la extensión y el prefijo "reglas"
     nombreDespejado = quitar_prefijo(path.splitext(fichero)[0])
+
+    return (subdirectorio, nombreDespejado)
+
+def devolverFormacionAsociada(rutaReglas, noPrefijo = False):
+    # Quitamos lo de 'file://' del principio
+    if "file://" in rutaReglas:
+        rutaReglas = rutaReglas[7:]
+
+    subdirectorio, nombreDespejado = dividir_ruta(rutaReglas)
 
     # Formamos el nuevo nombre
     nombreFormacion = "equipo" + nombreDespejado + ".form"
@@ -94,11 +96,10 @@ def extract_simple_name_es (team):
     if not (type(team) == types.TupleType) or not (len(team) == 2):
         str_error = 'Variable must be a pair '
         raise ValueError(str_error)
+    
+    subDirectorio, nombreDespejado = dividir_ruta(team[0])
 
-    i = team[1].find("/equipo")
-    j = team[1].find(".clp")
-
-    return (team[1])[i+7:j]
+    return subDirectorio+nombreDespejado
 
 def extract_name_expert_system(team):
     """Reciving a 2 elements tuple, extract the name of the player
@@ -111,12 +112,14 @@ def extract_name_expert_system(team):
         str_error = 'Variable must be a pair '
         raise ValueError(str_error)
     
+    subDirectorio, nombreDespejado = dividir_ruta(team[0])
+
     i_1 = team[0].find("/reglas")
     j_1 = team[0].find(".clp")
     i_2 = team[1].find("/equipo")
     j_2 = team[1].find(".form")
     
-    return (team[0])[i_1+7:j_1] + (team[1])[i_2+7:j_2]
+    return subDirectorio + (team[0])[i_1+7:j_1] + (team[1])[i_2+7:j_2]
 
 def extract_names_from_file (filename):
     """

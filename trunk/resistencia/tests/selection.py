@@ -60,11 +60,14 @@ def get_installed_teams():
     base_path = configure.load_configuration()['se_path']
     rules_path = os.path.join(base_path, 'rules')
 
-    print "rules_path:", rules_path
-
     ficheros_reglas = browse_dir_rules(rules_path)
     conjuntoTotal = []
-    for f in ficheros_reglas:
-        conjuntoTotal.append((f, filenames.devolverFormacionAsociada(f, True)))
+    for this_regla in ficheros_reglas:
+        this_formacion = filenames.devolverFormacionAsociada(this_regla, True)
+        if this_formacion != "":
+            conjuntoTotal.append((this_regla, this_formacion))
+        else:
+            print "ATENCIÓN: no se encontró el fichero de formación para el fichero de reglas <%s>" % this_regla
 
+    print "* %i equipos instalados en el sistema" % len(conjuntoTotal)
     return conjuntoTotal

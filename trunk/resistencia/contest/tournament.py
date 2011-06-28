@@ -40,7 +40,7 @@ def closest_power2(num):
 
 def _auto_pairings(equiposIniciales):
 
-    # print "AUTO PAIRINGS #####"
+    print "Auto pairings de", len(equiposIniciales), "equipos"
     # pprint.pprint(equiposIniciales)
     
     # Guardamos el número de equipos
@@ -89,6 +89,7 @@ def _extract_teams_from_pairing(elements):
 
 class Tournament(contest.Contest):
     def __init__(self, teams, num_turns, pairings_done=False, log_folder = None):
+            
         self.matchs = []
         self.teams = []
         self.round_winners = []
@@ -103,13 +104,16 @@ class Tournament(contest.Contest):
         else:
             self.teams = teams
 
+        print "len(teams):", len(teams)
+
         self.translator = contest.generate_key_names(self.teams)
         self.keys = []
 
         for t in self.translator:
             self.keys.append(t)
 
-            random.shuffle(self.keys)
+        
+        random.shuffle(self.keys)
 
         if not pairings_done:
             self.matchs.append(_auto_pairings(self.keys))
