@@ -44,6 +44,8 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
 
     print "#### INIT CONTEST"
 
+    teams = _clean_dictionary(teams)
+
     progress_bar = pbs.ProgressBarDialog(None, _('Checking teams...'))
     progress_bar_dialog = progress_bar.progress_bar_dialog
     progress_bar.set_num_elements(len(teams))
@@ -54,7 +56,7 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
 
     bannedTeams = []
     for equipo in teams:
-        print colores.ROJO + "Probando equipo:\n\t%s\n\t%s" % equipo, colores.ENDC
+        print colores.ROJO + "Probando equipo:\n", equipo, colores.ENDC
         try:
             probar_equipo(equipo)
         except:
@@ -77,9 +79,9 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
     controlPartida.restaurarCampeonato()
 
     if contest_format == 'playoff':
-        _init_playoff(_clean_dictionary(teams), fast, num_turns, back_round)
+        _init_playoff(teams, fast, num_turns, back_round)
     else:
-        _init_game(contest_format, _clean_dictionary(teams), fast, num_turns, back_round)
+        _init_game(contest_format, teams, fast, num_turns, back_round)
 
     print "#### END CONTEST"
 
@@ -109,7 +111,7 @@ def update_log_round(log_file, results, round_number):
 
     tournament_file.close()
 
-def update_log_end(log_file_name, results):
+def update_log_ending_league(log_file_name, results):
     log_file = open(log_file_name, 'a')
     log_file.write('** CLASIFICACIÓN FINAL\n')
 
@@ -117,6 +119,29 @@ def update_log_end(log_file_name, results):
         log_file.write('{0:2d} - {1}\n'.format(clasificado[1], clasificado[0]))
 
     log_file.close()
+    
+def update_log_ending_tournament(log_file_name, estadisticas):
+    cadena_clasificacion = "** CLASIFICACIÓN FINAL\n"
+
+    numVictorias = sorted([(x,estadisticas[x]["ganadas"]) for x in estadisticas if x != "aux_ghost_team"], key=lambda x:x[1], reverse = True)
+    
+    posicionPodio = 0
+    lastNumVictorias = 0
+
+    for i, e in enumerate(numVictorias):
+        if e[1] != lastNumVictorias:
+            if posicionPodio == 0:
+                posicionPodio = 1
+            else:   
+                posicionPodio *= 2
+                
+            lastNumVictorias = e[1]
+
+        cadena_clasificacion += "%i - %s \n" % (posicionPodio, e[0])
+
+    log_file = open(log_file_name, 'a')
+    log_file.write(cadena_clasificacion)
+    log_file.close()    
 
 def generate_log_file_name(prefix='pachanga', base_path = None):
     if base_path == None:
@@ -179,8 +204,6 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
         game = league.League(teams, num_turns, back_round, log_folder = log_folder_name)
 
     band = False
-
-
 
     # Contenedor para clasificaciones
     classifications = {}
@@ -294,33 +317,15 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
             
     if not band and not controlPartida.flagCancelarCampeonato:
         if game_type == 'cup':
-            cadena_clasificacion = "** CLASIFICACIÓN FINAL\n"
-
-            # A partir de las estadísticas, genera una lista de tuplas (jugador, númeroVictorias) ordenadas
-            numVictorias = sorted([(x,estadisticas[x]["ganadas"]) for x in estadisticas if x != "aux_ghost_team"], key=lambda x:x[1], reverse = True)
-            posicionPodio = 0
-            lastNumVictorias = 0
-
-            for i, e in enumerate(numVictorias):
-                if e[1] != lastNumVictorias:
-                    posicionPodio += 1
-                    lastNumVictorias = e[1]
-
-                cadena_clasificacion += "%i - %s \n" % (posicionPodio, e[0])
-
-            print cadena_clasificacion
-
-            log_file = open(log_file_name, 'a')
-            log_file.write(cadena_clasificacion)
-            log_file.close()
-
+            update_log_ending_tournament(log_file_name, estadisticas)
             dibujoClasificacion = dibujo_clasificacion.DibujoClasificacion(game)
-
         else:        
-            update_log_end(log_file_name, classifications)
+            update_log_ending_league(log_file_name, classifications)
         
     print ">>>> END INIT GAME"
     return (band, classifications)
+
+
 
 
 def _init_playoff(teams, fast, num_turns, back_round):
