@@ -72,11 +72,12 @@ class notifyResult:
         self.dlg_result.format_secondary_markup(result)
 
 class SimpleNotify:
-    def __init__(self, msg):
+    def __init__(self, msg, title = "Information"):
 
         builder = gtk.Builder()
         builder.add_from_file(xdg.get_data_path('glade/resultNotifier.glade'))
 
         self.dlg_result = builder.get_object('dlg_result')
         self.dlg_result.connect('response', lambda d, r: d.hide())
+        self.dlg_result.set_markup("<b>" + title + "</b>")
         self.dlg_result.format_secondary_markup(msg)
