@@ -84,6 +84,7 @@ class roundResults:
             else: #draw
                 teamA = _draw_string(teamA, draw_color)
                 teamB = _draw_string(teamB, draw_color)
+                reason = "-"
 
             self.list_store_results.append((teamA, teamB, reason))
     
