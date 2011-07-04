@@ -202,7 +202,7 @@ class quickGameDialog:
                 probar_equipo(equipo)
             except:
                 #progress_bar_dialog.hide()
-                notificacion = notify_result.SimpleNotify(_("The rules file \n<b>&lt;%s&gt;</b>\n has errors. This quick game will be cancelled.\n\nCheck «<i>log_gsiege</i>» log file for details.") % equipo[0])
+                notificacion = notify_result.SimpleNotify(_("The rules file <b>\"%s\"</b> has errors. This quick game will be cancelled.\n\nCheck \"<i>log_gsiege</i>\" log file for details.") % equipo[0])
                 notificacion.dlg_result.run()
                 #progress_bar_dialog.show()
 
