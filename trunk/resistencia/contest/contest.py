@@ -25,7 +25,6 @@ def generate_key_names(teams):
 
     for team in teams:
         name = filenames.extract_name_expert_system(team)
-k
         d[name] = team
 
     return d

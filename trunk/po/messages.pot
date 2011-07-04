@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-04 11:54+0200\n"
+"POT-Creation-Date: 2011-07-04 17:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,9 +110,9 @@ msgstr ""
 msgid ""
 "The rules file \n"
 "<b>&lt;%s&gt;</b>\n"
-" has errors.\n"
+" has errors. This quick game will be cancelled.\n"
 "\n"
-"Check program output for more information."
+"Check «<i>log_gsiege</i>» log file for details."
 msgstr ""
 
 #: ../resistencia/tests/tests.py:88
@@ -149,21 +149,21 @@ msgstr ""
 msgid "Are you sure to cancel the entire competition?"
 msgstr ""
 
-#: ../resistencia/contest/main.py:49
+#: ../resistencia/contest/main.py:50
 msgid "Checking teams..."
 msgstr ""
 
-#: ../resistencia/contest/main.py:64
+#: ../resistencia/contest/main.py:65
 #, python-format
 msgid ""
 "The rules file \n"
 "<b>&lt;%s&gt;</b>\n"
 " has errors. This team will be out of the competition.\n"
 "\n"
-"Check program output for more information."
+"Check «<i>log_gsiege</i>» log file for details."
 msgstr ""
 
-#: ../resistencia/contest/main.py:257
+#: ../resistencia/contest/main.py:258
 msgid "Running the contest"
 msgstr ""
 
@@ -172,18 +172,14 @@ msgstr ""
 #: ../guadaboard/human_game_handler.py:176
 #: ../guadaboard/human_game_handler.py:182
 #: ../guadaboard/human_game_handler.py:191
-#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:115
-#: ../libguadalete/libguadalete.py:129 ../libguadalete/libguadalete.py:145
-#: ../libguadalete/libguadalete.py:162
+#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:116
+#: ../libguadalete/libguadalete.py:130 ../libguadalete/libguadalete.py:146
+#: ../libguadalete/libguadalete.py:163
 msgid "Error parsing the file "
 msgstr ""
 
 #: ../libguadalete/parsear_fichero_reglas.py:38
 msgid "No comment"
-msgstr ""
-
-#: ../libguadalete/libguadalete.py:136 ../libguadalete/libguadalete.py:151
-msgid "   - Loading "
 msgstr ""
 
 #: ../data/glade/main.glade.h:1
