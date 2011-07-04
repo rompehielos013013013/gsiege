@@ -88,7 +88,7 @@ class DynGame:
 
         img_piece_slct_path = xdg.get_data_path('images/piece-selection.png')
         img_possible_move_path = xdg.get_data_path('images/posible-move.png')
-        print img_piece_slct_path
+        
         self.piece_selected = pygame.image.load(img_piece_slct_path)
         self.possible_move = pygame.image.load(img_possible_move_path)
 
@@ -168,7 +168,7 @@ class DynGame:
                                  self.default_piece, self.piece_size,
                                  self.board_size, identifiers=identifiers,
                                  player=self.player, hidden=True)
-            print 'vuelta a draw_boards'
+            
             srfc = _board.get_surface()
 
             self.srfc_board.blit(srfc.convert(), (0, 0))
@@ -177,7 +177,7 @@ class DynGame:
             if i != board_list[len(board_list) - 1]:
                 time.sleep(2)
 
-        print 'todo pintado'
+        
         band = False
         piece_selected = False
         piece = None
@@ -239,8 +239,8 @@ def check_valid_movement(source, dest):
     """
     Checks if a movement is valid or not
     """
-    print source
-    print dest
+    
+    
     if source[2] == dest[2]:  # same team. maybe handle for a better way
         return False
     else:

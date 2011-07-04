@@ -66,12 +66,12 @@ class TestSuite:
 
         os.mkdir(base_path)
 
-        print "Base Path", base_path
+        
 
         self.filename = base_path + filenames.generate_filename('stats',
                                                                 main_team)
 
-        print "Filename", self.filename
+        
         for _team in self.translator_teams:
             self.keys_teams.append(_team)
 

@@ -24,6 +24,7 @@ This file contains a function to get all the installed teams
 
 import os
 import re
+import logging
 
 from resistencia import configure, filenames
 
@@ -67,7 +68,7 @@ def get_installed_teams():
         if this_formacion != "":
             conjuntoTotal.append((this_regla, this_formacion))
         else:
-            print "ATENCIÓN: no se encontró el fichero de formación para el fichero de reglas <%s>" % this_regla
+            logging.error("ATENCIÓN: no se encontró el fichero de formación para el fichero de reglas <%s>", this_regla)
 
-    print "* %i equipos instalados en el sistema" % len(conjuntoTotal)
+    logging.info("* %i equipos instalados en el sistema", len(conjuntoTotal))
     return conjuntoTotal

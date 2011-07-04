@@ -41,12 +41,12 @@ class Resistencia:
     main window
     """
     def previous_games_file_chooser_handler(self):
-        print "\n"
-        print "#### PARTIDA ANTIGUA"
+        
+        
 
         selected_file = self.previous_games_chooser.get_filename()
         if not (selected_file == None):
-            print 'Seleccionado ' + selected_file
+            
             controlPartida.restaurarCampeonato()
             guada_board.run_from_file(selected_file)
             return True
@@ -63,7 +63,7 @@ class Resistencia:
 
     # Botón Acerca de
     def on_btn_about_clicked(self, widget):
-        print "About button clicked"
+        
 
         self.about.connect('response', lambda d, r: d.hide())
         self.about.set_transient_for(self.window)

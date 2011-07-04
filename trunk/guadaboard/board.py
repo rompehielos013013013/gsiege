@@ -80,7 +80,7 @@ class Board(object):
         #if player == 'A':
         #    self.player_team = 1
         #else:
-        print player
+        
         self.player_team = player
 
         # next loop will generate the surfaces of every different piece and
@@ -102,13 +102,13 @@ class Board(object):
                     _piece = piece.Piece(
                         value, covered, 60, rhidde, images[team])
                     self.keys[state[i][j]] = _piece.get_surface().convert()
-        print 'termina board.Board()'
+        
 
     def get_surface(self):
         """
         Generate a pygame drawable surface with the entire board.
         """
-        print 'get_surface'
+        
         size = (self.board_size * self.piece_size, ) * 2
         surface = pygame.surface.Surface(size).convert()
         #aux_board = _reverse_board(self.board_state)
@@ -128,19 +128,19 @@ class Board(object):
         Check if a point collides with a piece
         """
         real_pos = (pos[0] - offset[0], pos[1] - offset[1])
-        print pos
-        print real_pos
-        print offset
+        
+        
+        
 
         for i in range(self.board_size):
             for j in range(self.board_size):
                 if self.pieces_rects[i][j].collidepoint(real_pos):
-                    print 'seleccionado'
+                    
                     team = 0
                     if not self.board_state[i][j] == 0:
                         _abs_state = abs(self.board_state[i][j])
                         team = self.board_state[i][j] / _abs_state
-                    print (self.identifiers[i][j], (i, j), team)
+                    
                     return (self.identifiers[i][j], (i, j), team)
 
 

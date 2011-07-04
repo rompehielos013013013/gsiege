@@ -56,8 +56,8 @@ def _define_winner(board):
     """
     king_a = _find_element_matrix(board, 1)
     king_b = _find_element_matrix(board, -1)
-    print king_a
-    print king_b
+    
+    
 
     if (king_a and king_b) or (not king_a and not king_b):
         return 0
@@ -117,7 +117,7 @@ class HumanInteraction:
         """
         Get the id of the last move
         """
-        print 'get_identifier_last_move'
+        
         self.update_games()
         return self.last_movement[0]
 
@@ -125,7 +125,7 @@ class HumanInteraction:
         """
         Get the movement did on the last move
         """
-        print 'get_movement_last_move'
+        
         return self.last_movement[1]
 
     def define_winner(self):

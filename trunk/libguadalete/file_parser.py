@@ -75,10 +75,10 @@ def parse_temp_file(src_file):
                 board = __fill_matrix()
                 keys = __fill_matrix()
             else:
-                print '----------------------'
-                print board
-                print keys
-                print '----------------------'
+                
+                
+                
+                
                 rounds.append((board, keys)) #include the board on the game
                 #keys_rounds.append(keys)
                 del board
@@ -107,10 +107,10 @@ def parse_temp_file(src_file):
                     board[int(y) - 1][int(x) - 1] = int(val) - 2*int(val) - (int(d)*max_value)
                 keys[int(y) - 1][int(x) - 1] = id
 
-    print '----------------------'
-    print board
-    print keys
-    print '----------------------'        
+    
+    
+    
+    
     rounds.append((board, keys))
     f.close()
     return rounds

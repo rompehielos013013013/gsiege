@@ -58,8 +58,8 @@ def _rename_output_file(des):
     src = "resultado.txt"
     _file = open(src, "a")
     _file.write("fin\n")
-    print "src: %s" % src
-    print "des: %s" % des
+    
+    
     os.rename(src, des)
 
 
@@ -84,7 +84,7 @@ def init_human_game(player_formation, computer_team, player_as,
     """
     Intialize the clips environment
     """
-    print "### INIT HUMAN VS PC"
+    
     
     player_num = 0
     team_a = None
@@ -118,8 +118,8 @@ def init_human_game(player_formation, computer_team, player_as,
         name_team_b = filenames.extract_simple_name_es((None, team_b))
         name_team_a = filenames.extract_name_expert_system(team_a)
 
-    print "TEAM A:", team_a
-    print "TEAM B:", team_b
+    
+    
 
     aux_team_a = (name_team_a, team_a_piece)
     aux_team_b = (name_team_b, team_b_piece)
@@ -146,7 +146,7 @@ def init_human_game(player_formation, computer_team, player_as,
     traducirF.LoadFunctions(clips)
     traducirM.LoadFunctions(clips)
 
-    print "ASD1"
+    
     
     if player_num == 1:
         int_team = mirroring.interactive_formation(team_a)
@@ -199,20 +199,20 @@ def init_human_game(player_formation, computer_team, player_as,
 
     interaccion.LoadFunctions(clips, player_as)
 
-    print "******** !!"
+    
     interaccion.interaction_object = r_intact.HumanInteraction(
         aux_team_a, aux_team_b, default_piece, player_num, number_turns)
 
-    print "## CLIPS RESET"
+    
     clips.Reset()  # restart the environment
 
-    print "## CLIPS RUN"
+    
     clips.Run()  # start the simulation
 
-    print "## INTERACTION FINISH"
+    
     interaccion.interaction_object.finish()
 
-    print "## READ STDOUT"
+    
     _stream = clips.StdoutStream.Read()  # print the output
 
     # print _stream

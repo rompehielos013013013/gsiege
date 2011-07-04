@@ -71,7 +71,7 @@ class Game(object):
         """
         Iterates to the previous turn
         """
-        print "Turno anterior!!"
+        
 
         if self.turn != 0:
             self.turn = self.turn - 1

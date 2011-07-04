@@ -44,10 +44,4 @@ def probar_equipo(equipo):
     motor = libguadalete.LibGuadalete(equipo, eqBase, 50)
     motor.run_game()             
 
-def main():
-    for f in range(1,4):
-        print leer_comentario("rag%i.clp" % f )
-    
-if __name__ == '__main__':
-    main()
 

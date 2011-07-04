@@ -27,7 +27,7 @@ import gtk
 from resistencia import configure, filenames
 
 import round
-import pprint
+import logging
 import contest
 import controlPartida
 
@@ -40,9 +40,6 @@ def closest_power2(num):
 
 def _auto_pairings(equiposIniciales):
 
-    print "Auto pairings de", len(equiposIniciales), "equipos"
-    # pprint.pprint(equiposIniciales)
-    
     # Guardamos el número de equipos
     numEquiposIniciales = len(equiposIniciales)
 
@@ -104,8 +101,6 @@ class Tournament(contest.Contest):
         else:
             self.teams = teams
 
-        print "len(teams):", len(teams)
-
         self.translator = contest.generate_key_names(self.teams)
         self.keys = []
 
@@ -127,9 +122,9 @@ class Tournament(contest.Contest):
 
         self.number_of_rounds = int(math.log(len(self.matchs[0]), 2)) + 1
         
-        print "Torneo creado"
-        print str(len(self.matchs[0])) + " partidos en la primera ronda"
-        print str(self.number_of_rounds) + " rondas totales"
+        logging.info("Torneo creado")
+        logging.info("%s partidos en la primera ronda", str(len(self.matchs[0])))
+        logging.info("%s rondas totales", str(self.number_of_rounds))
 
     def play_round(self, progress_bar, fast=False):
         if not controlPartida.flagCancelarCampeonato:

@@ -27,18 +27,18 @@ interaction_object = real_interaction.HumanInteraction
 
 def clips_piece_input():
     #get the value someway
-    print 'clips_piece_input()'
+    
     #interaction_object.update_games()
     val = interaction_object.get_identifier_last_move()
-    print 'tras interaction_object.get_identifier_last_move()'
-    print val
+    
+    
     return clips.Integer(val)
 
 def clips_move_input():
     #get the value someway
-    print 'clips_move_input()'
+    
     val = interaction_object.get_movement_last_move()
-    print val
+    
     return clips.Integer(val)
 
 clips.RegisterPythonFunction(clips_piece_input, "piece-input")
