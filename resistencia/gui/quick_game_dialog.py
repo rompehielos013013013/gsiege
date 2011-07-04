@@ -24,8 +24,8 @@ import os.path
 import gtk
 
 from guadaboard import guada_board
-from libguadalete.parsear_fichero_reglas import leer_comentario
-from resistencia import configure, xdg, filenames
+from libguadalete.parsear_fichero_reglas import leer_comentario, probar_equipo
+from resistencia import configure, xdg, filenames, colores
 from resistencia.nls import gettext as _
 
 from resistencia.contest import controlPartida
@@ -192,6 +192,21 @@ class quickGameDialog:
 
     def load_board(self):
         controlPartida.restaurarCampeonato()
+
+        ambosEquipos = [(self.es_team_a, self.team_team_a), (self.es_team_b, self.team_team_b)]
+
+        for equipo in ambosEquipos:
+            print colores.ROJO + "Probando equipo:\n", equipo, colores.ENDC
+            try:
+                probar_equipo(equipo)
+            except:
+                #progress_bar_dialog.hide()
+                notificacion = notify_result.SimpleNotify(_("The rules file \n<b>&lt;%s&gt;</b>\n has errors.\n\nCheck program output for more information.") % equipo[0])
+                notificacion.dlg_result.run()
+                #progress_bar_dialog.show()
+
+                return
+
         try:
             winner,kk = guada_board.run(
                 ((self.es_team_a, self.team_team_a),
