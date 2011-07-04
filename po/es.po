@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-04 11:20+0200\n"
-"PO-Revision-Date: 2011-07-04 11:21+0200\n"
+"POT-Creation-Date: 2011-07-04 11:54+0200\n"
+"PO-Revision-Date: 2011-07-04 11:54+0200\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
 "Language: es\n"
@@ -39,6 +39,10 @@ msgstr "<b>@value@</b>"
 #: ../data/glade/settingsDialog.glade.h:1
 msgid "<b>Auto play mode: time between turns</b> (ms)"
 msgstr "<b>Avance automático: tiempo entre turnos</b> (ms)"
+
+#: ../resistencia/contest/controlPartida.py:19
+msgid "<b>Cancel competition?</b>"
+msgstr "<b>¿Cancelar competición?</b>"
 
 #: ../data/glade/results.glade.h:1
 msgid "<b>Classification</b>"
@@ -124,6 +128,10 @@ msgid ""
 " cod.: CIE44 de la \"Convocatoria 2010 de Proyectos de Innovación Educativa "
 "Universitaria para el PDI de la Universidad de Cádiz"
 msgstr ""
+
+#: ../resistencia/contest/controlPartida.py:20
+msgid "Are you sure to cancel the entire competition?"
+msgstr "¿Está seguro de cancelar la competición?"
 
 #: ../data/glade/results.glade.h:4
 msgid "Are you sure?"
@@ -481,7 +489,7 @@ msgid "The end!"
 msgstr "¡Fin!"
 
 #. progress_bar_dialog.hide()
-#: ../resistencia/gui/quick_game_dialog.py:204
+#: ../resistencia/gui/quick_game_dialog.py:205
 #, python-format
 msgid ""
 "The rules file \n"

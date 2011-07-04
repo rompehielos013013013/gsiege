@@ -57,7 +57,7 @@ configure.load_configuration()
 def main():
     "Main function"
 
-    logging.basicConfig(format='[%(filename)s (%(lineno)d) %(funcName)s] [%(levelname)s] %(message)s', filename='log_gsiege', level=logging.DEBUG)
+    logging.basicConfig(format='[%(levelname)s] [%(filename)s (%(lineno)d) %(funcName)s] %(message)s', filename='log_gsiege', level=logging.DEBUG)
     logging.info("#" * 40)
     logging.info("Init logging")
     # Crea una nueva instancia de la clase Resistencia, que guarda todos los
