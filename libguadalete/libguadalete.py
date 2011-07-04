@@ -101,30 +101,30 @@ class LibGuadalete(object):
 
         temp_team = mirroring.mirroring_team(self.teamB[1])
 
-        logging.info('Cargando', self.teamA[1])
+        logging.info('Cargando %s', self.teamA[1])
         #create a temporally file that mirror the formation of B team,
         #because it's written thinking in A team
         try:
             clips.Load(self.teamA[1])
         except clips.ClipsError as e:
-            logging.info("####################")
-            logging.info("ERROR de clips:", e)
-            logging.info("Mensaje: ")
-            logging.info(clips.ErrorStream.Read())
-            logging.info("####################")
+            logging.error("####################")
+            logging.error("ERROR de clips: %s", e)
+            logging.error("Mensaje: ")
+            logging.error(clips.ErrorStream.Read())
+            logging.error("####################")
 
             raise FileError(_('Error parsing the file ') +  self.teamA[1] + "\n" + e)
 
-        logging.info('Cargando', self.teamB[1])
+        logging.info('Cargando %s', self.teamB[1])
 
         try:
             clips.Load(temp_team)
         except clips.ClipsError as e:
-            logging.info("####################")
-            logging.info("ERROR de clips:", e)
-            logging.info("Mensaje: ")
-            logging.info(clips.ErrorStream.Read())
-            logging.info("####################")
+            logging.error("####################")
+            logging.error("ERROR de clips: %s", e)
+            logging.error("Mensaje: ")
+            logging.error(clips.ErrorStream.Read())
+            logging.error("####################")
 
             os.remove(temp_team)
             raise FileError(_('Error parsing the file ') +  self.teamB[1])
@@ -134,31 +134,31 @@ class LibGuadalete(object):
         os.remove(temp_form_B)
 
         fA.LoadFunctions(clips)
-        logging.info('Cargando', self.teamA[0])
+        logging.info('Cargando %s', self.teamA[0])
         try:
             clips.Load(self.teamA[0])
         except clips.ClipsError as e:
-            logging.info("####################")
-            logging.info("ERROR de clips:", e)
-            logging.info("Mensaje: ")
-            logging.info(clips.ErrorStream.Read())
-            logging.info("####################")
+            logging.error("####################")
+            logging.error("ERROR de clips: %s", e)
+            logging.error("Mensaje: ")
+            logging.error(clips.ErrorStream.Read())
+            logging.error("####################")
             raise FileError(_('Error parsing the file ') +  self.teamA[0])
 
         temp_rules = mirroring.mirroring_rules(self.teamB[0])
         
         #same thing that for the formation, but this time using the rules
         fB.LoadFunctions(clips)
-        logging.info('Cargando', self.teamB[0])
+        logging.info('Cargando %s', self.teamB[0])
         try:
             clips.Load(temp_rules)
         except clips.ClipsError as e:
             os.remove(temp_rules)
-            logging.info("####################")
-            logging.info("ERROR de clips:", e)
-            logging.info("Mensaje: ")
-            logging.info(clips.ErrorStream.Read())
-            logging.info("####################")
+            logging.error("####################")
+            logging.error("ERROR de clips: %s", e)
+            logging.error("Mensaje: ")
+            logging.error(clips.ErrorStream.Read())
+            logging.error("####################")
 
             raise FileError(_('Error parsing the file ') +  self.teamB[0] + "\n")
         
@@ -225,20 +225,21 @@ class LibGuadalete(object):
         Returns a pair containing the name of the output file where the game has
         been logged, and an integer indicating who won the game.
         """
-
-        logging.info("** PROCESSING MATCH...")
+        logging.info("")
+        logging.info("** PROCESANDO PARTIDO...")
 
         try:
             winner = self.__startGame()
         except FileError as e:
             raise FileError(e.msg)
 
-        logging.info("** PROCESSING ENDED")
+        logging.info("")
+        logging.info("** PROCESAMIENTO TERMINADO")
 
         des = self.__generateFileName()
         self.__renameOutputFile(des)
 
-        logging.info("Archivo de log: ", des)
-
+        logging.info("Archivo de log: %s", des)
+        logging.info("")
         
         return des, winner

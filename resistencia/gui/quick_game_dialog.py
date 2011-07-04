@@ -189,7 +189,7 @@ class quickGameDialog:
                 self.dlg_bad_file.format_secondary_text(e.msg)
                 self.dlg_bad_file.run()
 
-            logging.info("#### END QUICK GAME \n")
+            logging.info("#### END QUICK GAME")
 
     def load_board(self):
         controlPartida.restaurarCampeonato()

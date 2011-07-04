@@ -25,8 +25,7 @@ def generate_key_names(teams):
 
     for team in teams:
         name = filenames.extract_name_expert_system(team)
-        if name in d:
-            print "CONFLICTO PREVIO CON ", name
+k
         d[name] = team
 
     return d

@@ -24,6 +24,7 @@ import pygame
 from pygame import mixer
 
 import gtk
+import logging
 
 from guadaboard import pintarPartida
 
@@ -130,7 +131,7 @@ def run(team_a, team_b, fast=False, dont_log=False, hidden=False,
         out_file, winner = lib.run_game()
         
     except LibFileError as exc:
-        print "ERROR"
+        logging.error("ERROR: %s", exc.msg)
         raise GuadaFileError(exc.msg)
         
     # fast indica si queremos ver solo el resultado (fast = True) o la partida

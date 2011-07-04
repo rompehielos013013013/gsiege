@@ -4,7 +4,7 @@
 import pygame
 from pygame.locals import *
 
-import pprint
+import logging
 import algoritmoDiferencias
 
 from resistencia.xdg import get_data_path as xdg_data_path
@@ -44,7 +44,7 @@ class PintarPartida(object):
         self.parseador = algoritmoDiferencias.ParseadorPartida(ficheroOrigen)
 
     def run(self):
-        print "  ## INICIANDO Pintado de partida"
+        logging.info("## INICIANDO Pintado de partida")
         # Inicializando pygame..."
         pygame.init()
 
@@ -233,7 +233,7 @@ class PintarPartida(object):
 
         # Cerramos el subsistema gráfica (no es necesario)
         pygame.display.quit()
-        print "  ## FINALIZADO Pintado de partida"
+        logging.info("## FINALIZADO Pintado de partida")
         return 0
 
     ## CALLBACKS para los botones
@@ -260,7 +260,7 @@ class PintarPartida(object):
     
     def callAbortar(self, ):
         controlPartida.cancelarCampeonato()
-        print "ABORTAR"
+        logging.warning("ABORTAR")
 
     def callToggleAvanceAutomatico(self, ):
         if self.avanceAutomatico:

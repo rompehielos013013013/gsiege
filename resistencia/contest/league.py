@@ -91,20 +91,3 @@ class League(contest.Contest):
 
         return clasification
 
-    def print_actual_puntuations(self):
-        clasification = self.puntuations.items()
-        clasification.sort(contest.puntuations_compare)
-        clasification.reverse()
-
-        for i in clasification:
-            name = i[0]
-            punt = i[1]
-
-            if not name == 'aux_ghost_team':
-                long_name = len(name)
-                
-                num_sep = 29 - long_name
-
-                print name + ' ' + '-'*num_sep + ' ' + str(punt)
-
-    

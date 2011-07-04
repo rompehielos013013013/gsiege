@@ -19,6 +19,7 @@
 #----------------------------------------------------------------------
 
 import os
+import logging
 
 from guadaboard import guada_board
 from resistencia import xdg
@@ -46,7 +47,7 @@ class Round(object):
     def __init__(self, matchs, translator, num_turns = 150):
         self.round = [] #Formed by tuples ((teamA, teamB), played, result)
 
-        print "Round constructor"
+        logging.info("Round constructor")
         for match in matchs:
             self.round.append((match, False, 0))
 
@@ -137,8 +138,8 @@ class Round(object):
             raise RoundError('Not all games played')
 
     def play_match(self, fast=False, cant_draw=False, log_folder = None):
-        print "*************************************"
-        print "** PLAYING MATCH"
+        logging.info("*************************************")
+        logging.info("** JUGANDO PARTIDO")
         teamA_key = self.round[self.next_game][0][0]
         teamB_key = self.round[self.next_game][0][1]
         teamA = None
@@ -147,7 +148,7 @@ class Round(object):
         result = 0
         reason = "normal"
         if (not teamA_key == 'aux_ghost_team') and (not teamB_key == 'aux_ghost_team'):
-            print " - It's a normal match"
+            logging.info("- Partido normal")
             
             teamA = (self.translator[teamA_key], _pieceA)
             teamB = (self.translator[teamB_key], _pieceB)
@@ -162,27 +163,27 @@ class Round(object):
                     os.rename(log_container[0],
                               log_folder + "/" + os.path.basename(log_container[0]))
             except:
-                print "ERROR!"
+                logging.info("ERROR!")
                 
             
         else:
-            print " - It's a match against a ghost team"
+            logging.info("- Partido contra equipo fantasma")
             if teamA_key == 'aux_ghost_team':
                 result = -1
             else: #teamB_key == 'aux_ghost_team':
                 result = 1
 
-        print "\n** MATCH FINISHED:"
-        print   " - The result of the game '" + teamA_key + "' vs '"+ teamB_key + "' was:"
+        logging.info("** PARTIDO FINALIZADO:")
+        logging.info("Resultado del juego '" + teamA_key + "' vs '"+ teamB_key + "' was:")
 
         if result == 0:
-            print '    Draw'
+            logging.info('Empate')
         elif result == 1:
-            print '    ' + teamA_key + ' won'
+            logging.info(teamA_key + ' ganó')
         elif result == -1:
-            print '    ' + teamB_key + ' won'
+            logging.info(teamB_key + ' ganó')
 
-        print ""
+        logging.info("")
 
         self.round[self.next_game] = (self.round[self.next_game][0], True, result, reason)
         

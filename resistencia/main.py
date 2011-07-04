@@ -69,7 +69,7 @@ def main():
 
     # Lanza el bucle de GTK (?)
     gtk.main()
-    logging.info("End logging")
+    logging.info("End logging\n\n")
     
 if __name__ == "__main__":
     main()

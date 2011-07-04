@@ -31,18 +31,19 @@ from resistencia.nls import gettext as _
 
 from libguadalete.parsear_fichero_reglas import probar_equipo
 
+import logging
+
 import league
 import contest
 import tournament
 import controlPartida
 import round
-import pprint
 import dibujo_clasificacion
 
 def init_contest(contest_format, teams, fast=False, back_round=False,
                  num_turns=120):
 
-    print "#### INIT CONTEST"
+    logging.info("#### INIT CONTEST")
 
     teams = _clean_dictionary(teams)
 
@@ -56,12 +57,12 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
 
     bannedTeams = []
     for equipo in teams:
-        print colores.ROJO + "Probando equipo:\n", equipo, colores.ENDC
+        logging.info("Probando equipo: %s", equipo)
         try:
             probar_equipo(equipo)
         except:
             progress_bar_dialog.hide()
-            notificacion = notify_result.SimpleNotify(_("The rules file \n<b>&lt;%s&gt;</b>\n has errors. This team will be out of the competition.\n\nCheck program output for more information.") % equipo[0])
+            notificacion = notify_result.SimpleNotify(_("The rules file \n<b>&lt;%s&gt;</b>\n has errors. This team will be out of the competition.\n\nCheck «<i>log_gsiege</i>» log file for details.") % equipo[0])
             notificacion.dlg_result.run()
             progress_bar_dialog.show()
             bannedTeams.append(equipo)
@@ -83,7 +84,7 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
     else:
         _init_game(contest_format, teams, fast, num_turns, back_round)
 
-    print "#### END CONTEST"
+    logging.info("#### END CONTEST")
 
 def update_log_round(log_file, results, round_number):
     tournament_file = open(log_file, 'a')
@@ -181,7 +182,7 @@ def show_round_matches(game):
 
 def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_folder = None):
 
-    print ">>>> INIT GAME"
+    logging.info(">>>> INIT GAME")
 
     if log_base_folder == None:
         log_base_folder = configure.load_configuration()['games_path'] + '/'
@@ -192,8 +193,8 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
     log_folder_name = log_base_folder + log_base_name
     log_file_name = log_folder_name + "/" + game_type + ".txt"
 
-    print "Fichero de log:", log_file_name
-    print "Carpeta de log:", log_folder_name
+    logging.info("Fichero de log: %s", log_file_name)
+    logging.info("Carpeta de log: %s", log_folder_name)
 
     os.mkdir(log_folder_name)
     
@@ -219,7 +220,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
     # Mientras no se haya completado el juego
     while not game.completed() and not band and not controlPartida.flagCancelarCampeonato:
 
-        print "---- START OF THE ROUND"
+        logging.info("---- START OF THE ROUND")
 
         if results != None:
 
@@ -298,7 +299,7 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
         if fast:
             progress_bar_dialog.hide()
 
-        print "---- END OF THE ROUND"
+        logging.info("---- END OF THE ROUND")
 
     if not band:
         # Mostramos los resultados FINALES
@@ -322,14 +323,14 @@ def _init_game(game_type, teams, fast, num_turns, back_round = False, log_base_f
         else:        
             update_log_ending_league(log_file_name, classifications)
         
-    print ">>>> END INIT GAME"
+    logging.info(">>>> END INIT GAME")
     return (band, classifications)
 
 
 
 
 def _init_playoff(teams, fast, num_turns, back_round):
-    print "##### INIT PLAYOFF"
+    logging.info("##### INIT PLAYOFF")
 
     log_base_folder = configure.load_configuration()['games_path'] + '/'
     log_base_folder += "Mixto-" + filenames.generate_isodate() + "/"
@@ -343,7 +344,7 @@ def _init_playoff(teams, fast, num_turns, back_round):
         teams = _get_teams_next_round(teams, _extract_classifications(classifications))
         _init_game('cup', teams, fast, num_turns, log_base_folder = log_base_folder)
 
-    print "##### END PLAYOFF"
+    logging.info("##### END PLAYOFF")
      
 def _clean_dictionary(d):
     if type(d) == types.ListType:

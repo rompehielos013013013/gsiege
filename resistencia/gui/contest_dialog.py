@@ -76,8 +76,8 @@ class contestDialog:
                                                      formation_file_name))
 
 
-        print "INSERTADO:"
-        print self.rules_selected_file, self.formation_selected_file
+        
+        
 
         if not self.teams.has_key(name):
             self.teams[name] = (self.rules_selected_file, self.formation_selected_file)
@@ -241,7 +241,7 @@ class contestDialog:
             self.check_backround.set_sensitive(False)
 
     def on_check_backround_toggled(self, widget, data=None):
-        print 'hola'
+        
         if self.check_backround.get_active():
             self.back_round = True
         else:
