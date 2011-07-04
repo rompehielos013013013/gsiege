@@ -22,6 +22,7 @@ import os
 import random
 import sys
 import traceback
+import logging
 #sys.path.append("./libguadalete")
 
 import clips
@@ -100,30 +101,30 @@ class LibGuadalete(object):
 
         temp_team = mirroring.mirroring_team(self.teamB[1])
 
-        print '   - Loading ' + self.teamA[1]
+        logging.info('Cargando', self.teamA[1])
         #create a temporally file that mirror the formation of B team,
         #because it's written thinking in A team
         try:
             clips.Load(self.teamA[1])
         except clips.ClipsError as e:
-            print "####################"
-            print "ERROR de clips:", e
-            print "Mensaje: "
-            print clips.ErrorStream.Read()
-            print "####################"
+            logging.info("####################")
+            logging.info("ERROR de clips:", e)
+            logging.info("Mensaje: ")
+            logging.info(clips.ErrorStream.Read())
+            logging.info("####################")
 
             raise FileError(_('Error parsing the file ') +  self.teamA[1] + "\n" + e)
 
-        print '   - Loading ' + self.teamB[1]
+        logging.info('Cargando', self.teamB[1])
 
         try:
             clips.Load(temp_team)
         except clips.ClipsError as e:
-            print "####################"
-            print "ERROR de clips:", e
-            print "Mensaje: "
-            print clips.ErrorStream.Read()
-            print "####################"
+            logging.info("####################")
+            logging.info("ERROR de clips:", e)
+            logging.info("Mensaje: ")
+            logging.info(clips.ErrorStream.Read())
+            logging.info("####################")
 
             os.remove(temp_team)
             raise FileError(_('Error parsing the file ') +  self.teamB[1])
@@ -133,31 +134,31 @@ class LibGuadalete(object):
         os.remove(temp_form_B)
 
         fA.LoadFunctions(clips)
-        print _('   - Loading ') + self.teamA[0]
+        logging.info('Cargando', self.teamA[0])
         try:
             clips.Load(self.teamA[0])
         except clips.ClipsError as e:
-            print "####################"
-            print "ERROR de clips:", e
-            print "Mensaje: "
-            print clips.ErrorStream.Read()
-            print "####################"
+            logging.info("####################")
+            logging.info("ERROR de clips:", e)
+            logging.info("Mensaje: ")
+            logging.info(clips.ErrorStream.Read())
+            logging.info("####################")
             raise FileError(_('Error parsing the file ') +  self.teamA[0])
 
         temp_rules = mirroring.mirroring_rules(self.teamB[0])
         
         #same thing that for the formation, but this time using the rules
         fB.LoadFunctions(clips)
-        print _('   - Loading ') + self.teamB[0]
+        logging.info('Cargando', self.teamB[0])
         try:
             clips.Load(temp_rules)
         except clips.ClipsError as e:
             os.remove(temp_rules)
-            print "####################"
-            print "ERROR de clips:", e
-            print "Mensaje: "
-            print clips.ErrorStream.Read()
-            print "####################"
+            logging.info("####################")
+            logging.info("ERROR de clips:", e)
+            logging.info("Mensaje: ")
+            logging.info(clips.ErrorStream.Read())
+            logging.info("####################")
 
             raise FileError(_('Error parsing the file ') +  self.teamB[0] + "\n")
         
@@ -225,19 +226,19 @@ class LibGuadalete(object):
         been logged, and an integer indicating who won the game.
         """
 
-        print "\n  ** PROCESSING MATCH..."
+        logging.info("** PROCESSING MATCH...")
 
         try:
             winner = self.__startGame()
         except FileError as e:
             raise FileError(e.msg)
 
-        print "\n  ** PROCESSING ENDED"
+        logging.info("** PROCESSING ENDED")
 
         des = self.__generateFileName()
         self.__renameOutputFile(des)
 
-        print "   - Results of the game have been written to: \n    " + des
-        print ""
+        logging.info("Archivo de log: ", des)
+
         
         return des, winner

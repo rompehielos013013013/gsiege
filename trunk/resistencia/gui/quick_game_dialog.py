@@ -22,6 +22,7 @@ import sys
 import os.path
 
 import gtk
+import logging
 
 from guadaboard import guada_board
 from libguadalete.parsear_fichero_reglas import leer_comentario, probar_equipo
@@ -171,7 +172,7 @@ class quickGameDialog:
             self.team_team_b = self.team_team_b[7:]
 
         if correct == True:
-            print "\n#### INIT QUICK GAME"
+            logging.info("#### INIT QUICK GAME")
 
             # Ocultamos la ventana
             self.quick_game.hide()
@@ -180,15 +181,15 @@ class quickGameDialog:
                 gtk.main_iteration(False)
 
             try:
-                print ">>>> Iniciando juego"
+                logging.info(">>>> Iniciando juego")
                 self.load_board()
-                print ">>>> Fin del juego"
+                logging.info(">>>> Fin del juego")
 
             except guada_board.GuadaFileError as e:
                 self.dlg_bad_file.format_secondary_text(e.msg)
                 self.dlg_bad_file.run()
 
-            print "#### END QUICK GAME \n"
+            logging.info("#### END QUICK GAME \n")
 
     def load_board(self):
         controlPartida.restaurarCampeonato()
@@ -196,7 +197,7 @@ class quickGameDialog:
         ambosEquipos = [(self.es_team_a, self.team_team_a), (self.es_team_b, self.team_team_b)]
 
         for equipo in ambosEquipos:
-            print colores.ROJO + "Probando equipo:\n", equipo, colores.ENDC
+            logging.info("Probando equipo: %s", equipo)
             try:
                 probar_equipo(equipo)
             except:
