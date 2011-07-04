@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-28 13:13+0200\n"
-"PO-Revision-Date: 2011-06-28 13:13+0200\n"
+"POT-Creation-Date: 2011-07-04 11:20+0200\n"
+"PO-Revision-Date: 2011-07-04 11:21+0200\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
 "Language: es\n"
@@ -480,6 +480,22 @@ msgstr "Resultado de las pruebas para el equipo @team@"
 msgid "The end!"
 msgstr "¡Fin!"
 
+#. progress_bar_dialog.hide()
+#: ../resistencia/gui/quick_game_dialog.py:204
+#, python-format
+msgid ""
+"The rules file \n"
+"<b>&lt;%s&gt;</b>\n"
+" has errors.\n"
+"\n"
+"Check program output for more information."
+msgstr ""
+"El fichero de reglas \n"
+"<b>&lt;%s&gt;</b>\n"
+"tiene errores. Este equipo no participará en la competición.\n"
+"\n"
+"Compruebe la salida estándar para obtener más información."
+
 #: ../resistencia/contest/main.py:64
 #, python-format
 msgid ""
@@ -491,9 +507,9 @@ msgid ""
 msgstr ""
 "El fichero de reglas \n"
 "<b>&lt;%s&gt;</b>\n"
-"tiene errores. Este equipo no participará en la competicioń\n"
+"tiene errores. Este equipo no participará en la competición\n"
 "\n"
-"Check program output for more information."
+"Compruebe la salida estándar para obtener más información."
 
 #: ../data/glade/results.glade.h:11
 msgid "This are the results of the final round"

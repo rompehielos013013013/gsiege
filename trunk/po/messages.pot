@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-28 13:13+0200\n"
+"POT-Creation-Date: 2011-07-04 11:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,6 +102,17 @@ msgstr ""
 
 #: ../resistencia/gui/settings_dialog.py:87
 msgid "Invalid directory"
+msgstr ""
+
+#. progress_bar_dialog.hide()
+#: ../resistencia/gui/quick_game_dialog.py:204
+#, python-format
+msgid ""
+"The rules file \n"
+"<b>&lt;%s&gt;</b>\n"
+" has errors.\n"
+"\n"
+"Check program output for more information."
 msgstr ""
 
 #: ../resistencia/tests/tests.py:88
