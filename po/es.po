@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-04 11:54+0200\n"
-"PO-Revision-Date: 2011-07-04 11:54+0200\n"
+"POT-Creation-Date: 2011-07-04 17:11+0200\n"
+"PO-Revision-Date: 2011-07-04 17:12+0200\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
 "Language: es\n"
@@ -17,10 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: ../libguadalete/libguadalete.py:136 ../libguadalete/libguadalete.py:151
-msgid "   - Loading "
-msgstr "Cargando"
 
 #: ../data/glade/quickGame.glade.h:2 ../data/glade/humanEsDialog.glade.h:2
 #, no-c-format
@@ -157,7 +153,7 @@ msgstr "Calculando..."
 msgid "Can't handle draw, team B wins"
 msgstr "No se puede desempatar, gana B"
 
-#: ../resistencia/contest/main.py:49
+#: ../resistencia/contest/main.py:50
 msgid "Checking teams..."
 msgstr "Comprobando equipos"
 
@@ -224,9 +220,9 @@ msgstr "Error leyendo un fichero"
 #: ../guadaboard/human_game_handler.py:176
 #: ../guadaboard/human_game_handler.py:182
 #: ../guadaboard/human_game_handler.py:191
-#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:115
-#: ../libguadalete/libguadalete.py:129 ../libguadalete/libguadalete.py:145
-#: ../libguadalete/libguadalete.py:162
+#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:116
+#: ../libguadalete/libguadalete.py:130 ../libguadalete/libguadalete.py:146
+#: ../libguadalete/libguadalete.py:163
 msgid "Error parsing the file "
 msgstr "Error al analizar el fichero"
 
@@ -396,7 +392,7 @@ msgstr "Reglas"
 msgid "Rules file"
 msgstr "Archivo de reglas"
 
-#: ../resistencia/contest/main.py:257
+#: ../resistencia/contest/main.py:258
 msgid "Running the contest"
 msgstr "Ejecutando la partida..."
 
@@ -494,30 +490,30 @@ msgstr "¡Fin!"
 msgid ""
 "The rules file \n"
 "<b>&lt;%s&gt;</b>\n"
-" has errors.\n"
+" has errors. This quick game will be cancelled.\n"
 "\n"
-"Check program output for more information."
+"Check «<i>log_gsiege</i>» log file for details."
 msgstr ""
 "El fichero de reglas \n"
 "<b>&lt;%s&gt;</b>\n"
-"tiene errores. Este equipo no participará en la competición.\n"
+"tiene errores. Se cancelará la partida rápida.\n"
 "\n"
-"Compruebe la salida estándar para obtener más información."
+"Compruebe el fichero «<i>log_gsiege</i>» para más detalles."
 
-#: ../resistencia/contest/main.py:64
+#: ../resistencia/contest/main.py:65
 #, python-format
 msgid ""
 "The rules file \n"
 "<b>&lt;%s&gt;</b>\n"
 " has errors. This team will be out of the competition.\n"
 "\n"
-"Check program output for more information."
+"Check «<i>log_gsiege</i>» log file for details."
 msgstr ""
 "El fichero de reglas \n"
 "<b>&lt;%s&gt;</b>\n"
 "tiene errores. Este equipo no participará en la competición\n"
 "\n"
-"Compruebe la salida estándar para obtener más información."
+"Compruebe el fichero «<i>log_gsiege</i>» para más detalles."
 
 #: ../data/glade/results.glade.h:11
 msgid "This are the results of the final round"
@@ -618,3 +614,19 @@ msgstr "No ha seleccionado el fichero de formación para el equipo B"
 #: ../data/glade/main.glade.h:30
 msgid "You have to select a file"
 msgstr "Debe seleccionar un fichero"
+
+#~ msgid "   - Loading "
+#~ msgstr "Cargando"
+
+#~ msgid ""
+#~ "The rules file \n"
+#~ "<b>&lt;%s&gt;</b>\n"
+#~ " has errors.\n"
+#~ "\n"
+#~ "Check program output for more information."
+#~ msgstr ""
+#~ "El fichero de reglas \n"
+#~ "<b>&lt;%s&gt;</b>\n"
+#~ "tiene errores. Este equipo no participará en la competición.\n"
+#~ "\n"
+#~ "Compruebe la salida estándar para obtener más información."
