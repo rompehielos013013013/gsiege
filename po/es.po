@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-04 17:11+0200\n"
+"POT-Creation-Date: 2011-07-04 17:36+0200\n"
 "PO-Revision-Date: 2011-07-04 17:12+0200\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
@@ -484,22 +484,6 @@ msgstr "Resultado de las pruebas para el equipo @team@"
 msgid "The end!"
 msgstr "¡Fin!"
 
-#. progress_bar_dialog.hide()
-#: ../resistencia/gui/quick_game_dialog.py:205
-#, python-format
-msgid ""
-"The rules file \n"
-"<b>&lt;%s&gt;</b>\n"
-" has errors. This quick game will be cancelled.\n"
-"\n"
-"Check «<i>log_gsiege</i>» log file for details."
-msgstr ""
-"El fichero de reglas \n"
-"<b>&lt;%s&gt;</b>\n"
-"tiene errores. Se cancelará la partida rápida.\n"
-"\n"
-"Compruebe el fichero «<i>log_gsiege</i>» para más detalles."
-
 #: ../resistencia/contest/main.py:65
 #, python-format
 msgid ""
@@ -514,6 +498,20 @@ msgstr ""
 "tiene errores. Este equipo no participará en la competición\n"
 "\n"
 "Compruebe el fichero «<i>log_gsiege</i>» para más detalles."
+
+# python-format
+#. progress_bar_dialog.hide()
+#: ../resistencia/gui/quick_game_dialog.py:205
+#, python-format
+msgid ""
+"The rules file <b>\"%s\"</b> has errors. This quick game will be cancelled.\n"
+"\n"
+"Check \"<i>log_gsiege</i>\" log file for details."
+msgstr ""
+"El fichero de reglas <b>«%s»</b> tiene errores. Se cancelará la partida "
+"rápida.\n"
+"\n"
+"Compruebe el fichero <i>«log_gsiege»</i> para más detalles."
 
 #: ../data/glade/results.glade.h:11
 msgid "This are the results of the final round"
@@ -614,19 +612,3 @@ msgstr "No ha seleccionado el fichero de formación para el equipo B"
 #: ../data/glade/main.glade.h:30
 msgid "You have to select a file"
 msgstr "Debe seleccionar un fichero"
-
-#~ msgid "   - Loading "
-#~ msgstr "Cargando"
-
-#~ msgid ""
-#~ "The rules file \n"
-#~ "<b>&lt;%s&gt;</b>\n"
-#~ " has errors.\n"
-#~ "\n"
-#~ "Check program output for more information."
-#~ msgstr ""
-#~ "El fichero de reglas \n"
-#~ "<b>&lt;%s&gt;</b>\n"
-#~ "tiene errores. Este equipo no participará en la competición.\n"
-#~ "\n"
-#~ "Compruebe la salida estándar para obtener más información."
