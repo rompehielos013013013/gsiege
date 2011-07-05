@@ -28,6 +28,32 @@ import datetime
 import types
 import sys
 
+from resistencia.nls import gettext as _
+
+import resistencia
+
+def comprobar_nombre_reglas (s):
+    n, e = path.splitext(path.basename(s))
+
+    if n[:6] != 'reglas' or e != '.clp':
+        errorMsg = _("The rules file <b>\"%s\"</b> is not properly formed. \n\nIt should have the following syntax: <i>reglasNombre.clp</i>.") % (n + e)
+        notificacion = resistencia.gui.notify_result.SimpleNotify(errorMsg)
+        notificacion.dlg_result.run()
+        return False
+    else:
+        return True
+
+def comprobar_nombre_formacion (s):
+    n, e = path.splitext(path.basename(s))
+
+    if n[:6] != 'equipo' or e != '.form':
+        errorMsg = _("The formation file <b>\"%s\"</b> is not properly formed. \n\nIt should have the following syntax: <i>equipoNombre.form</i>.") % (n + e)
+        notificacion = resistencia.gui.notify_result.SimpleNotify(errorMsg)
+        notificacion.dlg_result.run()
+        return False
+    else:
+        return True
+
 def despejar_ruta (ruta):
     """ Recibe la ruta total o parcial de un fichero y la limpia, dejando solo
     el nombre del fichero sin la extensión"""

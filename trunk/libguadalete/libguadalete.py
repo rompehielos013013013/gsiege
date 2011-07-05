@@ -237,6 +237,7 @@ class LibGuadalete(object):
         logging.info("** PROCESAMIENTO TERMINADO")
 
         des = self.__generateFileName()
+        logging.info("Des: %s", des)
         self.__renameOutputFile(des)
 
         logging.info("Archivo de log: %s", des)

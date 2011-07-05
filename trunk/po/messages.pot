@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-04 17:43+0200\n"
+"POT-Creation-Date: 2011-07-06 01:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,22 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: ../resistencia/filenames.py:39
+#, python-format
+msgid ""
+"The rules file <b>\"%s\"</b> is not properly formed. \n"
+"\n"
+"It should have the following syntax: <i>reglasNombre.clp</i>."
+msgstr ""
+
+#: ../resistencia/filenames.py:50
+#, python-format
+msgid ""
+"The formation file <b>\"%s\"</b> is not properly formed. \n"
+"\n"
+"It should have the following syntax: <i>equipoNombre.form</i>."
+msgstr ""
 
 #: ../resistencia/gui/tests_dialog.py:143
 #: ../resistencia/gui/contest_dialog.py:104
@@ -49,8 +65,8 @@ msgstr ""
 
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
-#: ../resistencia/gui/round_results.py:163
-#: ../resistencia/gui/round_results.py:166
+#: ../resistencia/gui/round_results.py:164
+#: ../resistencia/gui/round_results.py:167
 msgid "Rests"
 msgstr ""
 
@@ -70,21 +86,21 @@ msgstr ""
 msgid "Can't handle draw, team B wins"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:124
+#: ../resistencia/gui/round_results.py:125
 msgid "Team name"
-msgstr ""
-
-#: ../resistencia/gui/round_results.py:156
-#: ../resistencia/gui/round_results.py:175
-msgid "Team A"
 msgstr ""
 
 #: ../resistencia/gui/round_results.py:157
 #: ../resistencia/gui/round_results.py:176
+msgid "Team A"
+msgstr ""
+
+#: ../resistencia/gui/round_results.py:158
+#: ../resistencia/gui/round_results.py:177
 msgid "Team B"
 msgstr ""
 
-#: ../resistencia/gui/round_results.py:180
+#: ../resistencia/gui/round_results.py:181
 msgid "Reason"
 msgstr ""
 
@@ -104,8 +120,7 @@ msgstr ""
 msgid "Invalid directory"
 msgstr ""
 
-#. progress_bar_dialog.hide()
-#: ../resistencia/gui/quick_game_dialog.py:205
+#: ../resistencia/gui/quick_game_dialog.py:212
 #, python-format
 msgid ""
 "The rules file <b>\"%s\"</b> has errors. This quick game will be cancelled.\n"
@@ -151,7 +166,7 @@ msgstr ""
 msgid "Checking teams..."
 msgstr ""
 
-#: ../resistencia/contest/main.py:65
+#: ../resistencia/contest/main.py:72
 #, python-format
 msgid ""
 "The rules file <b>\"%s\"</b> has errors. This team will be out of the "
@@ -160,7 +175,7 @@ msgid ""
 "Check \"<i>log_gsiege</i>\" log file for details."
 msgstr ""
 
-#: ../resistencia/contest/main.py:258
+#: ../resistencia/contest/main.py:265
 msgid "Running the contest"
 msgstr ""
 

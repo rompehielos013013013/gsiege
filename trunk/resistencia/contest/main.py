@@ -58,6 +58,13 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
     bannedTeams = []
     for equipo in teams:
         logging.info("Probando equipo: %s", equipo)
+
+        if (not filenames.comprobar_nombre_reglas(equipo[0]) or 
+            not filenames.comprobar_nombre_formacion(equipo[1])):
+            bannedTeams.append(equipo)
+            logging.warning("Equipo baneado: %s", equipo)
+            continue
+
         try:
             probar_equipo(equipo)
         except:
