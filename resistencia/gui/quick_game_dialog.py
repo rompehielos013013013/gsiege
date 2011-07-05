@@ -195,18 +195,26 @@ class quickGameDialog:
         controlPartida.restaurarCampeonato()
 
         ambosEquipos = [(self.es_team_a, self.team_team_a), (self.es_team_b, self.team_team_b)]
-
+        
         for equipo in ambosEquipos:
+            if (not filenames.comprobar_nombre_reglas(equipo[0]) or 
+                not filenames.comprobar_nombre_formacion(equipo[1])):
+
+                return
+
             logging.info("Probando equipo: %s", equipo)
             try:
                 probar_equipo(equipo)
-            except:
+            except Exception as e:
                 #progress_bar_dialog.hide()
+                logging.error("Algo ha fallado")
+                logging.error(e)
                 notificacion = notify_result.SimpleNotify(_("The rules file <b>\"%s\"</b> has errors. This quick game will be cancelled.\n\nCheck \"<i>log_gsiege</i>\" log file for details.") % equipo[0])
                 notificacion.dlg_result.run()
                 #progress_bar_dialog.show()
 
                 return
+            logging.info("Equipo probado")
 
         try:
             winner,kk = guada_board.run(

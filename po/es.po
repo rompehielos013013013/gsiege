@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-04 17:43+0200\n"
-"PO-Revision-Date: 2011-07-04 17:12+0200\n"
+"POT-Creation-Date: 2011-07-06 01:54+0200\n"
+"PO-Revision-Date: 2011-07-06 01:55+0200\n"
 "Last-Translator: Riku the Ronin <pablo.recioquijano@alum.uca.es>\n"
 "Language-Team: Spanish <>\n"
 "Language: es\n"
@@ -348,14 +348,14 @@ msgstr "Partidas antiguas"
 msgid "Quick game"
 msgstr "Partida rápida"
 
-#: ../resistencia/gui/round_results.py:180
+#: ../resistencia/gui/round_results.py:181
 msgid "Reason"
 msgstr "Razón"
 
 #: ../resistencia/gui/round_results.py:62
 #: ../resistencia/gui/round_results.py:63
-#: ../resistencia/gui/round_results.py:163
-#: ../resistencia/gui/round_results.py:166
+#: ../resistencia/gui/round_results.py:164
+#: ../resistencia/gui/round_results.py:167
 msgid "Rests"
 msgstr "Descansa"
 
@@ -392,7 +392,7 @@ msgstr "Reglas"
 msgid "Rules file"
 msgstr "Archivo de reglas"
 
-#: ../resistencia/contest/main.py:258
+#: ../resistencia/contest/main.py:265
 msgid "Running the contest"
 msgstr "Ejecutando la partida..."
 
@@ -454,17 +454,17 @@ msgstr "Reglas para el equipo A"
 msgid "System Expert for team B"
 msgstr "Reglas para el equipo B"
 
-#: ../resistencia/gui/round_results.py:156
-#: ../resistencia/gui/round_results.py:175
+#: ../resistencia/gui/round_results.py:157
+#: ../resistencia/gui/round_results.py:176
 msgid "Team A"
 msgstr "Equipo A"
 
-#: ../resistencia/gui/round_results.py:157
-#: ../resistencia/gui/round_results.py:176
+#: ../resistencia/gui/round_results.py:158
+#: ../resistencia/gui/round_results.py:177
 msgid "Team B"
 msgstr "Equipo B"
 
-#: ../resistencia/gui/round_results.py:124
+#: ../resistencia/gui/round_results.py:125
 msgid "Team name"
 msgstr "Nombre del equipo"
 
@@ -484,9 +484,19 @@ msgstr "Resultado de las pruebas para el equipo @team@"
 msgid "The end!"
 msgstr "¡Fin!"
 
+#: ../resistencia/filenames.py:50
+#, python-format
+msgid ""
+"The formation file <b>\"%s\"</b> is not properly formed. \n"
+"\n"
+"It should have the following syntax: <i>equipoNombre.form</i>."
+msgstr ""
+"El fichero de formación <b>\"%s\"</b> no está correctamente nombrado.\n"
+"\n"
+"Debería seguir el siguiente formato: <i>equipoNombre.form</i>."
+
 # python-format
-#. progress_bar_dialog.hide()
-#: ../resistencia/gui/quick_game_dialog.py:205
+#: ../resistencia/gui/quick_game_dialog.py:212
 #, python-format
 msgid ""
 "The rules file <b>\"%s\"</b> has errors. This quick game will be cancelled.\n"
@@ -498,7 +508,7 @@ msgstr ""
 "\n"
 "Compruebe el fichero <i>«log_gsiege»</i> para más detalles."
 
-#: ../resistencia/contest/main.py:65
+#: ../resistencia/contest/main.py:72
 #, python-format
 msgid ""
 "The rules file <b>\"%s\"</b> has errors. This team will be out of the "
@@ -506,10 +516,21 @@ msgid ""
 "\n"
 "Check \"<i>log_gsiege</i>\" log file for details."
 msgstr ""
-"El fichero de reglas <b>«%s»</b> "
-"tiene errores. Este equipo no participará en la competición\n"
+"El fichero de reglas <b>«%s»</b> tiene errores. Este equipo no participará "
+"en la competición\n"
 "\n"
 "Compruebe el fichero «<i>log_gsiege</i>» para más detalles."
+
+#: ../resistencia/filenames.py:39
+#, python-format
+msgid ""
+"The rules file <b>\"%s\"</b> is not properly formed. \n"
+"\n"
+"It should have the following syntax: <i>reglasNombre.clp</i>."
+msgstr ""
+"El fichero de formación <b>\"%s\"</b> no está correctamente nombrado.\n"
+"\n"
+"Debería seguir el siguiente formato: <i>reglasNombre.clp</i>."
 
 #: ../data/glade/results.glade.h:11
 msgid "This are the results of the final round"
