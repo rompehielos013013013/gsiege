@@ -1,0 +1,9 @@
+\beamer@endinputifotherversion {3.07pt}
+\select@language {spanish}
+\beamer@sectionintoc {1}{Definiciones}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{\IeC {\textquestiondown }Qu\IeC {\'e} es un sistema experto?}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{Componentes de un SEBR}{5}{0}{1}
+\beamer@subsubsectionintoc {0}{1}{2}{1}{6}{1}{Componentes principales}
+\beamer@subsubsectionintoc {0}{1}{2}{2}{7}{1}{Componentes secundarios}
+\beamer@sectionintoc {2}{CLIPS}{8}{0}{2}
+\beamer@sectionintoc {3}{Gades Siege}{9}{0}{3}
