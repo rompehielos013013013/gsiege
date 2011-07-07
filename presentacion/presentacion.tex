@@ -66,11 +66,134 @@
     \begin{block}{Estrategias de resolución de conflictos}
       Habrá ocasiones en las que varias reglas podrán ser candidatas, hay que
       decidir qué reglas disparar en cada caso.
-    \end{block}
-  
+    \end{block}  
+\end{frame}
+
+\subsection{Funcionamiento}
+\begin{frame}{Funcionamiento}
+  \begin{enumerate}
+  \item Se leen los hechos.
+  \item Se comprueba qué reglas cumplen las condiciones.
+  \item Se añaden las reglas candidatas a la agenda.
+  \item Se lanzan las reglas de la agenda, generando y/o borrando hechos como resultado de su ejecución.
+  \item Vuelta al principio.
+  \end{enumerate}
+
 \end{frame}
 
 \section{CLIPS}
+\begin{frame}{CLIPS}
+  \begin{block}{}
+    Usaremos \textbf{CLIPS} como sistema para el desarrollo y ejecución de
+    sistemas expertos basados en reglas.
+  \end{block}
+
+  \begin{itemize}
+  \item Es un sistema open source, creado por la NASA y mantenido por uno de sus
+    fundadores.
+  \item Existen muchos wrappers y derivados en otros lenguajes para poder
+    interactuar con Clips.
+  \item Más información en \url{http://clipsrules.sourceforge.net}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Hechos en CLIPS}
+Un \textbf{hecho} en clips tiene la siguiente forma:
+
+\texttt{(<relación> <campos\_de\_información>)}
+
+\bigskip
+
+Por ejemplo:
+
+\texttt{(persona ``Pepe'')}
+
+\bigskip
+
+Los hechos se \textit{afirman} con \texttt{assert:}
+
+\texttt{(assert (persona ``Pepe''))}
+
+\bigskip
+
+Y se retractan con \texttt{retract}. 
+
+\texttt{(retract <num\_hecho>)}
+
+\medskip
+
+Se puede utilizar \texttt{(facts)} para conocer los hechos y sus números
+asignados.
+  
+\end{frame}
+
+\begin{frame}[fragile]{Hechos en CLIPS}
+Los \textbf{hechos iniciales} se indican con \texttt{deffacts}:
+\begin{verbatim}
+(deffacts
+ (assert (persona "Pepe" 15))
+ (assert (persona "Juan" 18))
+ (assert (trabajo "Pepe" "Docente"))
+ (assert (trabajo "Juan" "Estudiante"))
+)
+\end{verbatim}  
+\end{frame}
+
+\begin{frame}[fragile]{Reglas en CLIPS}
+  Las \textbf{reglas} en CLIPS tienen dos partes:
+  \begin{enumerate}
+  \item \textbf{Condiciones:} serie de hechos y patrones que deben cumplirse
+    para que la regla se active.
+  \item \textbf{Acciones:} si las condiciones es cumplen, estas acciones se
+    lanzarán, normalmente generando nuevos hechos.
+  \end{enumerate}
+
+\bigskip
+
+Siguen esta sintaxis:
+\begin{verbatim}
+(defrule <nombre_regla>
+  <condiciones>
+    =>
+  <acciones>
+)
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]{Reglas en CLIPS}
+Por ejemplo:
+\begin{verbatim}
+(defrule apagar_fuego
+  (hay_emergencia fuego)
+   =>
+  (assert (llamar bomberos))
+)
+\end{verbatim}  
+
+Podemos declarar la prioridad de una regla con \texttt{salience:}
+
+\begin{verbatim}
+(defrule <nombre_regla>
+  (declare (salience 50))
+   ...
+\end{verbatim}    
+\end{frame}
+
+\begin{frame}[fragile]{Reglas en CLIPS}
+
+Podemos usar condiciones \textit{genéricas} que valgan para muchos
+hechos. Por ejemplo, esta regla se ejecutará para todas las personas, guardando
+el nombre de cada persona en la variable \texttt{?n}.
+
+\begin{verbatim}
+(defrule imprimir_persona>
+  (persona ?n)
+    =>
+  (printout t "Existe una persona cuyo nombre es " 
+    ?n crlf)
+)
+\end{verbatim}
+\end{frame}
 
 \section{Gades Siege}
 

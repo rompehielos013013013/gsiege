@@ -1,12 +1,8 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  7 JUL 2011 17:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  7 JUL 2011 18:36
 entering extended mode
  %&-line parsing enabled.
-**presentacion.tex
-(./presentacion.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, loaded.
-(/usr/share/texmf/tex/latex/beamer/base/beamer.cls
+**\input presentacion.tex
+(./presentacion.tex (/usr/share/texmf/tex/latex/beamer/base/beamer.cls
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasercs.sty
 Package: beamerbasercs 2007/01/28 (rcs-revision 1.4)
 )
@@ -1274,7 +1270,64 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <9> not available
 
 ] (./presentacion.toc) [8
 
-] (./presentacion.toc) [9
+] [9
+
+] (./presentacion.toc) [10
+
+]
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 98.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 98.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2009/06/22 v3.00 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 98.
+
+(/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2009/06/22 v3.00 AMS symbols B
+)
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 98.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 98.
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <5> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 98.
+ [11
+
+] [12
+
+]
+\openout3 = `presentacion.vrb'.
+
+
+(./presentacion.vrb) [13
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb) [14
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb)
+[15
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb
+Overfull \hbox (4.09108pt too wide) in paragraph at lines 12--12
+[]  \T1/pcr/m/n/10 (printout t "Existe una persona cuyo nombre es "[] 
+ []
+
+) [16
+
+] (./presentacion.toc) [17
 
 ]
 \tf@nav=\write6
@@ -1286,24 +1339,25 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <9> not available
 \tf@snm=\write8
 \openout8 = `presentacion.snm'.
 
-
-(./presentacion.aux) ) 
+ (./presentacion.aux) ) 
 Here is how much of TeX's memory you used:
- 19574 strings out of 495061
- 368904 string characters out of 1182621
- 490899 words of memory out of 3000000
- 22168 multiletter control sequences out of 15000+50000
- 93334 words of font info for 56 fonts, out of 3000000 for 9000
+ 19709 strings out of 495061
+ 370953 string characters out of 1182621
+ 491899 words of memory out of 3000000
+ 22254 multiletter control sequences out of 15000+50000
+ 102868 words of font info for 72 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 48i,20n,74p,368b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</u
-sr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-te
-xlive/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1
-/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pf
-b></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on presentacion.pdf (9 pages, 140909 bytes).
+ 48i,20n,74p,375b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</
+usr/share/texmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-te
+xlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1
+/urw/helvetic/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhv
+ro8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share
+/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts
+/type1/urw/times/utmri8a.pfb>
+Output written on presentacion.pdf (17 pages, 235746 bytes).
 PDF statistics:
- 440 PDF objects out of 1000 (max. 8388607)
- 26 named destinations out of 1000 (max. 500000)
- 151 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 780 PDF objects out of 1000 (max. 8388607)
+ 43 named destinations out of 1000 (max. 500000)
+ 159 words of extra memory for PDF output out of 10000 (max. 10000000)
 
