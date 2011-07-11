@@ -64,8 +64,7 @@
     \end{block}
 
     \begin{block}{Estrategias de resolución de conflictos}
-      Habrá ocasiones en las que varias reglas podrán ser candidatas, hay que
-      decidir qué reglas disparar en cada caso.
+      Decide qué regla disparar si hay varias que se cumplen. Puede ser la que más tiempo lleve sin dispararse, la que más veces se halla disparado, una aleatoriamente, etc.
     \end{block}  
 \end{frame}
 
@@ -95,7 +94,7 @@
   \item Es un sistema open source, creado por la NASA y mantenido por uno de sus
     creadores.
   \item Existen muchos wrappers y derivados en otros lenguajes para poder
-    interactuar con Clips.
+    interactuar con Clips: Jess (CLIPS para Java), PyCLIPS, FuzzyCLIPS, etc.
   \item Más información en \url{http://clipsrules.sourceforge.net}.
   \end{itemize}
 \end{frame}
@@ -115,13 +114,13 @@ Por ejemplo:
 
 \bigskip
 
-Los hechos se \textit{afirman} con \texttt{assert:}
+Se añaden hecho al sistema con \texttt{assert:}
 
 \texttt{(assert (persona ``Pepe''))}
 
 \bigskip
 
-Y se retractan con \texttt{retract}. 
+Y se eliminan de él con \texttt{retract}. 
 
 \texttt{(retract <num\_hecho>)}
 
@@ -152,7 +151,7 @@ Los \textbf{hechos iniciales} se indican con \texttt{deffacts}:
   \item \textbf{Condiciones:} serie de hechos y patrones que deben cumplirse
     para que la regla se active.
   \item \textbf{Acciones:} si las condiciones es cumplen, estas acciones se
-    lanzarán, normalmente generando nuevos hechos.
+    lanzarán, normalmente modificando el conjunto de hechos.
   \end{enumerate}
 
 \bigskip
@@ -203,8 +202,7 @@ el nombre de cada persona en la variable \texttt{?n}.
 \end{frame}
 
 \begin{frame}[fragile]{Reglas en CLIPS}
-  Para hacer \textbf{comprobaciones} arbitrarias, usaremos \texttt{test}. Lo usaremos en
-  el ejemplo siguiente.
+  Para hacer \textbf{comprobaciones} arbitrarias, usaremos \texttt{test} con notación infija.
 
   \medskip
 
@@ -268,10 +266,14 @@ Nos permitirá filtrar por campos individuales:
 \subsection{Introducción}
 
 \begin{frame}{Introducción}
+  \begin{block}{Objetivo}
+    Aprender el uso de un sistema experto para la inteligencia artificial \textbf{de un videojuego}, mediante un videojuego ;-)
+  \end{block}
+
   \begin{block}{Idea}
     Crear un sistema para el \textbf{enfrentamiento de dos ejércitos}, cada uno
     controlado por un \textbf{sistema experto} basado en reglas escritas en
-    CLIPS por los propios alumnos.
+    CLIPS por un alumno.
   \end{block}
 
 \end{frame}
@@ -284,7 +286,7 @@ Nos permitirá filtrar por campos individuales:
     \item Planteamiento basado en Stratego.
     \item Tenemos un \textbf{tablero} de 8x8, y \textbf{dos ejércitos} de 16 fichas:
       \begin{itemize}
-      \item Un \textbf{rey} (valor 1), al que hay que defender.
+      \item Un \textbf{rey} (valor 1), que cuando muere acaba la partida.
       \item Ocho peones (valor 2).
       \item Dos fichas de valor 3, dos de valor 4 y dos de valor 5.
       \item Una ficha todopoderosa de valor 6.
@@ -367,7 +369,7 @@ tablero (suponiendo que somos el equipo que juega abajo).
 
 \begin{frame}[fragile]{Estructura del juego: fichero de reglas}
   En el \textbf{fichero de reglas} se guardarán las reglas que el sistema
-  experto usará para evaluar las condiciones del juego y ejecutar las acciones convenientes.
+  experto usará para jugar.
 
   \begin{itemize}
   \item Deben guardarse en la ruta \texttt{data/teams/rules}
@@ -391,7 +393,7 @@ punto y coma como indicador.
 
 
 \begin{frame}[fragile]{Estructura del juego: movimiento}
-  En Gades Siege, un \textbf{movimiento} se representa como un hecho mediante
+  En Gades Siege, un \textbf{movimiento} se solitica como un hecho mediante
   una plantilla \texttt{mueve}, que tiene los siguientes \textit{slots}:
 
   \begin{description}
@@ -412,7 +414,8 @@ Por ejemplo, un movimiento horizontal:
 (assert (mueve (num ?n) (mov 1) (tiempo ?t)))
 \end{verbatim}
 
-Las acciones de las reglas suelen ser asertos de hechos que representan movimientos.
+Las reglas siempre suponen que el jugador empieza en la parte inferior del tablero. si no es así, el sistemas se encarga de traducirlas.
+%Las acciones de las reglas suelen ser asertos de hechos que representan movimientos.
 \end{frame}
 
 \begin{frame}[fragile]{Ejemplo de regla 1}
