@@ -7,4 +7,12 @@
 \beamer@subsubsectionintoc {0}{1}{2}{2}{7}{1}{Componentes secundarios}
 \beamer@subsectionintoc {1}{3}{Funcionamiento}{8}{0}{1}
 \beamer@sectionintoc {2}{CLIPS}{10}{0}{2}
-\beamer@sectionintoc {3}{Gades Siege}{20}{0}{3}
+\beamer@subsectionintoc {2}{1}{Introducci\IeC {\'o}n}{11}{0}{2}
+\beamer@subsectionintoc {2}{2}{Hechos}{13}{0}{2}
+\beamer@subsectionintoc {2}{3}{Reglas}{16}{0}{2}
+\beamer@subsectionintoc {2}{4}{Funciones}{21}{0}{2}
+\beamer@subsectionintoc {2}{5}{Plantillas}{23}{0}{2}
+\beamer@sectionintoc {3}{Gades Siege}{25}{0}{3}
+\beamer@subsectionintoc {3}{1}{Introducci\IeC {\'o}n}{26}{0}{3}
+\beamer@subsectionintoc {3}{2}{Planteamiento}{28}{0}{3}
+\beamer@subsectionintoc {3}{3}{Estructura}{31}{0}{3}
