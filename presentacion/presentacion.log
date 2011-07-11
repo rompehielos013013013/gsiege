@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  11 JUL 2011 12:35
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  11 JUL 2011 13:20
 entering extended mode
  %&-line parsing enabled.
 **\input presentacion.tex
@@ -1337,7 +1337,23 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 12--12
 
  (./presentacion.vrb) [18
 
-] (./presentacion.toc) [19
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb
+Overfull \hbox (4.09108pt too wide) in paragraph at lines 18--18
+[]\T1/pcr/m/n/10 ; Persona de edad 27, da igual el nombre o el peso[] 
+ []
+
+) [19
+
+] (./presentacion.toc) [20
+
+] [21
+
+] [22
+
+] [23
 
 ]
 \tf@nav=\write6
@@ -1351,10 +1367,10 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 12--12
 
  (./presentacion.aux) ) 
 Here is how much of TeX's memory you used:
- 19719 strings out of 495061
- 371075 string characters out of 1182621
+ 19741 strings out of 495061
+ 371403 string characters out of 1182621
  491899 words of memory out of 3000000
- 22256 multiletter control sequences out of 15000+50000
+ 22268 multiletter control sequences out of 15000+50000
  102868 words of font info for 72 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  48i,20n,74p,375b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1365,9 +1381,9 @@ xlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1
 ro8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share
 /texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on presentacion.pdf (19 pages, 253334 bytes).
+Output written on presentacion.pdf (23 pages, 292385 bytes).
 PDF statistics:
- 853 PDF objects out of 1000 (max. 8388607)
- 47 named destinations out of 1000 (max. 500000)
- 159 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1003 PDF objects out of 1200 (max. 8388607)
+ 55 named destinations out of 1000 (max. 500000)
+ 171 words of extra memory for PDF output out of 10000 (max. 10000000)
 

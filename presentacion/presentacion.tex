@@ -181,7 +181,7 @@ Podemos declarar la prioridad de una regla con \texttt{salience:}
 
 \begin{frame}[fragile]{Reglas en CLIPS}
 
-Podemos usar condiciones \textit{genéricas} que valgan para muchos
+Podemos usar \textbf{condiciones genéricas} que valgan para muchos
 hechos. Por ejemplo, esta regla se ejecutará para todas las personas, guardando
 el nombre de cada persona en la variable \texttt{?n}.
 
@@ -196,7 +196,7 @@ el nombre de cada persona en la variable \texttt{?n}.
 \end{frame}
 
 \begin{frame}[fragile]{Reglas en CLIPS}
-  Para hacer comprobaciones arbitrarias, usaremos \texttt{test}. Lo usaremos en
+  Para hacer \textbf{comprobaciones} arbitrarias, usaremos \texttt{test}. Lo usaremos en
   el ejemplo siguiente.
 
   \medskip
@@ -217,7 +217,7 @@ el nombre de cada persona en la variable \texttt{?n}.
 \end{frame}
 
 \begin{frame}[fragile]{Funciones en CLIPS}
-  Podemos modularizar las operaciones en funciones con \texttt{deffunction}. El
+  Podemos modularizar las operaciones en \textbf{funciones} con \texttt{deffunction}. El
   valor de retorno será el de la última expresión evaluada:
 
 \begin{verbatim}
@@ -231,8 +231,70 @@ el nombre de cada persona en la variable \texttt{?n}.
 \end{verbatim}
 \end{frame}
 
+\begin{frame}[fragile]{Plantillas en CLIPS}
+  Es posible estructurar la información de un hecho mediante el uso de
+  \textbf{plantillas}.
 
+\begin{verbatim}
+(deftemplate persona
+  (slot nombre)
+  (slot edad)
+  (slot peso)
+)
+(assert (persona (nombre "Pepe") (edad 27)))
+\end{verbatim}
+
+Nos permitirá filtrar por campos individuales:
+
+\begin{verbatim}
+; Persona de edad 27, da igual el nombre o el peso
+?h <- (persona (edad 27))
+\end{verbatim}
+  
+\end{frame}
 \section{Gades Siege}
+
+\begin{frame}{Introducción}
+  \begin{block}{Idea}
+    Crear un sistema para el \textbf{enfrentamiento de dos ejércitos}, cada uno
+    controlado por un \textbf{sistema experto} basado en reglas escritas en
+    CLIPS por los propios alumnos.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}{Planteamiento}
+  \begin{block}{}
+    \begin{itemize}
+    \item Planteamiento basado en Stratego.
+    \item Tenemos un \textbf{tablero} de 8x8, y \textbf{dos ejércitos} de 16 fichas:
+      \begin{itemize}
+      \item Un \textbf{rey} (valor 1), al que hay que defender.
+      \item Ocho peones (valor 2).
+      \item Dos fichas de valor 3, dos de valor 4 y dos de valor 5.
+      \item Una ficha todopoderosa de valor 6.
+      \end{itemize}
+    \item Por \textbf{turnos}, cada ejército mueve una ficha. Las fichas solo
+      pueden moverse una casilla en horizontal o vertical.
+    \item Cuando dos fichas \textbf{colisionan}, se muestran sus valores y muere la de
+      menor valor, o ambas si hay empate.
+    \end{itemize}
+  \end{block} 
+\end{frame}
+
+\begin{frame}{Implementaciones previas}
+El sistema ha evolucionado bastante a lo largo de los años:
+\begin{enumerate}
+\item Versión 0.1, \textbf{modo texto}. Totalmente funcional.
+\item Versión 0.1.1, se añade un \textbf{visor gráfico} para las partidas de texto.
+\item Versión 1.0, \textbf{La Reconquista}, aplicación gráfica e interactiva.
+\item Versión 2.0, \textbf{Resistencia en Cádiz 1812}. Reescritura de la versión 1.0, con
+  pruebas automáticas.
+\item Versión 2.x, \textbf{Gades Siege}. Ampliación del proyecto Resistencia 1812,
+  mejoras gráficas, nuevas reglas, etc.
+\end{enumerate}
+  
+\end{frame}
 
 
 % \section{Análisis Léxico}
