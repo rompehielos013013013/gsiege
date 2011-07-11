@@ -186,7 +186,7 @@ hechos. Por ejemplo, esta regla se ejecutará para todas las personas, guardando
 el nombre de cada persona en la variable \texttt{?n}.
 
 \begin{verbatim}
-(defrule imprimir_persona>
+(defrule imprimir_persona
   (persona ?n)
     =>
   (printout t "Existe una persona cuyo nombre es " 
@@ -194,6 +194,43 @@ el nombre de cada persona en la variable \texttt{?n}.
 )
 \end{verbatim}
 \end{frame}
+
+\begin{frame}[fragile]{Reglas en CLIPS}
+  Para hacer comprobaciones arbitrarias, usaremos \texttt{test}. Lo usaremos en
+  el ejemplo siguiente.
+
+  \medskip
+
+  Es posible guardar \textbf{referencias a hechos} en las condiciones para trabajar con
+  ellos en las acciones de la regla:
+
+\begin{verbatim}
+(defrule MODULO::jubila1
+  (persona ?n ?e)
+  ?h <- (trabajo ?n ?t)
+  (test (> ?e 65))
+    =>
+  (retract ?h)
+  (assert (jubilado ?n))
+)
+\end{verbatim}  
+\end{frame}
+
+\begin{frame}[fragile]{Funciones en CLIPS}
+  Podemos modularizar las operaciones en funciones con \texttt{deffunction}. El
+  valor de retorno será el de la última expresión evaluada:
+
+\begin{verbatim}
+(deffunction MAIN::mayor-mas-uno (?a ?b)
+  (if (> ?a ?b) then
+    (+ ?a 1)
+  else
+    (+ ?b 1)
+  )
+)
+\end{verbatim}
+\end{frame}
+
 
 \section{Gades Siege}
 

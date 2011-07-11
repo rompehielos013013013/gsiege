@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  7 JUL 2011 18:36
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  11 JUL 2011 12:35
 entering extended mode
  %&-line parsing enabled.
 **\input presentacion.tex
@@ -1327,7 +1327,17 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 12--12
 
 ) [16
 
-] (./presentacion.toc) [17
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb) [17
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb) [18
+
+] (./presentacion.toc) [19
 
 ]
 \tf@nav=\write6
@@ -1341,10 +1351,10 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 12--12
 
  (./presentacion.aux) ) 
 Here is how much of TeX's memory you used:
- 19709 strings out of 495061
- 370953 string characters out of 1182621
+ 19719 strings out of 495061
+ 371075 string characters out of 1182621
  491899 words of memory out of 3000000
- 22254 multiletter control sequences out of 15000+50000
+ 22256 multiletter control sequences out of 15000+50000
  102868 words of font info for 72 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  48i,20n,74p,375b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1355,9 +1365,9 @@ xlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1
 ro8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share
 /texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on presentacion.pdf (17 pages, 235746 bytes).
+Output written on presentacion.pdf (19 pages, 253334 bytes).
 PDF statistics:
- 780 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 500000)
+ 853 PDF objects out of 1000 (max. 8388607)
+ 47 named destinations out of 1000 (max. 500000)
  159 words of extra memory for PDF output out of 10000 (max. 10000000)
 
