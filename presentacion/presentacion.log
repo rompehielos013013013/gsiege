@@ -1,8 +1,12 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  11 JUL 2011 15:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  11 JUL 2011 15:52
 entering extended mode
  %&-line parsing enabled.
-**\input presentacion.tex
-(./presentacion.tex (/usr/share/texmf/tex/latex/beamer/base/beamer.cls
+**presentacion.tex
+(./presentacion.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, loaded.
+(/usr/share/texmf/tex/latex/beamer/base/beamer.cls
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasercs.sty
 Package: beamerbasercs 2007/01/28 (rcs-revision 1.4)
 )
@@ -1452,13 +1456,13 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 
  (./presentacion.aux) ) 
 Here is how much of TeX's memory you used:
- 19926 strings out of 495061
- 373691 string characters out of 1182621
- 521009 words of memory out of 3000000
- 22362 multiletter control sequences out of 15000+50000
+ 19928 strings out of 495061
+ 373709 string characters out of 1182621
+ 522827 words of memory out of 3000000
+ 22364 multiletter control sequences out of 15000+50000
  114087 words of font info for 91 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 48i,20n,74p,375b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 48i,20n,74p,368b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</
 usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/te
 xmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/
@@ -1467,9 +1471,9 @@ c/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></u
 sr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texli
 ve/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on presentacion.pdf (43 pages, 770995 bytes).
+Output written on presentacion.pdf (43 pages, 779187 bytes).
 PDF statistics:
- 3315 PDF objects out of 3580 (max. 8388607)
+ 3359 PDF objects out of 3580 (max. 8388607)
  103 named destinations out of 1000 (max. 500000)
  235 words of extra memory for PDF output out of 10000 (max. 10000000)
 
