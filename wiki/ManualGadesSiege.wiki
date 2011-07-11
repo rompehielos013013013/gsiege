@@ -105,6 +105,37 @@ El fichero de formación debe contenerse en la carpeta *formations* del director
 Como se ve a simple vista, el fichero consta de dos líneas de números separados entre sí por dos puntos. Estas dos líneas representan las dos filas en las que las fichas podrán colocarse inicialmente en el tablero. En la formación de ejemplo, el rey (número 1) está en la esquina inferior derecha, de forma que tiene bastante protección, es una formación habitual.
 
 === Fichero de reglas ===
-Los ficheros de reglas definen las reglas que el sistema experto evaluará en cada momento para decidir qué acción tomar. Estos ficheros se encuentran en la carpeta *rules* del directorio *teams*, y la nomenclatura a seguir será *reglasNombre.clp*, siendo _Nombre_, de nuevo, el mismo identificador que en el fichero de formación.
+Los ficheros de reglas definen las condiciones que el sistema experto evaluará en cada momento para decidir qué acción tomar. Estos ficheros se encuentran en la carpeta *rules* del directorio *teams*, y la nomenclatura a seguir será *reglasNombre.clp*, siendo _Nombre_, de nuevo, el mismo identificador que en el fichero de formación.
 
-Los ficheros de reglas son ficheros de Clips propiamente, por eso tienen la extensión .clp, y siguen la sintaxis de Clips.
+Los ficheros de reglas son ficheros de Clips propiamente, por eso tienen la extensión .clp, y siguen la sintaxis de Clips. En ellos listaremos, una detrás de otra, las reglas de nuestro sistema, por ejemplo:
+{{{
+(defrule EQUIPO-A::atacar1
+  (declare (salience 30))
+  (ficha (equipo "A") (num ?n1) (pos-x ?x1)
+         (pos-y ?y1) (puntos ?p1))
+  (ficha (equipo "B") (num ?n2) (pos-x ?x2)
+         (pos-y ?y2) (puntos ?p2) (descubierta 1))
+  (test (and (> ?p1 ?p2) (= ?y1 ?y2) (> ?x1 ?x2)))
+  (tiempo ?t)
+    =>
+  (assert (mueve (num ?n1) (mov 2) (tiempo ?t)))
+)
+}}}
+
+Explicaremos la regla línea a línea:
+
+{{{(defrule EQUIPO-A::atacar1}}} Cabecera de la regla de nombre `atacar1`, dentro del módulo `EQUIPO-A`.
+
+{{{(declare (salience 30))}}} Indicamos la prioridad de la regla respecto al resto.
+
+{{{(ficha (equipo "A") (num ?n1) (pos-x ?x1) (pos-y ?y1) (puntos ?p1))}}} Buscamos una ficha de nuestro equipo y guardamos sus datos en las variables indicadas, para poder hacer luego comprobaciones.
+
+{{{(ficha (equipo "B") (num ?n2) (pos-x ?x2) (pos-y ?y2) (puntos ?p2) (descubierta 1))}}} Buscamos una ficha del equipo contrario, con la condición de que esté descubierta.
+
+{{{(test (and (> ?p1 ?p2) (= ?y1 ?y2) (> ?x1 ?x2)))}}} En este bloque de comprobación, se verifica que nuestra ficha tenga mayor valor que la ficha adversaria, que ambas se encuentren en la misma columna y que nuestra ficha esté más a la derecha que la ficha contraria.
+
+{{{(tiempo ?t)}}} Guardamos en la variable `t` el turno actual.
+
+Si todas estas condiciones se cumplen, se ejecuta el bloque de acciones.
+
+{{{(assert (mueve (num ?n1) (mov 2) (tiempo ?t)))}}} Movemos nuestra ficha en dirección a la ficha adversaria.
