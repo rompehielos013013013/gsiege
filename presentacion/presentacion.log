@@ -1,12 +1,8 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  11 JUL 2011 15:52
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  12 JUL 2011 15:57
 entering extended mode
  %&-line parsing enabled.
-**presentacion.tex
-(./presentacion.tex
-LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
-yphenation, loaded.
-(/usr/share/texmf/tex/latex/beamer/base/beamer.cls
+**\input presentacion.tex
+(./presentacion.tex (/usr/share/texmf/tex/latex/beamer/base/beamer.cls
 (/usr/share/texmf/tex/latex/beamer/base/beamerbasercs.sty
 Package: beamerbasercs 2007/01/28 (rcs-revision 1.4)
 )
@@ -1276,55 +1272,65 @@ LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <9> not available
 
 ] [9
 
-] (./presentacion.toc) [10
-
 ]
+
+pdfTeX warning: pdflatex (file ./img/diagrama_funcionamiento.pdf): PDF inclusio
+n: found PDF version <1.5>, but at most version <1.4> allowed
+<img/diagrama_funcionamiento.pdf, id=864, 318.26404pt x 174.76996pt>
+File: img/diagrama_funcionamiento.pdf Graphic file (type pdf)
+
+<use img/diagrama_funcionamiento.pdf> [10
+
+ <./img/diagrama_funcionamiento.pdf>]
 (./presentacion.toc) [11
 
+] (./presentacion.toc) [12
+
 ]
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 101.
- (/usr/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 105.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 101.
+LaTeX Font Info:    Try loading font information for U+msa on input line 105.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 101.
+LaTeX Font Info:    Try loading font information for U+msb on input line 105.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 101.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 105.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 101.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 105.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <5> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 101.
- [12
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 105.
+ [13
 
-] (./presentacion.toc) [13
+] (./presentacion.toc) [14
 
-] [14
-
-]
-\openout3 = `presentacion.vrb'.
-
- (./presentacion.vrb) [15
-
-] (./presentacion.toc) [16
+] [15
 
 ]
 \openout3 = `presentacion.vrb'.
 
+ (./presentacion.vrb) [16
 
-(./presentacion.vrb) [17
+] (./presentacion.toc) [17
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [18
+
+(./presentacion.vrb) [18
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb) [19
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1334,21 +1340,21 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 12--12
 []  \T1/pcr/m/n/10 (printout t "Existe una persona cuyo nombre es "[] 
  []
 
-) [19
+) [20
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [20
+ (./presentacion.vrb) [21
 
-] (./presentacion.toc) [21
+] (./presentacion.toc) [22
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [22
+ (./presentacion.vrb) [23
 
-] (./presentacion.toc) [23
+] (./presentacion.toc) [24
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1358,46 +1364,46 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 18--18
 []\T1/pcr/m/n/10 ; Persona de edad 27, da igual el nombre o el peso[] 
  []
 
-) [24
-
-] (./presentacion.toc) [25
+) [25
 
 ] (./presentacion.toc) [26
 
-] [27
+] (./presentacion.toc) [27
+
+] [28
 
 ]
-(./presentacion.toc) [28
-
-] [29
+(./presentacion.toc) [29
 
 ] [30
 
-] (./presentacion.toc) [31
+] [31
+
+] (./presentacion.toc) [32
 
 ]
 \openout3 = `presentacion.vrb'.
 
 
-(./presentacion.vrb) [32
+(./presentacion.vrb) [33
 
-] [33
+] [34
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [34
+ (./presentacion.vrb) [35
 
 ]
 \openout3 = `presentacion.vrb'.
 
  (./presentacion.vrb)
-[35
+[36
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [36
+ (./presentacion.vrb) [37
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1412,7 +1418,7 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 13--13
 []  \T1/pcr/m/n/10 (test (and (> ?p1 ?p2) (= ?y1 ?y2) (> ?x1 ?x2)))[] 
  []
 
-) [37
+) [38
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1422,27 +1428,27 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 2.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 2.
-) [38
+) [39
 
-] [39
-
-]
-\openout3 = `presentacion.vrb'.
-
- (./presentacion.vrb) [40
+] [40
 
 ]
 \openout3 = `presentacion.vrb'.
 
-
-(./presentacion.vrb) [41
+ (./presentacion.vrb) [41
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [42
 
-] [43
+(./presentacion.vrb) [42
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb) [43
+
+] [44
 
 ]
 \tf@nav=\write6
@@ -1456,13 +1462,13 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 
  (./presentacion.aux) ) 
 Here is how much of TeX's memory you used:
- 19928 strings out of 495061
- 373709 string characters out of 1182621
- 522827 words of memory out of 3000000
- 22364 multiletter control sequences out of 15000+50000
+ 19939 strings out of 495061
+ 373924 string characters out of 1182621
+ 523652 words of memory out of 3000000
+ 22370 multiletter control sequences out of 15000+50000
  114087 words of font info for 91 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 48i,20n,74p,368b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 48i,20n,74p,375b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</
 usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/te
 xmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/
@@ -1471,9 +1477,9 @@ c/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></u
 sr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texli
 ve/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
 imes/utmri8a.pfb>
-Output written on presentacion.pdf (43 pages, 779187 bytes).
+Output written on presentacion.pdf (44 pages, 809525 bytes).
 PDF statistics:
- 3359 PDF objects out of 3580 (max. 8388607)
- 103 named destinations out of 1000 (max. 500000)
- 235 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3482 PDF objects out of 3580 (max. 8388607)
+ 105 named destinations out of 1000 (max. 500000)
+ 240 words of extra memory for PDF output out of 10000 (max. 10000000)
 
