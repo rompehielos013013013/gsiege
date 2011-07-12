@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  12 JUL 2011 15:57
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.16)  12 JUL 2011 16:36
 entering extended mode
  %&-line parsing enabled.
 **\input presentacion.tex
@@ -1093,6 +1093,10 @@ Package: beamercolorthemecrane 2007/01/28  (rcs-revision 1.9)
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\\' on input line 12.
 
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 12.
+
 (./presentacion.aux)
 \openout1 = `presentacion.aux'.
 
@@ -1242,54 +1246,114 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <5> not available
 (Font)              Font shape `T1/ptm/b/sc' tried instead on input line 16.
 
 (./presentacion.nav)
+Overfull \hbox (7.43271pt too wide) in paragraph at lines 16--16
+ [][]  
+ []
+
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <4> not available
 (Font)              Font shape `T1/ptm/b/sc' tried instead on input line 20.
- [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-]
-(./presentacion.toc
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+] (./presentacion.toc
 LaTeX Font Info:    Font shape `T1/ptm/bx/sc' in size <7> not available
 (Font)              Font shape `T1/ptm/b/sc' tried instead on input line 3.
-) [2
+)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] (./presentacion.toc) [3
+[2
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[3
 
 ]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <10> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 36.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <9> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 36.
- [4
+
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[4
 
 ] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
 [5
 
-] [6
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] [7
+[6
 
-] (./presentacion.toc) [8
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] [9
+[7
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[8
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[9
 
 ]
 
 pdfTeX warning: pdflatex (file ./img/diagrama_funcionamiento.pdf): PDF inclusio
 n: found PDF version <1.5>, but at most version <1.4> allowed
-<img/diagrama_funcionamiento.pdf, id=864, 318.26404pt x 174.76996pt>
+<img/diagrama_funcionamiento.pdf, id=941, 318.26404pt x 174.76996pt>
 File: img/diagrama_funcionamiento.pdf Graphic file (type pdf)
 
-<use img/diagrama_funcionamiento.pdf> [10
+<use img/diagrama_funcionamiento.pdf>
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
- <./img/diagrama_funcionamiento.pdf>]
-(./presentacion.toc) [11
+[10
 
-] (./presentacion.toc) [12
+ <./img/diagrama_funcionamiento.pdf>] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[11
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[12
 
 ]
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 105.
-
-(/usr/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
+ (/usr/share/texmf-texlive/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 LaTeX Font Info:    Try loading font information for U+msa on input line 105.
@@ -1308,29 +1372,63 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <7> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 105.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <5> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 105.
- [13
 
-] (./presentacion.toc) [14
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] [15
+[13
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[14
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[15
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [16
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] (./presentacion.toc) [17
+[16
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[17
 
 ]
 \openout3 = `presentacion.vrb'.
 
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-(./presentacion.vrb) [18
+[18
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [19
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[19
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1340,21 +1438,46 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 12--12
 []  \T1/pcr/m/n/10 (printout t "Existe una persona cuyo nombre es "[] 
  []
 
-) [20
+)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[20
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [21
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] (./presentacion.toc) [22
+[21
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[22
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [23
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] (./presentacion.toc) [24
+[23
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[24
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1364,46 +1487,197 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 18--18
 []\T1/pcr/m/n/10 ; Persona de edad 27, da igual el nombre o el peso[] 
  []
 
-) [25
+)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] (./presentacion.toc) [26
+[25
 
-] (./presentacion.toc) [27
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] [28
+[26
 
-]
-(./presentacion.toc) [29
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] [30
-
-] [31
-
-] (./presentacion.toc) [32
-
-]
-\openout3 = `presentacion.vrb'.
-
-
-(./presentacion.vrb) [33
-
-] [34
+[27
 
 ]
-\openout3 = `presentacion.vrb'.
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
- (./presentacion.vrb) [35
+[28
+
+] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[29
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[30
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[31
+
+]
+LaTeX Font Info:    Try loading font information for OMS+phv on input line 330.
+
+ (/usr/share/texmf-texlive/tex/latex/psnfss/omsphv.fd
+File: omsphv.fd 
+)
+LaTeX Font Info:    Font shape `OMS/phv/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 330.
+
+<img/version_1.png, id=2755, 355.3275pt x 333.245pt>
+File: img/version_1.png Graphic file (type png)
+ <use img/version_1.png>
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[32
+
+ <./img/version_1.png>]
+<img/version_2.png, id=2835, 347.2975pt x 318.18875pt>
+File: img/version_2.png Graphic file (type png)
+ <use img/version_2.png>
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[33
+
+ <./img/version_2.png>]
+<img/version_31.png, id=2912, 374.39874pt x 262.9825pt>
+File: img/version_31.png Graphic file (type png)
+
+<use img/version_31.png>
+<img/version_32.png, id=2913, 390.45876pt x 259.97125pt>
+File: img/version_32.png Graphic file (type png)
+
+<use img/version_32.png>
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[34
+
+ <./img/version_31.png> <./img/version_32.png>]
+<img/version_41.png, id=2991, 318.18875pt x 479.7925pt>
+File: img/version_41.png Graphic file (type png)
+
+<use img/version_41.png> <img/version_42.png, id=2992, 762.85pt x 588.1975pt>
+File: img/version_42.png Graphic file (type png)
+
+<use img/version_42.png>
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[35
+
+ <./img/version_41.png> <./img/version_42.png>]
+<img/version_51.jpg, id=3070, 651.43375pt x 316.18124pt>
+File: img/version_51.jpg Graphic file (type jpg)
+
+<use img/version_51.jpg>
+<img/version_52.jpg, id=3071, 684.5575pt x 511.9125pt>
+File: img/version_52.jpg Graphic file (type jpg)
+
+<use img/version_52.jpg>
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[36
+
+ <./img/version_51.jpg> <./img/version_52.jpg>] (./presentacion.toc)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[37
 
 ]
 \openout3 = `presentacion.vrb'.
 
  (./presentacion.vrb)
-[36
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[38
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[39
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [37
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[40
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[41
+
+]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb
+
+pdfTeX warning: pdflatex (file ./img/diagrama_movimientos.pdf): PDF inclusion: 
+found PDF version <1.5>, but at most version <1.4> allowed
+<img/diagrama_movimientos.pdf, id=3539, 103.66605pt x 113.40683pt>
+File: img/diagrama_movimientos.pdf Graphic file (type pdf)
+
+<use img/diagrama_movimientos.pdf>)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[42
+
+ <./img/diagrama_movimientos.pdf>]
+\openout3 = `presentacion.vrb'.
+
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[43
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1418,7 +1692,12 @@ Overfull \hbox (4.09108pt too wide) in paragraph at lines 13--13
 []  \T1/pcr/m/n/10 (test (and (> ?p1 ?p2) (= ?y1 ?y2) (> ?x1 ?x2)))[] 
  []
 
-) [38
+)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[44
 
 ]
 \openout3 = `presentacion.vrb'.
@@ -1428,27 +1707,63 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <9> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 2.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 2.
-) [39
+)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] [40
+[45
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[46
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [41
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[47
 
 ]
 \openout3 = `presentacion.vrb'.
 
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-(./presentacion.vrb) [42
+[48
 
 ]
 \openout3 = `presentacion.vrb'.
 
- (./presentacion.vrb) [43
+ (./presentacion.vrb)
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
 
-] [44
+[49
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[50
+
+]
+Overfull \hbox (7.43271pt too wide) has occurred while \output is active
+ [][]  
+ []
+
+[51
 
 ]
 \tf@nav=\write6
@@ -1462,24 +1777,25 @@ LaTeX Font Info:    Font shape `T1/phv/m/it' in size <6> not available
 
  (./presentacion.aux) ) 
 Here is how much of TeX's memory you used:
- 19939 strings out of 495061
- 373924 string characters out of 1182621
- 523652 words of memory out of 3000000
- 22370 multiletter control sequences out of 15000+50000
- 114087 words of font info for 91 fonts, out of 3000000 for 9000
+ 20040 strings out of 495061
+ 375566 string characters out of 1182621
+ 533547 words of memory out of 3000000
+ 22438 multiletter control sequences out of 15000+50000
+ 126170 words of font info for 98 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
  48i,20n,74p,375b,843s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</
-usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/te
-xmf-texlive/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/
-type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helveti
-c/uhvr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></u
-sr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texli
-ve/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/t
-imes/utmri8a.pfb>
-Output written on presentacion.pdf (44 pages, 809525 bytes).
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf-texlive
+/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/h
+elvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvr8a.pf
+b></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/te
+xmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8
+a.pfb>
+Output written on presentacion.pdf (51 pages, 1953909 bytes).
 PDF statistics:
- 3482 PDF objects out of 3580 (max. 8388607)
- 105 named destinations out of 1000 (max. 500000)
- 240 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4363 PDF objects out of 5155 (max. 8388607)
+ 119 named destinations out of 1000 (max. 500000)
+ 285 words of extra memory for PDF output out of 10000 (max. 10000000)
 

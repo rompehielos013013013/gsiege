@@ -9,7 +9,7 @@
 
 \title[Sistemas Expertos]{{\Huge Sistemas Expertos} \\ Diseño de Videojuegos}
 
-\author[Manuel Palomo Duarte - José Tomás Tocino]{Manuel Palomo Duarte \\ José Tomás Tocino García}
+\author[Manuel Palomo Duarte - Pablo Recio Quijano - José Tomás Tocino]{Manuel Palomo Duarte \\ Pablo Recio Quijano \\ José Tomás Tocino García}
 
 \date{Junio de 2011}
 
@@ -22,17 +22,17 @@
 \section{Definiciones}
 \subsection{¿Qué es un sistema experto?}
 \begin{frame}{¿Qué es un sistema experto?}
+  \begin{itemize}
+  \item \textbf{Sistema experto:} mecanismo que \textbf{simula} el
+    conocimiento de un experto humano en una materia determinada.
+  \item Se usan con éxito en muchas ramas de la ciencia: medicina, ingeniería, etc.
+  \item Existen varios tipos:
     \begin{itemize}
-    \item \textbf{Sistema experto:} mecanismo que \textbf{simula} el
-      conocimiento de un experto humano en una materia determinada.
-    \item Se usan con éxito en muchas ramas de la ciencia: medicina, ingeniería, etc.
-    \item Existen varios tipos:
-      \begin{itemize}
-      \item Basados en \textbf{reglas}. Son los que estudiaremos.
-      \item Basados en \textbf{casos}.
-      \item Basados en \textbf{redes bayesianas}.
-      \end{itemize}
+    \item Basados en \textbf{reglas}. Son los que estudiaremos.
+    \item Basados en \textbf{casos}.
+    \item Basados en \textbf{redes bayesianas}.
     \end{itemize}
+  \end{itemize}
 \end{frame}
 
 \subsection{Componentes de un SEBR}
@@ -58,14 +58,14 @@
 \subsubsection{Componentes secundarios}
 
 \begin{frame}{Componentes secundarios}
-    \begin{block}{Lista de activación (del inglés \textit{agenda})}
-      Contiene las reglas cuyas condiciones se han cumplido y son candidatas a
-      dispararse.
-    \end{block}
+  \begin{block}{Lista de activación (del inglés \textit{agenda})}
+    Contiene las reglas cuyas condiciones se han cumplido y son candidatas a
+    dispararse.
+  \end{block}
 
-    \begin{block}{Estrategias de resolución de conflictos}
-      Decide qué regla disparar si hay varias que se cumplen. Puede ser la que más tiempo lleve sin dispararse, la que más veces se halla disparado, una aleatoriamente, etc.
-    \end{block}  
+  \begin{block}{Estrategias de resolución de conflictos}
+    Decide qué regla disparar si hay varias que se cumplen. Puede ser la que más tiempo lleve sin dispararse, la que más veces se halla disparado, una aleatoriamente, etc.
+  \end{block}  
 \end{frame}
 
 \subsection{Funcionamiento}
@@ -107,37 +107,37 @@
 \subsection{Hechos}
 
 \begin{frame}{Hechos en CLIPS}
-Un \textbf{hecho} en clips tiene la siguiente forma:
+  Un \textbf{hecho} en clips tiene la siguiente forma:
 
-\texttt{(<relación> <campos\_de\_información>)}
+  \texttt{(<relación> <campos\_de\_información>)}
 
-\bigskip
+  \bigskip
 
-Por ejemplo:
+  Por ejemplo:
 
-\texttt{(persona ``Pepe'')}
+  \texttt{(persona ``Pepe'')}
 
-\bigskip
+  \bigskip
 
-Se añaden hecho al sistema con \texttt{assert:}
+  Se añaden hecho al sistema con \texttt{assert:}
 
-\texttt{(assert (persona ``Pepe''))}
+  \texttt{(assert (persona ``Pepe''))}
 
-\bigskip
+  \bigskip
 
-Y se eliminan de él con \texttt{retract}. 
+  Y se eliminan de él con \texttt{retract}. 
 
-\texttt{(retract <num\_hecho>)}
+  \texttt{(retract <num\_hecho>)}
 
-\medskip
+  \medskip
 
-Se puede utilizar \texttt{(facts)} para conocer los hechos y sus números
-asignados.
+  Se puede utilizar \texttt{(facts)} para conocer los hechos y sus números
+  asignados.
   
 \end{frame}
 
 \begin{frame}[fragile]{Hechos en CLIPS}
-Los \textbf{hechos iniciales} se indican con \texttt{deffacts}:
+  Los \textbf{hechos iniciales} se indican con \texttt{deffacts}:
 \begin{verbatim}
 (deffacts
  (assert (persona "Pepe" 15))
@@ -159,9 +159,9 @@ Los \textbf{hechos iniciales} se indican con \texttt{deffacts}:
     lanzarán, normalmente modificando el conjunto de hechos.
   \end{enumerate}
 
-\bigskip
+  \bigskip
 
-Siguen esta sintaxis:
+  Siguen esta sintaxis:
 \begin{verbatim}
 (defrule <nombre_regla>
   <condiciones>
@@ -172,7 +172,7 @@ Siguen esta sintaxis:
 \end{frame}
 
 \begin{frame}[fragile]{Reglas en CLIPS}
-Por ejemplo:
+  Por ejemplo:
 \begin{verbatim}
 (defrule apagar_fuego
   (hay_emergencia fuego)
@@ -181,7 +181,7 @@ Por ejemplo:
 )
 \end{verbatim}  
 
-Podemos declarar la prioridad de una regla con \texttt{salience:}
+  Podemos declarar la prioridad de una regla con \texttt{salience:}
 
 \begin{verbatim}
 (defrule <nombre_regla>
@@ -192,9 +192,9 @@ Podemos declarar la prioridad de una regla con \texttt{salience:}
 
 \begin{frame}[fragile]{Reglas en CLIPS}
 
-Podemos usar \textbf{condiciones genéricas} que valgan para muchos
-hechos. Por ejemplo, esta regla se ejecutará para todas las personas, guardando
-el nombre de cada persona en la variable \texttt{?n}.
+  Podemos usar \textbf{condiciones genéricas} que valgan para muchos
+  hechos. Por ejemplo, esta regla se ejecutará para todas las personas, guardando
+  el nombre de cada persona en la variable \texttt{?n}.
 
 \begin{verbatim}
 (defrule imprimir_persona
@@ -258,7 +258,7 @@ el nombre de cada persona en la variable \texttt{?n}.
 (assert (persona (nombre "Pepe") (edad 27)))
 \end{verbatim}
 
-Nos permitirá filtrar por campos individuales:
+  Nos permitirá filtrar por campos individuales:
 
 \begin{verbatim}
 ; Persona de edad 27, da igual el nombre o el peso
@@ -305,17 +305,96 @@ Nos permitirá filtrar por campos individuales:
 \end{frame}
 
 \begin{frame}{Historial de versiones}
-El sistema ha evolucionado bastante a lo largo de los años:
-\begin{enumerate}
-\item Versión 0.1, \textbf{modo texto}. Totalmente funcional.
-\item Versión 0.1.1, se añade un \textbf{visor gráfico} para las partidas de texto.
-\item Versión 1.0, \textbf{La Reconquista}, aplicación gráfica e interactiva.
-\item Versión 2.0, \textbf{Resistencia en Cádiz 1812}. Reescritura de la versión 1.0, con
-  pruebas automáticas.
-\item Versión 2.x, \textbf{Gades Siege}. Ampliación del proyecto Resistencia 1812,
-  mejoras gráficas, nuevas reglas, etc.
-\end{enumerate}  
+  El sistema ha evolucionado bastante a lo largo de los años:
+  \begin{enumerate}
+  \item Versión 0.1, \textbf{modo texto}. Totalmente funcional.
+  \item Versión 0.1.1, se añade un \textbf{visor gráfico} para las partidas de texto.
+  \item Versión 1.0, \textbf{La Reconquista}, aplicación gráfica e interactiva.
+  \item Versión 2.0, \textbf{Resistencia en Cádiz 1812}. Reescritura de la versión 1.0, con
+    pruebas automáticas.
+  \item Versión 2.x, \textbf{Gades Siege}. Ampliación del proyecto Resistencia 1812,
+    mejoras gráficas, nuevas reglas, etc.
+  \end{enumerate}  
 \end{frame}
+
+\begin{frame}{Versiones}
+  \begin{columns}
+    \column{0.6\textwidth}
+    \begin{block}{Versión 0.1 (Modo texto)}
+      \copyright \, Manuel Palomo, 2007\\
+      \textit{``Si mi madre me hubiera visto con 8 tías más gritando y saltando delante de una pantalle negra con letritas, se moría del disgusto''}
+    \end{block}
+    \column{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/version_1}
+  \end{columns}  
+\end{frame}
+
+\begin{frame}{Versiones}
+  \begin{columns}
+    \column{0.6\textwidth}
+    \begin{block}{Versión 0.1.1 (Modo texto + Gráfico)}
+      \copyright \, Manuel Palomo, Roberto García, 2008\\
+      Como alumno colaborador de la asignatura.
+    \end{block}
+    \column{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/version_2}
+  \end{columns}  
+\end{frame}
+
+\begin{frame}{Versiones}
+  \begin{block}{Versión 1.0 (Aplicación gráfica interactiva)}
+      \copyright \, Manuel Palomo, Roberto García, Jesús Soriano, 2009\\
+      Proyecto Final de Carrera    
+  \end{block}
+
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \includegraphics[width=\textwidth]{img/version_31}
+    \column{0.5\textwidth}
+    \includegraphics[width=\textwidth]{img/version_32}    
+  \end{columns}  
+\end{frame}
+
+\begin{frame}{Versiones}
+  \begin{block}{Versión 2.0 (Aplicación gráfica interactiva)}
+      \copyright \, Manuel Palomo, Pablo Recio, 2010 \\
+      Proyecto Final de Carrera    
+  \end{block}
+
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=0.5\textwidth]{img/version_41}      
+    \end{center}
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=\textwidth]{img/version_42}          
+    \end{center}
+  \end{columns}  
+\end{frame}
+
+\begin{frame}{Versiones}
+  \begin{block}{Versión 2.x (Aplicación gráfica interactiva)}
+      \copyright \, Manuel Palomo, Pablo Recio, José Tomás Tocino, 2011 \\
+      Ampliación y mejora de la versión 2.0
+  \end{block}
+
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=\textwidth]{img/version_51}
+    \end{center}
+
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=\textwidth]{img/version_52}
+    \end{center}
+
+  \end{columns}  
+\end{frame}
+
+
+
 
 \subsection{Estructura}
 
@@ -365,10 +444,10 @@ El sistema ha evolucionado bastante a lo largo de los años:
 2:2:2:2:2:2:2:1
 \end{verbatim}
 
-\medskip
+  \medskip
 
-Se colocan los valores de cada ficha en dos filas, tal y como aparecerían en el
-tablero (suponiendo que somos el equipo que juega abajo).
+  Se colocan los valores de cada ficha en dos filas, tal y como aparecerían en el
+  tablero (suponiendo que somos el equipo que juega abajo).
 \end{frame}
 
 
@@ -390,10 +469,10 @@ tablero (suponiendo que somos el equipo que juega abajo).
 ; DOC: aquí va el comentario
 \end{verbatim}
 
-\medskip
+  \medskip
 
-De igual modo se pueden añadir comentarios en el resto del fichero usando el
-punto y coma como indicador.
+  De igual modo se pueden añadir comentarios en el resto del fichero usando el
+  punto y coma como indicador.
 \end{frame}
 
 
@@ -403,24 +482,40 @@ punto y coma como indicador.
 
   \begin{description}
   \item[num] Identificador de la ficha a mover.
-  \item[mov] Número de movimiento, según esta relación:
-    {\small
-    \begin{description}
-    \item[1] avanza X
-    \item[2] retrocede X
-    \item[3] avanza Y
-    \item[4] retrocede Y
-    \end{description}}
+  \item[mov] Número de movimiento.
   \item[tiempo] Momento del tiempo en el que realizar el movimiento.
   \end{description}
 
-Por ejemplo, un movimiento horizontal:
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    {\small
+      El número de movimiento responde a la siguiente tabla:
+      \begin{itemize}
+      \item[1] avanza X
+      \item[2] retrocede X
+      \item[3] avanza Y
+      \item[4] retrocede Y
+      \end{itemize}}
+
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=1.2in]{img/diagrama_movimientos}      
+    \end{center}
+
+  \end{columns}
+
+
+
+\end{frame}
+
+\begin{frame}[fragile]{Estructura del juego: movimiento}
+  Por ejemplo, un movimiento horizontal:
 \begin{verbatim}
 (assert (mueve (num ?n) (mov 1) (tiempo ?t)))
 \end{verbatim}
 
-Las reglas siempre suponen que el jugador empieza en la parte inferior del tablero. si no es así, el sistemas se encarga de traducirlas.
-%Las acciones de las reglas suelen ser asertos de hechos que representan movimientos.
+  Las reglas siempre suponen que el jugador empieza en la parte inferior del tablero. si no es así, el sistemas se encarga de traducirlas.
+  % Las acciones de las reglas suelen ser asertos de hechos que representan movimientos.
 \end{frame}
 
 \begin{frame}[fragile]{Ejemplo de regla 1}
@@ -441,33 +536,33 @@ Las reglas siempre suponen que el jugador empieza en la parte inferior del table
 
 \begin{frame}[fragile]{Ejemplo de regla 1, condiciones}
 
-\small
-\texttt{(defrule EQUIPO-A::atacar1} $\rightarrow$ cabecera de la regla.
+  \small
+  \texttt{(defrule EQUIPO-A::atacar1} $\rightarrow$ cabecera de la regla.
 
-\medskip
+  \medskip
 
-\texttt{(declare (salience 30))} $\rightarrow$ declaramos la prioridad de la regla.
+  \texttt{(declare (salience 30))} $\rightarrow$ declaramos la prioridad de la regla.
 
-\medskip
+  \medskip
 
-\texttt{(ficha (equipo ''A'') (num ?n1) (pos-x ?x1) (pos-y ?y1) (puntos ?p1))} $\rightarrow$ buscamos una ficha cualquiera de nuestro equipo, guardando su posición y puntos.
+  \texttt{(ficha (equipo ''A'') (num ?n1) (pos-x ?x1) (pos-y ?y1) (puntos ?p1))} $\rightarrow$ buscamos una ficha cualquiera de nuestro equipo, guardando su posición y puntos.
 
-\medskip
+  \medskip
 
-\texttt{(ficha (equipo "B") (num ?n2) (pos-x ?x2) (pos-y ?y2) (puntos ?p2) (descubierta 1))} $\rightarrow$ buscamos una ficha adversaria, que esté descubierta.
+  \texttt{(ficha (equipo "B") (num ?n2) (pos-x ?x2) (pos-y ?y2) (puntos ?p2) (descubierta 1))} $\rightarrow$ buscamos una ficha adversaria, que esté descubierta.
 
-\medskip
+  \medskip
 
-\texttt{(test (and (> ?p1 ?p2) (= ?y1 ?y2) (> ?x1 ?x2)))} $\rightarrow$ comprobamos que:
-\begin{itemize}
-\item Nuestra ficha sea superior a la otra ficha.
-\item Ambas fichas estén en la misma columna (igual \texttt{pos-y}).
-\item Nuestra ficha esté más a la derecha que la otra ficha.
-\end{itemize}
+  \texttt{(test (and (> ?p1 ?p2) (= ?y1 ?y2) (> ?x1 ?x2)))} $\rightarrow$ comprobamos que:
+  \begin{itemize}
+  \item Nuestra ficha sea superior a la otra ficha.
+  \item Ambas fichas estén en la misma columna (igual \texttt{pos-y}).
+  \item Nuestra ficha esté más a la derecha que la otra ficha.
+  \end{itemize}
 
-\medskip
+  \medskip
 
-\texttt{(tiempo ?t)} $\rightarrow$ guardamos el turno en la variable t.
+  \texttt{(tiempo ?t)} $\rightarrow$ guardamos el turno en la variable t.
 \end{frame}
 
 \begin{frame}{Ejemplo de regla 1, acciones}
@@ -544,6 +639,9 @@ Las reglas siempre suponen que el jugador empieza en la parte inferior del table
   \item Más información en \url{http://gsiege.googlecode.com}
   \end{itemize}
 \end{frame}
+
+\licencia
+
 \end{document}
 
 
