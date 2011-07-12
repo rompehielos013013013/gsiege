@@ -1,11 +1,9 @@
 #summary Listamos reglas de ejemplos de diferente complejidad
 
 = Reglas de ejemplo =
-Vamos a listar una serie de reglas, de más sencillas a más complejas, para ver las posibilidades que tenemos a la hora de crear nuestro equipo.
+Vamos a listar una serie de reglas para ver las posibilidades que tenemos a la hora de crear nuestro equipo.
 
-== Reglas sencillas ==
-
-=== Barrer con el seis ===
+== Barrer con el seis ==
 Esta regla es de las más típicas que hay. Consiste en hacer que el seis, la ficha más poderosa, llegue hasta el otro lado del tablero y barra las filas del enemigo. Vamos a suponer que partimos con el siguiente fichero de formación:
 
 {{{
@@ -37,7 +35,7 @@ En la segunda parte, comprobamos que exista la ficha 6 y que ya se encuentre en 
 )
 }}}
 
-=== Barrido con peones ===
+== Barrido con peones ==
 Esta regla hará que todos los peones intenten barrer el tablero, llevándose por delante al mayor número de fichas posible. Suponemos que tenemos a todos los peones (ficha número 2) en la fila de vanguardia.
 
 La idea es que vayan en fila. Así, una vez que todos los peones estén en la fila 2, empiecen a avanzar a la fila 3, en lugar de que ninguno de ellos se escape del pelotón.
