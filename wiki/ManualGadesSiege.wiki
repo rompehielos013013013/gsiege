@@ -12,6 +12,8 @@ En este manual vamos a considerar que estamos trabajando con una instalación co
 ./gsiege.py
 }}}
 
+El log del programa se guardará en un fichero llamado `log_gsiege`, que guardará todos los mensajes, tanto de aviso como de error, que se produzcan durante la ejecución.
+
 = Opciones del menú principal =
 En el menú principal de Gades Siege encontraremos una serie de opciones, que detallaremos con más atención a continuación.
 
