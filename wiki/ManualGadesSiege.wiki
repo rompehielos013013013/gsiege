@@ -2,6 +2,8 @@
 
 En este manual se presentará el modo de uso de Gades Siege, cómo está estructurada la instalación, etcétera.
 
+<wiki:toc/>
+
 = Instalación =
 La instalación de Gades Siege es muy sencilla y está íntegramente reflejada en el artículo [InstruccionesInstalacion creado a tal efecto].
 
