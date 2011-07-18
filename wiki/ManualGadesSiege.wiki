@@ -4,9 +4,10 @@ En este manual se presentará el modo de uso de Gades Siege, cómo está estruct
 
 <wiki:toc/>
 
-= Instalación =
-La instalación de Gades Siege es muy sencilla y está íntegramente reflejada en el artículo [InstruccionesInstalacion creado a tal efecto].
+= Inicio =
+La *instalación* de Gades Siege es muy sencilla y está íntegramente reflejada en el artículo [InstruccionesInstalacion creado a tal efecto].
 
+== Ejecución ==
 En este manual vamos a considerar que estamos trabajando con una instalación correcta de Gades Siege. Para ejecutar el juego, dentro de la carpeta "trunk" del mismo lanzamos el siguiente comando:
 {{{
 ./gsiege.py
@@ -17,7 +18,10 @@ O este otro:
 python gsiege.py
 }}}
 
-El log del programa se guardará en un fichero llamado `log_gsiege`, que guardará todos los mensajes, tanto de aviso como de error, que se produzcan durante la ejecución.
+== Ficheros de registro ==
+En Gades Siege existen dos clases de ficheros de registro o *logging*. Por un lado, existe un fichero llamado `log_gsiege`, que encontrarás en la carpeta principal del programa (`trunk`), que contiene los mensajes que se producen durante la ejecución del programa: avisos, errores, y mensajes de depuración.
+
+Por otro lado, por cada encuentro disputado se genera un fichero de log con la reconstrucción de la partida. Estos ficheros los encontrarás en la carpeta `data/games`, organizados por tipos de juegos.
 
 = Opciones del menú principal =
 En el menú principal de Gades Siege encontraremos una serie de opciones, que detallaremos con más atención a continuación.
