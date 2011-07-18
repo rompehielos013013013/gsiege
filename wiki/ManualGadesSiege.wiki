@@ -74,7 +74,7 @@ En este modo, es posible revisar partidas previamente jugadas. Al indicar esta o
 == Configuración ==
 Las opciones de configuración que podemos modificar en esta sección son las siguientes:
   * Ruta al directorio de logs de partidas previas.
-  * Ruta al directorio de sistemas expertos. Para que sea un directorio correcto, debe contener dos subdirectorios: *rules* y *formations*. Posteriormente se explicará el sentido de estas carpetas.
+  * Ruta al directorio de sistemas expertos. Para que sea un directorio correcto, debe contener dos subdirectorios: *rules* y *formations*. [CreandoNuestroEquipo Posteriormente] se explicará el sentido de estas carpetas.
   * Opción de activar o desactivar la música en el tablero.
   * Ritmo de avance de las fichas en el modo de avance automático.
 
@@ -89,7 +89,7 @@ Gades Siege se estructura en la siguiente jerarquía de directorios:
     * *glade* : ficheros que definen las interfaces de usuario.
     * *images* : imágenes y gráficos.
     * *music* : música del juego.
-    * *teams* : <font color="#ff0000">*importante*</font>, aquí es donde se guardan los ficheros de los equipos. Posteriormente explicaremos con más detalle cómo incluir tus equipos en Gades Siege. Consta de dos subdirectorios:
+    * *teams* : <font color="#ff0000">*importante*</font>, aquí es donde se guardan los ficheros de los equipos. [CreandoNuestroEquipo Posteriormente] explicaremos con más detalle cómo incluir tus equipos en Gades Siege. Consta de dos subdirectorios:
       * *formations* : aquí se encuentran las formaciones de los equipos, esto es, cómo van colocadas las fichas inicialmente.
       * *rules* : aquí se encuentran las reglas del sistema experto que controla tu equipo.
   * *doc* : Documentación varia, irrelevante.
