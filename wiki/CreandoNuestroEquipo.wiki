@@ -9,11 +9,16 @@ Los ficheros de formación indican la posición inicial de nuestro sistema exper
 El fichero de formación debe contenerse en la carpeta *formations* del directorio *teams*, y su nombre debe seguir la estructura *equipoNombre.form*, donde _Nombre_ será el identificador de tu equipo. El contenido de un fichero de formación es muy sencillo de entender:
 
 {{{
-6:5:5:4:4:3:3:2
+5:6:5:4:4:3:3:2
 2:2:2:2:2:2:2:1
 }}}
 
-Como se ve a simple vista, el fichero consta de dos líneas de números separados entre sí por dos puntos. Estas dos líneas representan las dos filas en las que las fichas podrán colocarse inicialmente en el tablero. En la formación de ejemplo, el rey (número 1) está en la esquina inferior derecha, de forma que tiene bastante protección, es una formación habitual.
+Como se ve a simple vista, el fichero consta de dos líneas de números separados entre sí por dos puntos. Estas dos líneas representan las dos filas en las que las fichas podrán colocarse inicialmente en el tablero. La formación del ejemplo se representaría en el tablero como se ve en la siguiente imagen.
+
+[http://gsiege.googlecode.com/svn/web/ejemplo_mismo_equipo.png]
+
+Como se puede observar, ambos equipos tienen la misma formación, pero ésta queda "reflejada" según el bando.
+
 
 == Fichero de reglas ==
 Los ficheros de reglas definen las condiciones que el sistema experto evaluará en cada momento para decidir qué acción tomar. Estos ficheros se encuentran en la carpeta *rules* del directorio *teams*, y la nomenclatura a seguir será *reglasNombre.clp*, siendo _Nombre_, de nuevo, el mismo identificador que en el fichero de formación.
