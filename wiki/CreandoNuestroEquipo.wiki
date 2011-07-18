@@ -54,3 +54,5 @@ Explicaremos la regla línea a línea:
 Si todas estas condiciones se cumplen, se ejecuta el bloque de acciones.
 
 {{{(assert (mueve (num ?n1) (mov 2) (tiempo ?t)))}}} Movemos nuestra ficha en dirección a la ficha adversaria.
+
+Existe un entrada con [ReglasDeEjemplo]
