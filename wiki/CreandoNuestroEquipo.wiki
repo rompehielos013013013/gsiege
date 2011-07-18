@@ -27,7 +27,19 @@ Los ficheros de reglas son ficheros de Clips propiamente, por eso tienen la exte
 
 {{{; DOC: aquí va el comentario de nuestro fichero}}}
 
-También podemos escribir comentarios aclaratorios en cualquier parte del fichero utilizando el signo de punto y coma. Seguidamente listaremos, una detrás de otra, las reglas de nuestro sistema, por ejemplo:
+También podemos escribir comentarios aclaratorios en cualquier parte del fichero utilizando el signo de punto y coma. Seguidamente listaremos, una detrás de otra, las reglas de nuestro sistema. Todas las reglas siguen una estructura similar:
+{{{
+(defrule EQUIPO-A::nombreRegla
+  (declare (salience PRIORIDAD))
+  (tiempo ?t)
+  ; resto de condiciones
+  =>
+  ; acciones
+)
+}}}
+
+En primer lugar, la cabecera de la regla indica su nombre y módulo. Seguidamente podemos indicar la prioridad, que puede tomar como máximo el valor 80, que indica la mayor prioridad. La siguiente línea obligatoria es el indicador del tiempo, que nos informará del turno.
+
 {{{
 (defrule EQUIPO-A::atacar1
   (declare (salience 30))
