@@ -77,8 +77,11 @@ def quitar_prefijo_multiple(varios):
     return tuple(retorno)
     
 
-def dividir_ruta(rutaReglas):
+def dividir_ruta(rutaReglas, usandoFormacion = False):
     defPathRules = xdg_data_path('teams/rules/')
+
+    if usandoFormacion:
+        defPathRules = xdg_data_path('teams/formations/')
 
     # Le quitamos a la ruta del fichero de reglas la parte común
     rutaReglas = rutaReglas[len(defPathRules):]
@@ -123,7 +126,10 @@ def extract_simple_name_es (team):
         str_error = 'Variable must be a pair '
         raise ValueError(str_error)
     
-    subDirectorio, nombreDespejado = dividir_ruta(team[0])
+    if team[0] == None:
+        subDirectorio, nombreDespejado = dividir_ruta(team[1], True)
+    else:
+        subDirectorio, nombreDespejado = dividir_ruta(team[0])
 
     return subDirectorio+nombreDespejado
 

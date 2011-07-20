@@ -169,6 +169,11 @@ class LibGuadalete(object):
         clips.Run() #start the simulation
 
         t = clips.StdoutStream.Read() #print the output
+
+        clipsOutputFile = open("clipsOutputFile", "w")
+        clipsOutputFile.write(t)
+        clipsOutputFile.close()
+
         f = clips.FactList()
 
         last_fact = f[len(f)-1].PPForm()
