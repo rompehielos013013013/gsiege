@@ -3,7 +3,7 @@
 
 = Avance/ataque precavido =
 
-Esta regla, del alumno de la UCA *Juan Manuel Morcillo* (del curso 2010-11 de la asignatura _Diseño de Videojuegos_) nos puede servir de regla genérica de ataque, ya que hace que las piezas ataquen a las que se encuentren en casillas contiguas, *si y solo si* el ataque puede saldarse con una victoria o un empate. 
+Esta regla, del alumno de la UCA *Juan Manuel Morcillo* (del curso 2010-11 de la asignatura _Diseño de Videojuegos_) nos puede servir de regla genérica de ataque, ya que hace que las piezas se muevan hacia las que se encuentren en casillas contiguas diagonales solo si el ataque puede saldarse con una victoria o un empate. 
 
 Para ello, comprueba que la ficha enemiga esté descubierta y su puntuación sea menor o igual que la de la ficha propia. Las cuatro reglas corresponden a las cuatro posibles direcciones.
 
