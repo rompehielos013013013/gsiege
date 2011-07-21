@@ -30,7 +30,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "MOVER"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha-r dimension tiempo mueve turno tiempo-inicial)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha-r dimension tiempo mueve turno tiempo-inicial obstaculo)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_mover = clips.BuildModule(mod_name, mod_body)
@@ -49,6 +49,7 @@ def LoadFunctions(clips):
     rule_prec += '(test (= 0 (str-compare (turno ?ti ?t) ?e)))'
     rule_prec += '(test (mov-valido ?dim ?m ?x ?y))'
     rule_prec += '(not (ficha-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))'
+    rule_prec += '(not (obstaculo (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))'
     rule_prec += '(not (movido ?e ?t))'
     # =>
     # Rule body
