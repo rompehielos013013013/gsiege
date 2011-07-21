@@ -30,7 +30,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "INFORMAR"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha-r dimension tiempo tiempo-inicial)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha-r dimension tiempo tiempo-inicial obstaculo)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_informar = clips.BuildModule(mod_name, mod_body)
@@ -84,6 +84,7 @@ def LoadFunctions(clips):
     rule_prec += '(dimension ?dim)'
     rule_prec += '(test (not (> ?x ?dim)))'
     rule_prec += '(not (ficha-r (pos-x ?x) (pos-y ?y)))'
+#    rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y)))'
     # =>
     # Rule body
     rule_body  = '(retract ?c)'
@@ -113,6 +114,28 @@ def LoadFunctions(clips):
     # Building the rule
     no_vacia = mod_informar.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
+
+    """
+    # ---------------------------------
+    # Rule name
+    rule_name = 'noVacia1'
+    # Rule precontents
+    rule_prec  = '(declare (salience 10))'
+    rule_prec += '?c <- (columna ?x)'
+    rule_prec += '(fila ?y)'
+    rule_prec += '(dimension ?dim)'
+    rule_prec += '(test (not (> ?x ?dim)))'
+    rule_prec += '(obstaculo (pos-x ?x) (pos-y ?y))'
+    # =>
+    # Rule body
+    rule_body  = '(retract ?c)'
+    rule_body += '(assert (columna (+ ?x 1)))'
+    ### rule_body += '(printout t "(2)" crlf)'
+    rule_body += '(printout t " " ?e ?v (valor ?d)))'
+    # Building the rule
+    no_vacia1 = mod_informar.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+    #"""
 
     # ---------------------------------
     # Rule name

@@ -28,7 +28,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "TRADUCIRF"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha ficha-r dimension tiempo)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha ficha-r dimension tiempo obstaculo)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_traducirF = clips.BuildModule(mod_name, mod_body)

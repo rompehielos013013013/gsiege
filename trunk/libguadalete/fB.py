@@ -30,7 +30,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "EQUIPO-B"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha dimension tiempo mueve tiempo-inicial)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha dimension tiempo mueve tiempo-inicial obstaculo)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_equipoB = clips.BuildModule(mod_name, mod_body)
