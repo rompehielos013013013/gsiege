@@ -85,29 +85,49 @@ class LibGuadalete(object):
         random.seed()
         clips.Eval("(seed " + str(random.randint(0,9999)) + ")") 
         
-        print 1
-        funciones.LoadFunctions(clips)
-        print 2
-        f1.init_world(clips, self.number_turns)
-        print 3
-        f1.LoadFunctions(clips)
-        print 4
-        mover.LoadFunctions(clips)
-        print 5
-        texto.LoadFunctions(clips)
-        print 6
-        traducirF.LoadFunctions(clips)
-        print 7
-        traducirM.LoadFunctions(clips)
-        print 8
+        try:
+            print 1
+            funciones.LoadFunctions(clips)
+            print 2
+            f1.init_world(clips, self.number_turns)
+            print 3
+            f1.LoadFunctions(clips)
 
-        clips.Eval("(assert (obstaculo (pos-x 4) (pos-y 4)))")
-        clips.Eval("(assert (obstaculo (pos-x 3) (pos-y 4)))")
-        clips.Eval("(assert (obstaculo (pos-x 2) (pos-y 4)))")
-        clips.Eval("(assert (obstaculo (pos-x 1) (pos-y 4)))")
+            print 4
+            mover.LoadFunctions(clips)
+            print 5
+            texto.LoadFunctions(clips)
+            print 6
+            traducirF.LoadFunctions(clips)
+            print 7
+            traducirM.LoadFunctions(clips)
+            print 8
+
+#             print "PRE OBS"
+#             clips.BuildDeffacts("obstaculos", """(deffacts obstaculos
+# (ficha-r (equipo "A") (num 200))
+# (obstaculo (pos-x 4) (pos-y 4))
+# (obstaculo (pos-x 3) (pos-y 4))
+# (obstaculo (pos-x 2) (pos-y 4))
+# (obstaculo (pos-x 1) (pos-y 4)))""")
+#             print "POST OBS"
+
+
+            clips.Load("/home/jose/gsiege/repo/trunk/obstaculos.clp")
+        except clips.ClipsError as e:
+            logging.error("####################")
+            logging.error("ERROR de clips: %s", e)
+            logging.error("Mensaje: ")
+            logging.error(clips.ErrorStream.Read())
+            logging.error("####################")
+
+            raise FileError("W===============TTTT")
+
 
         temp_form_A = parsear_fichero_formacion.parsear_fichero_formacion(self.teamA[1])
         temp_form_B = parsear_fichero_formacion.parsear_fichero_formacion(self.teamB[1])
+
+        print temp_form_A
 
         self.teamA = (self.teamA[0], temp_form_A)
         self.teamB = (self.teamB[0], temp_form_B)
