@@ -6,14 +6,14 @@ Como se ha comentado previamente, en el directorio *teams* dentro de *data* enco
 == Fichero de formación ==
 Los ficheros de formación indican la posición inicial de nuestro sistema experto en el tablero. En anteriores versiones se utilizaba un fichero Clips para expresar estas posiciones, pero posteriormente decidimos utilizar una representación más sencilla.
 
-El fichero de formación debe contenerse en la carpeta *formations* del directorio *teams*, y su nombre debe seguir la estructura *equipoNombre.form*, donde _Nombre_ será el identificador de tu equipo. El contenido de un fichero de formación es muy sencillo de entender:
+El fichero de formación debe contenerse en la carpeta *formations* del directorio *teams*, y su nombre debe seguir la estructura *equipoNombre.form*, donde _Nombre_ será el identificador de tu equipo. El contenido de un fichero de formación es muy sencillo:
 
 {{{
 5:6:5:4:4:3:3:2
 2:2:2:2:2:2:2:1
 }}}
 
-Como se ve a simple vista, el fichero consta de dos líneas de números separados entre sí por dos puntos. Estas dos líneas representan las dos filas en las que las fichas podrán colocarse inicialmente en el tablero. La formación del ejemplo se representaría en el tablero como se ve en la siguiente imagen.
+Como se ve a simple vista, el fichero consta de dos líneas de números separados entre sí por dos puntos. Estas dos líneas representan las dos filas en las que las fichas podrán colocarse inicialmente en el tablero si el equipo comienza en la parte inferior (si lo hace en la superior sería su reflejo). La formación del ejemplo se representaría en el tablero como se ve en la siguiente imagen.
 
 [http://gsiege.googlecode.com/svn/web/ejemplo_mismo_equipo.png]
 
