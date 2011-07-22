@@ -7,4 +7,4 @@ Vamos a listar una serie de reglas para ver las posibilidades que tenemos a la h
   * [Regla_BarrerConSeis Barrer con la ficha 6]
   * [Regla_BarrerConPeones Barrer con los peones]
   * [Regla_AvancePrecavido Avance precavido]
-  * [Regla_CuandoQueden50Turnos Cuando queden 50 turnos]
+  * [Regla_CuandoQuedenTurnos Cuando queden turnos]
