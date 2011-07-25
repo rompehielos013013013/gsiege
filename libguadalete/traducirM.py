@@ -48,8 +48,7 @@ def LoadFunctions(clips):
     # =>
     # Rule body
     rule_body  = '(retract ?h1)'
-    rule_body += '(printout t "Traducido mov ficha-r n" ?n "de  "?m" a " (simetrico ?m) crlf)'
-    ### rule_body += '(printout t "turno de " ?ti " y " ?t " vale " (turno ?ti ?t) " y su str-compare con B da " (str-compare (turno ?ti ?t) "B"))'
+    rule_body += '(printout t "Movimento: ficha-r n" ?n "de  "?m" a " (simetrico ?m) crlf)'
     rule_body += '(assert (traducido ?n ?t))'
     rule_body += '(assert (mueve (num ?n) (mov (simetrico ?m)) (tiempo ?t)))'
     # Building the rule

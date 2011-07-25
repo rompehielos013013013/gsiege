@@ -173,7 +173,7 @@ def LoadFunctions(clips):
     rule_body  = '(retract ?c ?f)'
     ### rule_body += '(printout t "(4)" crlf)'
     rule_body += '(printout t crlf "----------------------------------" crlf '
-    rule_body +=           '"x:  1   2   3   4   5   6   7   8" crlf)'
+    rule_body +=           '"x:  1   2   3   4   5   6   7   8" crlf crlf)'
     ### rule_body += '(readline)'
     # Building the rule
     final_fila = mod_informar.BuildRule(rule_name, rule_prec, rule_body)

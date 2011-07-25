@@ -42,7 +42,7 @@ def LoadFunctions(clips):
     rule_prec += '(tiempo ?t)'
     # =>
     # Rule body
-    rule_body  = '(printout t "**********************************" crlf )'
+    rule_body  = '(printout t "" )'
     # Building the rule
     inicial1_0 = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
@@ -98,7 +98,7 @@ def LoadFunctions(clips):
     rule_prec += '(tiempo ?t)'
     # =>
     # Rule body
-    rule_body  = '(printout t "*Limpiado" ?t  crlf)'
+    rule_body  = '(printout t " Limpiado turno " ?t  crlf)'
     rule_body += '(assert (limpia ?t))'
     # Building the rule
     elimina2 = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
