@@ -131,6 +131,8 @@ def LoadFunctions(clips): #Maybe add number of turns, dimension, etc
     # Rule body 
     rule_body  = '(assert (tiempo-iniciado))'
     rule_body += '(assert (tiempo ?ti))'
+    rule_body += '(printout t "Inicialización del tiempo inicial" crlf)'
+
     # Building the rule
     inicia_tiempo = mod_main.BuildRule(rule_name, rule_prec, rule_body)
     #----------------------------------
@@ -172,9 +174,12 @@ def LoadFunctions(clips): #Maybe add number of turns, dimension, etc
     rule_body += '(assert (tiempo (- ?t 1)))'
     rule_body += '(retract ?orden)'
     rule_body += '(assert (modulos $?r INFORMAR))'
-    rule_body += '(printout t "Pasamos al modulo INFORMAR." crlf)'
-    rule_body += '(printout t "Tiempo " ?t crlf)'
-    ### rule_body += '(readline)'
+    rule_body += '(printout t crlf)'
+    rule_body += '(printout t "####################################################" crlf)'
+    rule_body += '(printout t "####################################################" crlf)'
+    rule_body += '(printout t "#### TURNO NUEVO - " ?t crlf)'
+    rule_body += '(printout t "· Pasamos al modulo INFORMAR." crlf)'
+    rule_body += '(printout t "· Tiempo " ?t crlf)'
     rule_body += '(focus INFORMAR)'
     control_y_tiempo = mod_main.BuildRule(rule_name, rule_prec, rule_body)
     #----------------------------------
@@ -194,7 +199,7 @@ def LoadFunctions(clips): #Maybe add number of turns, dimension, etc
     # =>
     # Rule body
     rule_body  = '(retract ?orden)'
-    rule_body += '(printout t " Modulo->" ?m " ")'
+    rule_body += '(printout t crlf "* Modulo->" ?m crlf " ")'
     rule_body += '(assert (modulos $?r ?m))'
     rule_body += '(focus ?m)'
     # Building the rule

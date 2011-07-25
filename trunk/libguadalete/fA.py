@@ -52,7 +52,7 @@ def LoadFunctions(clips):
     ### rule_prec += '(not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))'
     # =>
     # Rule body
-    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " hacia 1 en t " ?t crlf)'
+    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 1 en t " ?t crlf)'
     rule_body += '(assert (mueve (num ?n) (mov 1) (tiempo ?t)))'
     # Building the rule
     basica1 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
@@ -90,7 +90,7 @@ def LoadFunctions(clips):
     ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (+ ?y 1))))'
     # =>
     # Rule body
-    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " hacia 3 en t " ?t crlf)'
+    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 3 en t " ?t crlf)'
     rule_body += '(assert (mueve (num ?n) (mov 3) (tiempo ?t)))'
     # Building the rule
     basica3 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
@@ -109,7 +109,7 @@ def LoadFunctions(clips):
     ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))'
     # =>
     # Rule body
-    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " hacia 4 en t " ?t crlf)'
+    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 4 en t " ?t crlf)'
     rule_body += '(assert (mueve (num ?n) (mov 4) (tiempo ?t)))'
     # Building the rule
     basica4 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
