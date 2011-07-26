@@ -15,7 +15,7 @@
 ;
 
 (defmodule TRADUCIRF
-  (import MAIN deftemplate initial-fact ficha ficha-r dimension tiempo)
+  (import MAIN deftemplate initial-fact ficha ficha-r obstaculo obstaculo-r dimension tiempo)
   (import MAIN deffunction ?ALL))
 
 
@@ -43,6 +43,57 @@
   =>
   (assert (equipoA ?t "A")))
 
+
+(defrule TRADUCIRF::traducir_obstaculos_inicial_1
+  (declare (salience 101))
+  (not (traduccion_inicial))
+
+  ?h <- (obstaculo (pos-x ?x) (pos-y ?y))
+
+  =>
+  (assert (obstaculo-r (pos-x (sim ?x)) (pos-y (sim ?y))))
+  (retract ?h))
+
+(defrule TRADUCIRF::traducir_obstaculos_inicial_2
+  (declare (salience 100))
+  (not (traduccion_inicial))
+  (not (obstaculo (pos-x ?x) (pos-y ?y)))
+  =>
+  (assert (traduccion_inicial)))
+
+(defrule TRADUCIRF::traducir_obstaculos_inicial_3
+  (declare (salience 99))
+  (traduccion_inicial)
+  ?h <- (obstaculo-r (pos-x ?x) (pos-y ?y))
+  =>
+  (assert (obstaculo (pos-x ?x) (pos-y ?y))))
+
+(defrule TRADUCIRF::traducir_obstaculos_1
+  (declare (salience 20))
+  (tiempo ?t)
+  ?h <- (obstaculo (pos-x ?x) (pos-y ?y))
+  (not (obstaculos_traducidos ?t))
+  =>
+  (assert (obstaculo-r (pos-x (sim ?x)) (pos-y (sim ?y))))
+  (retract ?h))
+
+(defrule TRADUCIRF::traducir_obstaculos_2
+  (declare (salience 19))
+  (tiempo ?t)
+  (not (obstaculo (pos-x ?x) (pos-y ?y)))
+  (not (obstaculos_traducidos ?t))
+  =>
+  (assert (obstaculos_traducidos ?t)))
+
+(defrule TRADUCIRF::traducir_obstaculos_3
+  (declare (salience 19))
+  (tiempo ?t)
+  (obstaculos_traducidos ?t)
+  ?h <- (obstaculo-r (pos-x ?x) (pos-y ?y))
+  =>
+  (assert (obstaculo (pos-x ?x) (pos-y ?y))))
+  
+
 ;
 ; Elimina las ficha que existen
 ;
@@ -60,7 +111,7 @@
 ; Hace que no se eliminen las fichas que se creen
 ;
 
-(defrule TRADUCIRF::elimina2
+(defrule TRADUCIRF::elimina3
   (declare (salience 19))
   (tiempo ?t)
   =>
