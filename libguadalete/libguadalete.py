@@ -110,6 +110,7 @@ class LibGuadalete(object):
             raise FileError("W===============TTTT")
 
 
+        logging.info("Parseando ficheros de formación...")
         temp_form_A = parsear_fichero_formacion.parsear_fichero_formacion(self.teamA[1])
         temp_form_B = parsear_fichero_formacion.parsear_fichero_formacion(self.teamB[1])
 
@@ -150,9 +151,10 @@ class LibGuadalete(object):
         os.remove(temp_form_A)
         os.remove(temp_form_B)
 
-        fA.LoadFunctions(clips)
-        logging.info('Cargando %s', self.teamA[0])
+
         try:
+            fA.LoadFunctions(clips)
+            logging.info('Cargando %s', self.teamA[0])
             clips.Load(self.teamA[0])
         except clips.ClipsError as e:
             logging.error("####################")
@@ -165,9 +167,10 @@ class LibGuadalete(object):
         temp_rules = mirroring.mirroring_rules(self.teamB[0])
         
         #same thing that for the formation, but this time using the rules
-        fB.LoadFunctions(clips)
-        logging.info('Cargando %s', self.teamB[0])
+
         try:
+            fB.LoadFunctions(clips)
+            logging.info('Cargando %s', self.teamB[0])
             clips.Load(temp_rules)
         except clips.ClipsError as e:
             os.remove(temp_rules)

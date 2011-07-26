@@ -11,6 +11,8 @@ from resistencia.xdg import get_data_path as xdg_data_path
 from resistencia import configure, filenames
 from resistencia.contest import controlPartida
 
+from libguadalete.parsear_fichero_obstaculos import parsear_obstaculos
+
 from pintarFicha import Ficha
 from pintarBoton import Boton
 from pintarInterruptor import Interruptor
@@ -81,6 +83,10 @@ class PintarPartida(object):
         # Bliteamos el marco en el fondo
         self.imagenFondo.blit(imagenMarco, (510, self.posMarcoSuperior))
         self.imagenFondo.blit(imagenMarco, (510, self.posMarcoInferior))
+
+        self.obstaculos = parsear_obstaculos()
+        self.imagenObstaculo = pygame.image.load(xdg_data_path("images/stone.png"))
+        self.imagenObstaculo = self.imagenObstaculo.convert()
 
         # Cargamos la fuente para el rótulo con el valor de la ficha
         fuenteEquipos = pygame.font.Font(xdg_data_path("fonts/zektonbi.ttf"), 18)
@@ -194,6 +200,10 @@ class PintarPartida(object):
             # Pintamos las fichas
             for keyFicha in self.fichas:
                 self.fichas[keyFicha].pintar(self.pantalla)
+
+            for obs in self.obstaculos:
+                self.pantalla.blit(self.imagenObstaculo, (float(10 + (obs[0] - 1) * 60),
+                                                          float(10 + (obs[1] - 1) * 60)))
 
             # Pintamos los botones
             for btn in botonesInterfaz:

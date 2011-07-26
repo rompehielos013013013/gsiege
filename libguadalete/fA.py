@@ -43,12 +43,13 @@ def LoadFunctions(clips):
     # Rule name
     rule_name = 'basica1'
     # Rule precontents
-    rule_prec  = '(declare (salience 1))'
+    rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
     rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
     rule_prec += '(dimension ?dim&:(< ?x (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
+    rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
     ### rule_prec += '(not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))'
     # =>
     # Rule body
@@ -62,12 +63,13 @@ def LoadFunctions(clips):
     # Rule name
     rule_name = 'basica2'
     # Rule precontents
-    rule_prec  = '(declare (salience 1))'
+    rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
     rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
     rule_prec += '(dimension ?dim&:(> ?x (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
+    rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
     ### rule_prec += '(not (ficha (equipo "A") (pos-x (- ?x 1)) (pos-y ?y)))'
     # =>
     # Rule body
@@ -81,12 +83,13 @@ def LoadFunctions(clips):
     # Rule name
     rule_name = 'basica3'
     # Rule precontents
-    rule_prec  = '(declare (salience 1))'
+    rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
     rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
     rule_prec += '(dimension ?dim&:(< ?y (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
+    rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
     ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (+ ?y 1))))'
     # =>
     # Rule body
@@ -100,12 +103,13 @@ def LoadFunctions(clips):
     # Rule name
     rule_name = 'basica4'
     # Rule precontents
-    rule_prec  = '(declare (salience 1))'
+    rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
     rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
     rule_prec += '(dimension ?dim&:(> ?y (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
+    rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
     ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))'
     # =>
     # Rule body
@@ -114,6 +118,85 @@ def LoadFunctions(clips):
     # Building the rule
     basica4 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
+    
+
+
+    
+    rule_name = 'superbasica1'
+    # Rule precontents
+    rule_prec  = '(declare (salience 1))'
+    rule_prec += '(tiempo ?t)'
+    ### rule_prec += '(not (movido-A ?t))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
+    rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
+    ### rule_prec += '(not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))'
+    # =>
+    # Rule body
+    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 1 en t " ?t crlf)'
+    rule_body += '(assert (mueve (num ?n) (mov 1) (tiempo ?t)))'
+    # Building the rule
+    superbasica1 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+    
+    # ---------------------------------
+    # Rule name
+    rule_name = 'superbasica2'
+    # Rule precontents
+    rule_prec  = '(declare (salience 1))'
+    rule_prec += '(tiempo ?t)'
+    ### rule_prec += '(not (movido-A ?t))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
+    rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
+    ### rule_prec += '(not (ficha (equipo "A") (pos-x (- ?x 1)) (pos-y ?y)))'
+    # =>
+    # Rule body
+    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " hacia 2 en t " ?t crlf)'
+    rule_body += '(assert (mueve (num ?n) (mov 2) (tiempo ?t)))'
+    # Building the rule
+    superbasica2 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+    
+    # ---------------------------------
+    # Rule name
+    rule_name = 'superbasica3'
+    # Rule precontents
+    rule_prec  = '(declare (salience 1))'
+    rule_prec += '(tiempo ?t)'
+    ### rule_prec += '(not (movido-A ?t))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
+    rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
+    ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (+ ?y 1))))'
+    # =>
+    # Rule body
+    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 3 en t " ?t crlf)'
+    rule_body += '(assert (mueve (num ?n) (mov 3) (tiempo ?t)))'
+    # Building the rule
+    superbasica3 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+    
+    # ---------------------------------
+    # Rule name
+    rule_name = 'superbasica4'
+    # Rule precontents
+    rule_prec  = '(declare (salience 1))'
+    rule_prec += '(tiempo ?t)'
+    ### rule_prec += '(not (movido-A ?t))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
+    rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
+    ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))'
+    # =>
+    # Rule body
+    rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 4 en t " ?t crlf)'
+    rule_body += '(assert (mueve (num ?n) (mov 4) (tiempo ?t)))'
+    # Building the rule
+    superbasica4 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+
     
     # ---------------------------------
     # Rule name
