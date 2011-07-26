@@ -55,6 +55,11 @@
   (slot pos-x)
   (slot pos-y))
 
+(deftemplate obstaculo-r
+  (slot pos-x)
+  (slot pos-y))
+
+;
 ;
 ; Definimos los movimientos maximos que va tener la partida (sumando los dos bandos),
 ;  la dimensi'on del tablero y la secuencia de control de módulos
@@ -78,7 +83,7 @@
 ;
 
 (defmodule MAIN
-  (export deftemplate initial-fact ficha ficha-r obstaculo dimension tiempo mueve)
+  (export deftemplate initial-fact ficha ficha-r obstaculo obstaculo-r dimension tiempo mueve)
   (export deffunction ?ALL))
 
 ;

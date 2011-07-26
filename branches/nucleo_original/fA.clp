@@ -20,7 +20,7 @@
 
 (defmodule EQUIPO-A
 ;  (import MAIN deftemplate initial-fact ficha ficha-r dimension tiempo mueve)
-  (import MAIN deftemplate initial-fact ficha dimension tiempo mueve)
+  (import MAIN deftemplate initial-fact ficha obstaculo dimension tiempo mueve)
   (import MAIN deffunction ?ALL))
 
 
@@ -38,52 +38,116 @@
 ;  (facts))
 
 (defrule EQUIPO-A::basica1
-  (declare (salience 1))
+  (declare (salience 2))
   (tiempo ?t)
 ;  (not (movido-A ?t))
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
   (dimension ?dim&:(< ?x (/ ?dim 2)))
   (not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))
+  (not (obstaculo (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))
 ;  (not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))
   =>
   (printout t "EQUIPO-A mueve a" ?n " hacia 1 en t " ?t crlf)
   (assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 (defrule EQUIPO-A::basica2
-  (declare (salience 1))
+  (declare (salience 2))
   (tiempo ?t)
 ;  (not (movido-A ?t))
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
   (dimension ?dim&:(> ?x (/ ?dim 2)))
   (not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))
+  (not (obstaculo (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))
 ;  (not (ficha (equipo "A") (pos-x (- ?x 1)) (pos-y ?y)))
   =>
   (printout t "EQUIPO-A mueve a" ?n " hacia 2 en t " ?t crlf)
   (assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 (defrule EQUIPO-A::basica3
-  (declare (salience 1))
+  (declare (salience 2))
   (tiempo ?t)
 ;  (not (movido-A ?t))
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
   (dimension ?dim&:(< ?y (/ ?dim 2)))
   (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
+  (not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
 ;  (not (ficha (equipo "A") (pos-x ?x) (pos-y (+ ?y 1))))
   =>
   (printout t "EQUIPO-A mueve a" ?n " hacia 3 en t " ?t crlf)
   (assert (mueve (num ?n) (mov 3) (tiempo ?t))))
 
 (defrule EQUIPO-A::basica4
-  (declare (salience 1))
+  (declare (salience 2))
   (tiempo ?t)
 ;  (not (movido-A ?t))
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
   (dimension ?dim&:(> ?y (/ ?dim 2)))
   (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))
+  (not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))
 ;  (not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))
   =>
   (printout t "EQUIPO-A mueve a" ?n " hacia 4 en t " ?t crlf)
   (assert (mueve (num ?n) (mov 4) (tiempo ?t))))
+
+
+
+
+(defrule EQUIPO-A::superbasica1
+  (declare (salience 2))
+  (tiempo ?t)
+;  (not (movido-A ?t))
+  (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
+  (not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))
+  (not (obstaculo (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))
+;  (not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))
+  =>
+  (printout t "EQUIPO-A mueve a" ?n " hacia 1 en t " ?t crlf)
+  (assert (mueve (num ?n) (mov 1) (tiempo ?t))))
+
+(defrule EQUIPO-A::superbasica2
+  (declare (salience 2))
+  (tiempo ?t)
+;  (not (movido-A ?t))
+  (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
+  (not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))
+  (not (obstaculo (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))
+;  (not (ficha (equipo "A") (pos-x (- ?x 1)) (pos-y ?y)))
+  =>
+  (printout t "EQUIPO-A mueve a" ?n " hacia 2 en t " ?t crlf)
+  (assert (mueve (num ?n) (mov 2) (tiempo ?t))))
+
+(defrule EQUIPO-A::superbasica3
+  (declare (salience 2))
+  (tiempo ?t)
+;  (not (movido-A ?t))
+  (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
+  (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
+  (not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
+;  (not (ficha (equipo "A") (pos-x ?x) (pos-y (+ ?y 1))))
+  =>
+  (printout t "EQUIPO-A mueve a" ?n " hacia 3 en t " ?t crlf)
+  (assert (mueve (num ?n) (mov 3) (tiempo ?t))))
+
+(defrule EQUIPO-A::superbasica4
+  (declare (salience 2))
+  (tiempo ?t)
+;  (not (movido-A ?t))
+  (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
+  (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))
+  (not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))
+;  (not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))
+  =>
+  (printout t "EQUIPO-A mueve a" ?n " hacia 4 en t " ?t crlf)
+  (assert (mueve (num ?n) (mov 4) (tiempo ?t))))
+
+
+
+
+
+
+
+
+
 
 (defrule EQUIPO-A::termina
   (declare (salience 100))
