@@ -87,8 +87,14 @@ class LibGuadalete(object):
         clips.Eval("(seed " + str(random.randint(0,9999)) + ")") 
         
         try:
+            # Se cargan una serie de funciones de utilidad, como "minimo" o "mov-valido"
             funciones.LoadFunctions(clips)
+
+            # Se inicializan las opciones de juego (deffacts)
             f1.init_world(clips, self.number_turns)
+
+            # Se cargan las plantillas ficha-r, ficha, mueve y obstaculo
+            # además de las reglas para el control de los turnos
             f1.LoadFunctions(clips)
             mover.LoadFunctions(clips)
             texto.LoadFunctions(clips)
