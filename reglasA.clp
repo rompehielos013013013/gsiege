@@ -17,6 +17,7 @@
   (tiempo ?t)
   (obstaculo (pos-x ?x) (pos-y ?y))
   =>
+(printout t "Regla propia" crlf)
   (printout t "UN OBSTÁCULO EN " ?x "," ?y crlf))
   
 
@@ -27,6 +28,7 @@
 	(ficha (equipo "B")  (pos-x ?x) (pos-y ?y2))
 	(test (or (= ?y1 (+ ?y2 1)) (= ?y1 (- ?y2 1))))
 	=>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 1) (tiempo ?t)))) 
 
 (defrule EQUIPO-A::zigzag2
@@ -36,6 +38,7 @@
 	(ficha (equipo "B")  (pos-x ?x) (pos-y ?y2))
 	(test (or (= ?y1 (+ ?y2 1)) (= ?y1 (- ?y2 1))))
 	=>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 2) (tiempo ?t)))) 
 
 (defrule EQUIPO-A::zigzag3
@@ -45,6 +48,7 @@
 	(ficha (equipo "B")  (pos-x ?x2) (pos-y ?y))
 	(test (or (= ?x1 (+ ?x2 1)) (= ?x1 (- ?x2 1))))
 	=>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 3) (tiempo ?t)))) 
 
 (defrule EQUIPO-A::zigzag4
@@ -54,6 +58,7 @@
 	(ficha (equipo "B")  (pos-x ?x2) (pos-y ?y))
 	(test (or (= ?x1 (+ ?x2 1)) (= ?x1 (- ?x2 1))))
 	=>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 4) (tiempo ?t)))) 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -67,6 +72,7 @@
 	(tiempo ?t)
 	(test (= ?x1 (+ ?x2 1)))
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 (defrule EQUIPO-A::muerde2
@@ -76,6 +82,7 @@
 	(tiempo ?t)
 	(test (= ?x1 (- ?x2 1)))
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -88,6 +95,7 @@
 	(test (< ?y 8))
 	(tiempo ?t)
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 3) (tiempo ?t))))
 
 (defrule EQUIPO-A::seisizq
@@ -96,6 +104,7 @@
 	(test (< ?y 8))
 	(tiempo ?t)
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 (defrule EQUIPO-A::seisdercha
@@ -104,6 +113,7 @@
 	(test (< ?y 8))
 	(tiempo ?t)
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 (defrule EQUIPO-A::cincoabajo
@@ -112,6 +122,7 @@
 	(test (< ?y 8))
 	(tiempo ?t)
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 3) (tiempo ?t))))
 
 (defrule EQUIPO-A::cincoizq
@@ -120,6 +131,7 @@
 	(test (< ?y 8))
 	(tiempo ?t)
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 (defrule EQUIPO-A::cincodercha
@@ -128,6 +140,7 @@
 	(test (< ?y 8))
 	(tiempo ?t)
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 
@@ -144,6 +157,7 @@
 	(tiempo ?t)
 	(test (= ?x1 (+ ?x2 1)))
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 (defrule EQUIPO-A::6muerde
@@ -153,6 +167,7 @@
 	(tiempo ?t)
 	(test (= ?x1 (- ?x2 1)))
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 (defrule EQUIPO-A::5muerde
@@ -162,6 +177,7 @@
 	(tiempo ?t)
 	(test (= ?x1 (+ ?x2 1)))
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 (defrule EQUIPO-A::5muerde
@@ -171,6 +187,7 @@
 	(tiempo ?t)
 	(test (= ?x1 (- ?x2 1)))
 =>
+(printout t "Regla propia" crlf)
 	(assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -183,6 +200,7 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos 4))
   (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
   =>
+(printout t "Regla propia" crlf)
   (assert (mueve (num ?n) (mov 3) (tiempo ?t))))
 
 
@@ -192,6 +210,7 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos 4))
   (not (ficha (equipo "A") (pos-y ?y) (pos-x ?x2&:(= ?x2 (+ ?x 1)))))
   =>
+(printout t "Regla propia" crlf)
   (assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 
@@ -201,6 +220,7 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos 4))
   (not (ficha (equipo "A") (pos-y ?y) (pos-x ?x2&:(= ?x2 (- ?x 1)))))
   =>
+(printout t "Regla propia" crlf)
   (assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 (defrule EQUIPO-A::basica-3
@@ -209,6 +229,7 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos 3))
   (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
   =>
+(printout t "Regla propia" crlf)
   (assert (mueve (num ?n) (mov 3) (tiempo ?t))))
 
 
@@ -218,6 +239,7 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos 3))
   (not (ficha (equipo "A") (pos-y ?y) (pos-x ?x2&:(= ?x2 (+ ?x 1)))))
   =>
+(printout t "Regla propia" crlf)
   (assert (mueve (num ?n) (mov 1) (tiempo ?t))))
 
 
@@ -227,6 +249,7 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos 3))
   (not (ficha (equipo "A") (pos-y ?y) (pos-x ?x2&:(= ?x2 (- ?x 1)))))
   =>
+(printout t "Regla propia" crlf)
   (assert (mueve (num ?n) (mov 2) (tiempo ?t))))
 
 
