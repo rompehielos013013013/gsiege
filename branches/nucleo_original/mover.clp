@@ -103,7 +103,7 @@
 
 
 (defrule MOVER::ataque-1
-  (declare (salience 90))
+  (declare (salience 91))
   (tiempo ?t)
   ?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))
   ?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))
@@ -122,7 +122,7 @@
 ;
 
 (defrule MOVER::ataque-2
-  (declare (salience 90))
+  (declare (salience 91))
   (tiempo ?t)
   ?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))
   ?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))
@@ -140,7 +140,7 @@
 ;
 
 (defrule MOVER::ataque-3
-  (declare (salience 90))
+  (declare (salience 91))
   (tiempo ?t)
   ?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))
   ?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))

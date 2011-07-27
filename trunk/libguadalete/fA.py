@@ -121,7 +121,7 @@ def LoadFunctions(clips):
     # ---------------------------------
     
 
-
+    """
     
     rule_name = 'superbasica1'
     # Rule precontents
@@ -200,7 +200,7 @@ def LoadFunctions(clips):
     superbasica4 = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
 
-
+    """
     
     # ---------------------------------
     # Rule name
@@ -213,6 +213,7 @@ def LoadFunctions(clips):
     rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
     rule_prec += '(test (mov-valido ?dim ?m ?x ?y))'
     rule_prec += '(not (ficha (equipo "A")  (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))'
+    rule_prec += '(not (obstaculo  (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))'
     # =>
     # Rule body
     rule_body  = '(pop-focus)'
