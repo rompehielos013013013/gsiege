@@ -68,7 +68,7 @@
 ; Hace que no se eliminen las fichas que se creen
 ;
 
-(defrule TRADUCIRF::elimina3
+(defrule TRADUCIRF::elimina2
   (declare (salience 19))
   (tiempo ?t)
   =>
