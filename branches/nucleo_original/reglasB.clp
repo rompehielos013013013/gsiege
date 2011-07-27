@@ -10,3 +10,11 @@
 ;
 
 ; Fichero para annadir reglas
+
+(defrule EQUIPO-B::v
+  (declare (salience 70))
+  (tiempo ?t)
+  (obstaculo (pos-x ?x) (pos-y ?y))
+  =>
+  (printout t "UN OBSTÁCULO EN " ?x "," ?y crlf))
+  
