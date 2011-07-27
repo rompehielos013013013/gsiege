@@ -38,6 +38,52 @@ def LoadFunctions(clips):
 
     # ---------------------------------
     # Rule name
+    rule_name = 'movimiento_invalido_ficha'
+    # Rule precontents
+    rule_prec  = '(declare (salience 90))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))'
+    rule_prec += '?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y) (descubierta ?d))'
+    rule_prec += '(dimension ?dim)'
+    rule_prec += '(tiempo-inicial ?ti)'
+    rule_prec += '(test (= 0 (str-compare (turno ?ti ?t) ?e)))'
+    rule_prec += '(test (mov-valido ?dim ?m ?x ?y))'
+    rule_prec += '(ficha-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2)))'
+    rule_prec += '(not (movido ?e ?t))'
+    # =>
+    # Rule body
+    rule_body  = '(retract ?h1)'
+    rule_body += '(printout t "Movimiento INVÁLIDO, type FICHA " ?m crlf)'
+    # Building the rule
+    movimiento = mod_mover.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+    # ---------------------------------
+    # Rule name
+    rule_name = 'movimiento_invalido_obstaculo'
+    # Rule precontents
+    rule_prec  = '(declare (salience 90))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))'
+    rule_prec += '?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y) (descubierta ?d))'
+    rule_prec += '(dimension ?dim)'
+    rule_prec += '(tiempo-inicial ?ti)'
+    rule_prec += '(test (= 0 (str-compare (turno ?ti ?t) ?e)))'
+    rule_prec += '(test (mov-valido ?dim ?m ?x ?y))'
+    rule_prec += '(obstaculo-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2)))'
+    rule_prec += '(not (movido ?e ?t))'
+    # =>
+    # Rule body
+    rule_body  = '(retract ?h1)'
+    rule_body += '(printout t "Movimiento INVÁLIDO, type OBSTACULO " ?m crlf)'
+    # Building the rule
+    movimiento = mod_mover.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+   
+   
+    # ---------------------------------
+    # Rule name
     rule_name = 'movimiento'
     # Rule precontents
     rule_prec  = '(declare (salience 90))'
@@ -67,7 +113,7 @@ def LoadFunctions(clips):
     # Rule name
     rule_name = 'ataque-1'
     # Rule precontents
-    rule_prec  = '(declare (salience 90))'
+    rule_prec  = '(declare (salience 91))'
     rule_prec += '?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))'
     rule_prec += '?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))'
     rule_prec += '(dimension ?dim)'
@@ -91,7 +137,7 @@ def LoadFunctions(clips):
     # Rule name
     rule_name = 'ataque-2'
     # Rule precontents
-    rule_prec  = '(declare (salience 90))'
+    rule_prec  = '(declare (salience 91))'
     rule_prec += '(tiempo ?t)'
     rule_prec += '?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))'
     rule_prec += '?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))'
@@ -117,7 +163,7 @@ def LoadFunctions(clips):
     # Rule name
     rule_name = 'ataque-3'
     # Rule precontents
-    rule_prec  = '(declare (salience 90))'
+    rule_prec  = '(declare (salience 91))'
     rule_prec += '(tiempo ?t)'
     rule_prec += '?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))'
     rule_prec += '?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))'
