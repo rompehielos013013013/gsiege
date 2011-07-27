@@ -16,7 +16,7 @@
 ;
 
 (defmodule INFORMAR
-  (import MAIN deftemplate initial-fact ficha-r obstaculo dimension tiempo)
+  (import MAIN deftemplate initial-fact ficha-r obstaculo obstaculo-r dimension tiempo)
   (import MAIN deffunction ?ALL))
 
 
@@ -59,7 +59,7 @@
   (dimension ?dim)
   (test (not (> ?x ?dim)))
   (not (ficha-r (pos-x ?x) (pos-y ?y)))
-  (not (obstaculo (pos-x ?x) (pos-y ?y)))
+  (not (obstaculo-r (pos-x ?x) (pos-y ?y)))
   =>
   (retract ?c)
   (assert (columna (+ ?x 1)))
@@ -84,7 +84,7 @@
   (fila ?y)
   (dimension ?dim)
   (test (not (> ?x ?dim)))
-  (obstaculo (pos-x ?x) (pos-y ?y))
+  (obstaculo-r (pos-x ?x) (pos-y ?y))
   =>
   (retract ?c)
   (assert (columna (+ ?x 1)))
