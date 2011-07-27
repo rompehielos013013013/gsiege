@@ -28,7 +28,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "TRADUCIRF"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha ficha-r dimension tiempo obstaculo)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha ficha-r dimension tiempo obstaculo obstaculo-r)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_traducirF = clips.BuildModule(mod_name, mod_body)
@@ -75,6 +75,23 @@ def LoadFunctions(clips):
     inicial1_1 = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
 
+
+    # ---------------------------------
+    # Rule name
+    rule_name = 'obstaculos_limpiar'
+    # Rule precontents
+    rule_prec  = '(declare (salience 20))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '?h <- (ficha (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(not (obstaculos_limpios ?t))'
+    # =>
+    # Rule body
+    rule_body  = '(retract ?h)'
+    # Building the rule
+    obstaculos_limpiar = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+
     # ---------------------------------
     # Rule name
     rule_name = 'elimina1'
@@ -98,10 +115,44 @@ def LoadFunctions(clips):
     rule_prec += '(tiempo ?t)'
     # =>
     # Rule body
-    rule_body  = '(printout t " Limpiado turno " ?t  crlf)'
+    rule_body  = '(printout t " Fichas y obstaculos limpios " ?t  crlf)'
     rule_body += '(assert (limpia ?t))'
+    rule_body += '(assert (obstaculos_limpios ?t))'
+
     # Building the rule
     elimina2 = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+    # ---------------------------------
+    # Rule name
+    rule_name = 'obstaculos_traducir_A'
+    # Rule precontents
+    rule_prec  = '(declare (salience 10))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '(equipoA ?t "A")'
+    rule_prec += '(obstaculo-r (pos-x ?x) (pos-y ?y))'
+    # =>
+    # Rule body
+    rule_body = '(assert (obstaculo (pos-x ?x) (pos-y ?y)))'
+
+    # Building the rule
+    obstaculos_traducir_A = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+    # ---------------------------------
+    # Rule name
+    rule_name = 'obstaculos_traducir_B'
+    # Rule precontents
+    rule_prec  = '(declare (salience 10))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '(equipoA ?t "B")'
+    rule_prec += '(obstaculo-r (pos-x ?x) (pos-y ?y))'
+    # =>
+    # Rule body
+    rule_body = '(assert (obstaculo (pos-x (sim ?x)) (pos-y (sim ?y))))'
+
+    # Building the rule
+    obstaculos_traducir_B = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
 
     # ---------------------------------

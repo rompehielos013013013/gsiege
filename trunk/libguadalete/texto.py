@@ -30,7 +30,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "INFORMAR"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha-r obstaculo dimension tiempo tiempo-inicial)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha-r obstaculo obstaculo-r dimension tiempo tiempo-inicial)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_informar = clips.BuildModule(mod_name, mod_body)
@@ -84,7 +84,7 @@ def LoadFunctions(clips):
     rule_prec += '(dimension ?dim)'
     rule_prec += '(test (not (> ?x ?dim)))'
     rule_prec += '(not (ficha-r (pos-x ?x) (pos-y ?y)))'
-    rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y)))'
+    rule_prec += '(not (obstaculo-r (pos-x ?x) (pos-y ?y)))'
     # =>
     # Rule body
     rule_body  = '(retract ?c)'
@@ -125,7 +125,7 @@ def LoadFunctions(clips):
     rule_prec += '(fila ?y)'
     rule_prec += '(dimension ?dim)'
     rule_prec += '(test (not (> ?x ?dim)))'
-    rule_prec += '(obstaculo (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(obstaculo-r (pos-x ?x) (pos-y ?y))'
     # =>
     # Rule body
     rule_body  = '(retract ?c)'

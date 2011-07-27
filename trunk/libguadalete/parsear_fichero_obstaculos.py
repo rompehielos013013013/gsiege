@@ -25,9 +25,9 @@ def generar_reglas_obstaculos():
     if obstaculos:
 
         fichero = tempfile.NamedTemporaryFile(delete = False)
-        fichero.write("(deffacts obstaculos")
+        fichero.write("(deffacts MAIN::obstaculos")
         for obs in obstaculos:
-            fichero.write ("(obstaculo (pos-x %i) (pos-y %i))\n" % obs)
+            fichero.write ("(obstaculo-r (pos-x %i) (pos-y %i))\n" % obs)
         fichero.write(")")
         fichero.close()
 

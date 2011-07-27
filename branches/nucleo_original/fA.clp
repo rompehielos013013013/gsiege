@@ -40,7 +40,6 @@
 (defrule EQUIPO-A::basica1
   (declare (salience 2))
   (tiempo ?t)
-;  (not (movido-A ?t))
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))
   (dimension ?dim&:(< ?x (/ ?dim 2)))
   (not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))
@@ -101,7 +100,8 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))
   (not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))
   (not (obstaculo (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))
-;  (not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))
+
+  (test (<> ?x 8))
   =>
   (printout t "SUPERBASICA1: EQUIPO-A mueve a " ?n "(" ?p ") de [" ?x "," ?y "] a [" (+ ?x 1) "," ?y "] - mov 1" crlf)
 
@@ -114,7 +114,8 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))
   (not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))
   (not (obstaculo (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))
-;  (not (ficha (equipo "A") (pos-x (- ?x 1)) (pos-y ?y)))
+
+  (test (<> ?x 1))
   =>
   (printout t "SUPERBASICA2: EQUIPO-A mueve a " ?n "(" ?p ") de [" ?x "," ?y "] a [" (- ?x 1) "," ?y "] - mov 2" crlf)
 
@@ -127,7 +128,8 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))
   (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
   (not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))
-;  (not (ficha (equipo "A") (pos-x ?x) (pos-y (+ ?y 1))))
+
+  (test (<> ?y 8))
   =>
   (printout t "SUPERBASICA3: EQUIPO-A mueve a " ?n "(" ?p ") de [" ?x "," ?y "] a [" ?x "," (+ ?y 1) "] - mov 3" crlf)
 
@@ -140,7 +142,8 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))
   (not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))
   (not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))
-;  (not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))
+
+  (test (<> ?y 1))
   =>
   (printout t "SUPERBASICA4: EQUIPO-A mueve a " ?n "(" ?p ") de [" ?x "," ?y "] a [" ?x "," (- ?y 1) "] - mov 4" crlf)
 

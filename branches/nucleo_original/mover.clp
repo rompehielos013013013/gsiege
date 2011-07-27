@@ -19,7 +19,7 @@
 ;
 
 (defmodule MOVER
-  (import MAIN deftemplate initial-fact ficha-r obstaculo dimension tiempo mueve)
+  (import MAIN deftemplate initial-fact ficha-r obstaculo obstaculo-r dimension tiempo mueve)
   (import MAIN deffunction ?ALL))
 
 
@@ -31,6 +31,7 @@
 ; Regla movimiento: realiza un movimiento a una casilla vacia
 ;
 
+
 (defrule MOVER::movimiento
   (declare (salience 90))
   (tiempo ?t)
@@ -39,13 +40,55 @@
   (dimension ?dim)
   (test (mov-valido ?dim ?m ?x ?y))
   (not (ficha-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
-  (not (obstaculo (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
+  (not (obstaculo-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
   (not (movido ?e ?t))
   =>
   (retract ?h1 ?h2)
   (printout t "Movimiento de "?n"(puntos "?p") :mov "?m crlf)
   (assert (movido ?e ?t))
   (assert (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m))) (descubierta ?d))))
+
+(defrule MOVER::movimiento_invalido_ficha
+  (declare (salience 90))
+  (tiempo ?t)
+  ?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))
+  ?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y) (descubierta ?d))
+  (dimension ?dim)
+;  (test (not (mov-valido ?dim ?m ?x ?y)))
+  (ficha-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2)))
+;  (obstaculo-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2)))
+;  (not (movido ?e ?t))
+  =>
+  (retract ?h1)
+  (printout t "Movimiento INVÁLIDO por ficha "?n"(puntos "?p") :mov "?m crlf))
+
+(defrule MOVER::movimiento_invalido_obstaculo
+  (declare (salience 90))
+  (tiempo ?t)
+  ?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))
+  ?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y) (descubierta ?d))
+  (dimension ?dim)
+;  (test (not (mov-valido ?dim ?m ?x ?y)))
+;  (not (ficha-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
+  (obstaculo-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2)))
+;  (not (movido ?e ?t))
+  =>
+  (retract ?h1)
+  (printout t "Movimiento INVÁLIDO por obstáculo "?n"(puntos "?p") :mov "?m crlf))
+
+(defrule MOVER::movimiento_invalido_dimension
+  (declare (salience 90))
+  (tiempo ?t)
+  ?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))
+  ?h2 <- (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y) (descubierta ?d))
+  (dimension ?dim)
+  (test (not (mov-valido ?dim ?m ?x ?y)))
+;  (not (ficha-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
+;  (not (obstaculo-r (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
+;  (not (movido ?e ?t))
+  =>
+  (retract ?h1)
+  (printout t "Movimiento INVÁLIDO por dimensión "?n"(puntos "?p") :mov "?m crlf))
 
 ;
 ; Regla ataque-1: realiza un ataque con victoria

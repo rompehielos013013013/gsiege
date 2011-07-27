@@ -36,6 +36,8 @@ def LoadFunctions(clips):
     mod_equipoA = clips.BuildModule(mod_name, mod_body)
     #----------------------------------
 
+#    mod_equipoA.BuildRule("imprimeObs", "(declare (salience 70)) (tiempo ?t) (obstaculo (pos-x ?x) (pos-y ?y))", '(printout t "OBSTACULO EN " ?x "," ?y crlf)')
+
     # --------------------------------
     # Next rules have minimun priority, so it's only played if
     # the team has no rules to apply at this moment
@@ -45,12 +47,10 @@ def LoadFunctions(clips):
     # Rule precontents
     rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
-    ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(dimension ?dim&:(< ?x (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
     rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
-    ### rule_prec += '(not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))'
     # =>
     # Rule body
     rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 1 en t " ?t crlf)'
@@ -66,7 +66,7 @@ def LoadFunctions(clips):
     rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(dimension ?dim&:(> ?x (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
     rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
@@ -86,7 +86,7 @@ def LoadFunctions(clips):
     rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(dimension ?dim&:(< ?y (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
     rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
@@ -106,10 +106,11 @@ def LoadFunctions(clips):
     rule_prec  = '(declare (salience 2))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(dimension ?dim&:(> ?y (/ ?dim 2)))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
     rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
+
     ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))'
     # =>
     # Rule body
@@ -127,9 +128,11 @@ def LoadFunctions(clips):
     rule_prec  = '(declare (salience 1))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
     rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (+ ?x 1))) (pos-y ?y)))'
+    rule_prec += '(test (<> ?x 8))'
+
     ### rule_prec += '(not (ficha (equipo "A") (pos-x (+ ?x 1)) (pos-y ?y)))'
     # =>
     # Rule body
@@ -146,9 +149,10 @@ def LoadFunctions(clips):
     rule_prec  = '(declare (salience 1))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
     rule_prec += '(not (obstaculo (pos-x ?x2&:(= ?x2 (- ?x 1))) (pos-y ?y)))'
+    rule_prec += '(test (<> ?x 1))'
     ### rule_prec += '(not (ficha (equipo "A") (pos-x (- ?x 1)) (pos-y ?y)))'
     # =>
     # Rule body
@@ -165,10 +169,10 @@ def LoadFunctions(clips):
     rule_prec  = '(declare (salience 1))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
     rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (+ ?y 1)))))'
-    ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (+ ?y 1))))'
+    rule_prec += '(test (<> ?y 8))'
     # =>
     # Rule body
     rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 3 en t " ?t crlf)'
@@ -184,10 +188,10 @@ def LoadFunctions(clips):
     rule_prec  = '(declare (salience 1))'
     rule_prec += '(tiempo ?t)'
     ### rule_prec += '(not (movido-A ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
     rule_prec += '(not (obstaculo (pos-x ?x) (pos-y ?y2&:(= ?y2 (- ?y 1)))))'
-    ### rule_prec += '(not (ficha (equipo "A") (pos-x ?x) (pos-y (- ?y 1))))'
+    rule_prec += '(test (<> ?y 1))'
     # =>
     # Rule body
     rule_body  = '(printout t "EQUIPO-A mueve a" ?n " en (" ?x "," ?y ") hacia 4 en t " ?t crlf)'
