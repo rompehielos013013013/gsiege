@@ -82,7 +82,7 @@ def LoadFunctions(clips):
     # Rule precontents
     rule_prec  = '(declare (salience 20))'
     rule_prec += '(tiempo ?t)'
-    rule_prec += '?h <- (ficha (pos-x ?x) (pos-y ?y))'
+    rule_prec += '?h <- (obstaculo (pos-x ?x) (pos-y ?y))'
     rule_prec += '(not (obstaculos_limpios ?t))'
     # =>
     # Rule body
