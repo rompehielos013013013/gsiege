@@ -83,3 +83,30 @@ Existirán unos hechos, con el siguiente formato
 }}}
 
 Con estos, el jugador podrá evaluar la estrategia que más le convenga según los obstáculos que existan en la partida.
+
+=== Fichas muertas ===
+A la hora de crear nuestra estrategia, es posible saber qué fichas han muerto utilizando predicados del estilo:
+{{{
+(not (ficha (puntos 6)))
+}}}
+
+Eso funciona en la mayoría de los casos, pero habrá veces en los que queramos mayor control. Por ejemplo, puede ser interesante saber *en qué casilla murió* nuestra fichas 5, para evitar pasar por allí, ya que probablemente haya un 6.
+
+Para ello, hemos implementado la plantilla `fichamuerta`, con los siguientes parámetros:
+{{{
+(fichamuerta (equipo ?e) (num ?n) (pos-x ?x) (puntos ?p) (pos-y ?y) (pos-y ?y))
+}}}
+
+Con ello, podremos saber qué fichas han muerto y en qué casilla murieron.
+
+Puedes utilizar la siguiente regla para imprimir en cada turno la lista de fichas que han muerto:
+{{{
+(defrule EQUIPO-A::imprimeMuertas
+  (declare (salience 70)) 
+  (tiempo ?t) 
+  (fichamuerta (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))
+  =>
+  (printout t "Ficha muerta, equipo " ?e ", num " ?n ", puntos " ?p ", " ?x "," ?y crlf))
+}}}
+
+Al ser una regla que no provoca movimientos, no consume turno.
