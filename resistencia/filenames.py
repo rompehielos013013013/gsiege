@@ -36,7 +36,7 @@ def comprobar_nombre_reglas (s):
     n, e = path.splitext(path.basename(s))
 
     if n[:6] != 'reglas' or e != '.clp':
-        errorMsg = _("The rules file <b>\"%s\"</b> is not properly formed. \n\nIt should have the following syntax: <i>reglasNombre.clp</i>.") % (n + e)
+        errorMsg = _("The rules file <b>\"%s\"</b> is not properly formed. \n\nIt should have the following syntax: <i>reglas<b>Nombre</b>.clp</i>, where <b>Nombre</b> is the name of the team.") % (n + e)
         notificacion = resistencia.gui.notify_result.SimpleNotify(errorMsg)
         notificacion.dlg_result.run()
         return False
@@ -47,7 +47,7 @@ def comprobar_nombre_formacion (s):
     n, e = path.splitext(path.basename(s))
 
     if n[:6] != 'equipo' or e != '.form':
-        errorMsg = _("The formation file <b>\"%s\"</b> is not properly formed. \n\nIt should have the following syntax: <i>equipoNombre.form</i>.") % (n + e)
+        errorMsg = _("The formation file <b>\"%s\"</b> is not properly formed. \n\nIt should have the following syntax: <i>equipo<b>Nombre</b>.form</i>, where <b>Nombre</b> is the name of the team.") % (n + e)
         notificacion = resistencia.gui.notify_result.SimpleNotify(errorMsg)
         notificacion.dlg_result.run()
         return False
