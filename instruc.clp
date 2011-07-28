@@ -37,5 +37,5 @@
 (watch modulos)
 
 (run)
-(facts)
+#(facts)
 (exit)
