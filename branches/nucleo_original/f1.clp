@@ -123,7 +123,6 @@
   (printout t "#### TURNO NUEVO - " ?t crlf)
   (printout t "Pasamos al modulo INFORMAR." crlf)
   (printout t "Tiempo " ?t crlf)
-;  (readline)
   (focus INFORMAR))
 
 

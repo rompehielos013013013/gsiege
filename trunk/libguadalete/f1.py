@@ -82,6 +82,17 @@ def LoadFunctions(clips): #Maybe add number of turns, dimension, etc
     # Building the template
     ficha = clips.BuildTemplate(template_name, template_body)
     # ---------------------------------
+
+    template_name = "fichamuerta"
+    # Template body
+    template_body  = "(slot equipo)"
+    template_body += "(slot num)"
+    template_body += "(slot puntos)"
+    template_body += "(slot pos-x)"
+    template_body += "(slot pos-y)"
+    # Building the template
+    fichamuerta = clips.BuildTemplate(template_name, template_body)
+    # ---------------------------------
     
     #---------------------------------
     # Movement template. The movs are:
@@ -111,7 +122,7 @@ def LoadFunctions(clips): #Maybe add number of turns, dimension, etc
     # Module name
     mod_name = "MAIN"
     # Module body
-    mod_body  = "(export deftemplate initial-fact ficha obstaculo obstaculo-r ficha-r dimension tiempo mueve turno tiempo-inicial)"
+    mod_body  = "(export deftemplate initial-fact ficha obstaculo obstaculo-r ficha-r fichamuerta dimension tiempo mueve turno tiempo-inicial)"
     mod_body += "(export deffunction ?ALL)"
     # Building the module
     mod_main = clips.BuildModule(mod_name, mod_body)

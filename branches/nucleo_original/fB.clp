@@ -153,7 +153,7 @@
   (ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))
   (test (mov-valido ?dim ?m ?x ?y)) 
   (not (ficha (equipo "A")  (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
-  (not (obstaculo-r  (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
+  (not (obstaculo (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))
   =>
   (pop-focus))
 
