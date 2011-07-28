@@ -30,7 +30,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "MOVER"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha-r dimension tiempo mueve turno tiempo-inicial obstaculo obstaculo-r)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha-r fichamuerta dimension tiempo mueve turno tiempo-inicial obstaculo obstaculo-r)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_mover = clips.BuildModule(mod_name, mod_body)
@@ -121,6 +121,7 @@ def LoadFunctions(clips):
     rule_prec += '(test (= 0 (str-compare (turno ?ti ?t) ?e)))'
     rule_prec += '(test (mov-valido ?dim ?m ?x ?y))'
     rule_prec += '?h3 <- (ficha-r (equipo ?e2&~?e) (num ?n2) (puntos ?p2&:(> ?p ?p2)) (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2)))'
+    rule_prec += '(ficha-r (num ?n2) (puntos ?p2))'
     rule_prec += '(not (movido ?e ?t))'
     # =>
     # Rule body
@@ -128,7 +129,7 @@ def LoadFunctions(clips):
     rule_body += '(printout t "Ataque con victoria de "?n"(puntos "?p") : mov "?m crlf)'
     rule_body += '(assert (movido ?e ?t))'
     rule_body += '(assert (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m))) (descubierta 1)))'
-    rule_body += '(assert (muerta ?n2))'
+    rule_body += '(assert (fichamuerta (num ?n2) (puntos ?p2) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m)))))'
     # Building the rule
     ataque_1 = mod_mover.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
@@ -152,8 +153,9 @@ def LoadFunctions(clips):
     rule_body  = '(retract ?h1 ?h2 ?h3)'
     rule_body += '(printout t "Ataque con empate de "?n"(puntos "?p") : mov "?m crlf)'
     rule_body += '(assert (movido ?e ?t))'
-    rule_body += '(assert (muerta ?n))'
-    rule_body += '(assert (muerta ?n2))'
+    rule_body += '(assert (fichamuerta (num ?n) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m)))))'
+    rule_body += '(assert (fichamuerta (num ?n2) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m)))))'
+
     
     # Building the rule
     ataque_2 = mod_mover.BuildRule(rule_name, rule_prec, rule_body)
@@ -179,7 +181,8 @@ def LoadFunctions(clips):
     rule_body += '(printout t "Ataque con derrota de "?n"(puntos "?p") : mov "?m crlf)'
     rule_body += '(assert (movido ?e ?t))'
     rule_body += '(assert (ficha-r (equipo ?e2) (num ?n2) (puntos ?p2) (pos-x ?x2) (pos-y ?y2) (descubierta 1)))'
-    rule_body += '(assert (muerta ?n))'
+    rule_body += '(assert (fichamuerta (num ?n) (puntos ?p) (pos-x ?x2) (pos-y ?y2)))'
+
     # Building the rule
     ataque_3 = mod_mover.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
