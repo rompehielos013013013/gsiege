@@ -36,7 +36,7 @@ def LoadFunctions(clips):
     mod_equipoA = clips.BuildModule(mod_name, mod_body)
     #----------------------------------
 
-#    mod_equipoA.BuildRule("imprimeObs", "(declare (salience 70)) (tiempo ?t) (obstaculo (pos-x ?x) (pos-y ?y))", '(printout t "OBSTACULO EN " ?x "," ?y crlf)')
+    mod_equipoA.BuildRule("imprimeObs", "(declare (salience 70)) (tiempo ?t) (obstaculo (pos-x ?x) (pos-y ?y))", '(printout t "OBSTACULO EN " ?x "," ?y crlf)')
 
     # --------------------------------
     # Next rules have minimun priority, so it's only played if
@@ -210,13 +210,26 @@ def LoadFunctions(clips):
     rule_prec += '(tiempo ?t)'
     rule_prec += '(dimension ?dim)'
     rule_prec += '(mueve (num ?n) (mov ?m) (tiempo ?t))'
-    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(ficha (equipo "A") (num ?n) (pos-x ?x) (pos-y ?y) (puntos ?p))'
     rule_prec += '(test (mov-valido ?dim ?m ?x ?y))'
     rule_prec += '(not (ficha (equipo "A")  (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))'
     rule_prec += '(not (obstaculo  (pos-x ?x2&:(= (+ ?x (mov-x ?m)) ?x2)) (pos-y ?y2&:(= (+ ?y (mov-y ?m)) ?y2))))'
     # =>
     # Rule body
-    rule_body  = '(pop-focus)'
+    rule_body = '(printout t "Al menos un movimiento correcto..." crlf)'
+    rule_body += '(printout t "ficha num " ?n "- puntos " ?p " - " ?x "," ?y " - mov " ?m crlf)'
+    rule_body += '(pop-focus)'
     # Building the rule
     termina = mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
+
+    rule_name = 'limpia_invalidos'
+
+    rule_prec  = '(declare (salience 99))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '?h1 <- (mueve (num ?n) (mov ?m) (tiempo ?t))'
+
+    rule_body  = '(retract ?h1)'
+    rule_body += '(printout t "Movimiento borrado por inválido..." crlf)'
+
+    mod_equipoA.BuildRule(rule_name, rule_prec, rule_body)
