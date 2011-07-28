@@ -37,6 +37,8 @@ def LoadFunctions(clips):
     #----------------------------------
 
     mod_equipoA.BuildRule("imprimeObs", "(declare (salience 70)) (tiempo ?t) (obstaculo (pos-x ?x) (pos-y ?y))", '(printout t "OBSTACULO EN " ?x "," ?y crlf)')
+    mod_equipoA.BuildRule("imprimeMuertas", "(declare (salience 70)) (tiempo ?t) (fichamuerta (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))", 
+                          '(printout t "Ficha muerta, equipo " ?e ", num " ?n ", puntos " ?p ", " ?x "," ?y crlf)')
 
     # --------------------------------
     # Next rules have minimun priority, so it's only played if

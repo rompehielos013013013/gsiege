@@ -6,7 +6,7 @@ import pprint
 import os
 import random
 
-def parsear_fichero_formacion(rutaFichero):
+def parsear_fichero_formacion(rutaFichero, equipo = "A"):
     """Parsea el fichero de formación en formato texto y genera el clp temporal
     """
 
@@ -127,7 +127,7 @@ def parsear_fichero_formacion(rutaFichero):
     for x, cx in enumerate(matrizFinal):
         for y, cy in enumerate(cx):
             ficheroTemp.write('\t(ficha-r (equipo "A") (num %s) (puntos %i) (pos-x %i) (pos-y %i) (descubierta 0))\n'
-                              % ("1" + str(x) + str(y), cy, x + 1, y + 1))
+                              % (equipo + str(x) + str(y), cy, x + 1, y + 1))
 
     ficheroTemp.write(")\n")
     ficheroTemp.close()
