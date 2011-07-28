@@ -86,10 +86,14 @@ def init_contest(contest_format, teams, fast=False, back_round=False,
 
     controlPartida.restaurarCampeonato()
 
-    if contest_format == 'playoff':
-        _init_playoff(teams, fast, num_turns, back_round)
+    if len(teams) > 1:
+        if contest_format == 'playoff':
+            _init_playoff(teams, fast, num_turns, back_round)
+        else:
+            _init_game(contest_format, teams, fast, num_turns, back_round)
     else:
-        _init_game(contest_format, teams, fast, num_turns, back_round)
+         notificacion = notify_result.SimpleNotify(_("Not enough teams to hold the competition. Aborting."))
+         notificacion.dlg_result.run()
 
     logging.info("#### END CONTEST")
 
