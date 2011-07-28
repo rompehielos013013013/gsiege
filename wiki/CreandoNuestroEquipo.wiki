@@ -72,4 +72,14 @@ Si todas estas condiciones se cumplen, se ejecuta el bloque de acciones.
 
 {{{(assert (mueve (num ?n1) (mov 2) (tiempo ?t)))}}} Movemos nuestra ficha en dirección a la ficha adversaria.
 
-Existe un entrada con [ReglasDeEjemplo]
+Existe una entrada con [ReglasDeEjemplo]
+
+=== Obstáculos ===
+En las últimas versiones de Gades Siege es posible añadir *obstáculos* en el tablero. El motor del juego ignorará las reglas que intenten atravesar un obstáculo, pero lo ideal es que sea el propio jugador el que los tenga en cuenta.
+
+Existirán unos hechos, con el siguiente formato
+{{{
+(obstaculo (pos-x ?x) (pos-y ?y))
+}}}
+
+Con estos, el jugador podrá evaluar la estrategia que más le convenga según los obstáculos que existan en la partida.
