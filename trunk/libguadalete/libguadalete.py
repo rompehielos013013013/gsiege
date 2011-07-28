@@ -117,8 +117,8 @@ class LibGuadalete(object):
 
 
         logging.info("Parseando ficheros de formación...")
-        temp_form_A = parsear_fichero_formacion.parsear_fichero_formacion(self.teamA[1])
-        temp_form_B = parsear_fichero_formacion.parsear_fichero_formacion(self.teamB[1])
+        temp_form_A = parsear_fichero_formacion.parsear_fichero_formacion(self.teamA[1], "A")
+        temp_form_B = parsear_fichero_formacion.parsear_fichero_formacion(self.teamB[1], "B")
 
         self.teamA = (self.teamA[0], temp_form_A)
         self.teamB = (self.teamB[0], temp_form_B)

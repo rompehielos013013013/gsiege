@@ -28,7 +28,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "TRADUCIRF"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha ficha-r dimension tiempo obstaculo obstaculo-r)"
+    mod_body  = "(import MAIN deftemplate initial-fact ficha ficha-r fichamuerta fichamuerta-r dimension tiempo obstaculo obstaculo-r)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_traducirF = clips.BuildModule(mod_name, mod_body)
@@ -91,10 +91,25 @@ def LoadFunctions(clips):
     obstaculos_limpiar = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
 
+    # ---------------------------------
+    # Rule name
+    rule_name = 'fichasmuertas_limpiar'
+    # Rule precontents
+    rule_prec  = '(declare (salience 20))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '?h <- (fichamuerta (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(not (fichasmuertas_limpias ?t))'
+    # =>
+    # Rule body
+    rule_body  = '(retract ?h)'
+    # Building the rule
+    obstaculos_limpiar = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
 
     # ---------------------------------
     # Rule name
-    rule_name = 'elimina1'
+    rule_name = 'fichas_limpiar'
     # Rule precontents
     rule_prec  = '(declare (salience 20))'
     rule_prec += '(tiempo ?t)'
@@ -109,7 +124,7 @@ def LoadFunctions(clips):
 
     # ---------------------------------
     # Rule name
-    rule_name = 'elimina2'
+    rule_name = 'reiniciar_limpiados'
     # Rule precontents
     rule_prec  = '(declare (salience 19))'
     rule_prec += '(tiempo ?t)'
@@ -118,6 +133,7 @@ def LoadFunctions(clips):
     rule_body  = '(printout t " Fichas y obstaculos limpios " ?t  crlf)'
     rule_body += '(assert (limpia ?t))'
     rule_body += '(assert (obstaculos_limpios ?t))'
+    rule_body += '(assert (fichasmuertas_limpias ?t))'
 
     # Building the rule
     elimina2 = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
@@ -153,6 +169,40 @@ def LoadFunctions(clips):
 
     # Building the rule
     obstaculos_traducir_B = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+    # ---------------------------------
+    # Rule name
+    rule_name = 'fichamuertas_traducir_A'
+    # Rule precontents
+    rule_prec  = '(declare (salience 10))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '(equipoA ?t ?e1)'
+    rule_prec += '(fichamuerta-r (equipo ?e1) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))'
+
+    # =>
+    # Rule body
+    rule_body = '(assert (fichamuerta (equipo ?e1) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y)))'
+
+    # Building the rule
+    fichamuertas_traducir_A = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+    # ---------------------------------
+    # Rule name
+    rule_name = 'fichamuertas_traducir_B'
+    # Rule precontents
+    rule_prec  = '(declare (salience 10))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '(equipoA ?t ?e1)'
+    rule_prec += '(fichamuerta-r (equipo ?e2) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))'
+    rule_prec += '(test (<> 0 (str-compare ?e1 ?e2)))'
+    # =>
+    # Rule body
+    rule_body = '(assert (fichamuerta (equipo ?e2) (num ?n) (puntos ?p) (pos-x (sim ?x)) (pos-y (sim ?y))))'
+
+    # Building the rule
+    fichamuertas_traducir_B = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
 
     # ---------------------------------
