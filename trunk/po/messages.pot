@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-06 01:54+0200\n"
+"POT-Creation-Date: 2011-07-28 20:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -175,7 +175,11 @@ msgid ""
 "Check \"<i>log_gsiege</i>\" log file for details."
 msgstr ""
 
-#: ../resistencia/contest/main.py:265
+#: ../resistencia/contest/main.py:95
+msgid "Not enough teams to hold the competition. Aborting."
+msgstr ""
+
+#: ../resistencia/contest/main.py:269
 msgid "Running the contest"
 msgstr ""
 
@@ -184,9 +188,9 @@ msgstr ""
 #: ../guadaboard/human_game_handler.py:176
 #: ../guadaboard/human_game_handler.py:182
 #: ../guadaboard/human_game_handler.py:191
-#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:116
-#: ../libguadalete/libguadalete.py:130 ../libguadalete/libguadalete.py:146
-#: ../libguadalete/libguadalete.py:163
+#: ../guadaboard/human_game_handler.py:198 ../libguadalete/libguadalete.py:140
+#: ../libguadalete/libguadalete.py:154 ../libguadalete/libguadalete.py:171
+#: ../libguadalete/libguadalete.py:189
 msgid "Error parsing the file "
 msgstr ""
 
