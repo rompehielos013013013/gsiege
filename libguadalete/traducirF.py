@@ -122,6 +122,16 @@ def LoadFunctions(clips):
     elimina1 = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
 
+    rule_name = 'movimientos_limpiar'
+    
+    rule_prec = '(declare (salience 20))'
+    rule_prec = '(tiempo ?t)'
+    rule_prec = '?h <- (movio (equipo ?e) (num ?n) (puntos ?p) (turno ?t) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y))'
+    rule_prec = '(not (limpia ?t))'
+    
+    rule_body = '(retract ?h)'
+    limpiar_movimientos = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+
     # ---------------------------------
     # Rule name
     rule_name = 'reiniciar_limpiados'
