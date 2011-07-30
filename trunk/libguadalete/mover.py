@@ -30,7 +30,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "MOVER"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha-r fichamuerta fichamuerta-r dimension tiempo mueve turno tiempo-inicial obstaculo obstaculo-r)"
+    mod_body  = "(import MAIN deftemplate initial-fact movio-r ficha-r fichamuerta fichamuerta-r dimension tiempo mueve turno tiempo-inicial obstaculo obstaculo-r)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_mover = clips.BuildModule(mod_name, mod_body)
@@ -102,6 +102,7 @@ def LoadFunctions(clips):
     rule_body  = '(retract ?h1 ?h2)'
     rule_body += '(printout t "Movimiento de "?e", "?n"(puntos "?p") :mov "?m crlf)'
     rule_body += '(assert (movido ?e ?t))'
+    rule_body += '(assert (movio-r (equipo ?e) (num ?n) (turno ?t) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y) (puntos ?p)))'
     rule_body += '(assert (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m))) (descubierta ?d)))'
     # Building the rule
     movimiento = mod_mover.BuildRule(rule_name, rule_prec, rule_body)
@@ -128,6 +129,7 @@ def LoadFunctions(clips):
     rule_body  = '(retract ?h1 ?h2 ?h3)'
     rule_body += '(printout t "Ataque con victoria de "?n"(puntos "?p") : mov "?m crlf)'
     rule_body += '(assert (movido ?e ?t))'
+    rule_body += '(assert (movio-r (equipo ?e) (num ?n) (puntos ?p) (turno ?t) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y)))'
     rule_body += '(assert (ficha-r (equipo ?e) (num ?n) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m))) (descubierta 1)))'
     rule_body += '(assert (fichamuerta-r (num ?n2) (equipo ?e) (puntos ?p2) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m)))))'
     # Building the rule
@@ -154,6 +156,7 @@ def LoadFunctions(clips):
     rule_body  = '(retract ?h1 ?h2 ?h3)'
     rule_body += '(printout t "Ataque con empate de "?n"(puntos "?p") : mov "?m crlf)'
     rule_body += '(assert (movido ?e ?t))'
+    rule_body += '(assert (movio-r (equipo ?e) (num ?n) (puntos ?p) (turno ?t) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y)))'
     rule_body += '(assert (fichamuerta-r (num ?n)  (equipo ?e) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m)))))'
     rule_body += '(assert (fichamuerta-r (num ?n2)  (equipo ?e2) (puntos ?p) (pos-x (+ ?x (mov-x ?m))) (pos-y (+ ?y (mov-y ?m)))))'
 
@@ -181,6 +184,7 @@ def LoadFunctions(clips):
     rule_body  = '(retract ?h1 ?h2 ?h3)'
     rule_body += '(printout t "Ataque con derrota de "?n"(puntos "?p") : mov "?m crlf)'
     rule_body += '(assert (movido ?e ?t))'
+    rule_body += '(assert (movio-r (equipo ?e) (num ?n) (puntos ?p) (turno ?t) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y)))'    
     rule_body += '(assert (ficha-r (equipo ?e2) (num ?n2) (puntos ?p2) (pos-x ?x2) (pos-y ?y2) (descubierta 1)))'
     rule_body += '(assert (fichamuerta-r (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x2) (pos-y ?y2)))'
 
