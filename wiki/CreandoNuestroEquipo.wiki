@@ -128,3 +128,15 @@ Gades Siege mantiene un historial con los movimientos que ha hecho cada equipo, 
 }}}
 
 Como se puede apreciar, la plantilla guarda información sobre ĺa posición inicial de la ficha y el tipo de movimiento que hizo, así como la identidad de la ficha, equipo y turno.
+
+= Depurando nuestro equipo =
+Para depurar nuestro equipo, la herramienta que más nos va a servir será el fichero de log `clipsOutputFile`. En este fichero encontrarás, en modo texto, toda la información referente al transcurso de la partida, con el estado de la misma en cada turno. 
+
+En vuestras reglas podéis imprimir mensajes y valores con la siguiente función
+{{{
+(printout t "Este es el mensaje y el valor de x es " ?x ". Fin del mensaje" crlf)
+}}}
+
+Tened en cuenta algo importante: habrá veces en los que la regla se ejecute, y el mensaje se imprima, pero el movimiento que intenta hacer puede que no sea válido y no tenga efecto. Por ejemplo, si nuestra regla de mayor prioridad hace que una ficha con 2 puntos se mueva hacia adelante, probablemente nuestra regla se ejecutará para cada ficha de 2 puntos viva hasta que encuentre una que no tenga ningún obstáculo delante y el movimiento se pueda realizar.  
+
+Lo ideal, pues, es que en vuestras reglas *comprobéis manualmente* que la casilla a la que os queréis mover está libre (o tiene un enemigo de menor nivel).
