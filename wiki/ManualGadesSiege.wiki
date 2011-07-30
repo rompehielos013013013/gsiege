@@ -103,4 +103,15 @@ Gades Siege se estructura en la siguiente jerarquía de directorios:
   * *resistencia* : ficheros Python con el módulo principal del programa, que controla el funcionamiento en general, las interfaces gráficas de usuario, opciones de configuración, etcétera.
 
 == Ficheros de los equipos ==
-Para obtener más información sobre cómo crear los ficheros de los equipos, visita la página del wiki [CreandoNuestroEquipo Creando Nuestro Equipo]
+Para obtener más información sobre cómo crear los ficheros de los equipos, visita la página del wiki [CreandoNuestroEquipo Creando Nuestro Equipo].
+
+== Obstáculos ==
+Los obstáculos se definen en el fichero *obstaculos* dentro de la carpeta *data*. La sintaxis para definir los obstáculos es muy sencilla. Simplemente, por cada línea hay que escribir una tupla `(x,y)` con la posición del obstáculo. Por ejemplo, este sería un fichero de obstáculos válido:
+{{{
+(1,4)
+(2,4)
+(3,4)
+(4,4)
+}}}
+
+Tal y como se explica en el artículo [CreandoNuestroEquipo Creando Nuestro Equipo], es posible conocer desde nuestras reglas los obstáculos que hay en el tablero mediante el hecho `(obstaculo (pos-x) (pos-y))`.
