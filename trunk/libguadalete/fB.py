@@ -30,15 +30,12 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "EQUIPO-B"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha fichamuerta dimension tiempo mueve tiempo-inicial obstaculo)"
+    mod_body  = "(import MAIN deftemplate initial-fact movio ficha fichamuerta dimension tiempo mueve tiempo-inicial obstaculo)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_equipoB = clips.BuildModule(mod_name, mod_body)
     #---------------------------------
 
-    mod_equipoB.BuildRule("imprimeObs", "(declare (salience 70)) (tiempo ?t) (obstaculo (pos-x ?x) (pos-y ?y))", '(printout t "OBSTACULO EN " ?x "," ?y crlf)')
-    mod_equipoB.BuildRule("imprimeMuertas", "(declare (salience 70)) (tiempo ?t) (fichamuerta (equipo ?e) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))", 
-                          '(printout t "Ficha muerta, equipo " ?e ", num " ?n ", puntos " ?p ", " ?x "," ?y crlf)')
     # --------------------------------
     # Next rules have minimun priority, so it's only played if
     # the team has no rules to apply at this moment
