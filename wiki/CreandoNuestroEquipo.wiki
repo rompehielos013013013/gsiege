@@ -120,3 +120,11 @@ Puedes utilizar la siguiente regla para imprimir en cada turno la lista de ficha
   (printout t "Ficha muerta, equipo " ?e ", num " ?n ", puntos " ?p ", " ?x "," ?y crlf))
 }}}
 Al igual que en el caso anterior, esta regla no provoca movimientos, por lo que no consume turno.
+
+=== Movimientos anteriores ===
+Gades Siege mantiene un historial con los movimientos que ha hecho cada equipo, utilizando la siguiente plantilla para guardar la información:
+{{{
+(movio (equipo ?e) (num ?n) (puntos ?p) (turno ?tr) (mov ?m) (pos-x-ini ?y) (pos-y-ini ?y))
+}}}
+
+Como se puede apreciar, la plantilla guarda información sobre ĺa posición inicial de la ficha y el tipo de movimiento que hizo, así como la identidad de la ficha, equipo y turno.
