@@ -28,7 +28,7 @@ def LoadFunctions(clips):
     # Module name
     mod_name = "TRADUCIRF"
     # Module body
-    mod_body  = "(import MAIN deftemplate initial-fact ficha ficha-r fichamuerta fichamuerta-r dimension tiempo obstaculo obstaculo-r)"
+    mod_body  = "(import MAIN deftemplate movio movio-r initial-fact ficha ficha-r fichamuerta fichamuerta-r dimension tiempo obstaculo obstaculo-r)"
     mod_body += "(import MAIN deffunction ?ALL)"
     # Building the module
     mod_traducirF = clips.BuildModule(mod_name, mod_body)
@@ -76,14 +76,25 @@ def LoadFunctions(clips):
     # ---------------------------------
 
 
+    ###############################################################################################
+    ## REGLAS DE LIMPIEZA
+    ##
+    ## Se limpian los hechos que hay que reflejar (cambiar 
+    ## coordenadas por las simétricas) en cada turno
+    ## - Obstáculos
+    ## - Fichas 
+    ## - Fichas muertas
+    ## - Historial de movimientos
+    ##
+
     # ---------------------------------
     # Rule name
     rule_name = 'obstaculos_limpiar'
     # Rule precontents
     rule_prec  = '(declare (salience 20))'
     rule_prec += '(tiempo ?t)'
-    rule_prec += '?h <- (obstaculo (pos-x ?x) (pos-y ?y))'
-    rule_prec += '(not (obstaculos_limpios ?t))'
+    rule_prec += '?h <- (obstaculo)'
+    rule_prec += '(not (limpia ?t))'
     # =>
     # Rule body
     rule_body  = '(retract ?h)'
@@ -97,8 +108,8 @@ def LoadFunctions(clips):
     # Rule precontents
     rule_prec  = '(declare (salience 20))'
     rule_prec += '(tiempo ?t)'
-    rule_prec += '?h <- (fichamuerta (pos-x ?x) (pos-y ?y))'
-    rule_prec += '(not (fichasmuertas_limpias ?t))'
+    rule_prec += '?h <- (fichamuerta)'
+    rule_prec += '(not (limpia ?t))'
     # =>
     # Rule body
     rule_body  = '(retract ?h)'
@@ -113,7 +124,7 @@ def LoadFunctions(clips):
     # Rule precontents
     rule_prec  = '(declare (salience 20))'
     rule_prec += '(tiempo ?t)'
-    rule_prec += '?h <- (ficha (num ?n) (equipo ?e) (pos-x ?x) (pos-y ?y) (puntos ?v) (descubierta ?d))'
+    rule_prec += '?h <- (ficha)'
     rule_prec += '(not (limpia ?t))'
     # =>
     # Rule body
@@ -124,10 +135,10 @@ def LoadFunctions(clips):
 
     rule_name = 'movimientos_limpiar'
     
-    rule_prec = '(declare (salience 20))'
-    rule_prec = '(tiempo ?t)'
-    rule_prec = '?h <- (movio (equipo ?e) (num ?n) (puntos ?p) (turno ?t) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y))'
-    rule_prec = '(not (limpia ?t))'
+    rule_prec  = '(declare (salience 20))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '?h <- (movio)'
+    rule_prec += '(not (limpia ?t))'
     
     rule_body = '(retract ?h)'
     limpiar_movimientos = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
@@ -142,12 +153,18 @@ def LoadFunctions(clips):
     # Rule body
     rule_body  = '(printout t " Fichas y obstaculos limpios " ?t  crlf)'
     rule_body += '(assert (limpia ?t))'
-    rule_body += '(assert (obstaculos_limpios ?t))'
-    rule_body += '(assert (fichasmuertas_limpias ?t))'
 
     # Building the rule
     elimina2 = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
     # ---------------------------------
+
+
+    ########################################################################
+    ## REGLAS DE TRADUCCIÓN
+    ##
+    ## Ya se han limpiado los hechos temporales, ahora hay que regenerarlos para el nuevo turno.
+    ## Habrá dos reglas para cada tipo, una que se ejecute en los turnos pares y otra en los turnos impares,
+    ## ya que en unos turnos habrá que reflejar las coordenadas y en otros no.
 
     # ---------------------------------
     # Rule name
@@ -183,13 +200,44 @@ def LoadFunctions(clips):
 
     # ---------------------------------
     # Rule name
+    rule_name = 'movimientos_traducir_A'
+    # Rule precontents
+    rule_prec  = '(declare (salience 10))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '(equipoA ?t "A")'
+    rule_prec += '(movio-r (equipo ?e) (num ?n) (puntos ?p) (turno ?t2) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y))'    
+    # =>
+    # Rule body
+    rule_body = '(assert (movio (equipo ?e) (num ?n) (puntos ?p) (turno ?t2) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y)))'    
+
+    # Building the rule
+    movimientos_traducir_A = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+    # ---------------------------------
+    # Rule name
+    rule_name = 'movimientos_traducir_B'
+    # Rule precontents
+    rule_prec  = '(declare (salience 10))'
+    rule_prec += '(tiempo ?t)'
+    rule_prec += '(equipoA ?t "B")'
+    rule_prec += '(movio-r (equipo ?e) (num ?n) (puntos ?p) (turno ?t2) (mov ?m) (pos-x-ini ?x) (pos-y-ini ?y))'    
+    # =>
+    # Rule body
+    rule_body = '(assert (movio (equipo ?e) (num ?n) (puntos ?p) (turno ?t2) (mov ?m) (pos-x-ini (sim ?x)) (pos-y-ini (sim ?y))))'    
+
+    # Building the rule
+    movimientos_traducir_B = mod_traducirF.BuildRule(rule_name, rule_prec, rule_body)
+    # ---------------------------------
+
+    # ---------------------------------
+    # Rule name
     rule_name = 'fichamuertas_traducir_A'
     # Rule precontents
     rule_prec  = '(declare (salience 10))'
     rule_prec += '(tiempo ?t)'
     rule_prec += '(equipoA ?t ?e1)'
     rule_prec += '(fichamuerta-r (equipo ?e1) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y))'
-
     # =>
     # Rule body
     rule_body = '(assert (fichamuerta (equipo ?e1) (num ?n) (puntos ?p) (pos-x ?x) (pos-y ?y)))'

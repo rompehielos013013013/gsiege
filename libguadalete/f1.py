@@ -235,7 +235,7 @@ def LoadFunctions(clips): #Maybe add number of turns, dimension, etc
     # =>
     # Rule body
     rule_body  = '(retract ?orden)'
-    rule_body += '(printout t crlf "* Modulo->" ?m crlf " ")'
+    rule_body += '(printout t crlf "* Modulo->" ?m crlf)'
     rule_body += '(assert (modulos $?r ?m))'
     rule_body += '(focus ?m)'
     # Building the rule
