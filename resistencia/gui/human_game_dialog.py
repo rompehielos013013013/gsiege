@@ -94,8 +94,8 @@ class humanGameDialog:
         self.label_description.set_label(leer_comentario(widget.get_filename()))
 
         if formacionAsociada != None:			
-			self.file_chooser_team_ia.set_uri(formacionAsociada)
-			self.formation_computer = self.file_chooser_team_ia.get_uri().replace('file://','')
+            self.file_chooser_team_ia.set_uri(formacionAsociada)
+            self.formation_computer = formacionAsociada.replace('file://','')
 
     def on_file_chooser_team_ia_file_set(self, widget, data=None):
         self.formation_computer = widget.get_uri().replace('file://', '')
