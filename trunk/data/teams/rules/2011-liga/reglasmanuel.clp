@@ -148,3 +148,56 @@
 
 ;;;;;;;;;Reglas de defensa del rey
 
+
+ (defrule EQUIPO-A::huir1
+   (declare (salience 70))
+   (tiempo ?t)
+   (ficha (equipo "A") (num ?n) (puntos 1) (pos-x ?x) (pos-y ?y))
+   (ficha (equipo "B") (num ?n2) (pos-x ?x2) (pos-y ?y2))
+   (ficha (equipo "A") (num ?n3) (pos-x ?x3) (pos-y ?y3))
+   (test (= ?x (+ ?x2 1)))
+   (test (= ?y ?y2))
+   (test (not (= ?x (- ?x3 1))))
+   (test (= ?y ?y3))
+   =>
+   (assert (mueve (num ?n) (mov 1) (tiempo ?t))))
+
+
+ (defrule EQUIPO-A::huir2
+   (declare (salience 70))
+   (tiempo ?t)
+   (ficha (equipo "A") (num ?n) (puntos 1) (pos-x ?x) (pos-y ?y))
+   (ficha (equipo "B") (num ?n2) (pos-x ?x2) (pos-y ?y2))
+   (ficha (equipo "A") (num ?n3) (pos-x ?x3) (pos-y ?y3))
+   (test (= ?x (- ?x2 1)))
+   (test (= ?y ?y2))
+   (test (not (= ?x (+ ?x3 1))))
+   (test (= ?y ?y3))
+   =>
+   (assert (mueve (num ?n) (mov 2) (tiempo ?t))))
+
+ (defrule EQUIPO-A::Ataqueab1
+   (declare (salience 70))
+   (tiempo ?t)
+   (ficha (equipo "A") (num ?n) (puntos 1) (pos-x ?x) (pos-y ?y))
+   (ficha (equipo "B") (num ?n2) (pos-x ?x2) (pos-y ?y2))
+   (ficha (equipo "A") (num ?n3) (pos-x ?x3) (pos-y ?y3))
+   (test (= ?y (+ ?y2 1)))
+   (test (= ?x ?x2))
+   (test (not (= ?y (- ?y3 1))))
+   (test (= ?x ?x3))
+   =>
+   (assert (mueve (num ?n) (mov 3) (tiempo ?t))))
+
+ (defrule EQUIPO-A::Ataquear1
+   (declare (salience 70))
+   (tiempo ?t)
+   (ficha (equipo "A") (num ?n) (puntos 1) (pos-x ?x) (pos-y ?y))
+   (ficha (equipo "B") (num ?n2) (pos-x ?x2) (pos-y ?y2))
+   (ficha (equipo "A") (num ?n3) (pos-x ?x3) (pos-y ?y3))
+   (test (= ?y (- ?y2 1)))
+   (test (= ?x ?x2))
+   (test (not (= ?y (+ ?y3 1))))
+   (test (= ?x ?x3))
+   =>
+   (assert (mueve (num ?n) (mov 4) (tiempo ?t))))
